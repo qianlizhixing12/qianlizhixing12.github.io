@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+
+<head>
+    <meta charset="utf-8">
+    <title>千里之行 始于足下 - pyunit</title>
+    <meta name="description" content="">
+    <meta name="author" content="qianlizhixing">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le styles -->
+    <link href="/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="/theme/local.css" rel="stylesheet">
+    <link href="/theme/pygments.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/theme/images/icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <a class="brand" name="hostpage">千里之行 始于足下</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="row">
+
+                <div class="span9">
+        
+
+        
+
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="/artsdi-shi-zhou.html"><h1>ARTS第十周</h1></a>
+2020-06-29
+
+<a class="url fn">qianlizhixing</a>
+
+
+ 
+        </div>
+        
+        <div><h2>Algorithm</h2>
+<p>leetcode 529 扫雷游戏</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/minesweeper/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/python/529.py">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://medium.com/@amymaraisane/6-tips-to-success-as-a-self-taught-software-developer-ba5eebfb7a98</p>
+</blockquote>
+<h3>自学编程的6个技巧</h3>
+<ul>
+<li>写下你的问题</li>
+<li>搜索答案更容易，迫使你有意识地清晰地表达你的问题</li>
+<li>避免陷入浩瀚的文档中，意识主要方向</li>
+<li>有时会发现更好的答案，见证自己的成长</li>
+<li>记录花在编码上的时间</li>
+<li>展示自己学习成果</li>
+<li>向别人展示你的成果，推销自己</li>
+<li>为代码编写单元测试</li>
+<li>为解决现实需求编码</li>
+</ul>
+<h2>Tip</h2>
+<ul>
+<li>hash存储value-index，改变list的indexof循环判断value查找index</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 客户是分级的，一级二级客户的code是不同的，现实中可能是层层代理商，找出代理商的级次</span>
+<span class="n">custom</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;001&#39;</span><span class="p">,</span> <span class="s1">&#39;00101&#39;</span><span class="p">,</span> <span class="s1">&#39;002&#39;</span><span class="p">,</span> <span class="s1">&#39;00201&#39;</span><span class="p">,</span> <span class="s1">&#39;00202&#39;</span><span class="p">,</span> <span class="s1">&#39;0020201&#39;</span><span class="p">]</span>
+
+<span class="c1"># 可能存在数据库中，或其他配置文件中，-分割每级长度</span>
+<span class="n">level</span> <span class="o">=</span> <span class="s1">&#39;3-2-2&#39;</span>
+
+
+<span class="c1"># 用数组索引当作级次，存放对应长度</span>
+<span class="k">def</span> <span class="nf">solution1</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">custom</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;solution1&#39;</span><span class="p">)</span>
+  <span class="n">help</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">level</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">help</span><span class="p">)):</span>
+    <span class="n">help</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">help</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+  <span class="k">for</span> <span class="n">cur</span> <span class="ow">in</span> <span class="n">custom</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;custom:</span><span class="si">{</span><span class="n">cur</span><span class="si">}</span><span class="s1"> level:</span><span class="si">{</span><span class="n">help</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cur</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+
+<span class="c1">#使用hash存储value-index，改变list的indexof循环判断value查找index</span>
+<span class="k">def</span> <span class="nf">solution2</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">custom</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;solution2&#39;</span><span class="p">)</span>
+  <span class="n">help</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">curLen</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">level</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">))):</span>
+    <span class="n">curLen</span> <span class="o">+=</span> <span class="n">i</span>
+    <span class="n">cur</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">help</span><span class="p">[</span><span class="n">curLen</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur</span>
+  <span class="k">for</span> <span class="n">cur</span> <span class="ow">in</span> <span class="n">custom</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;custom:</span><span class="si">{</span><span class="n">cur</span><span class="si">}</span><span class="s1"> level:</span><span class="si">{</span><span class="n">help</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">cur</span><span class="p">)]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+
+<span class="n">solution1</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">custom</span><span class="p">)</span>
+<span class="n">solution2</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">custom</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h2>Share</h2>
+<blockquote>
+<p>https://en.wikipedia.org/wiki/Unit_testing</p>
+<p>https://en.wikipedia.org/wiki/List_of_unit_testing_frameworks</p>
+<p>https://docs.python-guide.org/writing/tests/</p>
+<p>https://docs.python.org/zh-cn/3/library/unittest.html#module-unittest</p>
+<p>https://docs.python.org/zh-cn/3/using/cmdline.html#cmdoption-m</p>
+<p>https://docs.python.org/3/library/<strong>main</strong>.html?highlight=main#module-<strong>main</strong></p>
+<p>https://docs.pytest.org/en/latest/</p>
+<p>https://github.com/scrapy/scrapy/tree/master/tests</p>
+</blockquote>
+<h3>单元测试定义</h3>
+<ul>
+<li>在不运行最终应用程序前，先为最小的可测试单元编写测试，然后为它们之间的复合行为编写测试，以确保某个部分符合其设计并按预期运行，可以为复杂的应用程序构建全面的测试。</li>
+<li>最小的可测试单元可以是一个的函数，一个类，一个接口，一个模块等。</li>
+</ul>
+<h3>单元测试意义</h3>
+<ul>
+<li>编写单元测试，需要一定的‘代价’，因为质量不高的最小单元，是写不出好的单元测试的。</li>
+<li>付出‘代价’的同时，带来的优势(相互影响包含)。</li>
+<li>提高质量，强迫向大师看齐<ul>
+<li>逼迫遵守单一职责原则，保证单一功能</li>
+<li>逼迫遵守低耦合原则，毕竟职责单一</li>
+<li>逼迫遵守输入输出无状态，即函数式编程理念，不要滥用全局变量等特技</li>
+<li>逼迫遵守编码规范，框架规范(不想自己造轮子，就要使用开源测试框架，就要按套路组织文件，组织命名)</li>
+</ul>
+</li>
+<li>提高可维护性，保证重构质量<ul>
+<li>新老交接，单元测试是活的文档，有助于新人熟悉功能和业务</li>
+<li>重构过程，保证之前的测试用例可以通过</li>
+</ul>
+</li>
+<li>提高自动化程度<ul>
+<li>单元测试注重的粒度更小，可以和接口测试，UI测试，集成测试有机结合</li>
+<li>可以渗透到自动化，持续集成，持续构建，持续交付，静态分析中(如Jenkins代码测试覆盖率，通过率)</li>
+</ul>
+</li>
+<li>传承开源文化(分享，互助，团队)<ul>
+<li>单元测试和代码评审(code review)，已成为软件工程标准化流程</li>
+<li>讨论交流中取长补短</li>
+<li>大佬呼吁，没有代码评审和单元测试文化的公司，请离开</li>
+</ul>
+</li>
+</ul>
+<h3>单元测试框架</h3>
+<ul>
+<li>
+<p>几乎所有的编程语言都有单元测试框架</p>
+</li>
+<li>
+<p>先来感受下，一个c语言的单元测试框架Cmocka</p>
+</li>
+</ul>
+<p>```c
+  /*<em>
+   * https://github.com/clibs/cmocka/blob/master/example/assert_module.h
+   * 头文件
+   </em>/
+  //将value指向的值加一
+  extern void increment_value(int * const value);
+  //将value指向的值减一
+  extern void decrement_value(int * const value);</p>
+<p>/*<em>
+   * https://github.com/clibs/cmocka/blob/master/example/assert_module.c
+   * 源文件
+   </em>/
+  #include <assert.h>
+  #include "assert_module.h"</p>
+<p>void increment_value(int * const value) {
+      assert(value);
+      (*value) ++;
+  }</p>
+<p>void decrement_value(int * const value) {
+      if (value) {
+        (*value) --;
+      }
+  }</p>
+<p>/*<em>
+   * https://github.com/clibs/cmocka/blob/master/example/assert_module_test.c
+   * 测试入口文件
+   </em>/
+  #include <stdarg.h>
+  #include <stddef.h>
+  #include <setjmp.h>
+  #include <cmocka.h>
+  #include "assert_module.h"</p>
+<p>/<strong>
+   <em>increment_value执行过程，assert(value)为false，抛出异常
+   </em>/
+  static void increment_value_fail(void </strong>state) {
+      (void) state;</p>
+<div class="highlight"><pre><span></span><code><span class="err">  increment_value(NULL);</span>
+</code></pre></div>
+
+
+<p>}</p>
+<p>/<strong>
+   <em>increment_value执行过程，assert(value)为false，抛出异常
+   </em>expect_assert_failure期望异常出现，用例通过
+   <em>/
+  /</em> This test case succeeds since increment_value() asserts on the NULL
+   * pointer. */
+  static void increment_value_assert(void </strong>state) {
+      (void) state;</p>
+<div class="highlight"><pre><span></span><code><span class="err">  expect_assert_failure(increment_value(NULL));</span>
+</code></pre></div>
+
+
+<p>}</p>
+<p>/<strong>
+   <em>decrement_value执行过程，if (value)为false，没有运行(</em>value) --，也没有异常
+   <em>expect_assert_failure期望异常未出现，用例失败
+   </em>/
+  static void decrement_value_fail(void </strong>state) {
+      (void) state;</p>
+<div class="highlight"><pre><span></span><code><span class="err">  expect_assert_failure(decrement_value(NULL));</span>
+</code></pre></div>
+
+
+<p>}</p>
+<p>int main(void) {
+      const struct CMUnitTest tests[] = {
+          cmocka_unit_test(increment_value_fail),
+          cmocka_unit_test(increment_value_assert),
+          cmocka_unit_test(decrement_value_fail),
+      };
+      return cmocka_run_group_tests(tests, NULL, NULL);
+  }</p>
+<p>/*<em>
+   * main.c
+   * 应用入口文件
+   </em>/
+  #include <stdio.h>
+  #include "assert_module.h"</p>
+<p>int main(int argc, char **argv) {
+      int x = 5;
+      increment_value(&amp;x);
+      printf(“5加1后：%d\n”, x);</p>
+<div class="highlight"><pre><span></span><code>  <span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+  <span class="n">decrement_value</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="mi">9</span><span class="err">减</span><span class="mi">1</span><span class="err">后：</span><span class="o">%</span><span class="n">d</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+
+
+<p>}
+  ```</p>
+<p>```c
+  /<em>
+   * 头文件tool.h
+   </em>/
+  #ifndef <strong>TOOL_H</strong>
+  #define <strong>TOOL_H</strong></p>
+<p>#include <stdbool.h></p>
+<p>extern void readline(char <em>value);
+  extern bool isValidNum(char </em>value);</p>
+<p>#endif</p>
+<p>/<em>
+   * 源文件tool.c
+   </em>/
+  #include <stdio.h>
+  #include <string.h>
+  #include "tool.h"</p>
+<p>void readline(char *value) {
+    int position = 0;
+    char c;
+    while ((c = getchar()) != '\n') {
+      value[position++] = c;
+    }
+    value[position] = '\0';
+  }</p>
+<p>bool isValidNum(char *value) {
+    if (!value) {
+      return false;
+    }</p>
+<div class="highlight"><pre><span></span><code><span class="o">//</span><span class="err">正负标志在第一位跳过</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span> <span class="o">||</span> <span class="o">*</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span> <span class="err">{</span>
+  <span class="n">value</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="err">}</span>
+
+<span class="nb">int</span> <span class="k">position</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">while</span> <span class="p">(</span><span class="o">*</span><span class="n">value</span><span class="p">)</span> <span class="err">{</span>
+  <span class="nb">char</span> <span class="k">c</span> <span class="o">=</span> <span class="o">*</span><span class="n">value</span><span class="p">;</span>
+  <span class="o">//</span><span class="err">数字</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">c</span> <span class="o">&lt;</span> <span class="s1">&#39;0&#39;</span> <span class="o">||</span> <span class="k">c</span> <span class="o">&gt;</span> <span class="s1">&#39;9&#39;</span><span class="p">)</span> <span class="err">{</span>
+    <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+  <span class="err">}</span>
+  <span class="k">position</span><span class="o">++</span><span class="p">;</span>
+  <span class="n">value</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="err">}</span>
+
+<span class="k">return</span> <span class="k">position</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+
+
+<p>}</p>
+<p>/<em>
+   * 单元测试入口test.c
+   </em>/
+  #include <setjmp.h>
+  #include <stdarg.h>
+  #include <stddef.h>
+  #include <stdint.h>
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <cmocka.h>
+  #include "tool.h"</p>
+<p>static void test_isValidNum_1(void <em><em>state) {
+    (void)state; /</em> unused </em>/
+    char value[] = "tst";
+    bool want = false;
+    bool target = isValidNum(value);
+    assert_int_equal(want, target);
+  }</p>
+<p>static void test_isValidNum_2(void <em><em>state) {
+    (void)state; /</em> unused </em>/
+    char value[] = "123";
+    bool want = true;
+    bool target = isValidNum(value);
+    assert_int_equal(want, target);
+  }</p>
+<p>static void test_isValidNum_3(void <em><em>state) {
+    (void)state; /</em> unused </em>/
+    char value[] = "+123";
+    bool want = true;
+    bool target = isValidNum(value);
+    assert_int_equal(want, target);
+  }</p>
+<p>static void isValidNum_4(void <em><em>state) {
+    (void)state; /</em> unused </em>/
+    char value[] = "1-23";
+    bool want = true;
+    bool target = isValidNum(value);
+    assert_int_equal(want, target);
+  }</p>
+<p>int main(int argc, char **argv) {
+    const struct CMUnitTest tests[] = {
+        cmocka_unit_test(test_isValidNum_1), cmocka_unit_test(test_isValidNum_2),
+        cmocka_unit_test(test_isValidNum_3), cmocka_unit_test(isValidNum_4)};</p>
+<div class="highlight"><pre><span></span><code><span class="err">return cmocka_run_group_tests(tests, NULL, NULL);</span>
+</code></pre></div>
+
+
+<p>}</p>
+<p>/<em>
+   * 应用入口main.c
+   </em>/
+  #include <stdio.h>
+  #include "tool.h"</p>
+<p>#include <stdio.h>
+  #include "tool.h"</p>
+<p>int main(int argc, char **argv) {
+    char tmp[255];</p>
+<div class="highlight"><pre><span></span><code><span class="n">while</span> <span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="err">{</span>
+  <span class="n">readline</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">isValidNum</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span> <span class="err">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="ss">&quot;%s is number!\n&quot;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
+  <span class="err">}</span> <span class="k">else</span> <span class="err">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="ss">&quot;%s is not number!\n&quot;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
+  <span class="err">}</span>
+<span class="err">}</span>
+
+<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+
+
+<p>}
+  ```</p>
+<ul>
+<li>
+<p>用例通过：期望值==运行值；用例失败：期望值!=运行值。</p>
+</li>
+<li>
+<p>测试assert_module_test.c和assert_module.h assert_module.c是隔离的，互不影响。</p>
+</li>
+<li>
+<p>编写一个main.c文件，作为正式的程序入口；assert_module_test.c作为单元测试的入口。</p>
+</li>
+<li>
+<p>正式编译指定main.c，单元测试指定assert_module_test.c。</p>
+</li>
+<li>
+<p>结合编程语言本身特点，测试框架可以隐藏入口文件，通过@Test，文件Test_等魔法分离发布代码和测试代码，前提条件，遵守约定(类似Servlet规范等)；指定运行入口(如pytest)。</p>
+</li>
+</ul>
+<h3>unittest</h3>
+<ul>
+<li>
+<p>unittest是python标准模块，风格类似JUnit。</p>
+</li>
+<li>
+<p>demo文件运行模式</p>
+</li>
+</ul>
+<p>```python
+  #launch.json
+  {
+    "version": "0.2.0",
+    "configurations": [{
+      "name": "mytest",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "args": ["-v"]
+    }]
+  }</p>
+<p>#widget.py
+  class Widget():</p>
+<div class="highlight"><pre><span></span><code><span class="n">def</span> <span class="n">__init__</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+  <span class="k">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+  <span class="k">self</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">50</span>
+  <span class="k">self</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">def</span> <span class="k">size</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
+  <span class="k">return</span> <span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="k">self</span><span class="p">.</span><span class="n">height</span><span class="p">)</span>
+
+<span class="n">def</span> <span class="n">resize</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+  <span class="k">self</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+  <span class="k">self</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+</code></pre></div>
+
+
+<p>#demo.py
+  import unittest
+  from widget import Widget</p>
+<p># unittest.TestCase提供了测试样例运行的基本框架
+  class Demo(unittest.TestCase):</p>
+<div class="highlight"><pre><span></span><code><span class="o">#</span> <span class="err">每一个测试用例必须以</span><span class="n">test开头</span><span class="err">，</span><span class="n">assert开头方法比较预期值和运行值</span>
+<span class="n">def</span> <span class="n">test_upper</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
+  <span class="k">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">.</span><span class="k">upper</span><span class="p">(),</span> <span class="s1">&#39;FOO&#39;</span><span class="p">)</span>
+
+<span class="n">def</span> <span class="n">testadd</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
+  <span class="k">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="n">def</span> <span class="n">tstadd</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
+  <span class="k">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>class Tst(unittest.TestCase):</p>
+<div class="highlight"><pre><span></span><code><span class="err">def testin(self):</span>
+<span class="err">  self.assertNotIn(&#39;n&#39;, [&#39;h&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;, &#39;o&#39;])</span>
+</code></pre></div>
+
+
+<p>class WidgetTest(unittest.TestCase):</p>
+<div class="highlight"><pre><span></span><code><span class="o">#</span><span class="err">前置操作，创建资源等</span>
+<span class="n">def</span> <span class="n">setUp</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
+  <span class="k">self</span><span class="p">.</span><span class="n">widget</span> <span class="o">=</span> <span class="n">Widget</span><span class="p">(</span><span class="s1">&#39;The widget&#39;</span><span class="p">)</span>
+
+<span class="n">def</span> <span class="n">test_default_widget_size</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
+  <span class="n">value</span> <span class="o">=</span> <span class="k">self</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="k">size</span><span class="p">()</span>
+  <span class="k">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="s1">&#39;incorrect default size&#39;</span><span class="p">)</span>
+
+<span class="n">def</span> <span class="n">test_widget_resize</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
+  <span class="k">self</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+  <span class="n">value</span> <span class="o">=</span> <span class="k">self</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="k">size</span><span class="p">()</span>
+  <span class="k">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="s1">&#39;wrong size after resize&#39;</span><span class="p">)</span>
+
+<span class="o">#</span><span class="err">后置操作，清理资源等</span>
+<span class="n">def</span> <span class="n">tearDown</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
+  <span class="n">pass</span>
+</code></pre></div>
+
+
+<p>if <strong>name</strong> == '<strong>main</strong>':
+    #launch配置-v显示更详细信息
+    unittest.main()</p>
+<p>#运行结果
+  '''
+  test_upper (<strong>main</strong>.Demo) ... ok
+  testadd (<strong>main</strong>.Demo) ... FAIL
+  testin (<strong>main</strong>.Tst) ... ok
+  test_default_widget_size (<strong>main</strong>.WidgetTest) ... ok
+  test_widget_resize (<strong>main</strong>.WidgetTest) ... ok</p>
+<p>======================================================================
+  FAIL: testadd (<strong>main</strong>.Demo)</p>
+<hr>
+<p>Traceback (most recent call last):
+    File "d:\testdemo\demo.py", line 13, in testadd
+      self.assertTrue(2 + 3 == 6)
+  AssertionError: False is not true</p>
+<hr>
+<p>Ran 5 tests in 0.006s</p>
+<p>FAILED (failures=1)
+  '''
+  ```</p>
+<ul>
+<li>demo命令行运行模式，让框架自己找到测试单元，或指定测试单元</li>
+</ul>
+<p><code>cmd
+  python -m unittest -v demo.py            #指定demo.py文件
+  python -m unittest -v                    #将demo.py改名为test*.py
+  python -m unittest -v demo.Demo          #指定测试类
+  python -m unittest -v demo.Demo.tstadd   #指定测试函数</code></p>
+<ul>
+<li>python -m参数：在 sys.path 中搜索指定名称的模块并将其内容作为 __main__ 模块来执行，运行的是该模块下__mian__.py。</li>
+</ul>
+<p>```python
+  #unittest模块下__main__.py
+  from .main import main</p>
+<p>main(module=None) #unittest.main()
+  ```</p>
+<ul>
+<li>
+<p>unittest.main()即TestProgram()是unittest框架执行的入口，TestLoader(默认加载器)识别和加载了测试用例。</p>
+</li>
+<li>
+<p>将测试代码和源代码分开到不同文件很有必要。</p>
+</li>
+</ul>
+<h3>pytest</h3>
+<ul>
+<li>
+<p>第三方模块，需要安装</p>
+</li>
+<li>
+<p>框架封装的更智能，用例发现更简单(<code>test_</code> 前缀函数， <code>Test</code> 前缀类)，用户只需要按约定命名并import pytest即可</p>
+</li>
+</ul>
+<p>```python
+  #luanch.json
+  {
+    "version": "0.2.0",
+    "configurations": [{
+      "name": "mytest",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "module": "pytest",
+      "cwd": "${fileDirname}"
+    }]
+  }</p>
+<p>#demo.py
+  def inc(x):
+    return x + 1</p>
+<p>#test_demo.py
+  import pytest
+  from demo import inc</p>
+<p>def test_answer():
+    assert inc(3) == 5</p>
+<p>class TestDemo():</p>
+<div class="highlight"><pre><span></span><code><span class="err">def testinc(self):</span>
+<span class="err">  assert inc(8) == 9</span>
+</code></pre></div>
+
+
+<p>'''
+  =========================================================== test session starts ============================================================
+  platform win32 -- Python 3.7.5, pytest-5.3.5, py-1.8.1, pluggy-0.13.1
+  rootdir: D:\testdemo
+  collected 2 items                                                                                                                            </p>
+<p>test_demo.py F.                                                                                                                       [100%] </p>
+<p>================================================================= FAILURES ================================================================= 
+  <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong> test_answer <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>_ </p>
+<div class="highlight"><pre><span></span><code><span class="err">  def test_answer():</span>
+</code></pre></div>
+
+
+<blockquote>
+<div class="highlight"><pre><span></span><code><span class="err">assert inc(3) == 5</span>
+</code></pre></div>
+
+
+<p>E     assert 4 == 5
+  E      +  where 4 = inc(3)</p>
+</blockquote>
+<p>test_demo.py:6: AssertionError
+  ======================================================= 1 failed, 1 passed in 0.14s ========================================================
+  '''
+  ```</p>
+<h4>指定测试用例</h4>
+<ul>
+<li>在模块中运行测试 pytest test_mod.py</li>
+<li>在目录中运行测试 pytest testing/</li>
+<li>按节点ID运行测试 pytest test_mod.py::test_func或者pytest test_mod.py::TestClass::test_method</li>
+<li>从包运行测试 pytest --pyargs pkg.testing</li>
+</ul>
+<h4>跟踪回溯打印</h4>
+<ul>
+<li>--showlocals # show local variables in tracebacks</li>
+<li>-l           # show local variables (shortcut)</li>
+<li>--tb=auto    # (default) 'long' tracebacks for the first and last # entry, but 'short' style for the other entries</li>
+<li>--tb=long    # exhaustive, informative traceback formatting</li>
+<li>--tb=short   # shorter traceback format</li>
+<li>--tb=line    # only one line per failure</li>
+<li>--tb=native  # Python standard library formatting</li>
+<li>--tb=no      # no traceback at all</li>
+</ul>
+<h4>详细总结报告-r</h4>
+<p>默认fE</p>
+<ul>
+<li>
+<p>f -失败</p>
+</li>
+<li>
+<p>E -误差</p>
+</li>
+<li>
+<p>s 跳过</p>
+</li>
+<li>
+<p>x -失败</p>
+</li>
+<li>
+<p>X -XPASS</p>
+</li>
+<li>
+<p>p 通过</p>
+</li>
+<li>
+<p>P -通过输出</p>
+</li>
+</ul>
+<h4>保存结果</h4>
+<ul>
+<li>JUnitXML格式文件 pytest --junitxml=path</li>
+<li>结果日志格式文件  pytest --resultlog=path</li>
+</ul>
+<h4>代码调用pytest</h4>
+<ul>
+<li>pytest.main()</li>
+</ul>
+<h4>fixtures</h4>
+<ul>
+<li>初始化测试功能，它们提供了一个固定的基线，以便测试可靠地执行并产生一致的、可重复的结果。初始化可以设置服务、状态或其他操作环境。在fixture函数中，每个函数的参数通常在test之后被命名为fixture</li>
+<li>pytest fixtures相对于传统的xUnit风格的setup/teardown函数提供了显著的改进</li>
+<li>conftest.py共享初始化</li>
+<li>@pytest.fixtures(params=)，params可循环序列，request.param . 无需更改测试功能代码。让我们再跑一次</li>
+</ul>
+<h3>总结</h3>
+<ul>
+<li>单元测试框架上手快</li>
+<li>多写多练多看</li>
+<li>异步多线程场景，编写单元测试比较困难</li>
+</ul></div>
+        <hr />
+    </div>
+		
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="/tag/pyunit.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+                </div>
+
+                <div class="span3">
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Site
+                            </li>
+
+                            <li><a href="/archives.html">Archives</a>
+                            <li><a href="/tags.html">Tags</a>
+                        </ul>
+                    </div>
+
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Categories
+                            </li>
+
+                            <li><a href="/category/arts.html">ARTS</a></li>
+                        </ul>
+                    </div>
+                </div>             </div>         </div> 
+        <footer>
+            <br />
+            <p><a name="hostpage">千里之行 始于足下</a> &copy; qianlizhixing 2020</p>
+        </footer>
+
+    </div> <!-- /container -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/theme/bootstrap-collapse.js"></script>
+    <script>
+        document.getElementsByName("hostpage").forEach((item) => {
+            item.href = window.location.origin;
+        });
+    </script>
+</body>
+
+</html>

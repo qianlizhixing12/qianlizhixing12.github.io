@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+
+<head>
+    <meta charset="utf-8">
+    <title>千里之行 始于足下 - ARTS第十二周</title>
+    <meta name="description" content="">
+    <meta name="author" content="qianlizhixing">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le styles -->
+    <link href="/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="/theme/local.css" rel="stylesheet">
+    <link href="/theme/pygments.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/theme/images/icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <a class="brand" name="hostpage">千里之行 始于足下</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="row">
+
+                <div class="span9">
+<div class='article'>
+    <div class="content-title">
+        <h1>ARTS第十二周</h1>
+2020-07-13
+
+<a class="url fn">qianlizhixing</a>
+
+
+    </div>
+
+    <div><h2>Algorithm</h2>
+<p>leetcode 98 验证二叉搜索树</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/validate-binary-search-tree/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/python/98.py">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://github.com/agis/git-style-guide</p>
+<p>https://github.com/aseaday/git-style-guide</p>
+</blockquote>
+<p>git规范</p>
+<h4>分支</h4>
+<ul>
+<li>选择简短和具有描述性的名字来命名分支</li>
+<li>来自外部的标识符也适合用作分支的名字，例如来自 Github 的 Issue 序号</li>
+<li>用破折号分割单词</li>
+<li>当不同的人围绕同一个特性开发时，维护整个团队的特性分支与每个人的独立分支是比较方便的做法，branch/dever</li>
+<li>合并之后，除非有特殊原因，从上游仓库中删除你的分支</li>
+</ul>
+<h4>提交</h4>
+<ul>
+<li>每个提交应当只包含一个简单的逻辑改动，不要在一个提交里包含多个逻辑改动。比如，如果一个补丁修复了一个 Bug，又优化了一个特性的性能，就将其拆分</li>
+<li>不要将一个逻辑改动拆分提交。例如一个功能的实现及其对应的测试应当一并提交</li>
+<li>尽早、尽快提交。出问题时，短小、完整的提交更容易发现并修正</li>
+<li>提交应当依逻辑排序。例如，如果 X 提交依赖于 Y，那么 Y 提交应该在 X 前面</li>
+</ul>
+<h4>消息</h4>
+<ul>
+<li>使用编辑器编写提交信息，而非命令行</li>
+<li>概要行（即第一行）应当简明扼要。它最好不超过 50 个字符，首字母大写，使用现在时祈使语气。不要以句号结尾, 因为它相当于标题</li>
+<li>在那之后空一行，然后填写详细描述。每行不超过 72 字符，解释为什么需要改动, 如何解决了这个 issue 以及它有什么副作用</li>
+<li>如果 提交 A 依赖于另一个 提交 B ，在前者的 commit message 中应当指明。援引对应提交的 Hash</li>
+<li>如果将一个提交 squash 到另一个提交，分别使用 --squash 和 --fixup 来强调目的</li>
+</ul>
+<h4>合并</h4>
+<ul>
+<li>不要篡改提交历史，对任何参与项目的人来说，修改历史是万恶之源</li>
+<li>保持你的提交历史干净、简单</li>
+<li>如果你的分支包含多个 commmit , 不要使用快进模式</li>
+</ul>
+<h2>Tip</h2>
+<h4>尝试不擅长的事</h4>
+<ul>
+<li>第一次通过zoom分享单元测试，分享的视频会看了三四次，总结如下</li>
+<li>总体上讲明白了自己要表达的内容，得益于早早准备了文档</li>
+<li>语言过于生涩，虽然准备了文档，没有练习直播分享彩排</li>
+</ul>
+<h2>Share</h2>
+<h3>Electron(二)</h3>
+<h4>主进程渲染进程通信</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">//main</span>
+<span class="nx">ipcMain</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;asynchronous-message&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">);</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">sender</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;asynchronous-reply&#39;</span><span class="p">,</span> <span class="s1">&#39;asyn pong&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">ipcMain</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;synchronous-message&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">);</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="s1">&#39;sync pong&#39;</span> <span class="o">+</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">showOpenDialog</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">//render</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">sendSync</span><span class="p">(</span><span class="s1">&#39;synchronous-message&#39;</span><span class="p">,</span> <span class="s1">&#39;sync ping&#39;</span><span class="p">));</span>
+
+<span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;asynchronous-reply&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;asynchronous-message&#39;</span><span class="p">,</span> <span class="s1">&#39;asyn ping&#39;</span><span class="p">);</span>
+</code></pre></div></div>
+
+    <hr>
+</div>
+                </div>
+
+                <div class="span3">
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Site
+                            </li>
+
+                            <li><a href="/archives.html">Archives</a>
+                            <li><a href="/tags.html">Tags</a>
+                        </ul>
+                    </div>
+
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Categories
+                            </li>
+
+                            <li><a href="/category/arts.html">ARTS</a></li>
+                        </ul>
+                    </div>
+                </div>             </div>         </div> 
+        <footer>
+            <br />
+            <p><a name="hostpage">千里之行 始于足下</a> &copy; qianlizhixing 2021</p>
+        </footer>
+
+    </div> <!-- /container -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/theme/bootstrap-collapse.js"></script>
+    <script>
+        document.getElementsByName("hostpage").forEach((item) => {
+            item.href = window.location.origin;
+        });
+    </script>
+</body>
+
+</html>

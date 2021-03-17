@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+
+<head>
+    <meta charset="utf-8">
+    <title>千里之行 始于足下 - 代码评审</title>
+    <meta name="description" content="">
+    <meta name="author" content="qianlizhixing">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le styles -->
+    <link href="/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="/theme/local.css" rel="stylesheet">
+    <link href="/theme/pygments.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/theme/images/icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <a class="brand" name="hostpage">千里之行 始于足下</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="row">
+
+                <div class="span9">
+        
+
+        
+
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="/artsdi-shi-liu-zhou.html"><h1>ARTS第十六周</h1></a>
+2020-08-10
+
+<a class="url fn">qianlizhixing</a>
+
+
+ 
+        </div>
+        
+        <div><h2>Algorithm</h2>
+<p>leetcode 338 比特位计数</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/counting-bits/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/c/338.c">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_14/</p>
+</blockquote>
+<h4>代码评审</h4>
+<ul>
+<li>提高了代码质量并降低了缺陷率</li>
+<li>代码可能有很多细节涉及系统具体业务</li>
+<li>代码审查的目的不应该是简单地纠正代码中的错误，而应该是分享知识和建立共同的编码指南</li>
+<li>通过学习和理解代码来检查代码，而不是寻找错误</li>
+<li>代码审查期间要温和，确保你的评论是有建设性的，而不是刻薄的</li>
+<li>避免团队成员中的组织级别影响代码评审</li>
+<li>如果团队有通过工具检查的编码约定，那么代码审查将更容易进行。这样，代码格式化就不会在代码评审会议上讨论</li>
+<li>让代码审查变得有趣也许是成功的最重要因素</li>
+</ul>
+<h2>Tip</h2>
+<h2>Share</h2>
+<h3>Electron(六)</h3>
+<h4>多个渲染进程间通信</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">//cefmanage.js</span>
+<span class="kr">const</span> <span class="nx">uuid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;node-uuid&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">ipcMain</span><span class="p">,</span> <span class="nx">ipcRenderer</span><span class="p">,</span> <span class="nx">remote</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">cefmanage</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">cefmap</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">cefreg</span> <span class="o">=</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">exec</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">cefmap</span><span class="p">[</span><span class="nx">uri</span><span class="p">]</span> <span class="o">=</span> <span class="nx">exec</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">ipcMain</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span><span class="p">[</span><span class="nx">uri</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">ipcRenderer</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span> <span class="o">=</span> <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">sendSync</span><span class="p">(</span><span class="s1">&#39;maincef&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">remote</span><span class="p">.</span><span class="nx">getCurrentWebContents</span><span class="p">().</span><span class="nx">id</span><span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kd">let</span> <span class="nx">ipc</span> <span class="o">=</span> <span class="nx">ipcMain</span> <span class="o">||</span> <span class="nx">ipcRenderer</span><span class="p">;</span>
+  <span class="nx">ipc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cefquery&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">request</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">request</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">queryid</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">queryid</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">uri</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">uri</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">param</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">param</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">cefexec</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">cefmap</span><span class="p">,</span> <span class="nx">queryid</span><span class="p">,</span> <span class="nx">uri</span><span class="p">,</span> <span class="nx">param</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">cefexec</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">cefmap</span><span class="p">,</span> <span class="nx">queryid</span><span class="p">,</span> <span class="nx">uri</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">exec</span> <span class="o">=</span> <span class="nx">cefmap</span><span class="p">[</span><span class="nx">uri</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">exec</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">exec</span><span class="p">(</span><span class="nx">param</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="nx">queryid</span><span class="o">:</span> <span class="nx">queryid</span><span class="p">,</span>
+          <span class="nx">code</span><span class="o">:</span> <span class="s1">&#39;000&#39;</span><span class="p">,</span>
+          <span class="nx">data</span><span class="o">:</span> <span class="nx">data</span>
+        <span class="p">}</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">sender</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;cefquery.callback&#39;</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">));</span>
+      <span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="nx">queryid</span><span class="o">:</span> <span class="nx">queryid</span><span class="p">,</span>
+          <span class="nx">code</span><span class="o">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">code</span><span class="p">,</span>
+          <span class="nx">msg</span><span class="o">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">msg</span>
+        <span class="p">}</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">sender</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;cefquery.callback&#39;</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">));</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">ipcMain</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">ipcMain</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;maincef&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">request</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span><span class="p">[</span><span class="nx">request</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">request</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+      <span class="p">}</span>
+      <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span><span class="p">;</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">ipcRenderer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span> <span class="o">=</span> <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">sendSync</span><span class="p">(</span><span class="s1">&#39;maincef&#39;</span><span class="p">,</span> <span class="p">[]);</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">workmap</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">maincef</span> <span class="o">=</span> <span class="p">{};</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">cefquery</span> <span class="o">=</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">queryid</span> <span class="o">=</span> <span class="nx">uuid</span><span class="p">.</span><span class="nx">v1</span><span class="p">();</span>
+      <span class="nx">request</span><span class="p">[</span><span class="s1">&#39;queryid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">queryid</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">workmap</span><span class="p">[</span><span class="nx">queryid</span><span class="p">]</span> <span class="o">=</span> <span class="nx">request</span><span class="p">;</span>
+      <span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">queryid</span><span class="o">:</span> <span class="nx">request</span><span class="p">.</span><span class="nx">queryid</span><span class="p">,</span>
+        <span class="nx">uri</span><span class="o">:</span> <span class="nx">request</span><span class="p">.</span><span class="nx">uri</span><span class="p">,</span>
+        <span class="nx">param</span><span class="o">:</span> <span class="nx">request</span><span class="p">.</span><span class="nx">param</span>
+      <span class="p">};</span>
+      <span class="kr">debugger</span><span class="p">;</span>
+      <span class="c1">//send 非str值没有传过去</span>
+      <span class="kd">let</span> <span class="nx">srvid</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span><span class="p">[</span><span class="nx">request</span><span class="p">.</span><span class="nx">uri</span><span class="p">];</span>
+      <span class="c1">// if (srvid == &#39;main&#39;) {</span>
+      <span class="c1">//   ipcRenderer.send(&#39;cefquery&#39;, JSON.stringify(data));</span>
+      <span class="c1">// } else</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="p">(</span><span class="nx">srvid</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;number&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">sendTo</span><span class="p">(</span><span class="nx">srvid</span><span class="p">,</span> <span class="s1">&#39;cefquery&#39;</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">delete</span> <span class="k">this</span><span class="p">.</span><span class="nx">workmap</span><span class="p">[</span><span class="nx">queryid</span><span class="p">];</span>
+        <span class="nx">request</span><span class="p">.</span><span class="nx">onFailure</span><span class="p">(</span><span class="s1">&#39;001&#39;</span><span class="p">,</span> <span class="s1">&#39;该操作未支持&#39;</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cefquery.callback&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">reponse</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">reponse</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">reponse</span><span class="p">);</span>
+      <span class="kd">let</span> <span class="nx">queryid</span> <span class="o">=</span> <span class="nx">reponse</span><span class="p">.</span><span class="nx">queryid</span><span class="p">;</span>
+      <span class="kd">let</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">workmap</span><span class="p">[</span><span class="nx">queryid</span><span class="p">];</span>
+      <span class="k">delete</span> <span class="k">this</span><span class="p">.</span><span class="nx">workmap</span><span class="p">[</span><span class="nx">queryid</span><span class="p">];</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">reponse</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s1">&#39;000&#39;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">request</span><span class="p">.</span><span class="nx">onSuccess</span><span class="p">(</span><span class="nx">reponse</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">request</span><span class="p">.</span><span class="nx">onFailure</span><span class="p">(</span><span class="nx">reponse</span><span class="p">.</span><span class="nx">code</span><span class="p">,</span> <span class="nx">reponse</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">cef</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cefmanage</span><span class="p">();</span>
+<span class="kr">const</span> <span class="nx">cefreg</span> <span class="o">=</span> <span class="nx">cef</span><span class="p">.</span><span class="nx">cefreg</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">cefquery</span> <span class="o">=</span> <span class="nx">cef</span><span class="p">.</span><span class="nx">cefquery</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">ipcMain</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">cefreg</span> <span class="p">};</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">ipcRenderer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">cefreg</span><span class="p">,</span> <span class="nx">cefquery</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">//mainservice.js</span>
+<span class="c1">// const mssql = require(&#39;mssql&#39;);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">Connection</span><span class="p">,</span> <span class="nx">Request</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;tedious&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">adodb</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;node-adodb&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">)</span>
+
+<span class="kd">function</span> <span class="nx">mssqlall</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// return mssql.connect(param.config).then(pool =&gt; {</span>
+  <span class="c1">//   return pool.request().query(param.sql);</span>
+  <span class="c1">// }).then(data =&gt; {</span>
+  <span class="c1">//   return Promise.resolve(data);</span>
+  <span class="c1">// }).catch(err =&gt; {</span>
+  <span class="c1">//   return Promise.reject({</span>
+  <span class="c1">//     code: &#39;001&#39;,</span>
+  <span class="c1">//     msg: err</span>
+  <span class="c1">//   });</span>
+  <span class="c1">// });</span>
+
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Connection</span><span class="p">(</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">);</span>
+
+    <span class="nx">conn</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">reject</span><span class="p">({</span>
+          <span class="nx">code</span><span class="o">:</span> <span class="s1">&#39;001&#39;</span><span class="p">,</span>
+          <span class="nx">msg</span><span class="o">:</span> <span class="nx">err</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+
+      <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span><span class="nx">param</span><span class="p">.</span><span class="nx">sql</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">rowCount</span><span class="p">,</span> <span class="nx">rows</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">reject</span><span class="p">({</span>
+            <span class="nx">code</span><span class="o">:</span> <span class="s1">&#39;001&#39;</span><span class="p">,</span>
+            <span class="nx">msg</span><span class="o">:</span> <span class="nx">err</span>
+          <span class="p">});</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">resolve</span><span class="p">(</span><span class="nx">rows</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+
+      <span class="c1">// Execute SQL statement</span>
+      <span class="nx">conn</span><span class="p">.</span><span class="nx">execSql</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// node-adodb模块</span>
+<span class="kd">function</span> <span class="nx">accessall</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="sb">`Provider=Microsoft.Jet.OLEDB.4.0;Data Source=</span><span class="si">${</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">database</span><span class="si">}</span><span class="sb">;Jet OLEDB:System Database=</span><span class="si">${</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">systemdb</span><span class="si">}</span><span class="sb">;User ID=</span><span class="si">${</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">user</span><span class="si">}</span><span class="sb">;Password=</span><span class="si">${</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">password</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">adodb</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">config</span><span class="p">).</span><span class="nx">query</span><span class="p">(</span><span class="nx">param</span><span class="p">.</span><span class="nx">sql</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">({</span>
+      <span class="nx">code</span><span class="o">:</span> <span class="s1">&#39;001&#39;</span><span class="p">,</span>
+      <span class="nx">msg</span><span class="o">:</span> <span class="nx">err</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// node-request模块</span>
+<span class="kd">function</span> <span class="nx">httpall</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">req</span><span class="p">(</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">uri</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">reject</span><span class="p">({</span>
+          <span class="nx">code</span><span class="o">:</span> <span class="s1">&#39;001&#39;</span><span class="p">,</span>
+          <span class="nx">msg</span><span class="o">:</span> <span class="nx">err</span>
+        <span class="p">})</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">resolve</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">mssqlall</span><span class="p">,</span> <span class="nx">accessall</span><span class="p">,</span> <span class="nx">httpall</span> <span class="p">};</span>
+
+<span class="c1">//main.js</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">BrowserWindow</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">)</span>
+<span class="c1">// require(&#39;./main-cefQuery&#39;);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">cefreg</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./cefmanage&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">mssqlall</span><span class="p">,</span> <span class="nx">accessall</span><span class="p">,</span> <span class="nx">httpall</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./mainservice&#39;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">createService</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">cefreg</span><span class="p">(</span><span class="s1">&#39;access.all&#39;</span><span class="p">,</span> <span class="nx">accessall</span><span class="p">);</span>
+  <span class="nx">cefreg</span><span class="p">(</span><span class="s1">&#39;http.all&#39;</span><span class="p">,</span> <span class="nx">httpall</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createMainWindow</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Create the browser window.</span>
+  <span class="kd">let</span> <span class="nx">win</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">800</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="nx">webPreferences</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">nodeIntegration</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nx">allowRunningInsecureContent</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;indexid&#39;</span><span class="p">,</span> <span class="nx">win</span><span class="p">.</span><span class="nx">webContents</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+
+  <span class="c1">// and load the index.html of the app.</span>
+  <span class="c1">// win.loadFile(&#39;index.html&#39;)</span>
+  <span class="nx">win</span><span class="p">.</span><span class="nx">loadFile</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">)</span>
+
+  <span class="c1">// Open the DevTools.</span>
+  <span class="nx">win</span><span class="p">.</span><span class="nx">webContents</span><span class="p">.</span><span class="nx">openDevTools</span><span class="p">()</span>
+
+  <span class="c1">//任务栏图标进度条</span>
+  <span class="nx">win</span><span class="p">.</span><span class="nx">setProgressBar</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createServiceWindow</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Create the browser window.</span>
+  <span class="kd">let</span> <span class="nx">win</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">800</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="nx">show</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">webPreferences</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">nodeIntegration</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nx">allowRunningInsecureContent</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;servid&#39;</span><span class="p">,</span> <span class="nx">win</span><span class="p">.</span><span class="nx">webContents</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+
+  <span class="c1">// and load the index.html of the app.</span>
+  <span class="nx">win</span><span class="p">.</span><span class="nx">loadFile</span><span class="p">(</span><span class="s1">&#39;service.html&#39;</span><span class="p">)</span>
+
+  <span class="c1">// Open the DevTools.</span>
+  <span class="nx">win</span><span class="p">.</span><span class="nx">webContents</span><span class="p">.</span><span class="nx">openDevTools</span><span class="p">()</span>
+
+  <span class="c1">//任务栏图标进度条</span>
+  <span class="nx">win</span><span class="p">.</span><span class="nx">setProgressBar</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createWindow</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">createService</span><span class="p">();</span>
+  <span class="nx">createServiceWindow</span><span class="p">();</span>
+  <span class="nx">createMainWindow</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">commandLine</span><span class="p">.</span><span class="nx">appendSwitch</span><span class="p">(</span><span class="s1">&#39;--disable-http-cache&#39;</span><span class="p">);</span>
+
+<span class="c1">// This method will be called when Electron has finished</span>
+<span class="c1">// initialization and is ready to create browser windows.</span>
+<span class="c1">// Some APIs can only be used after this event occurs.</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">whenReady</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">createWindow</span><span class="p">);</span>
+
+<span class="c1">// Quit when all windows are closed.</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;window-all-closed&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// On macOS it is common for applications and their menu bar</span>
+  <span class="c1">// to stay active until the user quits explicitly with Cmd + Q</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">!==</span> <span class="s1">&#39;darwin&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">quit</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">//service.html</span>
+<span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">service</span><span class="o">&lt;</span><span class="err">/title&gt;</span>
+<span class="o">&lt;</span><span class="err">/head&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+    <span class="kr">const</span> <span class="p">{</span>
+      <span class="nx">cefreg</span>
+    <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./cefmanage&#39;</span><span class="p">);</span>
+
+    <span class="kd">function</span> <span class="nx">servicetest</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">resolve</span><span class="p">(</span><span class="sb">`service.test ok!!! </span><span class="si">${</span><span class="nx">param</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="nx">cefreg</span><span class="p">(</span><span class="s1">&#39;service.test&#39;</span><span class="p">,</span> <span class="nx">servicetest</span><span class="p">);</span>
+  <span class="o">&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="err">/body&gt;</span>
+
+<span class="o">&lt;</span><span class="err">/html&gt;</span>
+
+<span class="c1">//index.html</span>
+<span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!&lt;</span><span class="err">/title&gt;</span>
+  <span class="c">&lt;!--</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//electronjs.org/docs/tutorial/security#csp-meta-tag --&gt;</span>
+  <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">http</span><span class="o">-</span><span class="nx">equiv</span><span class="o">=</span><span class="s2">&quot;Content-Security-Policy&quot;</span> <span class="nx">content</span><span class="o">=</span><span class="s2">&quot;script-src &#39;self&#39; &#39;unsafe-inline&#39;;&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="err">/head&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!&lt;</span><span class="err">/h1&gt;</span>
+  <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+    <span class="kr">const</span> <span class="p">{</span>
+      <span class="nx">cefquery</span>
+    <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./cefmanage&#39;</span><span class="p">);</span>
+
+
+    <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">cefquery</span><span class="p">({</span>
+        <span class="nx">uri</span><span class="o">:</span> <span class="s1">&#39;mssql.all&#39;</span><span class="p">,</span>
+        <span class="nx">param</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">userName</span><span class="o">:</span> <span class="s1">&#39;sa&#39;</span><span class="p">,</span>
+            <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;****&#39;</span><span class="p">,</span>
+            <span class="nx">server</span><span class="o">:</span> <span class="s1">&#39;****&#39;</span><span class="p">,</span>
+            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+              <span class="nx">database</span><span class="o">:</span> <span class="s1">&#39;****&#39;</span>
+            <span class="p">}</span>
+          <span class="p">},</span>
+          <span class="nx">sql</span><span class="o">:</span> <span class="s1">&#39;select * from UA_Account&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">onSuccess</span><span class="o">:</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+          <span class="nx">resolve</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="nx">onFailure</span><span class="o">:</span> <span class="p">(</span><span class="nx">code</span><span class="p">,</span> <span class="nx">msg</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+          <span class="nx">reject</span><span class="p">({</span>
+            <span class="nx">code</span><span class="o">:</span> <span class="nx">code</span><span class="p">,</span>
+            <span class="nx">msg</span><span class="o">:</span> <span class="nx">msg</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;mssql.all succ&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+    <span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;mssql.all fail&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">code</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">msg</span><span class="p">)</span>
+    <span class="p">});</span>
+
+    <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">cefquery</span><span class="p">({</span>
+        <span class="nx">uri</span><span class="o">:</span> <span class="s1">&#39;service.test&#39;</span><span class="p">,</span>
+        <span class="nx">param</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s1">&#39;e3e&#39;</span><span class="o">:</span> <span class="mi">345</span>
+        <span class="p">},</span>
+        <span class="nx">onSuccess</span><span class="o">:</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+          <span class="nx">resolve</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="nx">onFailure</span><span class="o">:</span> <span class="p">(</span><span class="nx">code</span><span class="p">,</span> <span class="nx">msg</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+          <span class="nx">reject</span><span class="p">({</span>
+            <span class="nx">code</span><span class="o">:</span> <span class="nx">code</span><span class="p">,</span>
+            <span class="nx">msg</span><span class="o">:</span> <span class="nx">msg</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service.test succ&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+    <span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service.test fail&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">code</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">msg</span><span class="p">)</span>
+    <span class="p">});</span>
+
+    <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">cefquery</span><span class="p">({</span>
+        <span class="nx">uri</span><span class="o">:</span> <span class="s1">&#39;access.all&#39;</span><span class="p">,</span>
+        <span class="nx">param</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;****&#39;</span><span class="p">,</span>
+            <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;****&#39;</span><span class="p">,</span>
+            <span class="nx">database</span><span class="o">:</span> <span class="s1">&#39;****&#39;</span><span class="p">,</span>
+            <span class="nx">systemdb</span><span class="o">:</span> <span class="s1">&#39;****&#39;</span>
+          <span class="p">},</span>
+          <span class="nx">sql</span><span class="o">:</span> <span class="s1">&#39;select * from GLPref&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">onSuccess</span><span class="o">:</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+          <span class="nx">resolve</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="nx">onFailure</span><span class="o">:</span> <span class="p">(</span><span class="nx">code</span><span class="p">,</span> <span class="nx">msg</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+          <span class="nx">reject</span><span class="p">({</span>
+            <span class="nx">code</span><span class="o">:</span> <span class="nx">code</span><span class="p">,</span>
+            <span class="nx">msg</span><span class="o">:</span> <span class="nx">msg</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;access.all succ&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+    <span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;access.all fail&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">code</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">msg</span><span class="p">)</span>
+    <span class="p">});</span>
+
+    <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">cefquery</span><span class="p">({</span>
+        <span class="nx">uri</span><span class="o">:</span> <span class="s1">&#39;http.all&#39;</span><span class="p">,</span>
+        <span class="nx">param</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">uri</span><span class="o">:</span> <span class="s1">&#39;****&#39;</span><span class="p">,</span>
+            <span class="nx">method</span><span class="o">:</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+            <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;Accept-Language&quot;</span><span class="o">:</span> <span class="s2">&quot;zh-CN,zh;q=0.9&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;Accept-Encoding&quot;</span><span class="o">:</span> <span class="s2">&quot;gzip, deflate&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;Accept&quot;</span><span class="o">:</span> <span class="s2">&quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">onSuccess</span><span class="o">:</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+          <span class="nx">resolve</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="nx">onFailure</span><span class="o">:</span> <span class="p">(</span><span class="nx">code</span><span class="p">,</span> <span class="nx">msg</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+          <span class="nx">reject</span><span class="p">({</span>
+            <span class="nx">code</span><span class="o">:</span> <span class="nx">code</span><span class="p">,</span>
+            <span class="nx">msg</span><span class="o">:</span> <span class="nx">msg</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;http.all succ&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+    <span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;http.all fail&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">code</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">msg</span><span class="p">)</span>
+    <span class="p">});</span>
+  <span class="o">&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="err">/body&gt;</span>
+
+<span class="o">&lt;</span><span class="err">/html&gt;</span>
+</code></pre></div></div>
+        <hr />
+    </div>
+		
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="/tag/dai-ma-ping-shen.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+                </div>
+
+                <div class="span3">
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Site
+                            </li>
+
+                            <li><a href="/archives.html">Archives</a>
+                            <li><a href="/tags.html">Tags</a>
+                        </ul>
+                    </div>
+
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Categories
+                            </li>
+
+                            <li><a href="/category/arts.html">ARTS</a></li>
+                        </ul>
+                    </div>
+                </div>             </div>         </div> 
+        <footer>
+            <br />
+            <p><a name="hostpage">千里之行 始于足下</a> &copy; qianlizhixing 2020</p>
+        </footer>
+
+    </div> <!-- /container -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/theme/bootstrap-collapse.js"></script>
+    <script>
+        document.getElementsByName("hostpage").forEach((item) => {
+            item.href = window.location.origin;
+        });
+    </script>
+</body>
+
+</html>

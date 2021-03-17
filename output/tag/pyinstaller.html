@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+
+<head>
+    <meta charset="utf-8">
+    <title>千里之行 始于足下 - pyinstaller</title>
+    <meta name="description" content="">
+    <meta name="author" content="qianlizhixing">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le styles -->
+    <link href="/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="/theme/local.css" rel="stylesheet">
+    <link href="/theme/pygments.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/theme/images/icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <a class="brand" name="hostpage">千里之行 始于足下</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="row">
+
+                <div class="span9">
+        
+
+        
+
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="/artsdi-san-zhou.html"><h1>ARTS第三周</h1></a>
+2020-05-04
+
+<a class="url fn">qianlizhixing</a>
+
+
+ 
+        </div>
+        
+        <div><h2>Algorithm</h2>
+<p>leetcode 20 有效的括号
+- <a href="https://leetcode-cn.com/problems/valid-parentheses/">原题</a>
+- <a href="https://github.com/qianlizhixing12/leetcode/blob/master/c/20.c">解题</a></p>
+<h2>Review</h2>
+<blockquote>
+<p>https://pyinstaller.readthedocs.io/en/stable/</p>
+</blockquote>
+<p>pyinstaller打包py脚本为系统可执行程序格式。</p>
+<p>windows下支持打包为exe可执行文件。</p>
+<h3>安装</h3>
+<p>pip install pyinstaller</p>
+<h3>工作流程</h3>
+<ol>
+<li>对脚本进行解析</li>
+<li>在脚本目录生成 xxx.spec 文件</li>
+<li>创建一个 build 目录，写入一些日志文件和中间流程文件到 build 目录</li>
+<li>创建 dist 目录，生成可执行文件到 dist 目录</li>
+</ol>
+<h3>使用</h3>
+<p>pyinstaller -F xxx.py</p>
+<ul>
+<li>-F 打包成单独的 .exe 文件，这时生成的 .exe 文件会比较大，而且运行速度较慢</li>
+<li>-i  指定可执行文件的图标</li>
+<li>-w 去掉控制台窗口</li>
+</ul>
+<h2>Tip</h2>
+<blockquote>
+<p>https://www.cnblogs.com/bytebee/p/8194677.html</p>
+<p>http://fuseyism.com/classpath/doc/java/util/ArrayDeque-source.html</p>
+</blockquote>
+<p>取模运算转化成位运算 ，X % 2^n = X &amp; (2^n – 1)</p>
+<p>应用java源码ArrayDeque保持容量为2^n，便于头尾游标越界时取模计算</p>
+<div class="highlight"><pre><span></span><code>  <span class="mi">82</span><span class="p">:</span>     <span class="cm">/**</span>
+<span class="cm">  83:      * The minimum capacity that we&#39;ll use for a newly created deque.</span>
+<span class="cm">  84:      * Must be a power of 2.</span>
+<span class="cm">  85:      */</span>
+  <span class="mi">86</span><span class="p">:</span>     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">MIN_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+  <span class="mi">87</span><span class="p">:</span> 
+  <span class="mi">88</span><span class="p">:</span>     <span class="c1">// ******  Array allocation and resizing utilities ******</span>
+  <span class="mi">89</span><span class="p">:</span> 
+  <span class="mi">90</span><span class="p">:</span>     <span class="cm">/**</span>
+<span class="cm">  91:      * Allocate empty array to hold the given number of elements.</span>
+<span class="cm">  92:      *</span>
+<span class="cm">  93:      * @param numElements  the number of elements to hold</span>
+<span class="cm">  94:      */</span>
+  <span class="mi">95</span><span class="p">:</span>     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">allocateElements</span><span class="p">(</span><span class="kt">int</span> <span class="n">numElements</span><span class="p">)</span> <span class="p">{</span>
+  <span class="mi">96</span><span class="p">:</span>         <span class="kt">int</span> <span class="n">initialCapacity</span> <span class="o">=</span> <span class="n">MIN_INITIAL_CAPACITY</span><span class="p">;</span>
+  <span class="mi">97</span><span class="p">:</span>         <span class="c1">// Find the best power of two to hold elements.</span>
+  <span class="mi">98</span><span class="p">:</span>         <span class="c1">// Tests &quot;&lt;=&quot; because arrays aren&#39;t kept full.</span>
+  <span class="mi">99</span><span class="p">:</span>         <span class="k">if</span> <span class="p">(</span><span class="n">numElements</span> <span class="o">&gt;=</span> <span class="n">initialCapacity</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">100</span><span class="p">:</span>             <span class="n">initialCapacity</span> <span class="o">=</span> <span class="n">numElements</span><span class="p">;</span>
+ <span class="mi">101</span><span class="p">:</span>             <span class="n">initialCapacity</span> <span class="o">|=</span> <span class="p">(</span><span class="n">initialCapacity</span> <span class="o">&gt;&gt;&gt;</span>  <span class="mi">1</span><span class="p">);</span>
+ <span class="mi">102</span><span class="p">:</span>             <span class="n">initialCapacity</span> <span class="o">|=</span> <span class="p">(</span><span class="n">initialCapacity</span> <span class="o">&gt;&gt;&gt;</span>  <span class="mi">2</span><span class="p">);</span>
+ <span class="mi">103</span><span class="p">:</span>             <span class="n">initialCapacity</span> <span class="o">|=</span> <span class="p">(</span><span class="n">initialCapacity</span> <span class="o">&gt;&gt;&gt;</span>  <span class="mi">4</span><span class="p">);</span>
+ <span class="mi">104</span><span class="p">:</span>             <span class="n">initialCapacity</span> <span class="o">|=</span> <span class="p">(</span><span class="n">initialCapacity</span> <span class="o">&gt;&gt;&gt;</span>  <span class="mi">8</span><span class="p">);</span>
+ <span class="mi">105</span><span class="p">:</span>             <span class="n">initialCapacity</span> <span class="o">|=</span> <span class="p">(</span><span class="n">initialCapacity</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">16</span><span class="p">);</span>
+ <span class="mi">106</span><span class="p">:</span>             <span class="n">initialCapacity</span><span class="o">++</span><span class="p">;</span>
+ <span class="mi">107</span><span class="p">:</span> 
+ <span class="mi">108</span><span class="p">:</span>             <span class="k">if</span> <span class="p">(</span><span class="n">initialCapacity</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>   <span class="c1">// Too many elements, must back off</span>
+ <span class="mi">109</span><span class="p">:</span>                 <span class="n">initialCapacity</span> <span class="o">&gt;&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span><span class="c1">// Good luck allocating 2 ^ 30 elements</span>
+ <span class="mi">110</span><span class="p">:</span>         <span class="p">}</span>
+ <span class="mi">111</span><span class="p">:</span>         <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span><span class="o">[]</span><span class="p">)</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">initialCapacity</span><span class="o">]</span><span class="p">;</span>
+ <span class="mi">112</span><span class="p">:</span>     <span class="p">}</span>
+ <span class="mi">113</span><span class="p">:</span> 
+ <span class="mi">114</span><span class="p">:</span>     <span class="cm">/**</span>
+<span class="cm"> 115:      * Double the capacity of this deque.  Call only when full, i.e.,</span>
+<span class="cm"> 116:      * when head and tail have wrapped around to become equal.</span>
+<span class="cm"> 117:      */</span>
+ <span class="mi">118</span><span class="p">:</span>     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">doubleCapacity</span><span class="p">()</span> <span class="p">{</span>
+ <span class="mi">119</span><span class="p">:</span>         <span class="k">assert</span> <span class="n">head</span> <span class="o">==</span> <span class="n">tail</span><span class="p">;</span>
+ <span class="mi">120</span><span class="p">:</span>         <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+ <span class="mi">121</span><span class="p">:</span>         <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">elements</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+ <span class="mi">122</span><span class="p">:</span>         <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">p</span><span class="p">;</span> <span class="c1">// number of elements to the right of p</span>
+ <span class="mi">123</span><span class="p">:</span>         <span class="kt">int</span> <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">;</span>
+ <span class="mi">124</span><span class="p">:</span>         <span class="k">if</span> <span class="p">(</span><span class="n">newCapacity</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+ <span class="mi">125</span><span class="p">:</span>             <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Sorry, deque too big&quot;</span><span class="p">);</span>
+ <span class="mi">126</span><span class="p">:</span>         <span class="n">Object</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">newCapacity</span><span class="o">]</span><span class="p">;</span>
+ <span class="mi">127</span><span class="p">:</span>         <span class="n">System</span><span class="p">.</span><span class="na">arraycopy</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+ <span class="mi">128</span><span class="p">:</span>         <span class="n">System</span><span class="p">.</span><span class="na">arraycopy</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+ <span class="mi">129</span><span class="p">:</span>         <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span><span class="o">[]</span><span class="p">)</span><span class="n">a</span><span class="p">;</span>
+ <span class="mi">130</span><span class="p">:</span>         <span class="n">head</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="mi">131</span><span class="p">:</span>         <span class="n">tail</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+ <span class="mi">132</span><span class="p">:</span>     <span class="p">}</span>
+
+ <span class="mi">198</span><span class="p">:</span>         <span class="n">elements</span><span class="o">[</span><span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="n">head</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">elements</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">;</span>
+
+ <span class="mi">215</span><span class="p">:</span>         <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">tail</span> <span class="o">=</span> <span class="p">(</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">elements</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="n">head</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h2>Share</h2>
+<blockquote>
+<p>https://www.electronjs.org/docs</p>
+<p>https://github.com/electron</p>
+</blockquote>
+<p>Electron是GitHub开发的一个开源框架。它允许使用Node.js（后端）和Chromium（前端）完成桌面GUI应用程序的开发。著名项目包括GitHub的Atom和微软的Visual Studio Code。</p>
+<h3>依赖</h3>
+<p>js运行环境node.js</p>
+<p>js包管理npm</p>
+<p>推荐编辑器Atom，Visual Studio Code</p>
+<h3>安装</h3>
+<p>npm install (-g) electron</p>
+<h3>开始</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">//初始化项目</span>
+<span class="nx">npm</span> <span class="nx">init</span>
+<span class="c1">//修改package执行命令</span>
+<span class="nx">electron</span> <span class="p">.</span>
+
+<span class="c1">//main.js</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">BrowserWindow</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">)</span>
+
+<span class="kd">function</span> <span class="nx">createWindow</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Create the browser window.</span>
+  <span class="kd">let</span> <span class="nx">win</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">800</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="nx">webPreferences</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">nodeIntegration</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+
+  <span class="c1">// and load the index.html of the app.</span>
+  <span class="nx">win</span><span class="p">.</span><span class="nx">loadFile</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">)</span>
+
+  <span class="c1">// Open the DevTools.</span>
+  <span class="nx">win</span><span class="p">.</span><span class="nx">webContents</span><span class="p">.</span><span class="nx">openDevTools</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1">// This method will be called when Electron has finished</span>
+<span class="c1">// initialization and is ready to create browser windows.</span>
+<span class="c1">// Some APIs can only be used after this event occurs.</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">whenReady</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">createWindow</span><span class="p">)</span>
+
+<span class="c1">// Quit when all windows are closed.</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;window-all-closed&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// On macOS it is common for applications and their menu bar</span>
+  <span class="c1">// to stay active until the user quits explicitly with Cmd + Q</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">!==</span> <span class="s1">&#39;darwin&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">quit</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;activate&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// On macOS it&#39;s common to re-create a window in the app when the</span>
+  <span class="c1">// dock icon is clicked and there are no other windows open.</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">BrowserWindow</span><span class="p">.</span><span class="nx">getAllWindows</span><span class="p">().</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">createWindow</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+
+
+<p>如果报错Electron failed to install correctly, please delete node_modules/electron and try installing again，改用6.0版本</p></div>
+        <hr />
+    </div>
+		
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="/tag/pyinstaller.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+                </div>
+
+                <div class="span3">
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Site
+                            </li>
+
+                            <li><a href="/archives.html">Archives</a>
+                            <li><a href="/tags.html">Tags</a>
+                        </ul>
+                    </div>
+
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Categories
+                            </li>
+
+                            <li><a href="/category/arts.html">ARTS</a></li>
+                        </ul>
+                    </div>
+                </div>             </div>         </div> 
+        <footer>
+            <br />
+            <p><a name="hostpage">千里之行 始于足下</a> &copy; qianlizhixing 2020</p>
+        </footer>
+
+    </div> <!-- /container -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/theme/bootstrap-collapse.js"></script>
+    <script>
+        document.getElementsByName("hostpage").forEach((item) => {
+            item.href = window.location.origin;
+        });
+    </script>
+</body>
+
+</html>

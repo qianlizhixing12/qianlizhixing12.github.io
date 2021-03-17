@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+
+<head>
+    <meta charset="utf-8">
+    <title>千里之行 始于足下 - setuptools</title>
+    <meta name="description" content="">
+    <meta name="author" content="qianlizhixing">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le styles -->
+    <link href="/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="/theme/local.css" rel="stylesheet">
+    <link href="/theme/pygments.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/theme/images/icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <a class="brand" name="hostpage">千里之行 始于足下</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="row">
+
+                <div class="span9">
+        
+
+        
+
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="/artsdi-shi-qi-zhou.html"><h1>ARTS第十七周</h1></a>
+2020-08-17
+
+<a class="url fn">qianlizhixing</a>
+
+
+ 
+        </div>
+        
+        <div><h2>Algorithm</h2>
+<p>leetcode 338 比特位计数</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/counting-bits/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/c/338.c">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://docs.oracle.com/cd/E19435-01/819-0069/intro.html</p>
+</blockquote>
+<h4>消息队列架构</h4>
+<ul>
+<li>消息队列是一种可靠的异步消息传递服务</li>
+<li>消息服务器由一个或多个代理组成，并执行消息路由和传递，它是消息队列服务的核心</li>
+<li>消息服务器由一个或一组共同工作的代理(作为代理集群)组成，以执行消息路由和传递服务</li>
+<li>身份验证，操作授权</li>
+<li>设置和客户端通信协议</li>
+<li>接受客户端消息，并将其放置在各自的物理目的地</li>
+<li>将消息路由并交付给一个或多个消费客户端</li>
+<li>保证可靠的交付</li>
+<li>为监控系统性能提供数据</li>
+<li>客户端运行时代理</li>
+<li>管理到消息服务器的消息传递</li>
+<li>建立连接，建立客户的身份</li>
+<li>实现客户端确认</li>
+<li>控制跨连接的消息流</li>
+<li>可以覆盖由生成客户端设置的消息头值</li>
+</ul>
+<h4>消息传递步骤</h4>
+<ul>
+<li>持久、可靠地传递的消息步骤</li>
+<li>消息生产<ul>
+<li>客户端运行时通过连接将消息从消息生成器传递到消息服务器</li>
+</ul>
+</li>
+<li>消息处理和路由<ul>
+<li>消息服务器从连接中读取消息并将其放置到适当的目的地</li>
+<li>消息服务器将(持久的)消息放在数据存储中</li>
+<li>消息服务器向消息生成器的客户端运行时确认收到消息</li>
+<li>消息服务器决定消息的路由</li>
+<li>消息服务器将消息从其目的地写到适当的连接</li>
+</ul>
+</li>
+<li>消息消费<ul>
+<li>消息使用者的客户端运行时将连接中的消息传递给消息使用者</li>
+<li>消息使用者的客户端运行时向消息服务器确认消息的使用</li>
+</ul>
+</li>
+<li>消息临终<ul>
+<li>消息服务器处理客户端确认，从其目的地和数据存储中删除(持久)消息</li>
+<li>消息服务器向使用者的客户端运行时确认，客户端确认已被处理，且消息无法再次传递</li>
+</ul>
+</li>
+<li>消息分类</li>
+<li>消息本体，由生产客户端发送到消费客户端的JMS消息</li>
+<li>消息控制确认，在消息服务器和客户端运行时之间传递确认和其他非有效负载消息，以确保有效负载消息成功传递，并控制连接之间的消息流</li>
+</ul>
+<h4>消息传递模型</h4>
+<ul>
+<li>点到点</li>
+<li>从生产者传递到单个使用者</li>
+<li>消息首先传递到队列目的地(消息服务器)，然后从队列一次传递一个消息，传递到为队列注册的使用者之一</li>
+<li>任意数量的生产者都可以将消息发送到队列目的地，但是每个消息都保证只能传递给一个消费者并被一个消费者成功使用</li>
+<li>如果没有使用者为队列目的地注册，则队列保存它接收到的消息，并在使用者为队列注册时传递这些消息</li>
+<li>发布/订阅</li>
+<li>从生产者传递到任意数量的使用者</li>
+<li>消息首先被传递到主题目的地，然后传递到订阅了主题的所有活动使用者</li>
+<li>任意数量的生产者都可以将消息发送到主题目的地，并且每个消息都可以发送到任意数量的订阅使用者</li>
+</ul>
+<h4>消息推送模式</h4>
+<ul>
+<li>Push模式，由消息中间件主动地将消息推送给消费者</li>
+<li>consumer把轮询过程封装了，并注册MessageListener监听器，取到消息后，唤醒MessageListener的consumeMessage()来消费，对用户而言，感觉消息是被推送过来的</li>
+<li>需要一个中心节点，负责消息的分配情况（哪段消息分配给consumer1，哪段消息分配给consumer2），同时还要监听consumer的ack消息用于判断消息是否处理成功，如果在timeout时间内为收到响应可以认为该consumer挂掉，需要重新分配sonsumer上失败的消息</li>
+<li>容易冲垮consumer，虽然可以向amq那样使用prefetch limit  和预留缓冲区 ，但是还是不能解决由consumer的选择性消费</li>
+<li>Pull模式，由消费者主动向消息中间件拉取消息</li>
+<li>取消息的过程需要用户自己写，根据offset取得消息</li>
+<li>consumer决定消息的消费情况，这种模式有一个好处是我们不需要返回ack消息，因为当consumer申请消费下一批消息时就可以认为上一批消息已经处理完毕，也不需要处理超时的问题，consumer可以根据自己的消费能力来消费消息</li>
+<li>pull最大问题是实时性问题，对于现在的MQ系统，对latency的追求越来越高，这个时候纯粹的Pull模式将满足不了实时性方面的需求</li>
+</ul>
+<h2>Tip</h2>
+<h2>Share</h2>
+<blockquote>
+<p>https://mp.weixin.qq.com/s?__biz=MzUyOTk2MTcwNg==&amp;mid=2247485029&amp;idx=1&amp;sn=a986bf7b7d7003f637cfccc6428e6310&amp;scene=21#wechat_redirect</p>
+<p>https://mp.weixin.qq.com/s?__biz=MzUyOTk2MTcwNg==&amp;mid=2247485034&amp;idx=1&amp;sn=b4a039013e3265c04700c48b1b338e06&amp;scene=21#wechat_redirect</p>
+<p>https://mp.weixin.qq.com/s/Kmqhr9szPdvBI0KQPm9JsA</p>
+</blockquote>
+<h3>distutils</h3>
+<blockquote>
+<p>https://docs.python.org/zh-cn/3.7/distutils/introduction.html</p>
+<p>https://blog.csdn.net/weixin_36670529/article/details/102794001</p>
+</blockquote>
+<p>distutils可以用来在Python环境中构建和安装额外的模块。新的模块可以是纯Python的，也可以是用C/C++写的扩展模块，或者可以是Python包，包中包含了由C和Python编写的模块。</p>
+<h4>模块构建流程</h4>
+<ul>
+<li>编写setup脚本（一般是setup.py）</li>
+<li>编写一个setup配置文件（可选）</li>
+<li>创建一个源码发布</li>
+<li>创建一个或多个构建（二进制）发布（可选）</li>
+</ul>
+<h5>setup脚本</h5>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">distutils.core</span> <span class="kn">import</span> <span class="n">setup</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;aaa&#39;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
+    <span class="n">include_package_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;aaa&#39;</span><span class="p">,</span> <span class="s1">&#39;aaa.bbb&#39;</span><span class="p">],</span>
+    <span class="n">package_dir</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;aaa&#39;</span><span class="p">:</span> <span class="s1">&#39;src&#39;</span><span class="p">},</span>
+    <span class="n">package_data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;aaa&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;bbb/*.config&#39;</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;config&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;src/bbb/ccc.config&#39;</span><span class="p">]),</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<ul>
+<li>name 包名</li>
+<li>version 版本</li>
+<li>packages 导入包(包下所有py文件)</li>
+<li>package_dir 包所在目录</li>
+<li>package_data 静态文件(复制到相对目录)</li>
+<li>data_files 静态文件(安装到指定python系统目录)</li>
+</ul>
+<h5>源码发布</h5>
+<div class="highlight"><pre><span></span><code>python setup.py sdist
+</code></pre></div>
+
+
+<p>sdist命令会创建一个archive 文件（比如Unix上的tar文件，Windows上的zip文件），它包含setup.py， 源码文件。该archive文件命名为aaa-1.0.0.tar.gz(zip)</p>
+<h5>安装模块</h5>
+<p>用户希望安装aaa模块，他只需要下载aaa-1.0.0.tar.gz，解压，进入aaa-1.0.0目录，然后运行</p>
+<div class="highlight"><pre><span></span><code>python setup.py install
+</code></pre></div>
+
+
+<p>该命令最终会将foo.py复制到Python环境存放第三方模块的目录中</p>
+<h5>构建发布</h5>
+<div class="highlight"><pre><span></span><code>python setup.py bdist
+</code></pre></div>
+
+
+<h3>setuptools</h3>
+<blockquote>
+<p>https://www.jianshu.com/p/ea9973091fdf</p>
+</blockquote>
+<p>setuptools是Python distutils增强版的集合，它可以帮助我们更简单的创建和分发Python包，尤其是拥有依赖关系的。</p>
+<h4>模块构建流程</h4>
+<ul>
+<li>编写setup脚本（一般是setup.py）</li>
+<li>编写一个setup配置文件（可选）</li>
+<li>打包</li>
+<li>安装</li>
+</ul>
+<h5>setup脚本</h5>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;aaa&#39;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
+    <span class="n">include_package_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">),</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
+        <span class="s1">&#39;bbb&gt;=0.10&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="c1"># package_dir={&#39;nxx&#39;: &#39;src&#39;},</span>
+    <span class="c1"># package_data={</span>
+    <span class="c1">#     &#39;nxx&#39;: [&#39;log/*.config&#39;],</span>
+    <span class="c1"># },</span>
+    <span class="c1"># data_files=[</span>
+    <span class="c1">#     (&#39;config&#39;, [&#39;src/log/log.config&#39;]),</span>
+    <span class="c1"># ],</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<ul>
+<li>name 包名</li>
+<li>version 版本</li>
+<li>include_package_data = True，启用清单文件MANIFEST.in包含数据文件</li>
+<li>packages 导入包(包下所有py文件)，find_packages(src)自动找到src目录下所有包</li>
+<li>install_requires 自动安装依赖</li>
+<li>package_dir 包所在目录</li>
+<li>package_data 静态文件(复制到相对目录)</li>
+<li>data_files 静态文件(安装到指定python系统目录)</li>
+</ul>
+<h5>打包</h5>
+<div class="highlight"><pre><span></span><code>python setup.py bdist_egg
+</code></pre></div>
+
+
+<p>当前目录下的dist目录内创建一个egg文件，名为aaa-1.0-py3.7.egg（zip压缩文件）， 文件名格式就是”应用名-版本号-Python版本.egg”。</p>
+<p>当前目录多了”build”和”MyApp.egg-info”子目录来存放打包的中间结果。</p>
+<h5>安装</h5>
+<div class="highlight"><pre><span></span><code>easy_install aaa-1.0-py3.7.egg
+<span class="c1"># 或者</span>
+easy_install aaa-1.0-py3.7.wheel
+<span class="c1"># 或者</span>
+pip install aaa-1.0-py3.7.wheel
+<span class="c1"># 或者</span>
+python setup.py install
+</code></pre></div>
+
+
+<h3>通用命令</h3>
+<ul>
+<li>build 构建</li>
+<li>sdist 源码分发</li>
+<li>install 源码安装</li>
+<li>bdist 可执行文件分发</li>
+<li>bdist_egg egg文件分发</li>
+<li>bdist_wheel wheel文件分发</li>
+</ul>
+<h3>tox</h3>
+<blockquote>
+<p>https://zhuanlan.zhihu.com/p/101330325</p>
+</blockquote>
+<p>支持创建隔离的 Python 环境，在里面可以安装不同版本的 Python 解释器与各种依赖库，以此方便开发者做自动化测试、打包、持续集成等事情。</p>
+<h4>配置文件</h4>
+<ul>
+<li>pyproject.toml</li>
+<li>tox.ini</li>
+<li>setup.cfg</li>
+</ul>
+<h5>tox.ini</h5>
+<ul>
+<li>[tox]下面是全局性的配置项，envlist 字段定义了 tox 操作的环境</li>
+<li>[xxx]下面是 xxx 虚拟环境的配置项，[xxx:yyy]继承 xxx 的配置，同时其自身配置项的优先级更高</li>
+<li>常用的配置项有：description（描述信息）、basepython（Python解释器版本）、deps（环境依赖项）、commands（命令语句）等等</li>
+<li>内置的基础变量{toxinidir}、{homedir}、{envname}、{envdir}</li>
+<li>操作系统的环境变量：{env:KEY}，效果等同于<code>os.environ['KEY']</code></li>
+</ul>
+<h4>工作流程</h4>
+<ul>
+<li>配置（figuration）：加载配置文件（如 tox.ini），解析命令行参数，读取系统环境变量等</li>
+<li>打包（packaging）：可选的，对于带有 setup.py 文件的项目，可以在这步去生成它的源发行版</li>
+<li>创建虚拟环境：默认使用 virtualenv 来创建虚拟环境，并根据配置项中的“deps”安装所需的依赖项，然后执行配置好的命令（commands）</li>
+<li>报告（report）：汇总所有虚拟环境的运行结果并罗列出来</li>
+</ul></div>
+        <hr />
+    </div>
+		
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="/tag/setuptools.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+                </div>
+
+                <div class="span3">
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Site
+                            </li>
+
+                            <li><a href="/archives.html">Archives</a>
+                            <li><a href="/tags.html">Tags</a>
+                        </ul>
+                    </div>
+
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Categories
+                            </li>
+
+                            <li><a href="/category/arts.html">ARTS</a></li>
+                        </ul>
+                    </div>
+                </div>             </div>         </div> 
+        <footer>
+            <br />
+            <p><a name="hostpage">千里之行 始于足下</a> &copy; qianlizhixing 2020</p>
+        </footer>
+
+    </div> <!-- /container -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/theme/bootstrap-collapse.js"></script>
+    <script>
+        document.getElementsByName("hostpage").forEach((item) => {
+            item.href = window.location.origin;
+        });
+    </script>
+</body>
+
+</html>

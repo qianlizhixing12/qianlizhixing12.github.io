@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+
+<head>
+    <meta charset="utf-8">
+    <title>千里之行 始于足下 - COM</title>
+    <meta name="description" content="">
+    <meta name="author" content="qianlizhixing">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le styles -->
+    <link href="/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="/theme/local.css" rel="stylesheet">
+    <link href="/theme/pygments.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/theme/images/icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <a class="brand" name="hostpage">千里之行 始于足下</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="row">
+
+                <div class="span9">
+        
+
+        
+
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="/artsdi-shi-san-zhou.html"><h1>ARTS第十三周</h1></a>
+2020-07-20
+
+<a class="url fn">qianlizhixing</a>
+
+
+ 
+        </div>
+        
+        <div><h2>Algorithm</h2>
+<p>leetcode 77 组合</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/combinations/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/python/77.py">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://docs.microsoft.com/zh-cn/windows/win32/com/component-object-model--com--portal</p>
+</blockquote>
+<h3>Component Object Model</h3>
+<ul>
+<li>用于组件之间函数调用的二进制标准</li>
+<li>微软OLE(复合文档)和ActiveX(支持internet的组件)技术的基础技术</li>
+<li>COM指定了一个对象模型和编程要求，使COM对象(也称为COM组件)能够与其他对象交互</li>
+<li>提供符合COM规范的运行时环境的主机系统</li>
+<li>定义特性契约的接口，以及实现接口的组件</li>
+<li>向系统提供组件的服务器和使用组件提供的特性的客户机</li>
+<li>跟踪组件在本地和远程主机上部署的位置的注册表</li>
+<li>一种服务控制管理器，用于定位本地和远程主机上的组件，并将服务器连接到客户机</li>
+<li>一种结构化的存储协议，定义了如何在主机文件系统上导航文件的内容</li>
+<li>COM定义了一些基本接口，这些接口提供所有基于COM的技术通用的功能</li>
+<li>将函数的强类型分组为接口的规定</li>
+<li>提供多态性、特性发现和对象生命周期跟踪的基本接口</li>
+<li>一种唯一标识组件及其接口的机制<ul>
+<li>每个接口都有自己唯一的接口标识符，是一个全局唯一标识符(GUID)</li>
+<li>在创建新接口时，必须为该接口创建新的标识符</li>
+<li>当调用者使用接口时，它必须使用唯一标识符</li>
+</ul>
+</li>
+<li>
+<p>从部署中创建组件实例的组件加载器</p>
+</li>
+<li>
+<p>所有COM接口都继承IUnknown接口</p>
+</li>
+<li>所有的COM对象都需要实现IUnknown接口</li>
+<li>IUnknown接口包含用于多态性和实例生命周期管理的基本COM操作</li>
+<li>IUnknown接口有三个成员函数，分别是QueryInterface、AddRef和Release</li>
+<li>调用QueryInterface在运行时确定COM对象是否支持特定接口；COM对象如果实现了请求的接口，则返回ppvObject ' ' out参数中的接口指针，否则返回NULL</li>
+<li>COM对象实例的生存期由其引用计数控制；IUnknown成员函数AddRef和释放控制计数；AddRef增加计数，Release减少计数。当引用计数达到零时，Release成员函数可以释放实例，因为没有调用者在使用它</li>
+<li>具体实现细节</li>
+<li>COM允许在不同的应用程序中使用类，在Windows平台上，类存在于动态链接库(DLL)或另一个应用程序(EXE)中</li>
+<li>系统上安装的COM对象维护一个所有clsid的注册数据库，注册数据库是每个CLSID和存放相应类的DLL或EXE位置之间的映射。每当调用者想要创建COM类的实例时，COM查询该数据库。调用者只需要知道CLSID就可以请求类的新实例</li>
+<li>创建实例最简单的方法是调用COM函数CoCreateInstance</li>
+<li>要基于单个CLSID创建多个对象，调用CoGetClassObject函数</li>
+<li>要连接到已经创建并运行的对象，调用GetActiveObject函数</li>
+</ul>
+<h2>Tip</h2>
+<h3>node.js中解析返回的html</h3>
+<ul>
+<li>正则表达式</li>
+<li>xpath</li>
+<li>cheerio类似jQuery操作</li>
+</ul>
+<h2>Share</h2>
+<h3>Electron(三)</h3>
+<h4>访问mssql</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// main</span>
+<span class="c1">// mssql模块 依赖msnodesql或着tedious</span>
+<span class="nx">ipcMain</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mssql.all&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">request</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">,</span> <span class="nx">request</span><span class="p">.</span><span class="nx">sql</span><span class="p">);</span>
+  <span class="nx">mssql</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">conn</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">request</span><span class="p">().</span><span class="nx">query</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">sql</span><span class="p">);</span>
+  <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">sender</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;mssql.all&#39;</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+  <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="c1">// render</span>
+    <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mssql.all&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">reponse</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reponse</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;sa&#39;</span><span class="p">,</span>
+        <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;******&#39;</span><span class="p">,</span>
+        <span class="nx">server</span><span class="o">:</span> <span class="s1">&#39;******&#39;</span><span class="p">,</span>
+        <span class="nx">database</span><span class="o">:</span> <span class="s1">&#39;******&#39;</span><span class="p">,</span>
+        <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">encrypt</span><span class="o">:</span> <span class="kc">false</span> <span class="c1">//使用windows azure，需要设置配置。</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="nx">sql</span><span class="o">:</span> <span class="s1">&#39;select * from ******&#39;</span>
+    <span class="p">}</span>
+    <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;mssql.all&#39;</span><span class="p">,</span> <span class="nx">request</span><span class="p">);</span>
+</code></pre></div>
+
+
+<h4>访问access</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// main</span>
+<span class="c1">// node-adodb模块</span>
+<span class="nx">ipcMain</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;access.all&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">request</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">,</span> <span class="nx">request</span><span class="p">.</span><span class="nx">sql</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="sb">`Provider=Microsoft.Jet.OLEDB.4.0;Data Source=</span><span class="si">${</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">database</span><span class="si">}</span><span class="sb">;Jet OLEDB:System Database=</span><span class="si">${</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">systemdb</span><span class="si">}</span><span class="sb">;User ID=</span><span class="si">${</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">user</span><span class="si">}</span><span class="sb">;Password=</span><span class="si">${</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">password</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">conn</span> <span class="o">=</span> <span class="nx">adodb</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    <span class="nx">conn</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">sql</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">event</span><span class="p">.</span><span class="nx">sender</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;access.all&#39;</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+    <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">sender</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;access.all&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// render</span>
+<span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;access.all&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">reponse</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reponse</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="kr">const</span> <span class="nx">requestAccess</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;******&#39;</span><span class="p">,</span>
+        <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;******&#39;</span><span class="p">,</span>
+        <span class="nx">database</span><span class="o">:</span> <span class="s1">&#39;******&#39;</span><span class="p">,</span>
+        <span class="nx">systemdb</span><span class="o">:</span> <span class="s1">&#39;******&#39;</span>
+      <span class="p">},</span>
+      <span class="nx">sql</span><span class="o">:</span> <span class="s1">&#39;select * from ******&#39;</span>
+    <span class="p">}</span>
+    <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;access.all&#39;</span><span class="p">,</span> <span class="nx">requestAccess</span><span class="p">);</span>
+</code></pre></div></div>
+        <hr />
+    </div>
+		
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="/tag/com.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+                </div>
+
+                <div class="span3">
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Site
+                            </li>
+
+                            <li><a href="/archives.html">Archives</a>
+                            <li><a href="/tags.html">Tags</a>
+                        </ul>
+                    </div>
+
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Categories
+                            </li>
+
+                            <li><a href="/category/arts.html">ARTS</a></li>
+                        </ul>
+                    </div>
+                </div>             </div>         </div> 
+        <footer>
+            <br />
+            <p><a name="hostpage">千里之行 始于足下</a> &copy; qianlizhixing 2020</p>
+        </footer>
+
+    </div> <!-- /container -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/theme/bootstrap-collapse.js"></script>
+    <script>
+        document.getElementsByName("hostpage").forEach((item) => {
+            item.href = window.location.origin;
+        });
+    </script>
+</body>
+
+</html>

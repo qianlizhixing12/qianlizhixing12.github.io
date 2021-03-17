@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+
+<head>
+    <meta charset="utf-8">
+    <title>千里之行 始于足下 - numpy</title>
+    <meta name="description" content="">
+    <meta name="author" content="qianlizhixing">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le styles -->
+    <link href="/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="/theme/local.css" rel="stylesheet">
+    <link href="/theme/pygments.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/theme/images/icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <a class="brand" name="hostpage">千里之行 始于足下</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="row">
+
+                <div class="span9">
+        
+
+        
+
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="/artsdi-ba-zhou.html"><h1>ARTS第八周</h1></a>
+2020-06-08
+
+<a class="url fn">qianlizhixing</a>
+
+
+ 
+        </div>
+        
+        <div><h2>Algorithm</h2>
+<p>leetcode 589 N叉树的前序遍历</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/python/589.py">解题</a></li>
+</ul>
+<p>leetcode 590 N叉树的后序遍历</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/python/590.py">解题</a></li>
+</ul>
+<p>leetcode 429 N叉树的层序遍历</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/python/429.py">解题</a></li>
+</ul>
+<p>leetcode 144 二叉树的前序遍历</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/binary-tree-preorder-traversal/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/python/144.py">解题</a></li>
+</ul>
+<p>leetcode 94 二叉树的中序遍历</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/python/94.py">解题</a></li>
+</ul>
+<p>leetcode 102 二叉树的层序遍历</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/python/102.py">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>http://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html</p>
+</blockquote>
+<ul>
+<li>
+<p>就像住宅或图书馆的计划需要描述这些建筑的用例一样，软件应用程序的架构也需要描述应用程序的用例。</p>
+</li>
+<li>
+<p>架构不应该与框架有关，架构不应该由框架提供；框架是要使用的工具，而不是要遵守的架构；如果你的架构基于框架，那么它就不能基于你的用例。</p>
+</li>
+<li>
+<p>好的架构以用例为中心的原因是，架构师可以安全地描述支持那些用例的结构，而不需要使用框架、工具和环境。</p>
+</li>
+<li>
+<p>一个好的软件架构允许关于框架、数据库、web服务器和其他环境问题和工具的决策被推迟或延迟。好的体系结构使得在项目的后期才有必要决定使用Rails、Spring、Hibernate、Tomcat或MySql。一个好的架构也可以使您很容易地改变对这些决策的想法。好的体系结构强调用例，并将它们与外围关注点解耦。</p>
+</li>
+<li>
+<p>Web是一种交付机制，不应该主导您的系统结构。</p>
+</li>
+<li>
+<p>让框架做所有事情的立场。这不是你想要的立场。</p>
+</li>
+<li>
+<p>防止框架接管架构。</p>
+</li>
+<li>
+<p>体系结构应该告诉读者关于系统的信息，而不是在系统中使用的框架。</p>
+</li>
+</ul>
+<h2>Tip</h2>
+<p>leetcode 429 N叉树的层序遍历 递归写法</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Definition for a Node.</span>
+<span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">children</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="n">children</span>
+
+
+<span class="c1">#迭代写法</span>
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+
+  <span class="k">def</span> <span class="nf">levelOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="s1">&#39;Node&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="n">ans</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[</span><span class="n">root</span><span class="p">]</span>
+    <span class="k">while</span> <span class="n">nodes</span><span class="p">:</span>
+      <span class="n">cur</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="n">visit</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+          <span class="k">continue</span>
+        <span class="n">visit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">)</span>
+      <span class="n">nodes</span> <span class="o">=</span> <span class="n">cur</span>
+      <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">visit</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ans</span>
+
+
+<span class="c1">#递归写法</span>
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+
+  <span class="k">def</span> <span class="nf">levelOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="s1">&#39;Node&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+
+    <span class="k">def</span> <span class="nf">help</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+      <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span> <span class="o">==</span> <span class="n">level</span><span class="p">:</span>
+        <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+      <span class="n">ans</span><span class="p">[</span><span class="n">level</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+
+      <span class="k">for</span> <span class="n">children</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+        <span class="n">help</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">root</span><span class="p">:</span>
+      <span class="n">help</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ans</span>
+</code></pre></div>
+
+
+<ul>
+<li>
+<p>常规递归写法：一般会把每层所有的节点作为集合为数组，作为递归参数调用，对本层处理时将本层所有子节点集合为数组；递归此过程。</p>
+</li>
+<li>
+<p>评论区所示：不收集每层所有节点，每个元素及深度作为递归参数调用，这样每个节点在最终结果数组的索引明确了。</p>
+</li>
+</ul>
+<h2>Share</h2>
+<blockquote>
+<p>https://www.numpy.org.cn/about/</p>
+</blockquote>
+<p>NumPy是使用Python进行科学计算的基础包，包含一个强大的N维数组对象，有用的线性代数，傅里叶变换和随机数功能。广泛应用于科学计算和深度学习。</p>
+<p>NumPy最基础结构是封装的N维数组，基本操作：</p>
+<ul>
+<li>可用numpy.array，numpy.zeros，numpy.ones，numpy.random.random构造一维或n维数组</li>
+<li>可以像普通数组一样通过索引赋值和访问</li>
+<li>可以通过arr[:col]快速访问某列元素</li>
+<li>可以逐元素执行加减乘除(+-*/)和矩阵乘法(dot)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="n">arr</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">arr1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr1</span><span class="p">)</span>
+
+<span class="n">arr2</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr2</span><span class="p">)</span>
+
+<span class="n">arr3</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr3</span><span class="p">)</span>
+
+<span class="n">arr4</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr4</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+</code></pre></div>
+
+
+<p>Torch最基础结构是封装好的tensor(张量)，类比操作，与numpy转换：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;numpy abs&#39;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;torch abs&#39;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">tensor</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;numpy sin&#39;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;torch sin&#39;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">tensor</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;numpy mean&#39;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;torch mean&#39;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tensor</span><span class="p">))</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+<span class="n">tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;numpy multiplication &#39;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;torch multiplication &#39;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">mm</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">tensor</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;numpy multiplication &#39;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="c1"># print(&#39;torch multiplication &#39;, tensor.dot(tensor))</span>
+
+<span class="n">np_data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">torch_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np_data</span><span class="p">)</span>
+<span class="n">tensor2array</span> <span class="o">=</span> <span class="n">torch_data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;numpy array:&#39;</span><span class="p">,</span> <span class="n">np_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;torch tensor:&#39;</span><span class="p">,</span> <span class="n">torch_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;tensor to array:&#39;</span><span class="p">,</span> <span class="n">tensor2array</span><span class="p">)</span>
+</code></pre></div></div>
+        <hr />
+    </div>
+		
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="/tag/numpy.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+                </div>
+
+                <div class="span3">
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Site
+                            </li>
+
+                            <li><a href="/archives.html">Archives</a>
+                            <li><a href="/tags.html">Tags</a>
+                        </ul>
+                    </div>
+
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Categories
+                            </li>
+
+                            <li><a href="/category/arts.html">ARTS</a></li>
+                        </ul>
+                    </div>
+                </div>             </div>         </div> 
+        <footer>
+            <br />
+            <p><a name="hostpage">千里之行 始于足下</a> &copy; qianlizhixing 2020</p>
+        </footer>
+
+    </div> <!-- /container -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/theme/bootstrap-collapse.js"></script>
+    <script>
+        document.getElementsByName("hostpage").forEach((item) => {
+            item.href = window.location.origin;
+        });
+    </script>
+</body>
+
+</html>

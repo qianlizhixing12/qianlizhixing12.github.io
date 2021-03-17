@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+
+<head>
+    <meta charset="utf-8">
+    <title>千里之行 始于足下</title>
+    <meta name="description" content="">
+    <meta name="author" content="qianlizhixing">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le styles -->
+    <link href="/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="/theme/local.css" rel="stylesheet">
+    <link href="/theme/pygments.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/theme/images/icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <a class="brand" name="hostpage">千里之行 始于足下</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="row">
+
+                <div class="span9">
+        
+
+        
+
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="/artsdi-shi-jiu-zhou.html"><h1>ARTS第十九周</h1></a>
+2021-03-17
+
+<a class="url fn">qianlizhixing</a>
+
+
+ 
+        </div>
+        
+        <div></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-shi-ba-zhou.html"><h2>ARTS第十八周</h2></a>
+        <div class= "well small"> 2021-01-25
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
+<p>leetcode 430 扁平化多级双向链表</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/flatten-a-multilevel-doubly-linked-list/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/c%2B%2B/430.cpp">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_15/</p>
+</blockquote>
+<h3>理性编码</h3>
+<ul>
+<li>推理软件正确性得基本方法是将所有代码分成小段(通常组织为精简函数)，并讨论小段代码的正确行</li>
+<li>小块代码应该便于对其状态的解读，包括函数名，函数变量名，任务描述，解读简单，容易抽象成前提条件和后置条件</li>
+<li>许多众所周知的编码实践使推理更容易，大多可以被静态代码分析器检查</li>
+<li>不要使用goto，会导致代码高度耦合</li>
+<li>不要使用可修改的全局变量，会导致代码相互依赖改变量状态(数值)</li>
+<li>变量尽量拥有最小的作用域</li>
+<li>让对象不可变</li>
+<li>通过使用水平和垂直的间距，例如对齐相关的结构，提高代码可读性</li>
+<li>通过为对象、类型、函数等选择描述性(但相对较短)的名称，使代码自文档化</li>
+<li>如果你需要一个嵌套的小块，让它成为一个函数</li>
+<li>函数尽量短而精，即简短并且专注于一个单一的任务，以前有24行的限制，现在也适用</li>
+<li>函数参数尽量少 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-shi-ba-zhou.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-shi-qi-zhou.html"><h2>ARTS第十七周</h2></a>
+        <div class= "well small"> 2020-08-17
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
+<p>leetcode 338 比特位计数</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/counting-bits/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/c/338.c">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://docs.oracle.com/cd/E19435-01/819-0069/intro.html</p>
+</blockquote>
+<h4>消息队列架构</h4>
+<ul>
+<li>消息队列是一种可靠的异步消息传递服务</li>
+<li>消息服务器由一个或多个代理组成，并执行消息路由和传递，它是消息队列服务的核心</li>
+<li>消息服务器由一个或一组共同工作的代理(作为代理集群)组成，以执行消息路由和传递服务</li>
+<li>身份验证，操作授权</li>
+<li>设置和客户端通信协议</li>
+<li>接受客户端消息，并将其放置在各自的物理目的地</li>
+<li>将消息路由并交付给一个或多个消费客户端</li>
+<li>保证可靠的交付</li>
+<li>为监控系统性能提供数据</li>
+<li>客户端运行时代理</li>
+<li>管理到消息服务器的消息传递</li>
+<li>建立连接，建立客户的身份</li>
+<li>实现客户端确认</li>
+<li>控制跨连接的消息流</li>
+<li>可以覆盖由生成客户端设置的消息头值</li>
+</ul>
+<h4>消息传递步骤</h4>
+<ul>
+<li>持久、可靠地传递的消息步骤</li>
+<li>消息生产<ul>
+<li>客户端运行时通过连接将消息从消息生成器传递到消息服务器</li>
+</ul>
+</li>
+<li>消息处理和路由<ul>
+<li>消息服务器从连接中读取消息并将其放置到适当的目的地</li>
+<li>消息服务器将(持久的)消息放在数据存储中 …</li></ul></li></ul> <a class="btn btn-info xsmall" href="/artsdi-shi-qi-zhou.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-shi-liu-zhou.html"><h2>ARTS第十六周</h2></a>
+        <div class= "well small"> 2020-08-10
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
+<p>leetcode 338 比特位计数</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/counting-bits/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/c/338.c">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_14/</p>
+</blockquote>
+<h4>代码评审</h4>
+<ul>
+<li>提高了代码质量并降低了缺陷率</li>
+<li>代码可能有很多细节涉及系统具体业务</li>
+<li>代码审查的目的不应该是简单地纠正代码中的错误，而应该是分享知识和建立共同的编码指南</li>
+<li>通过学习和理解代码来检查代码，而不是寻找错误</li>
+<li>代码审查期间要温和，确保你的评论是有建设性的，而不是刻薄的</li>
+<li>避免团队成员中的组织级别影响代码评审</li>
+<li>如果团队有通过工具检查的编码约定，那么代码审查将更容易进行。这样，代码格式化就不会在代码评审会议上讨论</li>
+<li>让代码审查变得有趣也许是成功的最重要因素</li>
+</ul>
+<h2>Tip</h2>
+<h2>Share</h2>
+<h3>Electron(六)</h3>
+<h4>多个渲染进程间通信</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">//cefmanage.js</span>
+<span class="kr">const</span> <span class="nx">uuid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;node-uuid&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">ipcMain</span><span class="p">,</span> <span class="nx">ipcRenderer</span><span class="p">,</span> <span class="nx">remote</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">cefmanage …</span></code></pre></div> <a class="btn btn-info xsmall" href="/artsdi-shi-liu-zhou.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-shi-wu-zhou.html"><h2>ARTS第十五周</h2></a>
+        <div class= "well small"> 2020-08-03
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
+<p>leetcode 190 颠倒二进制位</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/reverse-bits/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/c/190.c">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_13/</p>
+</blockquote>
+<h4>代码布局</h4>
+<ul>
+<li>编程时花在浏览和阅读代码上的时间要比实际输入多得多</li>
+<li>如果行为相同的代码看起来也一样，那么感知系统将帮助找出其中的区别；要遵守关于如何在编译单元中布置类的各个部分的约定:常量、字段、公共方法和私有方法</li>
+<li>让团队就基础的自动格式化程序达成一致</li>
+<li>除非有积极的分歧，一个团队将很快汇聚到一个共同的“手工完成”的风格</li>
+<li>格式化程序无法理解意图，重要的是换行和分组反映了代码的意图，而不仅仅是语言的语法</li>
+<li>紧凑的格式，在屏幕上看到的内容越多，在不破坏上下文滚动或切换文件的情况下，能看到的内容就越多；布局能帮助理解代码</li>
+</ul>
+<h2>Tip</h2>
+<h2>Share</h2>
+<h3>Electron(五)</h3>
+<h4>批量管理进程间通信</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// main.js</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">ipcMain</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">mssql</span> <span class="o">=</span> <span class="nx">require …</span></code></pre></div> <a class="btn btn-info xsmall" href="/artsdi-shi-wu-zhou.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-shi-si-zhou.html"><h2>ARTS第十四周</h2></a>
+        <div class= "well small"> 2020-07-27
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
+<p>leetcode 191 位1的个数</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/number-of-1-bits/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/c/191.c">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_12/</p>
+</blockquote>
+<h4>代码设计</h4>
+<ul>
+<li>随着模型的过时，未完成的设计通过重复地构建和改进接近最终目标而发展。</li>
+<li>一个偶然的观察者可能很难区分一个未完成的设计和一个完成的产品。</li>
+<li>建造成本比设计成本更容易计算，当可预测的任务缩减为零时，不可预测的设计时间开始占主导地位。结果产生得更快，但可靠的时间线却会溜走。</li>
+<li>随着建筑成本的减少，能够快速完成设计的公司在市场上获得优势。快速完成设计成为工程公司的核心推动力。</li>
+<li>伟大的设计师致力于掌握他们的工艺而产生的。代码也不例外。</li>
+</ul>
+<h2>Tip</h2>
+<h2>Share</h2>
+<h3>Electron(四)</h3>
+<h4>跨域发送请求</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// main</span>
+<span class="c1">// node-adodb模块</span>
+  <span class="kr">const</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">);</span>
+  <span class="nx">req</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">uri</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response …</span></code></pre></div> <a class="btn btn-info xsmall" href="/artsdi-shi-si-zhou.html">read more</a></div>
+    </div>	
+				
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="/index.html">1</a></li>
+    <li class=""><a href="/index2.html">2</a></li>
+    <li class=""><a href="/index3.html">3</a></li>
+    <li class=""><a href="/index4.html">4</a></li>
+
+    <li class="next"><a href="/index2.html">Next &rarr;</a></li>
+
+</ul>
+</div>
+ 
+  
+                </div>
+
+                <div class="span3">
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Site
+                            </li>
+
+                            <li><a href="/archives.html">Archives</a>
+                            <li><a href="/tags.html">Tags</a>
+                        </ul>
+                    </div>
+
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Categories
+                            </li>
+
+                            <li><a href="/category/arts.html">ARTS</a></li>
+                        </ul>
+                    </div>
+                </div>             </div>         </div> 
+        <footer>
+            <br />
+            <p><a name="hostpage">千里之行 始于足下</a> &copy; qianlizhixing 2021</p>
+        </footer>
+
+    </div> <!-- /container -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/theme/bootstrap-collapse.js"></script>
+    <script>
+        document.getElementsByName("hostpage").forEach((item) => {
+            item.href = window.location.origin;
+        });
+    </script>
+</body>
+
+</html>

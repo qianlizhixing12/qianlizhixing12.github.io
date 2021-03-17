@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+
+<head>
+    <meta charset="utf-8">
+    <title>千里之行 始于足下 - ARTS第十八周</title>
+    <meta name="description" content="">
+    <meta name="author" content="qianlizhixing">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le styles -->
+    <link href="/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="/theme/local.css" rel="stylesheet">
+    <link href="/theme/pygments.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/theme/images/icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <a class="brand" name="hostpage">千里之行 始于足下</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="row">
+
+                <div class="span9">
+<div class='article'>
+    <div class="content-title">
+        <h1>ARTS第十八周</h1>
+2021-01-25
+
+<a class="url fn">qianlizhixing</a>
+
+
+    </div>
+
+    <div><h2>Algorithm</h2>
+<p>leetcode 430 扁平化多级双向链表</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/flatten-a-multilevel-doubly-linked-list/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/c%2B%2B/430.cpp">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_15/</p>
+</blockquote>
+<h3>理性编码</h3>
+<ul>
+<li>推理软件正确性得基本方法是将所有代码分成小段(通常组织为精简函数)，并讨论小段代码的正确行</li>
+<li>小块代码应该便于对其状态的解读，包括函数名，函数变量名，任务描述，解读简单，容易抽象成前提条件和后置条件</li>
+<li>许多众所周知的编码实践使推理更容易，大多可以被静态代码分析器检查</li>
+<li>不要使用goto，会导致代码高度耦合</li>
+<li>不要使用可修改的全局变量，会导致代码相互依赖改变量状态(数值)</li>
+<li>变量尽量拥有最小的作用域</li>
+<li>让对象不可变</li>
+<li>通过使用水平和垂直的间距，例如对齐相关的结构，提高代码可读性</li>
+<li>通过为对象、类型、函数等选择描述性(但相对较短)的名称，使代码自文档化</li>
+<li>如果你需要一个嵌套的小块，让它成为一个函数</li>
+<li>函数尽量短而精，即简短并且专注于一个单一的任务，以前有24行的限制，现在也适用</li>
+<li>函数参数尽量少，最多4个。将相关参数组合成对象或结构体，这样的一致性有助于解读</li>
+<li>从块到库的每个代码单元都应该有一个<em>狭窄的接口</em>，更少的交流减少了推理的需要</li>
+</ul>
+<h3>注释建议</h3>
+<ul>
+<li>代码应该向后面的程序员解释清楚</li>
+<li>代码中应该解释代码应该做什么，难写就难读</li>
+<li>注释也可能走得太远，确保注释澄清了代码，而不是模糊了它</li>
+<li>头注释应该能提供足够的信息，帮助其他程序员使用你的代码，而不需要读一遍</li>
+<li>内联注释应该帮助下一个开发人员修复或扩展它</li>
+</ul>
+<h3>只注释晦涩难懂的代码</h3>
+<ul>
+<li>理论与实践之间的差异，在实践中比在理论中更大</li>
+<li>当代码格式不佳时，编译器、解释器和其他工具肯定会反对，错误注释却无法借助工具发现</li>
+<li>版本相关的注释，注释掉的代码试图解决版本控制和历史的问题，这些问题已经被版本控制工具回答了(更有效地)</li>
+<li>代码库中普遍存在的嘈杂的注释和不正确的注释会鼓励程序员忽略所有的注释</li>
+<li>为了避免代码库因程序员的聪明才智而被误用，并降低忽略任何真正有价值的注释的风险，注释应该被当作代码来对待</li>
+<li>每条注释都应该为读者增加一些价值，否则它就是浪费，应该被删除或重写</li>
+<li>注释应该说一些代码没有也不能说的东西</li>
+<li>注释说明一段代码应该已经说了什么，这是在邀请更改代码结构或编码约定，以便代码自己说话</li>
+<li>不要补偿不好的方法名或类名，而要重命名它们</li>
+<li>不要在长函数中注释节，而要提取较小的函数，这些函数的名称能捕捉到前一节的意图</li>
+<li>尽量通过代码来表达</li>
+</ul>
+<h2>Tip</h2>
+<h2>Share</h2>
+<blockquote>
+<p>https://github.com/shieldfy/API-Security-Checklist</p>
+</blockquote>
+<h3>开发安全的API所需要核对的清单</h3>
+<h4>身份认证</h4>
+<ul>
+<li>不要使用 <code>Basic Auth</code> ，请使用标准的认证协议（如 <a href="https://jwt.io/">JWT</a>，<a href="https://oauth.net/">OAuth</a>）。</li>
+<li>不要重新实现 <code>Authentication</code>、<code>token generating</code> 和 <code>password storing</code>，请使用标准库。</li>
+<li>限制密码错误尝试次数，并且增加账号冻结功能。</li>
+<li>加密所有的敏感数据。</li>
+</ul>
+<h4>JWT（JSON Web Token）</h4>
+<ul>
+<li>使用随机复杂的密钥（<code>JWT Secret</code>）以增加暴力破解的难度。</li>
+<li>不要在请求体中直接提取数据，要对数据进行加密（<code>HS256</code> 或 <code>RS256</code>）。</li>
+<li>使 token 的过期时间尽量的短（<code>TTL</code>，<code>RTTL</code>）。</li>
+<li>不要在 JWT 的请求体中存放敏感数据，因为它是<a href="https://jwt.io/#debugger-io">可解码的</a>。</li>
+</ul>
+<h4>OAuth 授权或认证协议</h4>
+<ul>
+<li>始终在后台验证 <code>redirect_uri</code>，只允许白名单的 URL。</li>
+<li>始终在授权时使用有效期较短的授权码（code）而不是令牌（access_token）（不允许 <code>response_type=token</code>）。</li>
+<li>使用随机哈希数的 <code>state</code> 参数来防止跨站请求伪造（CSRF）。</li>
+<li>对不同的应用分别定义默认的作用域和各自有效的作用域参数。</li>
+</ul>
+<h3>访问</h3>
+<ul>
+<li>限制流量来防止 DDoS 攻击和暴力攻击。</li>
+<li>在服务端使用 HTTPS 协议来防止 MITM （中间人攻击）。</li>
+<li>使用 <code>HSTS</code> 协议防止 SSL Strip 攻击。</li>
+</ul>
+<h3>输入</h3>
+<ul>
+<li>使用与操作相符的 HTTP 操作函数，<code>GET（读取)</code>，<code>POST（创建）</code>，<code>PUT（替换/更新）</code> 以及 <code>DELETE（删除记录）</code>，如果请求的方法不适用于请求的资源则返回 <code>405 Method Not Allowed</code>。</li>
+<li>在请求头中的 <code>content-type</code> 字段使用内容验证来只允许支持的格式（如 <code>application/xml</code>，<code>application/json</code> 等等）并在不满足条件的时候返回 <code>406 Not Acceptable</code>。</li>
+<li>验证 <code>content-type</code> 中申明的编码和你收到正文编码一致（如 <code>application/x-www-form-urlencoded</code>，<code>multipart/form-data</code>，<code>application/json</code> 等等）。</li>
+<li>验证用户输入来避免一些普通的易受攻击缺陷（如 <code>XSS</code>，<code>SQL-注入</code>，<code>远程代码执行</code> 等等）。</li>
+<li>不要在 URL 中使用任何敏感的数据（<code>credentials</code>，<code>Passwords</code>，<code>security tokens</code>，or <code>API keys</code>），而是使用标准的认证请求头。</li>
+<li>使用一个 API Gateway 服务来启用缓存、限制访问速率（如 <code>Quota</code>，<code>Spike Arrest</code>，<code>Concurrent Rate Limit</code>）以及动态地部署 APIs resources。</li>
+</ul>
+<h3>处理</h3>
+<ul>
+<li>检查是否所有的接口都包含必要都身份认证，以避免被破坏了的认证体系。</li>
+<li>避免使用特有的资源 id。使用 <code>/me/orders</code> 替代 <code>/user/654321/orders</code>。</li>
+<li>使用 <code>UUID</code> 代替自增长的 id。</li>
+<li>如果需要解析 XML 文件，确保实体解析（entity parsing）是关闭的以避免 <code>XXE</code> 攻击。</li>
+<li>如果需要解析 XML 文件，确保实体扩展（entity expansion）是关闭的以避免通过指数实体扩展攻击实现的 <code>Billion Laughs/XML bomb</code>。</li>
+<li>在文件上传中使用 CDN。</li>
+<li>如果数据处理量很大，尽可能使用队列或者 Workers 在后台处理来避免阻塞请求，从而快速响应客户端。</li>
+<li>不要忘了把 DEBUG 模式关掉。</li>
+</ul>
+<h3>输出</h3>
+<ul>
+<li>增加请求返回头 <code>X-Content-Type-Options: nosniff</code>。</li>
+<li>增加请求返回头 <code>X-Frame-Options: deny</code>。</li>
+<li>增加请求返回头 <code>Content-Security-Policy: default-src 'none'</code>。</li>
+<li>删除请求返回中的指纹头 - <code>X-Powered-By</code>，<code>Server</code>，<code>X-AspNet-Version</code> 等等。</li>
+<li>在响应中遵循请求的 <code>content-type</code>，如果你的请求类型是 <code>application/json</code> 那么你返回的 <code>content-type</code> 就是 <code>application/json</code>。</li>
+<li>不要返回敏感的数据，如 <code>credentials</code>，<code>Passwords</code>，<code>security tokens</code>。</li>
+<li>给请求返回使用合理的 HTTP 响应代码。（如 <code>200 OK</code>，<code>400 Bad Request</code>，<code>401 Unauthorized</code>，<code>405 Method Not Allowed</code> 等等）。</li>
+</ul>
+<h3>持续集成和持续部署</h3>
+<ul>
+<li>使用单元测试以及集成测试的覆盖率来保障你的设计和实现。</li>
+<li>引入代码审查流程，禁止私自合并代码。</li>
+<li>在推送到生产环境之前确保服务的所有组件都用杀毒软件静态地扫描过，包括第三方库和其它依赖。</li>
+<li>为部署设计一个回滚方案。</li>
+</ul>
+<h3>参考</h3>
+<ul>
+<li><a href="https://github.com/yosriady/api-development-tools">yosriady/api-development-tools</a> - 用于构建 RESTful HTTP + JSON API 的有用资源集合。</li>
+</ul></div>
+
+    <hr>
+</div>
+                </div>
+
+                <div class="span3">
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Site
+                            </li>
+
+                            <li><a href="/archives.html">Archives</a>
+                            <li><a href="/tags.html">Tags</a>
+                        </ul>
+                    </div>
+
+
+                    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">
+                                Categories
+                            </li>
+
+                            <li><a href="/category/arts.html">ARTS</a></li>
+                        </ul>
+                    </div>
+                </div>             </div>         </div> 
+        <footer>
+            <br />
+            <p><a name="hostpage">千里之行 始于足下</a> &copy; qianlizhixing 2021</p>
+        </footer>
+
+    </div> <!-- /container -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/theme/bootstrap-collapse.js"></script>
+    <script>
+        document.getElementsByName("hostpage").forEach((item) => {
+            item.href = window.location.origin;
+        });
+    </script>
+</body>
+
+</html>
