@@ -50,8 +50,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="/artsdi-er-shi-zhou.html"><h1>ARTS第二十周</h1></a>
-2021-03-22
+            <a href="/artsdi-er-shi-yi-zhou.html"><h1>ARTS第二十一周</h1></a>
+2021-03-29
 
 <a class="url fn">qianlizhixing</a>
 
@@ -60,6 +60,259 @@
         </div>
         
         <div><h2>Algorithm</h2>
+<p>leetcode 74 搜索二维矩阵</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/search-a-2d-matrix/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/74.py">解题</a></li>
+<li>解题思路，数组元素具有单调性时，二分查找</li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_37/
+https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_38/
+https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_39/
+</p>
+</blockquote>
+<h3>努力工作是没有回报的</h3>
+<ul>
+<li>应该考虑减少工作量以提高效率，完成更多的工作</li>
+<li>作为一名专业的程序员，你必须让自己在自己的专业领域保持更新</li>
+<li>准备和教育是职业的重要组成部分</li>
+<li>作为一名专业程序员，应该知道一周工作60个小时是不明智的。表现得像个专业人士:准备、影响、观察、反思和改变</li>
+</ul>
+<h3>如何使用Bug追踪器</h3>
+<ul>
+<li>一份好的bug报告需要以下三点</li>
+<li>如何尽可能精确地重现错误，以及这将使错误出现的频率</li>
+<li>应该发生什么事，至少在你看来是这样。</li>
+<li>到底发生了什么，或者至少是你记录的所有信息</li>
+<li>花点时间解释为什么这个bug应该被关闭，可以节省以后向经理和客户证明它的冗长时间</li>
+<li>更改bug的优先级也是公开声明，仅因为微不足道，并不意味着它不会阻止其他人使用该产品</li>
+</ul>
+<h3>通过删除代码来改进代码</h3>
+<ul>
+<li>为什么一开始就会出现不必要的代码</li>
+<li>这是一个有趣的额外的东西，程序员想要编写它(写代码是因为它能增加价值，而不是因为它能让你开心)</li>
+<li>有人认为将来可能会需要它，所以觉得最好现在就编写它(如果你现在不需要它，也不要马上写)</li>
+<li>它看起来并不是一个很大的“额外”，因此实现它比回到客户那里查看是否真的需要它更容易</li>
+<li>程序员发明了既没有记录也没有讨论的额外需求来证明额外的特性，这个要求实际上是假的</li>
+</ul>
+<h2>Tip</h2>
+<h2>Share(selenium)</h2>
+<h3>处理滑动验证</h3>
+<p>上篇用pyppeteer处理了geetest滑块验证，试着selenium处理</p>
+<blockquote>
+<p>整理复用下面三篇博客</p>
+<p>https://blog.csdn.net/paololiu/article/details/52514504</p>
+<p>https://cloud.tencent.com/developer/article/1377218</p>
+<p>https://zhuanlan.zhihu.com/p/107786616</p>
+<p>https://www.jianshu.com/p/3f968958af5a</p>
+</blockquote>
+<h4>逻辑步骤</h4>
+<ol>
+<li>还原图片，包括包含滑动块和不含滑动块的背景图</li>
+<li>比较图片，比较两张图片，找出滑块通过时的位置</li>
+<li>模拟滑动，先加速接近最终位置减速滑动（三个步骤：鼠标点击滑块，移动滑块，放开鼠标）</li>
+</ol>
+<h4>说明</h4>
+<ul>
+<li>不能百分百成功</li>
+</ul>
+<p>感觉代码注释清楚，比文字有效，直接上代码</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.support.ui</span> <span class="kn">import</span> <span class="n">WebDriverWait</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.action_chains</span> <span class="kn">import</span> <span class="n">ActionChains</span>
+<span class="kn">import</span> <span class="nn">PIL.Image</span> <span class="k">as</span> <span class="nn">image</span>
+<span class="kn">import</span> <span class="nn">PIL.ImageChops</span> <span class="k">as</span> <span class="nn">imagechops</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">ChromeOptions</span><span class="p">()</span>
+    <span class="c1">#隐藏Chrome正在受到自动软件的控制</span>
+    <span class="c1"># options.add_argument(&#39;--disable-infobars&#39;)已弃用</span>
+    <span class="n">options</span><span class="o">.</span><span class="n">add_experimental_option</span><span class="p">(</span><span class="s1">&#39;useAutomationExtension&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">options</span><span class="o">.</span><span class="n">add_experimental_option</span><span class="p">(</span><span class="s1">&#39;excludeSwitches&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;enable-automation&#39;</span><span class="p">])</span>
+    <span class="c1"># options.add_argument(&#39;--headless&#39;)</span>
+    <span class="k">with</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span> <span class="k">as</span> <span class="n">bs</span><span class="p">:</span>
+        <span class="n">bs</span><span class="o">.</span><span class="n">maximize_window</span><span class="p">()</span>
+        <span class="n">bs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://****&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># 防止被识别，将webdriver设置为false</span>
+            <span class="c1"># bs.execute_script(</span>
+            <span class="c1">#     &#39;Object.defineProperties(navigator,{ webdriver:{ get: () =&gt; false } })&#39;</span>
+            <span class="c1"># )</span>
+            <span class="n">fill_info</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="s1">&#39;15055495@qq.com&#39;</span><span class="p">,</span> <span class="s1">&#39;kdfjksdf&#39;</span><span class="p">)</span>
+            <span class="n">validation</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span>
+            <span class="c1"># print_info(bs)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">bs</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">fill_info</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">passwd</span><span class="p">):</span>
+    <span class="n">bs</span><span class="o">.</span><span class="n">find_elements_by_class_name</span><span class="p">(</span><span class="s1">&#39;login-button&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    <span class="c1"># bs.find_element_by_xpath(</span>
+    <span class="c1">#     &#39;//button[contains(@class,&quot;login-button&quot;)]&#39;).click()</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">WebDriverWait</span><span class="p">(</span>
+        <span class="n">bs</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">find_element_by_name</span><span class="p">(</span><span class="s1">&#39;mobileOrEmail&#39;</span><span class="p">))</span>
+    <span class="n">email</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="c1"># bs.find_element_by_name(&#39;mobileOrEmail&#39;).send_keys(user)</span>
+    <span class="c1"># bs.find_element_by_xpath(&#39;//input[@name=&quot;mobileOrEmail&quot;]&#39;).send_keys(user)</span>
+    <span class="n">bs</span><span class="o">.</span><span class="n">find_element_by_name</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">passwd</span><span class="p">)</span>
+    <span class="c1"># bs.find_element_by_xpath(&#39;//input[@name=&quot;password&quot;]&#39;).send_keys(passwd)</span>
+    <span class="n">bs</span><span class="o">.</span><span class="n">find_element_by_class_name</span><span class="p">(</span><span class="s1">&#39;submit&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    <span class="c1"># bs.find_element_by_xpath(</span>
+    <span class="c1">#     &#39;//button[contains(@class,&quot;sm-button&quot;)][1]&#39;).click()</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">validation</span><span class="p">(</span><span class="n">bs</span><span class="p">):</span>
+    <span class="n">distance</span> <span class="o">=</span> <span class="n">get_slide_distance</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span>
+    <span class="n">tracks</span> <span class="o">=</span> <span class="n">get_slide_track</span><span class="p">(</span><span class="n">distance</span> <span class="o">-</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">move_slide</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">tracks</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">get_slide_distance</span><span class="p">(</span><span class="n">bs</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    # 获取验证图片相对距离</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">bg_info</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span>
+        <span class="s1">&#39;return document.getElementsByClassName(&quot;geetest_canvas_bg&quot;)[0].toDataURL(&quot;image/png&quot;);&#39;</span>
+    <span class="p">)</span>
+    <span class="n">bg</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="n">bg_info</span><span class="p">)</span>
+    <span class="n">fullbg_info</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span>
+        <span class="s1">&#39;return document.getElementsByClassName(&quot;geetest_canvas_fullbg&quot;)[0].toDataURL(&quot;image/png&quot;);&#39;</span>
+    <span class="p">)</span>
+    <span class="n">fullbg</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="n">fullbg_info</span><span class="p">)</span>
+    <span class="c1"># bg.save(&#39;bg.png&#39;)</span>
+    <span class="c1"># fullbg.save(&#39;fullbg.png&#39;)</span>
+    <span class="c1">#获取差异</span>
+    <span class="k">return</span> <span class="n">get_diff_location</span><span class="p">(</span><span class="n">fullbg</span><span class="p">,</span> <span class="n">bg</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">get_image</span><span class="p">(</span><span class="n">img_info</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    根据base64数据还原图片</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">im_base64</span> <span class="o">=</span> <span class="n">img_info</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">im_bytes</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">im_base64</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">im_bytes</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">get_diff_location</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    计算缺口的位置，difference太精确，用绝对值相差50比较</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">is_similar</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        对比RGB值</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">pixel1</span> <span class="o">=</span> <span class="n">image1</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+        <span class="n">pixel2</span> <span class="o">=</span> <span class="n">image2</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pixel1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">pixel2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">50</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">260</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">160</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">is_similar</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span>
+
+
+<span class="k">def</span> <span class="nf">get_slide_track</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">seconds</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    根据轨迹离散分布生成的数学生成</span>
+<span class="sd">    :param distance: 缺口位置</span>
+<span class="sd">    :param seconds:  时间</span>
+<span class="sd">    :return: 轨迹数组</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">ease_out_quad</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">ease_out_quart</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">ease_out_expo</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">distance</span> <span class="o">+=</span> <span class="mi">20</span>
+
+    <span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)))</span>
+
+    <span class="c1"># ease: 生成函数</span>
+    <span class="n">ease</span> <span class="o">=</span> <span class="n">ease_out_quart</span>
+    <span class="c1"># # ease = ease_out_quad</span>
+    <span class="c1"># # ease = ease_out_expo</span>
+    <span class="c1"># ease = sigmoid</span>
+    <span class="n">tracks</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">offsets</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">):</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">ease</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">seconds</span><span class="p">)</span> <span class="o">*</span> <span class="n">distance</span><span class="p">)</span>
+        <span class="n">tracks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">offset</span> <span class="o">-</span> <span class="n">offsets</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">offsets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tracks</span>
+
+
+<span class="k">def</span> <span class="nf">move_slide</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">tracks</span><span class="p">):</span>
+    <span class="n">slide</span> <span class="o">=</span> <span class="n">WebDriverWait</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">until</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">bs</span><span class="p">:</span> <span class="n">bs</span><span class="o">.</span><span class="n">find_element_by_class_name</span><span class="p">(</span><span class="s1">&#39;geetest_slider_button&#39;</span><span class="p">))</span>
+    <span class="c1"># slide = bs.find_element_by_class_name(&#39;geetest_slider_button&#39;)</span>
+    <span class="c1"># 点击元素</span>
+    <span class="n">ActionChains</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span><span class="o">.</span><span class="n">click_and_hold</span><span class="p">(</span><span class="n">slide</span><span class="p">)</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
+    <span class="c1"># 拖动元素</span>
+    <span class="k">for</span> <span class="n">track</span> <span class="ow">in</span> <span class="n">tracks</span><span class="p">:</span>
+        <span class="n">ActionChains</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span><span class="o">.</span><span class="n">move_by_offset</span><span class="p">(</span><span class="n">xoffset</span><span class="o">=</span><span class="n">track</span><span class="p">,</span> <span class="n">yoffset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
+    <span class="c1"># 释放鼠标</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span>
+    <span class="n">ActionChains</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span><span class="o">.</span><span class="n">release</span><span class="p">()</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ok&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">bs</span><span class="p">):</span>
+    <span class="c1"># 获取cookies</span>
+    <span class="n">cookies</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">get_cookies</span><span class="p">()</span>
+    <span class="n">sessionStorage</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="s1">&#39;return sessionStorage;&#39;</span><span class="p">)</span>
+    <span class="n">localStorage</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="s1">&#39;return localStorage;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cookies</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sessionStorage</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">localStorage</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-er-shi-zhou.html"><h2>ARTS第二十周</h2></a>
+        <div class= "well small"> 2021-03-22
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
 <p>leetcode 剑指Offer38 字符串的排列</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/">原题</a></li>
@@ -87,336 +340,9 @@
 <li>errno全局错误信号容易被忽略，很难使用</li>
 <li>异常是一种更受结构化语言支持的错误信令和处理方式</li>
 <li>不处理错误后果</li>
-<li>代码脆弱，充满令人兴奋，难以发现的bug</li>
-<li>代码安全，破解者经常利用糟糕的错误处理来入侵软件系统</li>
-<li>代码结构丑陋，如果代码中有一些错误需要不断处理，那么界面可能很糟糕</li>
-</ul>
-<h2>Tip</h2>
-<h2>Share(pyppeteer)</h2>
-<blockquote>
-<p>https://github.com/pyppeteer/pyppeteer</p>
-<p>https://pyppeteer.github.io/pyppeteer/reference.html</p>
-<p>http://puppeteerjs.com/</p>
-<p>https://www.douban.com/note/193710154/</p>
-</blockquote>
-<h3>概念</h3>
-<ul>
-<li>puppeteer是Google开发的一个Node库，它提供了一个高级API来通过DevTools协议控制Chromium，js代码调用这些API来操纵chromium浏览器，完成自动化任务。</li>
-<li>chromium是chrome的开源版本(实验版本)，和chorme内核相同，chromium包含新功能和实验功能，待稳定后同步到chrome新版本。</li>
-<li>pyppeteer是puppeteer的python版本。</li>
-<li>pyppeteer是基于asyncio构建的，它的所有属性和方法几乎都是coroutine (协程) 对象。</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># 安装pyppeteer</span>
-pip install pyppeteer
-<span class="c1"># 安装chromium</span>
-Python<span class="se">\S</span>cripts<span class="se">\p</span>yppeteer-install.exe
-</code></pre></div>
-
-
-<h3>简单demo</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
-<span class="kn">from</span> <span class="nn">pyppeteer</span> <span class="kn">import</span> <span class="n">launch</span>
-
-
-<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">browser</span> <span class="o">=</span> <span class="k">await</span> <span class="n">launch</span><span class="p">(</span><span class="n">headless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">page</span> <span class="o">=</span> <span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">newPage</span><span class="p">()</span>
-    <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="s1">&#39;https://qianlizhixing12.github.io/&#39;</span><span class="p">)</span>
-    <span class="c1"># 截屏</span>
-    <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">screenshot</span><span class="p">({</span><span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;example.png&#39;</span><span class="p">})</span>
-    <span class="c1"># 执行js</span>
-    <span class="n">dimensions</span> <span class="o">=</span> <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;() =&gt; {</span>
-<span class="s1">        return {</span>
-<span class="s1">            width: document.documentElement.clientWidth,</span>
-<span class="s1">            height: document.documentElement.clientHeight,</span>
-<span class="s1">            deviceScaleFactor: window.devicePixelRatio,</span>
-<span class="s1">        }</span>
-<span class="s1">    }&#39;&#39;&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span>
-    <span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-
-<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
-</code></pre></div>
-
-
-<h3>处理滑动验证</h3>
-<blockquote>
-<p>整理复用下面三篇博客</p>
-<p>https://blog.csdn.net/paololiu/article/details/52514504</p>
-<p>https://cloud.tencent.com/developer/article/1377218</p>
-<p>https://zhuanlan.zhihu.com/p/107786616</p>
-</blockquote>
-<h4>逻辑步骤</h4>
-<ol>
-<li>还原图片，包括包含滑动块和不含滑动块的背景图</li>
-<li>比较图片，比较两张图片，找出滑块通过时的位置</li>
-<li>模拟滑动，先加速接近最终位置减速滑动（三个步骤：鼠标点击滑块，移动滑块，放开鼠标）</li>
-</ol>
-<h4>说明</h4>
-<ul>
-<li>不能百分百成功</li>
-</ul>
-<p>感觉代码注释清楚，比文字有效，直接上代码</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">base64</span>
-<span class="kn">import</span> <span class="nn">asyncio</span>
-<span class="kn">from</span> <span class="nn">pyppeteer</span> <span class="kn">import</span> <span class="n">launch</span>
-<span class="kn">import</span> <span class="nn">PIL.Image</span> <span class="k">as</span> <span class="nn">image</span>
-<span class="kn">import</span> <span class="nn">PIL.ImageChops</span> <span class="k">as</span> <span class="nn">imagechops</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-<span class="kn">import</span> <span class="nn">random</span>
-
-
-<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">launch_args</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;headless&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;--start-maximized&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;--disable-infobars&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;--log-level=3&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;--enable-extensions&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36&quot;</span><span class="p">,</span>
-        <span class="p">],</span>
-        <span class="s2">&quot;ignoreDefaultArgs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;--enable-automation&#39;</span><span class="p">]</span>  <span class="c1"># 去除Chrome正受到自动测试软件的控制</span>
-    <span class="p">}</span>
-    <span class="n">browser</span> <span class="o">=</span> <span class="k">await</span> <span class="n">launch</span><span class="p">(</span><span class="n">launch_args</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="p">[</span><span class="n">page</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">pages</span><span class="p">()</span>
-        <span class="n">page</span><span class="o">.</span><span class="n">setDefaultNavigationTimeout</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">screen_size</span><span class="p">()</span>
-        <span class="c1"># 最大化窗口</span>
-        <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">setViewport</span><span class="p">({</span><span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="n">width</span><span class="p">,</span> <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="n">height</span><span class="p">})</span>
-        <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://****.html&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;timeout&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
-        <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">waitFor</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-        <span class="c1"># 设置浏览器</span>
-        <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">setUserAgent</span><span class="p">(</span>
-            <span class="s1">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)&#39;</span>
-            <span class="s1">&#39; Chrome/74.0.3729.169 Safari/537.36&#39;</span><span class="p">)</span>
-        <span class="c1"># 防止被识别，将webdriver设置为false</span>
-        <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
-            <span class="sd">&#39;&#39;&#39;() =&gt;{ Object.defineProperties(navigator,{ webdriver:{ get: () =&gt; false } }) }&#39;&#39;&#39;</span>
-        <span class="p">)</span>
-        <span class="k">await</span> <span class="n">validation</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
-    <span class="k">finally</span><span class="p">:</span>
-        <span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-
-<span class="k">async</span> <span class="k">def</span> <span class="nf">validation</span><span class="p">(</span><span class="n">page</span><span class="p">):</span>
-    <span class="c1"># 点击登录，弹出验证</span>
-    <span class="n">elem</span> <span class="o">=</span> <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//a[@class=&quot;js-login&quot;]&#39;</span><span class="p">)</span>
-    <span class="k">await</span> <span class="n">elem</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
-    <span class="c1"># await page.click(&#39;a.js-login&#39;)</span>
-    <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">waitFor</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="c1"># 获取拖动起始位置</span>
-    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;() =&gt; {</span>
-<span class="s1">        let locat = document.getElementsByClassName(&#39;gt_slider_knob&#39;)[0].getBoundingClientRect();</span>
-<span class="s1">        console.log(locat);</span>
-<span class="s1">        return [locat.x, locat.y];</span>
-<span class="s1">    } &#39;&#39;&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="c1"># 获取验证图片</span>
-    <span class="n">full_img</span><span class="p">,</span> <span class="n">fullbg_img</span><span class="p">,</span> <span class="n">diff_img</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_decode_image</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
-    <span class="c1"># full_img.save(&#39;full.png&#39;)</span>
-    <span class="c1"># fullbg_img.save(&#39;fullbg.png&#39;)</span>
-    <span class="c1"># diff_img.save(&#39;diff.png&#39;)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">diff_img</span><span class="o">.</span><span class="n">getbbox</span><span class="p">())</span>
-    <span class="c1"># 方法一</span>
-    <span class="c1"># track_list = await get_track(diff_img.getbbox()[0])</span>
-    <span class="c1"># 方法二</span>
-    <span class="n">track_list</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_track_</span><span class="p">(</span><span class="n">diff_img</span><span class="o">.</span><span class="n">getbbox</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="c1"># 点击元素</span>
-    <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">hover</span><span class="p">(</span><span class="s1">&#39;div.gt_slider_knob.gt_show&#39;</span><span class="p">)</span>
-    <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">waitFor</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">mouse</span><span class="o">.</span><span class="n">down</span><span class="p">()</span>
-    <span class="c1"># 拖动元素</span>
-    <span class="n">x</span> <span class="o">+=</span> <span class="mi">22</span>
-    <span class="n">y</span> <span class="o">+=</span> <span class="mi">22</span>
-    <span class="k">for</span> <span class="n">track</span> <span class="ow">in</span> <span class="n">track_list</span><span class="p">:</span>
-        <span class="n">x</span> <span class="o">+=</span> <span class="n">track</span>
-        <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">mouse</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="c1"># 释放鼠标</span>
-    <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">mouse</span><span class="o">.</span><span class="n">up</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ok&#39;</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">screen_size</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;使用tkinter获取屏幕大小&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">tkinter</span>
-    <span class="n">tk</span> <span class="o">=</span> <span class="n">tkinter</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
-    <span class="n">width</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">winfo_screenwidth</span><span class="p">()</span>
-    <span class="n">height</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">winfo_screenheight</span><span class="p">()</span>
-    <span class="n">tk</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span>
-
-
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_decode_image</span><span class="p">(</span><span class="n">page</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    获取图片</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">full_img_info</span> <span class="o">=</span> <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;() =&gt; {</span>
-<span class="s1">        let items = document.getElementsByClassName(&quot;gt_cut_bg_slice&quot;);</span>
-<span class="s1">        let len = items.length;</span>
-<span class="s1">        let values = [];</span>
-<span class="s1">        let url = items[0].style.backgroundImage;</span>
-<span class="s1">        for (let i = 0; i&lt; len; i++) {</span>
-<span class="s1">            values.push({&#39;x&#39;:parseInt(items[i].style.backgroundPositionX.replace(&#39;px&#39;, &#39;&#39;), 10),&#39;y&#39;:parseInt(items[i].style.backgroundPositionY.replace(&#39;px&#39;, &#39;&#39;), 10)});</span>
-<span class="s1">        }</span>
-<span class="s1">        url = url.substring(5, url.length - 2);</span>
-<span class="s1">        return {&#39;url&#39;:url, &#39;postion&#39;:values};</span>
-<span class="s1">    }&#39;&#39;&#39;</span><span class="p">)</span>
-    <span class="c1">#重新合并图片</span>
-    <span class="n">full_img</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_merge_image</span><span class="p">(</span><span class="n">full_img_info</span><span class="p">)</span>
-
-    <span class="n">fullbg_img_info</span> <span class="o">=</span> <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;() =&gt; {</span>
-<span class="s1">        let items = document.getElementsByClassName(&quot;gt_cut_fullbg_slice&quot;);</span>
-<span class="s1">        let len = items.length;</span>
-<span class="s1">        let values = [];</span>
-<span class="s1">        let url = items[0].style.backgroundImage;</span>
-<span class="s1">        for (let i = 0; i&lt; len; i++) {</span>
-<span class="s1">            values.push({&#39;x&#39;:parseInt(items[i].style.backgroundPositionX.replace(&#39;px&#39;, &#39;&#39;), 10),&#39;y&#39;:parseInt(items[i].style.backgroundPositionY.replace(&#39;px&#39;, &#39;&#39;), 10)});</span>
-<span class="s1">        }</span>
-<span class="s1">        url = url.substring(5, url.length - 2);</span>
-<span class="s1">        return {&#39;url&#39;:url, &#39;postion&#39;:values};</span>
-<span class="s1">    }&#39;&#39;&#39;</span><span class="p">)</span>
-    <span class="c1">#重新合并图片</span>
-    <span class="n">fullbg_img</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_merge_image</span><span class="p">(</span><span class="n">fullbg_img_info</span><span class="p">)</span>
-    <span class="c1">#获取差异</span>
-    <span class="n">diff_img</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_diff</span><span class="p">(</span><span class="n">full_img</span><span class="p">,</span> <span class="n">fullbg_img</span><span class="p">)</span>
-    <span class="c1"># x = await get_diff_location(full_img, fullbg_img)</span>
-    <span class="c1"># print(x)</span>
-    <span class="k">return</span> <span class="n">full_img</span><span class="p">,</span> <span class="n">fullbg_img</span><span class="p">,</span> <span class="n">diff_img</span>
-
-
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_merge_image</span><span class="p">(</span><span class="n">img_info</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    根据位置对图片进行合并还原</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">im</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_info</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
-
-    <span class="n">new_im</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;RGB&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">260</span><span class="p">,</span> <span class="mi">116</span><span class="p">))</span>
-
-    <span class="n">im_list_upper</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">im_list_down</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">for</span> <span class="n">postion</span> <span class="ow">in</span> <span class="n">img_info</span><span class="p">[</span><span class="s1">&#39;postion&#39;</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">postion</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">58</span><span class="p">:</span>
-            <span class="n">im_list_upper</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="n">im</span><span class="o">.</span><span class="n">crop</span><span class="p">((</span><span class="nb">abs</span><span class="p">(</span><span class="n">postion</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]),</span> <span class="mi">58</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">postion</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">166</span><span class="p">)))</span>
-        <span class="k">if</span> <span class="n">postion</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">im_list_down</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="n">im</span><span class="o">.</span><span class="n">crop</span><span class="p">((</span><span class="nb">abs</span><span class="p">(</span><span class="n">postion</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]),</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">postion</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">58</span><span class="p">)))</span>
-
-    <span class="n">new_im</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;RGB&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">260</span><span class="p">,</span> <span class="mi">116</span><span class="p">))</span>
-
-    <span class="n">x_offset</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">im</span> <span class="ow">in</span> <span class="n">im_list_upper</span><span class="p">:</span>
-        <span class="n">new_im</span><span class="o">.</span><span class="n">paste</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="n">x_offset</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-        <span class="n">x_offset</span> <span class="o">+=</span> <span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="n">x_offset</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">im</span> <span class="ow">in</span> <span class="n">im_list_down</span><span class="p">:</span>
-        <span class="n">new_im</span><span class="o">.</span><span class="n">paste</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="n">x_offset</span><span class="p">,</span> <span class="mi">58</span><span class="p">))</span>
-        <span class="n">x_offset</span> <span class="o">+=</span> <span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="n">new_im</span>
-
-
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_diff</span><span class="p">(</span><span class="n">img1</span><span class="p">,</span> <span class="n">img2</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">imagechops</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">img1</span><span class="p">,</span> <span class="n">img2</span><span class="p">)</span>
-
-
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_diff_location</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    计算缺口的位置，difference太精确，用绝对值相差50比较</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="k">def</span> <span class="nf">is_similar</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        对比RGB值</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">pass</span>
-
-        <span class="n">pixel1</span> <span class="o">=</span> <span class="n">image1</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-        <span class="n">pixel2</span> <span class="o">=</span> <span class="n">image2</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pixel1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">pixel2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">50</span><span class="p">:</span>
-                <span class="k">return</span> <span class="kc">False</span>
-
-        <span class="k">return</span> <span class="kc">True</span>
-
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">260</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">116</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">is_similar</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">i</span>
-
-
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_track</span><span class="p">(</span><span class="n">distance</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    根据缺口的位置模拟x轴移动的轨迹，完全随机</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">pass</span>
-
-    <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="c1"># 间隔通过随机范围函数来获得</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-
-    <span class="k">while</span> <span class="n">distance</span> <span class="o">-</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
-        <span class="nb">list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-        <span class="n">distance</span> <span class="o">=</span> <span class="n">distance</span> <span class="o">-</span> <span class="n">x</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">distance</span><span class="p">):</span>
-        <span class="nb">list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="nb">list</span>
-
-
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_track_</span><span class="p">(</span><span class="n">distance</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    根据偏移量获取移动轨迹，模仿匀加速后匀减速</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># 移动轨迹</span>
-    <span class="n">track</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="c1"># 当前位移</span>
-    <span class="n">current</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="c1"># 减速阈值</span>
-    <span class="n">mid</span> <span class="o">=</span> <span class="n">distance</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">//</span> <span class="mi">5</span>
-    <span class="c1"># 计算间隔</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="mf">0.2</span>
-    <span class="c1"># 初速度</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">while</span> <span class="n">current</span> <span class="o">&lt;</span> <span class="n">distance</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">current</span> <span class="o">&lt;</span> <span class="n">mid</span><span class="p">:</span>
-            <span class="c1"># 加速度为正2</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># 加速度为负3</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
-        <span class="c1"># 初速度v0</span>
-        <span class="n">v0</span> <span class="o">=</span> <span class="n">v</span>
-        <span class="c1"># 当前速度v = v0 + at</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="n">v0</span> <span class="o">+</span> <span class="n">a</span> <span class="o">*</span> <span class="n">t</span>
-        <span class="c1"># 移动距离x = v0t + 1/2 * a * t^2</span>
-        <span class="n">move</span> <span class="o">=</span> <span class="n">v0</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">t</span>
-        <span class="c1"># 当前位移</span>
-        <span class="n">current</span> <span class="o">+=</span> <span class="n">move</span>
-        <span class="c1"># 加入轨迹</span>
-        <span class="n">track</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">move</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">track</span>
-
-
-<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
-</code></pre></div></div>
-        <hr />
-    </div>
-		
+<li>代码脆弱 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-zhou.html">read more</a></div>
+    </div>	
+				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>

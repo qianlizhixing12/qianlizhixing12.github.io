@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>千里之行 始于足下 - qianlizhixing</title><link>/</link><description></description><lastBuildDate>Mon, 22 Mar 2021 00:00:00 +0800</lastBuildDate><item><title>ARTS第二十周</title><link>/artsdi-er-shi-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+<rss version="2.0"><channel><title>千里之行 始于足下 - qianlizhixing</title><link>/</link><description></description><lastBuildDate>Mon, 29 Mar 2021 00:00:00 +0800</lastBuildDate><item><title>ARTS第二十一周</title><link>/artsdi-er-shi-yi-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 74 搜索二维矩阵&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/search-a-2d-matrix/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/74.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;解题思路，数组元素具有单调性时，二分查找&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_37/
+https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_38/
+https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_39/
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;努力工作是没有回报的&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;应该考虑减少工作量以提高效率，完成更多的工作&lt;/li&gt;
+&lt;li&gt;作为一名专业的程序员，你必须让自己在自己的专业领域保持更新&lt;/li&gt;
+&lt;li&gt;准备和教育是职业的重要组成部分&lt;/li&gt;
+&lt;li&gt;作为一名专业程序员，应该知道一周工作60个小时是不明智的。表现得像个专业人士:准备、影响、观察、反思和改变&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;如何使用Bug追踪器&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;一份好的bug报告需要以下三点&lt;/li&gt;
+&lt;li&gt;如何尽可能精确地重现错误 …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 29 Mar 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-03-29:/artsdi-er-shi-yi-zhou.html</guid><category>ARTS</category><category>bug报告</category><category>selenium</category><category>geetest</category></item><item><title>ARTS第二十周</title><link>/artsdi-er-shi-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 剑指Offer38 字符串的排列&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/"&gt;原题&lt;/a&gt;&lt;/li&gt;
