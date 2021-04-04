@@ -3,13 +3,13 @@
 
 AUTHOR = 'qianlizhixing'
 SITENAME = '千里之行 始于足下'
-SITEURL = ''
 
 PATH = 'content'
 
 TIMEZONE = 'Asia/Shanghai'
 
-DEFAULT_LANG = 'Chinese (Simplified)'
+# DEFAULT_LANG = 'Chinese (Simplified)'
+DEFAULT_LANG = 'en'
 
 DATE_FORMATS = {
     'en': '%Y-%m-%d %H:%M:%S',
