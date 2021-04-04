@@ -3,7 +3,7 @@ Category: ARTS
 Author: qianlizhixing
 Title: ARTS第二十一周
 Date: 2021-03-29
-Tags: bug报告, selenium, geetest
+Tags: bug报告, selenium, geetest, 数据采集
 ---
 
 ## Algorithm

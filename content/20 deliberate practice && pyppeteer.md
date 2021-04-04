@@ -3,7 +3,7 @@ Category: ARTS
 Author: qianlizhixing
 Title: ARTS第二十周
 Date: 2021-03-22
-Tags: 刻意练习, pyppeteer, geetest
+Tags: 刻意练习, pyppeteer, geetest, 数据采集
 ---
 
 ## Algorithm
