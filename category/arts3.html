@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="chinese (simplified)">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -45,6 +45,57 @@
                 <div class="span9">
         
 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-shi-zhou.html"><h2>ARTS第十周</h2></a>
+        <div class= "well small"> 2020-06-29
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
+<p>leetcode 529 扫雷游戏</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/minesweeper/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/python/529.py">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://medium.com/@amymaraisane/6-tips-to-success-as-a-self-taught-software-developer-ba5eebfb7a98</p>
+</blockquote>
+<h3>自学编程的6个技巧</h3>
+<ul>
+<li>写下你的问题</li>
+<li>搜索答案更容易，迫使你有意识地清晰地表达你的问题</li>
+<li>避免陷入浩瀚的文档中，意识主要方向</li>
+<li>有时会发现更好的答案，见证自己的成长</li>
+<li>记录花在编码上的时间</li>
+<li>展示自己学习成果</li>
+<li>向别人展示你的成果，推销自己</li>
+<li>为代码编写单元测试</li>
+<li>为解决现实需求编码</li>
+</ul>
+<h2>Tip</h2>
+<ul>
+<li>hash存储value-index，改变list的indexof循环判断value查找index</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 客户是分级的，一级二级客户的code是不同的，现实中可能是层层代理商，找出代理商的级次</span>
+<span class="n">custom</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;001&#39;</span><span class="p">,</span> <span class="s1">&#39;00101&#39;</span><span class="p">,</span> <span class="s1">&#39;002&#39;</span><span class="p">,</span> <span class="s1">&#39;00201&#39;</span><span class="p">,</span> <span class="s1">&#39;00202&#39;</span><span class="p">,</span> <span class="s1">&#39;0020201&#39;</span><span class="p">]</span>
+
+<span class="c1"># 可能存在数据库中，或其他配置文件中，-分割每级长度</span>
+<span class="n">level</span> <span class="o">=</span> <span class="s1">&#39;3-2-2&#39;</span>
+
+
+<span class="c1"># 用数组索引当作级次，存放对应长度</span>
+<span class="k">def</span> <span class="nf">solution1</span><span class="p">(</span><span class="n">level …</span></code></pre></div> <a class="btn btn-info xsmall" href="/artsdi-shi-zhou.html">read more</a></div>
+    </div>	
+				
+
+ 
         
 
  
@@ -270,41 +321,6 @@
 <li>用户的核心工作是类似的，试图以同样的顺序完成任务，在同样的地方犯同样的错误；围绕核心进行设计，“如果用户想要……怎么办”，导致了复杂的特性和用户需求的混乱</li>
 <li>用户陷入困境时，他们会缩小关注范围，帮助文本对于糟糕的用户界面设计来说是一个糟糕的解决方案；有说明或帮助文本，请确保将其放在问题区域旁边，有时工具提示比帮助菜单更有用</li>
 <li>Users tend to muddle through. They'll find a …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-wu-zhou.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="/artsdi-si-zhou.html"><h2>ARTS第四周</h2></a>
-        <div class= "well small"> 2020-05-11
-
-<a class="url fn">qianlizhixing</a>
-
-
- </div>
-        <div class="summary"><h2>Algorithm</h2>
-<p>leetcode 155 最小栈
-- <a href="https://leetcode-cn.com/problems/min-stack/">原题</a>
-- <a href="https://github.com/qianlizhixing12/leetcode/blob/master/c/155.best.c">解题</a></p>
-<h2>Review</h2>
-<blockquote>
-<p>https://herbsutter.com/2020/04/01/when-the-hot-loops-done/</p>
-</blockquote>
-<h4>编写高吞吐量热循环代码一些小技巧（A "hot loops" is code that get called often）</h4>
-<ul>
-<li>避免持有锁或其他资源，除非你知道它不会阻塞另一个性能敏感的线程。绝对不要获取任何新锁或其他资源!(当然，.Close()可能会声称是非阻塞的，但真的能确定吗?)</li>
-<li>将所有阻塞操作放在性能关键的部分之外，包括监控系统调度</li>
-<li>不要进行I/O操作，包括控制台日志记录</li>
-<li>将I/O操作化作无锁环缓冲区操作</li>
-</ul>
-<h2>Tip</h2>
-<h4>时间格式处理</h4>
-<ul>
-<li>用户本地时间格式的差异，经常导致容易忽略的bug。例如windows下开发一个每天弹窗提示用户一次的功能，第一天本地时间格式是2020-01-01 00:00:00，第二天本地时间格式是2020/01/02 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-si-zhou.html">read more</a></div>
     </div>	
 				
 <div class="pagination">

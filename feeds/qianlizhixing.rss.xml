@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>千里之行 始于足下 - qianlizhixing</title><link>/</link><description></description><lastBuildDate>Mon, 29 Mar 2021 00:00:00 +0800</lastBuildDate><item><title>ARTS第二十一周</title><link>/artsdi-er-shi-yi-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+<rss version="2.0"><channel><title>千里之行 始于足下 - qianlizhixing</title><link>/</link><description></description><lastBuildDate>Mon, 05 Apr 2021 00:00:00 +0800</lastBuildDate><item><title>ARTS第二十二周</title><link>/artsdi-er-shi-er-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 面试题17.21 直方图的水量&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/volume-of-histogram-lcci/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/17.21.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;单调栈&lt;/li&gt;
+&lt;li&gt;双指针&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_41/
+https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_42/
+https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_43/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;进程间通信影响应用程序响应时间&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;数据结构和算法，在某些情况下可能会对性能产生影响，但在现代多层企业应用程序中不太可能主导性能&lt;/li&gt;
+&lt;li&gt;远程进程间通信的数量通常对性能占主导地位，每个远程进程间通信都会对总体响应时间造成一些不可忽略的延迟，这些影响会累积起来，特别是当它们依次发生时&lt;/li&gt;
+&lt;li&gt;应用节俭原则，优化流程之间的接口，以便以最小的交互量交换手边正确的数据&lt;/li&gt;
+&lt;li&gt;在可能的情况下并行处理进程间通信，这样总体响应时间主要由延迟时间最长的IPC驱动&lt;/li&gt;
+&lt;li&gt;缓存以前的ipc的结果，这样将来的ipc就可以通过使用本地缓存来避免&lt;/li&gt;
+&lt;li&gt;无论是通过缓存 …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 05 Apr 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-04-05:/artsdi-er-shi-er-zhou.html</guid><category>ARTS</category><category>fontTools</category><category>woff</category><category>字体加密</category><category>数据采集</category></item><item><title>ARTS第二十一周</title><link>/artsdi-er-shi-yi-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 74 搜索二维矩阵&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/search-a-2d-matrix/"&gt;原题&lt;/a&gt;&lt;/li&gt;
@@ -23,7 +44,7 @@ https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-sho
 &lt;h3&gt;如何使用Bug追踪器&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;一份好的bug报告需要以下三点&lt;/li&gt;
-&lt;li&gt;如何尽可能精确地重现错误 …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 29 Mar 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-03-29:/artsdi-er-shi-yi-zhou.html</guid><category>ARTS</category><category>bug报告</category><category>selenium</category><category>geetest</category></item><item><title>ARTS第二十周</title><link>/artsdi-er-shi-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;li&gt;如何尽可能精确地重现错误 …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 29 Mar 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-03-29:/artsdi-er-shi-yi-zhou.html</guid><category>ARTS</category><category>bug报告</category><category>selenium</category><category>geetest</category><category>数据采集</category></item><item><title>ARTS第二十周</title><link>/artsdi-er-shi-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 剑指Offer38 字符串的排列&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/"&gt;原题&lt;/a&gt;&lt;/li&gt;
@@ -51,7 +72,7 @@ https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-sho
 &lt;li&gt;errno全局错误信号容易被忽略，很难使用&lt;/li&gt;
 &lt;li&gt;异常是一种更受结构化语言支持的错误信令和处理方式&lt;/li&gt;
 &lt;li&gt;不处理错误后果&lt;/li&gt;
-&lt;li&gt;代码脆弱 …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 22 Mar 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-03-22:/artsdi-er-shi-zhou.html</guid><category>ARTS</category><category>刻意练习</category><category>pyppeteer</category><category>geetest</category></item><item><title>ARTS第十九周</title><link>/artsdi-shi-jiu-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;li&gt;代码脆弱 …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 22 Mar 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-03-22:/artsdi-er-shi-zhou.html</guid><category>ARTS</category><category>刻意练习</category><category>pyppeteer</category><category>geetest</category><category>数据采集</category></item><item><title>ARTS第十九周</title><link>/artsdi-shi-jiu-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 138 复制带随机指针的链表&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/copy-list-with-random-pointer/"&gt;原题&lt;/a&gt;&lt;/li&gt;

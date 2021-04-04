@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="chinese (simplified)">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -50,8 +50,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="/artsdi-er-shi-yi-zhou.html"><h1>ARTS第二十一周</h1></a>
-2021-03-29
+            <a href="/artsdi-er-shi-er-zhou.html"><h1>ARTS第二十二周</h1></a>
+2021-04-05
 
 <a class="url fn">qianlizhixing</a>
 
@@ -60,6 +60,193 @@
         </div>
         
         <div><h2>Algorithm</h2>
+<p>leetcode 面试题17.21 直方图的水量</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/volume-of-histogram-lcci/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/17.21.py">解题</a></li>
+<li>单调栈</li>
+<li>双指针</li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_41/
+https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_42/
+https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_43/</p>
+</blockquote>
+<h3>进程间通信影响应用程序响应时间</h3>
+<ul>
+<li>数据结构和算法，在某些情况下可能会对性能产生影响，但在现代多层企业应用程序中不太可能主导性能</li>
+<li>远程进程间通信的数量通常对性能占主导地位，每个远程进程间通信都会对总体响应时间造成一些不可忽略的延迟，这些影响会累积起来，特别是当它们依次发生时</li>
+<li>应用节俭原则，优化流程之间的接口，以便以最小的交互量交换手边正确的数据</li>
+<li>在可能的情况下并行处理进程间通信，这样总体响应时间主要由延迟时间最长的IPC驱动</li>
+<li>缓存以前的ipc的结果，这样将来的ipc就可以通过使用本地缓存来避免</li>
+<li>无论是通过缓存、并行或其他技术减少远程ipc响应时间，都比改变数据结构选择或调整排序算法带来的回报要大得多</li>
+</ul>
+<h3>保持构建整洁</h3>
+<ul>
+<li>在成百上千个不关心的编译器警告中，找到真正关注的编译器警告困难得多</li>
+<li>对构建警告使用零容忍策略，即使知道警告内容永远不会在生产环境中出现</li>
+<li>某些构建警告真的不关心，也不重要(例如版本升级，老的代码在新版本)，改变警告政策</li>
+<li>构建警告是有用的，不要等到大扫除后再做，马上修复警告源、抑制此警告或修复工具的警告策略</li>
+<li>保持构建的整洁不仅仅是避免编译错误或测试失败，警告也是代码整洁的重要和关键部分</li>
+</ul>
+<h3>使用命令行工具</h3>
+<ul>
+<li>IDE有很多值得喜欢的地方，不仅易于使用，还使程序员不必考虑构建过程中涉及的大量小细节</li>
+<li>当一个工具易于使用时，是因为这个工具为你做决定，并在幕后自动做很多事情</li>
+<li>编写make文件帮助理解构建可执行文件的所有步骤(编译、汇编、链接等)</li>
+<li>使用许多命令行选项进行试验也是一种宝贵的教育经验</li>
+<li>一个设计良好的IDE只是一组命令行工具的图形前端</li>
+<li>有些任务使用命令行工具比使用IDE更容易或更有效地执行</li>
+<li>命令行工具本质上支持脚本，它允许任务的自动化</li>
+</ul>
+<h2>Tip</h2>
+<h3>unicode_escape</h3>
+<ul>
+<li>用unicode_escape转义字符串普通字符相互转化</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">convert_unicode_escape</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    转义字符串普通字符相互转化</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1">#转义字符串</span>
+    <span class="n">s1</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\u597d\u4eba</span><span class="s1">&#39;</span>
+    <span class="c1">#普通字符串</span>
+    <span class="n">s2</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\u597d\u4eba&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
+    <span class="c1">#out ----  好人 \u597d\u4eba</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;unicode_escape&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">),</span>
+        <span class="n">s2</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;unicode_escape&#39;</span><span class="p">))</span>
+    <span class="c1">#out ----  \u597d\u4eba 好人</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">convert_unicode_escape</span><span class="p">()</span>
+</code></pre></div>
+
+
+<h2>Share</h2>
+<h3>字体加密</h3>
+<blockquote>
+<p>整理了链接博客</p>
+<p>https://zhuanlan.zhihu.com/p/33112359</p>
+</blockquote>
+<h4>逻辑步骤</h4>
+<ol>
+<li>人工得到一个基本映射(如\ue456--&gt;3)，作为对照</li>
+<li>实时获取字体和隐藏的源码</li>
+<li>根据对比基本映射，得到实时映射</li>
+<li>根据实时映射和源码，得到最终结果</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">fake_useragent</span> <span class="kn">import</span> <span class="n">UserAgent</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+<span class="kn">from</span> <span class="nn">fontTools.ttLib</span> <span class="kn">import</span> <span class="n">TTFont</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">info</span><span class="p">,</span> <span class="n">woff_href</span> <span class="o">=</span> <span class="n">get_info</span><span class="p">()</span>
+    <span class="n">woff</span> <span class="o">=</span> <span class="n">get_woff</span><span class="p">(</span><span class="n">woff_href</span><span class="p">)</span>
+    <span class="n">get_word</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">woff</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">get_info</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    获取信息</span>
+<span class="sd">    获取字体链接</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="n">UserAgent</span><span class="p">(</span><span class="n">verify_ssl</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;random&#39;</span><span class="p">]}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;https://***.com/&#39;</span><span class="p">,</span>
+                            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+                            <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># with open(r&#39;test_font.txt&#39;, mode=&#39;wb&#39;) as f:</span>
+    <span class="c1">#     f.write(response.content)</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">selector</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">selector</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//ul[contains(@class, &quot;ranking-box&quot;)]/li&#39;</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span>
+            <span class="s1">&#39;.//span[@class=&quot;ranking-top-moive-name&quot; or @class=&quot;ranking-movie-name&quot;]/text()&#39;</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;.//span[@class=&quot;stonefont&quot;]/text()&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># print(name, num)</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="n">num</span><span class="p">})</span>
+    <span class="c1"># &quot;url(&#39;//4858115f54fc92296.woff&#39;)&quot;</span>
+    <span class="n">woff_info</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;/html/head/style/text()&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">woff_href</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;url\(&#39;(\S*\.woff)&#39;\)&quot;</span><span class="p">,</span> <span class="n">woff_info</span><span class="p">)</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">info</span><span class="p">,</span> <span class="n">woff_href</span>
+
+
+<span class="k">def</span> <span class="nf">get_woff</span><span class="p">(</span><span class="n">woff_href</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    下载字体</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="n">UserAgent</span><span class="p">(</span><span class="n">verify_ssl</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;random&#39;</span><span class="p">]}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https:&quot;</span> <span class="o">+</span> <span class="n">woff_href</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># with open(r&#39;test_font.woff&#39;, mode=&#39;wb&#39;) as f:</span>
+    <span class="c1">#     f.write(response.content)</span>
+    <span class="n">woff</span> <span class="o">=</span> <span class="n">TTFont</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+    <span class="c1"># woff.saveXML(&#39;test_font.xml&#39;)</span>
+    <span class="k">return</span> <span class="n">woff</span>
+
+
+<span class="k">def</span> <span class="nf">get_word</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">woff</span><span class="p">):</span>
+    <span class="c1"># test_font_base.otf是某一次访问获取的字体文件，然后人工识别内容，作为与后面获取字体的比对标本，从而让电脑自动获得后面获取字体的实际内容</span>
+    <span class="c1">#FontCreator 得到一个基本映射</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">TTFont</span><span class="p">(</span><span class="s1">&#39;test_font_base.woff&#39;</span><span class="p">)</span>
+    <span class="n">base_dic</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;uniF19B&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;uniF4EF&#39;</span><span class="p">:</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;uniE137&#39;</span><span class="p">:</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;uniE343&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;uniE8CD&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;uniE7A1&#39;</span><span class="p">:</span> <span class="s1">&#39;9&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;uniF848&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;uniF489&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;uniE5E2&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;uniF88A&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">unis</span> <span class="o">=</span> <span class="n">woff</span><span class="o">.</span><span class="n">getGlyphOrder</span><span class="p">()[</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="n">woff_dic</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">uni</span> <span class="ow">in</span> <span class="n">unis</span><span class="p">:</span>
+        <span class="n">woff_glyf</span> <span class="o">=</span> <span class="n">woff</span><span class="p">[</span><span class="s1">&#39;glyf&#39;</span><span class="p">][</span><span class="n">uni</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">uni_</span> <span class="ow">in</span> <span class="n">base_dic</span><span class="p">:</span>
+            <span class="c1"># 同一字体的glyf相同，不深究</span>
+            <span class="k">if</span> <span class="n">woff_glyf</span> <span class="o">==</span> <span class="n">base</span><span class="p">[</span><span class="s1">&#39;glyf&#39;</span><span class="p">][</span><span class="n">uni_</span><span class="p">]:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;u&#39;\u&quot;</span> <span class="o">+</span> <span class="n">uni</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+                <span class="n">woff_dic</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">base_dic</span><span class="p">[</span><span class="n">uni_</span><span class="p">]</span>
+                <span class="k">break</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">uni</span> <span class="ow">in</span> <span class="n">woff_dic</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">uni</span><span class="p">,</span> <span class="n">woff_dic</span><span class="p">[</span><span class="n">uni</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">num</span><span class="p">)</span>
+    <span class="k">pass</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-er-shi-yi-zhou.html"><h2>ARTS第二十一周</h2></a>
+        <div class= "well small"> 2021-03-29
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
 <p>leetcode 74 搜索二维矩阵</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/search-a-2d-matrix/">原题</a></li>
@@ -83,221 +270,9 @@ https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-sho
 <h3>如何使用Bug追踪器</h3>
 <ul>
 <li>一份好的bug报告需要以下三点</li>
-<li>如何尽可能精确地重现错误，以及这将使错误出现的频率</li>
-<li>应该发生什么事，至少在你看来是这样。</li>
-<li>到底发生了什么，或者至少是你记录的所有信息</li>
-<li>花点时间解释为什么这个bug应该被关闭，可以节省以后向经理和客户证明它的冗长时间</li>
-<li>更改bug的优先级也是公开声明，仅因为微不足道，并不意味着它不会阻止其他人使用该产品</li>
-</ul>
-<h3>通过删除代码来改进代码</h3>
-<ul>
-<li>为什么一开始就会出现不必要的代码</li>
-<li>这是一个有趣的额外的东西，程序员想要编写它(写代码是因为它能增加价值，而不是因为它能让你开心)</li>
-<li>有人认为将来可能会需要它，所以觉得最好现在就编写它(如果你现在不需要它，也不要马上写)</li>
-<li>它看起来并不是一个很大的“额外”，因此实现它比回到客户那里查看是否真的需要它更容易</li>
-<li>程序员发明了既没有记录也没有讨论的额外需求来证明额外的特性，这个要求实际上是假的</li>
-</ul>
-<h2>Tip</h2>
-<h2>Share(selenium)</h2>
-<h3>处理滑动验证</h3>
-<p>上篇用pyppeteer处理了geetest滑块验证，试着selenium处理</p>
-<blockquote>
-<p>整理复用下面三篇博客</p>
-<p>https://blog.csdn.net/paololiu/article/details/52514504</p>
-<p>https://cloud.tencent.com/developer/article/1377218</p>
-<p>https://zhuanlan.zhihu.com/p/107786616</p>
-<p>https://www.jianshu.com/p/3f968958af5a</p>
-</blockquote>
-<h4>逻辑步骤</h4>
-<ol>
-<li>还原图片，包括包含滑动块和不含滑动块的背景图</li>
-<li>比较图片，比较两张图片，找出滑块通过时的位置</li>
-<li>模拟滑动，先加速接近最终位置减速滑动（三个步骤：鼠标点击滑块，移动滑块，放开鼠标）</li>
-</ol>
-<h4>说明</h4>
-<ul>
-<li>不能百分百成功</li>
-</ul>
-<p>感觉代码注释清楚，比文字有效，直接上代码</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
-<span class="kn">from</span> <span class="nn">selenium.webdriver.support.ui</span> <span class="kn">import</span> <span class="n">WebDriverWait</span>
-<span class="kn">from</span> <span class="nn">selenium.webdriver.common.action_chains</span> <span class="kn">import</span> <span class="n">ActionChains</span>
-<span class="kn">import</span> <span class="nn">PIL.Image</span> <span class="k">as</span> <span class="nn">image</span>
-<span class="kn">import</span> <span class="nn">PIL.ImageChops</span> <span class="k">as</span> <span class="nn">imagechops</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-<span class="kn">import</span> <span class="nn">base64</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">random</span>
-
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">options</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">ChromeOptions</span><span class="p">()</span>
-    <span class="c1">#隐藏Chrome正在受到自动软件的控制</span>
-    <span class="c1"># options.add_argument(&#39;--disable-infobars&#39;)已弃用</span>
-    <span class="n">options</span><span class="o">.</span><span class="n">add_experimental_option</span><span class="p">(</span><span class="s1">&#39;useAutomationExtension&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">options</span><span class="o">.</span><span class="n">add_experimental_option</span><span class="p">(</span><span class="s1">&#39;excludeSwitches&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;enable-automation&#39;</span><span class="p">])</span>
-    <span class="c1"># options.add_argument(&#39;--headless&#39;)</span>
-    <span class="k">with</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span> <span class="k">as</span> <span class="n">bs</span><span class="p">:</span>
-        <span class="n">bs</span><span class="o">.</span><span class="n">maximize_window</span><span class="p">()</span>
-        <span class="n">bs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://****&#39;</span><span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># 防止被识别，将webdriver设置为false</span>
-            <span class="c1"># bs.execute_script(</span>
-            <span class="c1">#     &#39;Object.defineProperties(navigator,{ webdriver:{ get: () =&gt; false } })&#39;</span>
-            <span class="c1"># )</span>
-            <span class="n">fill_info</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="s1">&#39;15055495@qq.com&#39;</span><span class="p">,</span> <span class="s1">&#39;kdfjksdf&#39;</span><span class="p">)</span>
-            <span class="n">validation</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span>
-            <span class="c1"># print_info(bs)</span>
-        <span class="k">finally</span><span class="p">:</span>
-            <span class="n">bs</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-
-
-<span class="k">def</span> <span class="nf">fill_info</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">passwd</span><span class="p">):</span>
-    <span class="n">bs</span><span class="o">.</span><span class="n">find_elements_by_class_name</span><span class="p">(</span><span class="s1">&#39;login-button&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
-    <span class="c1"># bs.find_element_by_xpath(</span>
-    <span class="c1">#     &#39;//button[contains(@class,&quot;login-button&quot;)]&#39;).click()</span>
-    <span class="n">email</span> <span class="o">=</span> <span class="n">WebDriverWait</span><span class="p">(</span>
-        <span class="n">bs</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">find_element_by_name</span><span class="p">(</span><span class="s1">&#39;mobileOrEmail&#39;</span><span class="p">))</span>
-    <span class="n">email</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-    <span class="c1"># bs.find_element_by_name(&#39;mobileOrEmail&#39;).send_keys(user)</span>
-    <span class="c1"># bs.find_element_by_xpath(&#39;//input[@name=&quot;mobileOrEmail&quot;]&#39;).send_keys(user)</span>
-    <span class="n">bs</span><span class="o">.</span><span class="n">find_element_by_name</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">passwd</span><span class="p">)</span>
-    <span class="c1"># bs.find_element_by_xpath(&#39;//input[@name=&quot;password&quot;]&#39;).send_keys(passwd)</span>
-    <span class="n">bs</span><span class="o">.</span><span class="n">find_element_by_class_name</span><span class="p">(</span><span class="s1">&#39;submit&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
-    <span class="c1"># bs.find_element_by_xpath(</span>
-    <span class="c1">#     &#39;//button[contains(@class,&quot;sm-button&quot;)][1]&#39;).click()</span>
-    <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">validation</span><span class="p">(</span><span class="n">bs</span><span class="p">):</span>
-    <span class="n">distance</span> <span class="o">=</span> <span class="n">get_slide_distance</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span>
-    <span class="n">tracks</span> <span class="o">=</span> <span class="n">get_slide_track</span><span class="p">(</span><span class="n">distance</span> <span class="o">-</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="n">move_slide</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">tracks</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">get_slide_distance</span><span class="p">(</span><span class="n">bs</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    # 获取验证图片相对距离</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">bg_info</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span>
-        <span class="s1">&#39;return document.getElementsByClassName(&quot;geetest_canvas_bg&quot;)[0].toDataURL(&quot;image/png&quot;);&#39;</span>
-    <span class="p">)</span>
-    <span class="n">bg</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="n">bg_info</span><span class="p">)</span>
-    <span class="n">fullbg_info</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span>
-        <span class="s1">&#39;return document.getElementsByClassName(&quot;geetest_canvas_fullbg&quot;)[0].toDataURL(&quot;image/png&quot;);&#39;</span>
-    <span class="p">)</span>
-    <span class="n">fullbg</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="n">fullbg_info</span><span class="p">)</span>
-    <span class="c1"># bg.save(&#39;bg.png&#39;)</span>
-    <span class="c1"># fullbg.save(&#39;fullbg.png&#39;)</span>
-    <span class="c1">#获取差异</span>
-    <span class="k">return</span> <span class="n">get_diff_location</span><span class="p">(</span><span class="n">fullbg</span><span class="p">,</span> <span class="n">bg</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">get_image</span><span class="p">(</span><span class="n">img_info</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    根据base64数据还原图片</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">im_base64</span> <span class="o">=</span> <span class="n">img_info</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">im_bytes</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">im_base64</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">im_bytes</span><span class="p">))</span>
-
-
-<span class="k">def</span> <span class="nf">get_diff_location</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    计算缺口的位置，difference太精确，用绝对值相差50比较</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="k">def</span> <span class="nf">is_similar</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        对比RGB值</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">pixel1</span> <span class="o">=</span> <span class="n">image1</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-        <span class="n">pixel2</span> <span class="o">=</span> <span class="n">image2</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pixel1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">pixel2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">50</span><span class="p">:</span>
-                <span class="k">return</span> <span class="kc">False</span>
-
-        <span class="k">return</span> <span class="kc">True</span>
-
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">260</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">160</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">is_similar</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">i</span>
-
-
-<span class="k">def</span> <span class="nf">get_slide_track</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">seconds</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    根据轨迹离散分布生成的数学生成</span>
-<span class="sd">    :param distance: 缺口位置</span>
-<span class="sd">    :param seconds:  时间</span>
-<span class="sd">    :return: 轨迹数组</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="nf">ease_out_quad</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">ease_out_quart</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">ease_out_expo</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
-        <span class="n">distance</span> <span class="o">+=</span> <span class="mi">20</span>
-
-    <span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)))</span>
-
-    <span class="c1"># ease: 生成函数</span>
-    <span class="n">ease</span> <span class="o">=</span> <span class="n">ease_out_quart</span>
-    <span class="c1"># # ease = ease_out_quad</span>
-    <span class="c1"># # ease = ease_out_expo</span>
-    <span class="c1"># ease = sigmoid</span>
-    <span class="n">tracks</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">offsets</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">):</span>
-        <span class="n">offset</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">ease</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">seconds</span><span class="p">)</span> <span class="o">*</span> <span class="n">distance</span><span class="p">)</span>
-        <span class="n">tracks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">offset</span> <span class="o">-</span> <span class="n">offsets</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="n">offsets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">tracks</span>
-
-
-<span class="k">def</span> <span class="nf">move_slide</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">tracks</span><span class="p">):</span>
-    <span class="n">slide</span> <span class="o">=</span> <span class="n">WebDriverWait</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">until</span><span class="p">(</span>
-        <span class="k">lambda</span> <span class="n">bs</span><span class="p">:</span> <span class="n">bs</span><span class="o">.</span><span class="n">find_element_by_class_name</span><span class="p">(</span><span class="s1">&#39;geetest_slider_button&#39;</span><span class="p">))</span>
-    <span class="c1"># slide = bs.find_element_by_class_name(&#39;geetest_slider_button&#39;)</span>
-    <span class="c1"># 点击元素</span>
-    <span class="n">ActionChains</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span><span class="o">.</span><span class="n">click_and_hold</span><span class="p">(</span><span class="n">slide</span><span class="p">)</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
-    <span class="c1"># 拖动元素</span>
-    <span class="k">for</span> <span class="n">track</span> <span class="ow">in</span> <span class="n">tracks</span><span class="p">:</span>
-        <span class="n">ActionChains</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span><span class="o">.</span><span class="n">move_by_offset</span><span class="p">(</span><span class="n">xoffset</span><span class="o">=</span><span class="n">track</span><span class="p">,</span> <span class="n">yoffset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
-    <span class="c1"># 释放鼠标</span>
-    <span class="n">sleep</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span>
-    <span class="n">ActionChains</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span><span class="o">.</span><span class="n">release</span><span class="p">()</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ok&#39;</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">bs</span><span class="p">):</span>
-    <span class="c1"># 获取cookies</span>
-    <span class="n">cookies</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">get_cookies</span><span class="p">()</span>
-    <span class="n">sessionStorage</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="s1">&#39;return sessionStorage;&#39;</span><span class="p">)</span>
-    <span class="n">localStorage</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="s1">&#39;return localStorage;&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">cookies</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">sessionStorage</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">localStorage</span><span class="p">)</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
-</code></pre></div></div>
-        <hr />
-    </div>
-		
+<li>如何尽可能精确地重现错误 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-yi-zhou.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -477,52 +452,6 @@ https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-sho
 <li>消息处理和路由<ul>
 <li>消息服务器从连接中读取消息并将其放置到适当的目的地</li>
 <li>消息服务器将(持久的)消息放在数据存储中 …</li></ul></li></ul> <a class="btn btn-info xsmall" href="/artsdi-shi-qi-zhou.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="/artsdi-shi-liu-zhou.html"><h2>ARTS第十六周</h2></a>
-        <div class= "well small"> 2020-08-10
-
-<a class="url fn">qianlizhixing</a>
-
-
- </div>
-        <div class="summary"><h2>Algorithm</h2>
-<p>leetcode 338 比特位计数</p>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/counting-bits/">原题</a></li>
-<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/c/338.c">解题</a></li>
-</ul>
-<h2>Review</h2>
-<blockquote>
-<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_14/</p>
-</blockquote>
-<h4>代码评审</h4>
-<ul>
-<li>提高了代码质量并降低了缺陷率</li>
-<li>代码可能有很多细节涉及系统具体业务</li>
-<li>代码审查的目的不应该是简单地纠正代码中的错误，而应该是分享知识和建立共同的编码指南</li>
-<li>通过学习和理解代码来检查代码，而不是寻找错误</li>
-<li>代码审查期间要温和，确保你的评论是有建设性的，而不是刻薄的</li>
-<li>避免团队成员中的组织级别影响代码评审</li>
-<li>如果团队有通过工具检查的编码约定，那么代码审查将更容易进行。这样，代码格式化就不会在代码评审会议上讨论</li>
-<li>让代码审查变得有趣也许是成功的最重要因素</li>
-</ul>
-<h2>Tip</h2>
-<h2>Share</h2>
-<h3>Electron(六)</h3>
-<h4>多个渲染进程间通信</h4>
-<div class="highlight"><pre><span></span><code><span class="c1">//cefmanage.js</span>
-<span class="kr">const</span> <span class="nx">uuid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;node-uuid&#39;</span><span class="p">);</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">ipcMain</span><span class="p">,</span> <span class="nx">ipcRenderer</span><span class="p">,</span> <span class="nx">remote</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
-
-<span class="kd">function</span> <span class="nx">cefmanage …</span></code></pre></div> <a class="btn btn-info xsmall" href="/artsdi-shi-liu-zhou.html">read more</a></div>
     </div>	
 				
 <div class="pagination">

@@ -1,5 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>千里之行 始于足下 - qianlizhixing</title><link href="/" rel="alternate"></link><link href="/feeds/qianlizhixing.atom.xml" rel="self"></link><id>/</id><updated>2021-03-29T00:00:00+08:00</updated><entry><title>ARTS第二十一周</title><link href="/artsdi-er-shi-yi-zhou.html" rel="alternate"></link><published>2021-03-29T00:00:00+08:00</published><updated>2021-03-29T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-03-29:/artsdi-er-shi-yi-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>千里之行 始于足下 - qianlizhixing</title><link href="/" rel="alternate"></link><link href="/feeds/qianlizhixing.atom.xml" rel="self"></link><id>/</id><updated>2021-04-05T00:00:00+08:00</updated><entry><title>ARTS第二十二周</title><link href="/artsdi-er-shi-er-zhou.html" rel="alternate"></link><published>2021-04-05T00:00:00+08:00</published><updated>2021-04-05T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-04-05:/artsdi-er-shi-er-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 面试题17.21 直方图的水量&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/volume-of-histogram-lcci/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/17.21.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;单调栈&lt;/li&gt;
+&lt;li&gt;双指针&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_41/
+https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_42/
+https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_43/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;进程间通信影响应用程序响应时间&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;数据结构和算法，在某些情况下可能会对性能产生影响，但在现代多层企业应用程序中不太可能主导性能&lt;/li&gt;
+&lt;li&gt;远程进程间通信的数量通常对性能占主导地位，每个远程进程间通信都会对总体响应时间造成一些不可忽略的延迟，这些影响会累积起来，特别是当它们依次发生时&lt;/li&gt;
+&lt;li&gt;应用节俭原则，优化流程之间的接口，以便以最小的交互量交换手边正确的数据&lt;/li&gt;
+&lt;li&gt;在可能的情况下并行处理进程间通信，这样总体响应时间主要由延迟时间最长的IPC驱动&lt;/li&gt;
+&lt;li&gt;缓存以前的ipc的结果，这样将来的ipc就可以通过使用本地缓存来避免&lt;/li&gt;
+&lt;li&gt;无论是通过缓存 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 面试题17.21 直方图的水量&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/volume-of-histogram-lcci/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/17.21.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;单调栈&lt;/li&gt;
+&lt;li&gt;双指针&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_41/
+https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_42/
+https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_43/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;进程间通信影响应用程序响应时间&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;数据结构和算法，在某些情况下可能会对性能产生影响，但在现代多层企业应用程序中不太可能主导性能&lt;/li&gt;
+&lt;li&gt;远程进程间通信的数量通常对性能占主导地位，每个远程进程间通信都会对总体响应时间造成一些不可忽略的延迟，这些影响会累积起来，特别是当它们依次发生时&lt;/li&gt;
+&lt;li&gt;应用节俭原则，优化流程之间的接口，以便以最小的交互量交换手边正确的数据&lt;/li&gt;
+&lt;li&gt;在可能的情况下并行处理进程间通信，这样总体响应时间主要由延迟时间最长的IPC驱动&lt;/li&gt;
+&lt;li&gt;缓存以前的ipc的结果，这样将来的ipc就可以通过使用本地缓存来避免&lt;/li&gt;
+&lt;li&gt;无论是通过缓存、并行或其他技术减少远程ipc响应时间，都比改变数据结构选择或调整排序算法带来的回报要大得多&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;保持构建整洁&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;在成百上千个不关心的编译器警告中，找到真正关注的编译器警告困难得多&lt;/li&gt;
+&lt;li&gt;对构建警告使用零容忍策略，即使知道警告内容永远不会在生产环境中出现&lt;/li&gt;
+&lt;li&gt;某些构建警告真的不关心，也不重要(例如版本升级，老的代码在新版本)，改变警告政策&lt;/li&gt;
+&lt;li&gt;构建警告是有用的，不要等到大扫除后再做，马上修复警告源、抑制此警告或修复工具的警告策略&lt;/li&gt;
+&lt;li&gt;保持构建的整洁不仅仅是避免编译错误或测试失败，警告也是代码整洁的重要和关键部分&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;使用命令行工具&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;IDE有很多值得喜欢的地方，不仅易于使用，还使程序员不必考虑构建过程中涉及的大量小细节&lt;/li&gt;
+&lt;li&gt;当一个工具易于使用时，是因为这个工具为你做决定，并在幕后自动做很多事情&lt;/li&gt;
+&lt;li&gt;编写make文件帮助理解构建可执行文件的所有步骤(编译、汇编、链接等)&lt;/li&gt;
+&lt;li&gt;使用许多命令行选项进行试验也是一种宝贵的教育经验&lt;/li&gt;
+&lt;li&gt;一个设计良好的IDE只是一组命令行工具的图形前端&lt;/li&gt;
+&lt;li&gt;有些任务使用命令行工具比使用IDE更容易或更有效地执行&lt;/li&gt;
+&lt;li&gt;命令行工具本质上支持脚本，它允许任务的自动化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Tip&lt;/h2&gt;
+&lt;h3&gt;unicode_escape&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;用unicode_escape转义字符串普通字符相互转化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;convert_unicode_escape&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;    转义字符串普通字符相互转化&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span class="c1"&gt;#转义字符串&lt;/span&gt;
+    &lt;span class="n"&gt;s1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;u&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\u597d\u4eba&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+    &lt;span class="c1"&gt;#普通字符串&lt;/span&gt;
+    &lt;span class="n"&gt;s2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;\u597d\u4eba&amp;#39;&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;#out ----  好人 \u597d\u4eba&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;unicode_escape&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;unicode_escape&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="c1"&gt;#out ----  \u597d\u4eba 好人&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;convert_unicode_escape&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Share&lt;/h2&gt;
+&lt;h3&gt;字体加密&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;整理了链接博客&lt;/p&gt;
+&lt;p&gt;https://zhuanlan.zhihu.com/p/33112359&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;逻辑步骤&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;人工得到一个基本映射(如\ue456--&amp;gt;3)，作为对照&lt;/li&gt;
+&lt;li&gt;实时获取字体和隐藏的源码&lt;/li&gt;
+&lt;li&gt;根据对比基本映射，得到实时映射&lt;/li&gt;
+&lt;li&gt;根据实时映射和源码，得到最终结果&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;fake_useragent&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;UserAgent&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;lxml&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;etree&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;fontTools.ttLib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;TTFont&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;io&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;BytesIO&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;woff_href&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_info&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;woff&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_woff&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;woff_href&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;get_word&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;woff&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_info&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;    获取信息&lt;/span&gt;
+&lt;span class="sd"&gt;    获取字体链接&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;headers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;User-Agent&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;UserAgent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;verify_ssl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;random&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;https://***.com/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;verify&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# with open(r&amp;#39;test_font.txt&amp;#39;, mode=&amp;#39;wb&amp;#39;) as f:&lt;/span&gt;
+    &lt;span class="c1"&gt;#     f.write(response.content)&lt;/span&gt;
+    &lt;span class="n"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="n"&gt;selector&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;etree&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;selector&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;//ul[contains(@class, &amp;quot;ranking-box&amp;quot;)]/li&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;.//span[@class=&amp;quot;ranking-top-moive-name&amp;quot; or @class=&amp;quot;ranking-movie-name&amp;quot;]/text()&amp;#39;&lt;/span&gt;
+        &lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.//span[@class=&amp;quot;stonefont&amp;quot;]/text()&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="c1"&gt;# print(name, num)&lt;/span&gt;
+        &lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;num&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="c1"&gt;# &amp;quot;url(&amp;#39;//4858115f54fc92296.woff&amp;#39;)&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;woff_info&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;etree&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/html/head/style/text()&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;woff_href&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;url\(&amp;#39;(\S*\.woff)&amp;#39;\)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;woff_info&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;groups&lt;/span&gt;&lt;span class="p"&gt;()[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;woff_href&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_woff&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;woff_href&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;    下载字体&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;headers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;User-Agent&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;UserAgent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;verify_ssl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;random&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https:&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;woff_href&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;verify&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# with open(r&amp;#39;test_font.woff&amp;#39;, mode=&amp;#39;wb&amp;#39;) as f:&lt;/span&gt;
+    &lt;span class="c1"&gt;#     f.write(response.content)&lt;/span&gt;
+    &lt;span class="n"&gt;woff&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TTFont&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BytesIO&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="c1"&gt;# woff.saveXML(&amp;#39;test_font.xml&amp;#39;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;woff&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_word&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;woff&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# test_font_base.otf是某一次访问获取的字体文件，然后人工识别内容，作为与后面获取字体的比对标本，从而让电脑自动获得后面获取字体的实际内容&lt;/span&gt;
+    &lt;span class="c1"&gt;#FontCreator 得到一个基本映射&lt;/span&gt;
+    &lt;span class="n"&gt;base&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TTFont&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;test_font_base.woff&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;base_dic&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;uniF19B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;uniF4EF&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;6&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;uniE137&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;uniE343&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;uniE8CD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;5&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;uniE7A1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;9&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;uniF848&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;uniF489&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;uniE5E2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;4&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;uniF88A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;7&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;unis&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;woff&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getGlyphOrder&lt;/span&gt;&lt;span class="p"&gt;()[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;
+    &lt;span class="n"&gt;woff_dic&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;uni&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;unis&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;woff_glyf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;woff&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;glyf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;uni&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;uni_&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;base_dic&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="c1"&gt;# 同一字体的glyf相同，不深究&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;woff_glyf&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;glyf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;uni_&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+                &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;eval&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;u&amp;#39;\u&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;uni&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;woff_dic&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;base_dic&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;uni_&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="k"&gt;break&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;num&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;uni&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;woff_dic&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;uni&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;woff_dic&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;uni&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="ARTS"></category><category term="fontTools"></category><category term="woff"></category><category term="字体加密"></category><category term="数据采集"></category></entry><entry><title>ARTS第二十一周</title><link href="/artsdi-er-shi-yi-zhou.html" rel="alternate"></link><published>2021-03-29T00:00:00+08:00</published><updated>2021-03-29T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-03-29:/artsdi-er-shi-yi-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 74 搜索二维矩阵&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/search-a-2d-matrix/"&gt;原题&lt;/a&gt;&lt;/li&gt;
@@ -258,7 +448,7 @@ https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-sho
 
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="ARTS"></category><category term="bug报告"></category><category term="selenium"></category><category term="geetest"></category></entry><entry><title>ARTS第二十周</title><link href="/artsdi-er-shi-zhou.html" rel="alternate"></link><published>2021-03-22T00:00:00+08:00</published><updated>2021-03-22T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-03-22:/artsdi-er-shi-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="ARTS"></category><category term="bug报告"></category><category term="selenium"></category><category term="geetest"></category><category term="数据采集"></category></entry><entry><title>ARTS第二十周</title><link href="/artsdi-er-shi-zhou.html" rel="alternate"></link><published>2021-03-22T00:00:00+08:00</published><updated>2021-03-22T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-03-22:/artsdi-er-shi-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 剑指Offer38 字符串的排列&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/"&gt;原题&lt;/a&gt;&lt;/li&gt;
@@ -640,7 +830,7 @@ Python&lt;span class="se"&gt;\S&lt;/span&gt;cripts&lt;span class="se"&gt;\p&lt;/
 
 
 &lt;span class="n"&gt;asyncio&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_event_loop&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run_until_complete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="ARTS"></category><category term="刻意练习"></category><category term="pyppeteer"></category><category term="geetest"></category></entry><entry><title>ARTS第十九周</title><link href="/artsdi-shi-jiu-zhou.html" rel="alternate"></link><published>2021-03-17T00:00:00+08:00</published><updated>2021-03-17T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-03-17:/artsdi-shi-jiu-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="ARTS"></category><category term="刻意练习"></category><category term="pyppeteer"></category><category term="geetest"></category><category term="数据采集"></category></entry><entry><title>ARTS第十九周</title><link href="/artsdi-shi-jiu-zhou.html" rel="alternate"></link><published>2021-03-17T00:00:00+08:00</published><updated>2021-03-17T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-03-17:/artsdi-shi-jiu-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 138 复制带随机指针的链表&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/copy-list-with-random-pointer/"&gt;原题&lt;/a&gt;&lt;/li&gt;
