@@ -50,8 +50,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="/artsdi-er-shi-er-zhou.html"><h1>ARTS第二十二周</h1></a>
-2021-04-05
+            <a href="/artsdi-er-shi-san-zhou.html"><h1>ARTS第二十三周</h1></a>
+2021-04-12
 
 <a class="url fn">qianlizhixing</a>
 
@@ -60,6 +60,278 @@
         </div>
         
         <div><h2>Algorithm</h2>
+<p>leetcode 153 寻找旋转排序数组中的最小值</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/153.py">解题</a></li>
+<li>二分查找</li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_53/</p>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_54/</p>
+</blockquote>
+<h3>链接器不是魔法</h3>
+<ul>
+<li>链接器所做的就是将目标文件的代码和数据部分连接在一起，将符号的引用与它们的定义连接起来，从库中提取无法解析的符号，并写出一个可执行文件</li>
+<li>映射文件是可执行文件中所有符号及其地址的列表。这告诉从库中链接了哪些模块，以及每个模块的大小</li>
+</ul>
+<h3>临时方案寿命</h3>
+<ul>
+<li>创建临时方案的原因多种多样，临时方案成功的关键很简单，它是有用的</li>
+<li>临时解决方案会产生惯性，它们存在，最终是有用的并且被广泛接受的，所以不需要立即解决临时方案的弊端。每当必须决定什么行动最能增加价值时，就会有许多比适当集成临时解决方案更高的行动。为什么?因为它就在那里，它有效，它被接受。唯一的缺点是它不遵循所选择的标准和指导方针-除了少数利基市场，这并不被认为是一个重要的力量</li>
+<li>如果临时解决方案出现问题，可能会创建新的临时方案解决这个临时方案的问题</li>
+<li>当系统包含过多的临时解决方案时，其熵值或内部复杂性增加，可维护性降低；然而，首先问这个问题可能是错误的；记住，我们讨论的是一个解决方案，它可能不是你喜欢的解决方案——它不太可能是任何人喜欢的解决方案——但重做这个解决方案的动机很弱</li>
+<li>应该怎么做</li>
+<li>一开始就避免创建临时解决方案，回避在大多数地方都不起作用</li>
+<li>改变影响项目经理决策的力量</li>
+<li>让它保持原样</li>
+<li>克服临时解决方案的最佳方法是使它们成为多余的，提供一个更优雅和有用的解决方案</li>
+</ul>
+<h2>Tip</h2>
+<h3>调试开关与静态文件</h3>
+<blockquote>
+<p>https://stackoverflow.com/questions/5836674/why-does-debug-false-setting-make-my-django-static-files-access-fail</p>
+</blockquote>
+<ul>
+<li>
+<p>调试模式下(DEBUG=True)，默认提供静态文件服务</p>
+</li>
+<li>
+<p>生产模式下(DEBUG=False)，默认不提供静态文件服务</p>
+</li>
+<li>
+<p>由nginx,apache提供文件服务</p>
+</li>
+<li>
+<p>改变运行方式</p>
+<p><code>bash
+python manage.py runserver --insecure</code></p>
+</li>
+<li>
+<p>添加静态文件路由</p>
+<p>```python
+from django.views import static
+from django.conf import settings
+from django.conf.urls import url</p>
+<p>url(r'^static/(?P<path>.*)$',
+        static.serve, {'document_root': settings.STATIC_ROOT},
+        name='static'),
+```</p>
+</li>
+</ul>
+<h3>nginx+daphne部署异步django项目</h3>
+<blockquote>
+<p>https://www.upidev.com/tutoriels/set-up-a-django-async-project-with-daphne-nginx-on-ubuntu-18-04/</p>
+</blockquote>
+<p><img alt="django_with_daphne_nginx" src=".\img\django_with_daphne_nginx.png"></p>
+<p>请求响应链路图</p>
+<ol>
+<li>启动django</li>
+</ol>
+<p><code>bash
+   daphne --proxy-headers mydjango.asgi:application</code></p>
+<ol>
+<li>域名服务</li>
+</ol>
+<p><code>ini
+   # C:\Windows\System32\drivers\etc\hosts文件加一行
+   127.0.0.1       myspider.com</code></p>
+<ol>
+<li>配置nginx</li>
+</ol>
+<p>```nginx
+   # nginx.conf</p>
+<p>server {
+          listen 80;
+          server_name myspider.com;</p>
+<div class="highlight"><pre><span></span><code><span class="w">      </span><span class="n">charset</span><span class="w">     </span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">client_max_body_size</span><span class="w"> </span><span class="mi">75</span><span class="n">M</span><span class="p">;</span><span class="w">   </span><span class="err">#</span><span class="w"> </span><span class="n">adjust</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">taste</span><span class="w"></span>
+
+<span class="w">      </span><span class="err">#</span><span class="w"> </span><span class="n">Django</span><span class="w"> </span><span class="n">media</span><span class="w"></span>
+<span class="w">      </span><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="k">static</span><span class="o">/</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">alias</span><span class="w"> </span><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">myspider</span><span class="err">\</span><span class="n">mydjango</span><span class="err">\</span><span class="k">static</span><span class="err">\\</span><span class="p">;</span><span class="w"> </span>
+<span class="w">      </span><span class="err">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">         </span><span class="n">try_files</span><span class="w"> </span><span class="err">$</span><span class="n">uri</span><span class="w"> </span><span class="nv">@proxy_to_app</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="err">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">location</span><span class="w"> </span><span class="nv">@proxy_to_app</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">proxy_pass</span><span class="w"> </span><span class="nl">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="err">:</span><span class="mi">8000</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">          </span><span class="n">proxy_http_version</span><span class="w"> </span><span class="mf">1.1</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">Upgrade</span><span class="w"> </span><span class="err">$</span><span class="n">http_upgrade</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="k">Connection</span><span class="w"> </span><span class="ss">&quot;upgrade&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">          </span><span class="n">proxy_redirect</span><span class="w"> </span><span class="k">off</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="err">$</span><span class="k">host</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">X</span><span class="o">-</span><span class="nc">Real</span><span class="o">-</span><span class="n">IP</span><span class="w"> </span><span class="err">$</span><span class="n">remote_addr</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="k">For</span><span class="w"> </span><span class="err">$</span><span class="n">proxy_add_x_forwarded_for</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="k">Host</span><span class="w"> </span><span class="err">$</span><span class="n">server_name</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="err">}</span><span class="w"></span>
+<span class="w">   </span><span class="err">}</span><span class="w"></span>
+</code></pre></div>
+
+
+<p>```</p>
+<h2>Share</h2>
+<blockquote>
+<p>数据采集比较全面的介绍</p>
+<p>https://lovelybear.blog.csdn.net/article/details/73927750</p>
+<p>https://www.zhihu.com/question/28168585</p>
+</blockquote>
+<h3>nginx反采集</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">fake_useragent</span> <span class="kn">import</span> <span class="n">UserAgent</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">spider_run</span><span class="p">():</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span>
+            <span class="s1">&#39;application/json;charset=UTF-8&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Cookie&#39;</span><span class="p">:</span>
+            <span class="s1">&#39;csrftoken=IoItQ0o4Iuuej8EaMwihhCRVzLcCaNz7hxLOeGwOU3MsVI7GVQgrMgnjSRJ1F7gK; sessionid=k3hbungs0mpua2ensuey7kzfncwjg75o&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Accept&#39;</span><span class="p">:</span>
+            <span class="s1">&#39;application/json, text/javascript, */*; q=0.01&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Accept-Encoding&#39;</span><span class="p">:</span>
+            <span class="s1">&#39;gzip, deflate&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Accept-Language&#39;</span><span class="p">:</span>
+            <span class="s1">&#39;zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7&#39;</span><span class="p">,</span>
+        <span class="c1">#&#39;User-Agent&#39;:</span>
+        <span class="c1">#    UserAgent(verify_ssl=False)[&#39;random&#39;],</span>
+        <span class="c1">#&#39;Referer&#39;:</span>
+        <span class="c1">#    &#39;http://myspider.com/gaokao/schoollist.html&#39;</span>
+    <span class="p">}</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+        <span class="s2">&quot;updatedt&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-04-05&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;schoolkey&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">})</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://myspider.com/api/gaokao/scoollist/get.do&#39;</span><span class="p">,</span>
+                             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+                             <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+                             <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">spider_run</span><span class="p">()</span>
+</code></pre></div>
+
+
+<ul>
+<li>未加任何反采集措施，返回200</li>
+</ul>
+<h4>禁止某些user-agent</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">#forbidden UA</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span><span class="sr">*</span> <span class="s">(Python|Scrapy|Curl|HttpClient))</span>
+<span class="p">{</span>
+    <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<ul>
+<li>
+<p>再次请求，返回403</p>
+</li>
+<li>
+<p>加上user_agent，正常返回200</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">fake_useragent</span> <span class="kn">import</span> <span class="n">UserAgent</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="n">UserAgent</span><span class="p">(</span><span class="n">verify_ssl</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;random&#39;</span><span class="p">]}</span>
+</code></pre></div>
+
+
+<h4>禁止某些method</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">#forbidden not GET|HEAD|POST method access</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$request_method</span> <span class="s">!~</span> <span class="s">^(GET|HEAD|POST)</span>$<span class="s">)</span>
+<span class="p">{</span>
+    <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h4>禁止访问频率</h4>
+<ul>
+<li>limit_req_zone 限制单位时间内的请求数，速率限制,采用的漏桶算法</li>
+<li>limit_req_conn 限制同一时间连接数，并发限制，根据源IP限制单用户并发访问的连接数</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">http</span> <span class="p">{</span>
+    <span class="kn">limit_conn_log_level</span> <span class="s">error</span><span class="p">;</span>
+    <span class="kn">limit_conn_status</span> <span class="mi">503</span><span class="p">;</span>
+    <span class="kn">limit_conn_zone</span> <span class="nv">$binary_remote_addr</span> <span class="s">zone=one:10m</span><span class="p">;</span>
+    <span class="kn">limit_conn_zone</span> <span class="nv">$server_name</span> <span class="s">zone=perserver:10m</span><span class="p">;</span>
+    <span class="kn">limit_req_zone</span> <span class="nv">$binary_remote_addr</span> <span class="s">zone=allips:10m</span>   <span class="s">rate=20r/s</span><span class="p">;</span>
+
+    <span class="kn">server</span> <span class="p">{</span>
+        <span class="kn">limit_conn</span>  <span class="no">on</span><span class="s">e</span>  <span class="mi">50</span><span class="p">;</span>                                              
+        <span class="kn">limit_conn</span> <span class="s">perserver</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="kn">limit_req</span>   <span class="s">zone=allips</span>  <span class="s">burst=5</span>  <span class="s">nodelay</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h4>限制下载速度</h4>
+<div class="highlight"><pre><span></span><code><span class="k">location</span> <span class="s">/file</span> <span class="p">{</span> 
+       <span class="kn">limit_rate_after</span> <span class="mi">10m</span><span class="p">;</span> 
+       <span class="kn">limit_rate</span> <span class="mi">128k</span><span class="p">;</span> 
+<span class="p">}</span> 
+</code></pre></div>
+
+
+<h4>限制referers</h4>
+<ul>
+<li>valide_referers指令</li>
+<li>none允许缺失的头部访问(默认)</li>
+<li>blocked允许referer没有对应值</li>
+<li>server_names:表示一个或多个主机名称，myspider.com表示通过myspider.com访问referers，*表示任意host主机</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">valid_referers</span> <span class="s">server_names</span> <span class="s">myspider.com</span><span class="p">;</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$invalid_referer</span><span class="s">)</span> <span class="p">{</span>
+    <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="s">(</span><span class="nv">$http_referer</span> <span class="p">~</span><span class="sr">*</span> <span class="s">&quot;要拦截的域名&quot;)</span><span class="p">{</span>
+    <span class="kn">return</span> <span class="mi">301</span> <span class="s">要跳转的域名</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<ul>
+<li>
+<p>再次请求，返回403</p>
+</li>
+<li>
+<p>加上referers，正常返回200</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Referer&#39;</span><span class="p">:</span> <span class="s1">&#39;http://myspider.com/gaokao/schoollist.html&#39;</span><span class="p">}</span>
+</code></pre></div></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-er-shi-er-zhou.html"><h2>ARTS第二十二周</h2></a>
+        <div class= "well small"> 2021-04-05
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
 <p>leetcode 面试题17.21 直方图的水量</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/volume-of-histogram-lcci/">原题</a></li>
@@ -80,158 +352,9 @@ https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-sho
 <li>应用节俭原则，优化流程之间的接口，以便以最小的交互量交换手边正确的数据</li>
 <li>在可能的情况下并行处理进程间通信，这样总体响应时间主要由延迟时间最长的IPC驱动</li>
 <li>缓存以前的ipc的结果，这样将来的ipc就可以通过使用本地缓存来避免</li>
-<li>无论是通过缓存、并行或其他技术减少远程ipc响应时间，都比改变数据结构选择或调整排序算法带来的回报要大得多</li>
-</ul>
-<h3>保持构建整洁</h3>
-<ul>
-<li>在成百上千个不关心的编译器警告中，找到真正关注的编译器警告困难得多</li>
-<li>对构建警告使用零容忍策略，即使知道警告内容永远不会在生产环境中出现</li>
-<li>某些构建警告真的不关心，也不重要(例如版本升级，老的代码在新版本)，改变警告政策</li>
-<li>构建警告是有用的，不要等到大扫除后再做，马上修复警告源、抑制此警告或修复工具的警告策略</li>
-<li>保持构建的整洁不仅仅是避免编译错误或测试失败，警告也是代码整洁的重要和关键部分</li>
-</ul>
-<h3>使用命令行工具</h3>
-<ul>
-<li>IDE有很多值得喜欢的地方，不仅易于使用，还使程序员不必考虑构建过程中涉及的大量小细节</li>
-<li>当一个工具易于使用时，是因为这个工具为你做决定，并在幕后自动做很多事情</li>
-<li>编写make文件帮助理解构建可执行文件的所有步骤(编译、汇编、链接等)</li>
-<li>使用许多命令行选项进行试验也是一种宝贵的教育经验</li>
-<li>一个设计良好的IDE只是一组命令行工具的图形前端</li>
-<li>有些任务使用命令行工具比使用IDE更容易或更有效地执行</li>
-<li>命令行工具本质上支持脚本，它允许任务的自动化</li>
-</ul>
-<h2>Tip</h2>
-<h3>unicode_escape</h3>
-<ul>
-<li>用unicode_escape转义字符串普通字符相互转化</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">convert_unicode_escape</span><span class="p">():</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    转义字符串普通字符相互转化</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="c1">#转义字符串</span>
-    <span class="n">s1</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\u597d\u4eba</span><span class="s1">&#39;</span>
-    <span class="c1">#普通字符串</span>
-    <span class="n">s2</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\u597d\u4eba&#39;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
-    <span class="c1">#out ----  好人 \u597d\u4eba</span>
-    <span class="nb">print</span><span class="p">(</span>
-        <span class="n">s1</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;unicode_escape&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">),</span>
-        <span class="n">s2</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;unicode_escape&#39;</span><span class="p">))</span>
-    <span class="c1">#out ----  \u597d\u4eba 好人</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">convert_unicode_escape</span><span class="p">()</span>
-</code></pre></div>
-
-
-<h2>Share</h2>
-<h3>字体加密</h3>
-<blockquote>
-<p>整理了链接博客</p>
-<p>https://zhuanlan.zhihu.com/p/33112359</p>
-</blockquote>
-<h4>逻辑步骤</h4>
-<ol>
-<li>人工得到一个基本映射(如\ue456--&gt;3)，作为对照</li>
-<li>实时获取字体和隐藏的源码</li>
-<li>根据对比基本映射，得到实时映射</li>
-<li>根据实时映射和源码，得到最终结果</li>
-</ol>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">fake_useragent</span> <span class="kn">import</span> <span class="n">UserAgent</span>
-<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
-<span class="kn">from</span> <span class="nn">fontTools.ttLib</span> <span class="kn">import</span> <span class="n">TTFont</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">info</span><span class="p">,</span> <span class="n">woff_href</span> <span class="o">=</span> <span class="n">get_info</span><span class="p">()</span>
-    <span class="n">woff</span> <span class="o">=</span> <span class="n">get_woff</span><span class="p">(</span><span class="n">woff_href</span><span class="p">)</span>
-    <span class="n">get_word</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">woff</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">get_info</span><span class="p">():</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    获取信息</span>
-<span class="sd">    获取字体链接</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="n">UserAgent</span><span class="p">(</span><span class="n">verify_ssl</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;random&#39;</span><span class="p">]}</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;https://***.com/&#39;</span><span class="p">,</span>
-                            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
-                            <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="c1"># with open(r&#39;test_font.txt&#39;, mode=&#39;wb&#39;) as f:</span>
-    <span class="c1">#     f.write(response.content)</span>
-    <span class="n">info</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">selector</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">selector</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//ul[contains(@class, &quot;ranking-box&quot;)]/li&#39;</span><span class="p">):</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span>
-            <span class="s1">&#39;.//span[@class=&quot;ranking-top-moive-name&quot; or @class=&quot;ranking-movie-name&quot;]/text()&#39;</span>
-        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">num</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;.//span[@class=&quot;stonefont&quot;]/text()&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="c1"># print(name, num)</span>
-        <span class="n">info</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="n">num</span><span class="p">})</span>
-    <span class="c1"># &quot;url(&#39;//4858115f54fc92296.woff&#39;)&quot;</span>
-    <span class="n">woff_info</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;/html/head/style/text()&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">woff_href</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;url\(&#39;(\S*\.woff)&#39;\)&quot;</span><span class="p">,</span> <span class="n">woff_info</span><span class="p">)</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">info</span><span class="p">,</span> <span class="n">woff_href</span>
-
-
-<span class="k">def</span> <span class="nf">get_woff</span><span class="p">(</span><span class="n">woff_href</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    下载字体</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="n">UserAgent</span><span class="p">(</span><span class="n">verify_ssl</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;random&#39;</span><span class="p">]}</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https:&quot;</span> <span class="o">+</span> <span class="n">woff_href</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="c1"># with open(r&#39;test_font.woff&#39;, mode=&#39;wb&#39;) as f:</span>
-    <span class="c1">#     f.write(response.content)</span>
-    <span class="n">woff</span> <span class="o">=</span> <span class="n">TTFont</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
-    <span class="c1"># woff.saveXML(&#39;test_font.xml&#39;)</span>
-    <span class="k">return</span> <span class="n">woff</span>
-
-
-<span class="k">def</span> <span class="nf">get_word</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">woff</span><span class="p">):</span>
-    <span class="c1"># test_font_base.otf是某一次访问获取的字体文件，然后人工识别内容，作为与后面获取字体的比对标本，从而让电脑自动获得后面获取字体的实际内容</span>
-    <span class="c1">#FontCreator 得到一个基本映射</span>
-    <span class="n">base</span> <span class="o">=</span> <span class="n">TTFont</span><span class="p">(</span><span class="s1">&#39;test_font_base.woff&#39;</span><span class="p">)</span>
-    <span class="n">base_dic</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;uniF19B&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;uniF4EF&#39;</span><span class="p">:</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;uniE137&#39;</span><span class="p">:</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;uniE343&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;uniE8CD&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;uniE7A1&#39;</span><span class="p">:</span> <span class="s1">&#39;9&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;uniF848&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;uniF489&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;uniE5E2&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;uniF88A&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span>
-    <span class="p">}</span>
-    <span class="n">unis</span> <span class="o">=</span> <span class="n">woff</span><span class="o">.</span><span class="n">getGlyphOrder</span><span class="p">()[</span><span class="mi">2</span><span class="p">:]</span>
-    <span class="n">woff_dic</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">uni</span> <span class="ow">in</span> <span class="n">unis</span><span class="p">:</span>
-        <span class="n">woff_glyf</span> <span class="o">=</span> <span class="n">woff</span><span class="p">[</span><span class="s1">&#39;glyf&#39;</span><span class="p">][</span><span class="n">uni</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">uni_</span> <span class="ow">in</span> <span class="n">base_dic</span><span class="p">:</span>
-            <span class="c1"># 同一字体的glyf相同，不深究</span>
-            <span class="k">if</span> <span class="n">woff_glyf</span> <span class="o">==</span> <span class="n">base</span><span class="p">[</span><span class="s1">&#39;glyf&#39;</span><span class="p">][</span><span class="n">uni_</span><span class="p">]:</span>
-                <span class="n">key</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;u&#39;\u&quot;</span> <span class="o">+</span> <span class="n">uni</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
-                <span class="n">woff_dic</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">base_dic</span><span class="p">[</span><span class="n">uni_</span><span class="p">]</span>
-                <span class="k">break</span>
-    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
-        <span class="n">num</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">uni</span> <span class="ow">in</span> <span class="n">woff_dic</span><span class="p">:</span>
-            <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">uni</span><span class="p">,</span> <span class="n">woff_dic</span><span class="p">[</span><span class="n">uni</span><span class="p">])</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">num</span><span class="p">)</span>
-    <span class="k">pass</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
-</code></pre></div></div>
-        <hr />
-    </div>
-		
+<li>无论是通过缓存 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-er-zhou.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -400,60 +523,6 @@ https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-sho
 <li>函数参数尽量少 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-shi-ba-zhou.html">read more</a></div>
     </div>	
 				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="/artsdi-shi-qi-zhou.html"><h2>ARTS第十七周</h2></a>
-        <div class= "well small"> 2020-08-17
-
-<a class="url fn">qianlizhixing</a>
-
-
- </div>
-        <div class="summary"><h2>Algorithm</h2>
-<p>leetcode 338 比特位计数</p>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/counting-bits/">原题</a></li>
-<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/c/338.c">解题</a></li>
-</ul>
-<h2>Review</h2>
-<blockquote>
-<p>https://docs.oracle.com/cd/E19435-01/819-0069/intro.html</p>
-</blockquote>
-<h4>消息队列架构</h4>
-<ul>
-<li>消息队列是一种可靠的异步消息传递服务</li>
-<li>消息服务器由一个或多个代理组成，并执行消息路由和传递，它是消息队列服务的核心</li>
-<li>消息服务器由一个或一组共同工作的代理(作为代理集群)组成，以执行消息路由和传递服务</li>
-<li>身份验证，操作授权</li>
-<li>设置和客户端通信协议</li>
-<li>接受客户端消息，并将其放置在各自的物理目的地</li>
-<li>将消息路由并交付给一个或多个消费客户端</li>
-<li>保证可靠的交付</li>
-<li>为监控系统性能提供数据</li>
-<li>客户端运行时代理</li>
-<li>管理到消息服务器的消息传递</li>
-<li>建立连接，建立客户的身份</li>
-<li>实现客户端确认</li>
-<li>控制跨连接的消息流</li>
-<li>可以覆盖由生成客户端设置的消息头值</li>
-</ul>
-<h4>消息传递步骤</h4>
-<ul>
-<li>持久、可靠地传递的消息步骤</li>
-<li>消息生产<ul>
-<li>客户端运行时通过连接将消息从消息生成器传递到消息服务器</li>
-</ul>
-</li>
-<li>消息处理和路由<ul>
-<li>消息服务器从连接中读取消息并将其放置到适当的目的地</li>
-<li>消息服务器将(持久的)消息放在数据存储中 …</li></ul></li></ul> <a class="btn btn-info xsmall" href="/artsdi-shi-qi-zhou.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -492,6 +561,7 @@ https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-sho
                             </li>
 
                             <li><a href="/category/arts.html">ARTS</a></li>
+                            <li><a href="/category/misc.html">misc</a></li>
                         </ul>
                     </div>
                 </div>             </div>         </div> 

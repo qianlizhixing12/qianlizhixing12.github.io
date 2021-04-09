@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>千里之行 始于足下 - qianlizhixing</title><link>/</link><description></description><lastBuildDate>Mon, 05 Apr 2021 00:00:00 +0800</lastBuildDate><item><title>ARTS第二十二周</title><link>/artsdi-er-shi-er-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+<rss version="2.0"><channel><title>千里之行 始于足下 - qianlizhixing</title><link>/</link><description></description><lastBuildDate>Mon, 12 Apr 2021 00:00:00 +0800</lastBuildDate><item><title>ARTS第二十三周</title><link>/artsdi-er-shi-san-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 153 寻找旋转排序数组中的最小值&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/153.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;二分查找&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_53/&lt;/p&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_54/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;链接器不是魔法&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;链接器所做的就是将目标文件的代码和数据部分连接在一起，将符号的引用与它们的定义连接起来，从库中提取无法解析的符号，并写出一个可执行文件&lt;/li&gt;
+&lt;li&gt;映射文件是可执行文件中所有符号及其地址的列表。这告诉从库中链接了哪些模块，以及每个模块的大小&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;临时方案寿命&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;创建临时方案的原因多种多样，临时方案成功的关键很简单，它是有用的&lt;/li&gt;
+&lt;li&gt;临时解决方案会产生惯性，它们存在，最终是有用的并且被广泛接受的，所以不需要立即解决临时方案的弊端。每当必须决定什么行动最能增加价值时，就会有许多比适当集成临时解决方案更高的行动。为什么?因为它就在那里，它有效，它被接受。唯一的缺点是它不遵循所选择的标准和指导方针-除了少数利基市场，这并不被认为是一个重要的力量&lt;/li&gt;
+&lt;li&gt;如果临时解决方案出现问题，可能会创建新的临时方案解决这个临时方案的问题 …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 12 Apr 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-04-12:/artsdi-er-shi-san-zhou.html</guid><category>misc</category><category>ASGI</category><category>daphne</category><category>django</category><category>nginx</category><category>数据采集</category></item><item><title>ARTS第二十二周</title><link>/artsdi-er-shi-er-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 面试题17.21 直方图的水量&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/volume-of-histogram-lcci/"&gt;原题&lt;/a&gt;&lt;/li&gt;
