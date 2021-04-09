@@ -1,5 +1,5 @@
 ---
-nginxCategory: ARTS
+Category: ARTS
 Author: qianlizhixing
 Title: ARTS第二十三周
 Date: 2021-04-12
