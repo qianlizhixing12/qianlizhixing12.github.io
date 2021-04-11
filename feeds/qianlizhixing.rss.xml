@@ -20,7 +20,13 @@
 &lt;ul&gt;
 &lt;li&gt;创建临时方案的原因多种多样，临时方案成功的关键很简单，它是有用的&lt;/li&gt;
 &lt;li&gt;临时解决方案会产生惯性，它们存在，最终是有用的并且被广泛接受的，所以不需要立即解决临时方案的弊端。每当必须决定什么行动最能增加价值时，就会有许多比适当集成临时解决方案更高的行动。为什么?因为它就在那里，它有效，它被接受。唯一的缺点是它不遵循所选择的标准和指导方针-除了少数利基市场，这并不被认为是一个重要的力量&lt;/li&gt;
-&lt;li&gt;如果临时解决方案出现问题，可能会创建新的临时方案解决这个临时方案的问题 …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 12 Apr 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-04-12:/artsdi-er-shi-san-zhou.html</guid><category>ARTS</category><category>ASGI</category><category>daphne</category><category>django</category><category>nginx</category><category>数据采集</category></item><item><title>ARTS第二十二周</title><link>/artsdi-er-shi-er-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;li&gt;如果临时解决方案出现问题，可能会创建新的临时方案解决这个临时方案的问题 …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 12 Apr 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-04-12:/artsdi-er-shi-san-zhou.html</guid><category>ARTS</category><category>ASGI</category><category>daphne</category><category>django</category><category>nginx</category><category>数据采集</category></item><item><title>我跳了个寂寞</title><link>/wo-tiao-liao-ge-ji-mo.html</link><description>&lt;h3&gt;2021.03跳槽记&lt;/h3&gt;
+&lt;h4&gt;首战触雷&lt;/h4&gt;
+&lt;p&gt;30岁的年龄，这次特别想跳个大厂镀金。2月初联系上了杭州某大厂HR，大量招聘云计算相关研发岗。&lt;/p&gt;
+&lt;p&gt;第一关，牛客线上算法考试。HR让准备好再考，时间上年前年后都可以。刚好今年提倡就地过年，春节在付费自习室练习算法题。春节假期最后一天进行了线上考试。三道题做出了两道，成功通过。&lt;/p&gt;
+&lt;p&gt;性格测试和HR面，正常都能过吧，我也过了。跳槽是一个双向选择过程，性格测试和HR面注意不要故意’装好‘，反而会前后矛盾，网上也有小部分挂在这一关了。&lt;/p&gt;
+&lt;p&gt;技术一面，本以为同在杭州，应该会到公司面试，结果是zoom视频面试。编程语言本身的问题回答的还可以，但是操作系统相关的感觉回答的很差，手撕算法编程也没有搞出来。面试官挺好，后面一直说很多人当面都写不出来，没关系。&lt;/p&gt;
+&lt;p&gt;本以为技术一面挂掉了，后面又接到技术二面通知，定的时间不好，周六早上九点。技术细节答得还可以吧，设计能力我不知道怎么表达。出现了一个比较尴尬的情况，我其实是面试python岗位，但笔试的时候用了c++解题，后面面试官认为应聘c++岗位。面试官之前应该没看过简历，上来先让手撕算法编程题，没做出来。后面还有其他应聘者在后面排队 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Sat, 10 Apr 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-04-10:/wo-tiao-liao-ge-ji-mo.html</guid><category>程序员生涯</category><category>职业</category><category>程序员</category><category>面试</category></item><item><title>ARTS第二十二周</title><link>/artsdi-er-shi-er-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 面试题17.21 直方图的水量&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/volume-of-histogram-lcci/"&gt;原题&lt;/a&gt;&lt;/li&gt;
