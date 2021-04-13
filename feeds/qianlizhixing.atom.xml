@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>千里之行 始于足下 - qianlizhixing</title><link href="/" rel="alternate"></link><link href="/feeds/qianlizhixing.atom.xml" rel="self"></link><id>/</id><updated>2021-04-12T00:00:00+08:00</updated><entry><title>ARTS第二十三周</title><link href="/artsdi-er-shi-san-zhou.html" rel="alternate"></link><published>2021-04-12T00:00:00+08:00</published><updated>2021-04-12T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-04-12:/artsdi-er-shi-san-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>千里之行 始于足下 - qianlizhixing</title><link href="/" rel="alternate"></link><link href="/feeds/qianlizhixing.atom.xml" rel="self"></link><id>/</id><updated>2021-04-13T00:00:00+08:00</updated><entry><title>完成leetcode300题</title><link href="/wan-cheng-leetcode300ti.html" rel="alternate"></link><published>2021-04-13T00:00:00+08:00</published><updated>2021-04-13T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-04-13:/wan-cheng-leetcode300ti.html</id><content type="html">&lt;h3&gt;完成leetcode300题&lt;/h3&gt;
+&lt;p&gt;&lt;img src=".\img\leetcode 300.png" alt="leetcode 300" style="zoom: 25%;" /&gt;&lt;/p&gt;
+&lt;h4&gt;刷题经过&lt;/h4&gt;
+&lt;p&gt;二月之前都是断断续续在做题，二月因为后面的面试，在自习室刷了半个月，每天10到15道题节奏。&lt;/p&gt;
+&lt;p&gt;二月后保持一天最少一道题，基本上是每日1题的题目，简单顺利就多做几道。&lt;/p&gt;
+&lt;h4&gt;刷题收获&lt;/h4&gt;
+&lt;p&gt;心理上不会害怕算法题。&lt;/p&gt;
+&lt;p&gt;题目大致能想到知识点。&lt;/p&gt;
+&lt;p&gt;直接的题目基本能写出答案。&lt;/p&gt;
+&lt;h4&gt;持续改善&lt;/h4&gt;
+&lt;p&gt;还没有形成在纸上画状态的习惯。&lt;/p&gt;
+&lt;p&gt;比较急于看刷题数量，很多题不管是自己写出还是看题解，并没有彻底弄懂。&lt;/p&gt;
+&lt;p&gt;刷题模板套路总结的少，难度小的题目还是凭感觉，难度大的题目还是手足无措。&lt;/p&gt;
+&lt;p&gt;细节不够满意，变量控制有时啰嗦，其实还是逻辑不够清晰。&lt;/p&gt;
+&lt;h4&gt;总之&lt;/h4&gt;
+&lt;p&gt;不贪多，每日一题，力求彻底弄懂。用画图单元测试等多种形式，把思路文字化，能让别人看懂自己的题解。&lt;/p&gt;</content><category term="程序员生涯"></category><category term="职业"></category><category term="程序员"></category><category term="leetcode"></category></entry><entry><title>ARTS第二十三周</title><link href="/artsdi-er-shi-san-zhou.html" rel="alternate"></link><published>2021-04-12T00:00:00+08:00</published><updated>2021-04-12T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-04-12:/artsdi-er-shi-san-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 153 寻找旋转排序数组中的最小值&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/"&gt;原题&lt;/a&gt;&lt;/li&gt;

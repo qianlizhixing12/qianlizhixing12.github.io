@@ -50,8 +50,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="/artsdi-er-shi-san-zhou.html"><h1>ARTS第二十三周</h1></a>
-2021-04-12
+            <a href="/wan-cheng-leetcode300ti.html"><h1>完成leetcode300题</h1></a>
+2021-04-13
 
 <a class="url fn">qianlizhixing</a>
 
@@ -59,7 +59,40 @@
  
         </div>
         
-        <div><h2>Algorithm</h2>
+        <div><h3>完成leetcode300题</h3>
+<p><img src=".\img\leetcode 300.png" alt="leetcode 300" style="zoom: 25%;" /></p>
+<h4>刷题经过</h4>
+<p>二月之前都是断断续续在做题，二月因为后面的面试，在自习室刷了半个月，每天10到15道题节奏。</p>
+<p>二月后保持一天最少一道题，基本上是每日1题的题目，简单顺利就多做几道。</p>
+<h4>刷题收获</h4>
+<p>心理上不会害怕算法题。</p>
+<p>题目大致能想到知识点。</p>
+<p>直接的题目基本能写出答案。</p>
+<h4>持续改善</h4>
+<p>还没有形成在纸上画状态的习惯。</p>
+<p>比较急于看刷题数量，很多题不管是自己写出还是看题解，并没有彻底弄懂。</p>
+<p>刷题模板套路总结的少，难度小的题目还是凭感觉，难度大的题目还是手足无措。</p>
+<p>细节不够满意，变量控制有时啰嗦，其实还是逻辑不够清晰。</p>
+<h4>总之</h4>
+<p>不贪多，每日一题，力求彻底弄懂。用画图单元测试等多种形式，把思路文字化，能让别人看懂自己的题解。</p></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-er-shi-san-zhou.html"><h2>ARTS第二十三周</h2></a>
+        <div class= "well small"> 2021-04-12
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
 <p>leetcode 153 寻找旋转排序数组中的最小值</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/">原题</a></li>
@@ -80,243 +113,9 @@
 <ul>
 <li>创建临时方案的原因多种多样，临时方案成功的关键很简单，它是有用的</li>
 <li>临时解决方案会产生惯性，它们存在，最终是有用的并且被广泛接受的，所以不需要立即解决临时方案的弊端。每当必须决定什么行动最能增加价值时，就会有许多比适当集成临时解决方案更高的行动。为什么?因为它就在那里，它有效，它被接受。唯一的缺点是它不遵循所选择的标准和指导方针-除了少数利基市场，这并不被认为是一个重要的力量</li>
-<li>如果临时解决方案出现问题，可能会创建新的临时方案解决这个临时方案的问题</li>
-<li>当系统包含过多的临时解决方案时，其熵值或内部复杂性增加，可维护性降低；然而，首先问这个问题可能是错误的；记住，我们讨论的是一个解决方案，它可能不是你喜欢的解决方案——它不太可能是任何人喜欢的解决方案——但重做这个解决方案的动机很弱</li>
-<li>应该怎么做</li>
-<li>一开始就避免创建临时解决方案，回避在大多数地方都不起作用</li>
-<li>改变影响项目经理决策的力量</li>
-<li>让它保持原样</li>
-<li>克服临时解决方案的最佳方法是使它们成为多余的，提供一个更优雅和有用的解决方案</li>
-</ul>
-<h2>Tip</h2>
-<h3>调试开关与静态文件</h3>
-<blockquote>
-<p>https://stackoverflow.com/questions/5836674/why-does-debug-false-setting-make-my-django-static-files-access-fail</p>
-</blockquote>
-<ul>
-<li>
-<p>调试模式下(DEBUG=True)，默认提供静态文件服务</p>
-</li>
-<li>
-<p>生产模式下(DEBUG=False)，默认不提供静态文件服务</p>
-</li>
-<li>
-<p>由nginx,apache提供文件服务</p>
-</li>
-<li>
-<p>改变运行方式</p>
-<p><code>bash
-python manage.py runserver --insecure</code></p>
-</li>
-<li>
-<p>添加静态文件路由</p>
-<p>```python
-from django.views import static
-from django.conf import settings
-from django.conf.urls import url</p>
-<p>url(r'^static/(?P<path>.*)$',
-        static.serve, {'document_root': settings.STATIC_ROOT},
-        name='static'),
-```</p>
-</li>
-</ul>
-<h3>nginx+daphne部署异步django项目</h3>
-<blockquote>
-<p>https://www.upidev.com/tutoriels/set-up-a-django-async-project-with-daphne-nginx-on-ubuntu-18-04/</p>
-</blockquote>
-<p><img alt="django_with_daphne_nginx" src=".\img\django_with_daphne_nginx.png"></p>
-<p>请求响应链路图</p>
-<ol>
-<li>启动django</li>
-</ol>
-<p><code>bash
-   daphne --proxy-headers mydjango.asgi:application</code></p>
-<ol>
-<li>域名服务</li>
-</ol>
-<p><code>ini
-   # C:\Windows\System32\drivers\etc\hosts文件加一行
-   127.0.0.1       myspider.com</code></p>
-<ol>
-<li>配置nginx</li>
-</ol>
-<p>```nginx
-   # nginx.conf</p>
-<p>server {
-          listen 80;
-          server_name myspider.com;</p>
-<div class="highlight"><pre><span></span><code><span class="w">      </span><span class="n">charset</span><span class="w">     </span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">      </span><span class="n">client_max_body_size</span><span class="w"> </span><span class="mi">75</span><span class="n">M</span><span class="p">;</span><span class="w">   </span><span class="err">#</span><span class="w"> </span><span class="n">adjust</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">taste</span><span class="w"></span>
-
-<span class="w">      </span><span class="err">#</span><span class="w"> </span><span class="n">Django</span><span class="w"> </span><span class="n">media</span><span class="w"></span>
-<span class="w">      </span><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="k">static</span><span class="o">/</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">          </span><span class="k">alias</span><span class="w"> </span><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">myspider</span><span class="err">\</span><span class="n">mydjango</span><span class="err">\</span><span class="k">static</span><span class="err">\\</span><span class="p">;</span><span class="w"> </span>
-<span class="w">      </span><span class="err">}</span><span class="w"></span>
-
-<span class="w">      </span><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">         </span><span class="n">try_files</span><span class="w"> </span><span class="err">$</span><span class="n">uri</span><span class="w"> </span><span class="nv">@proxy_to_app</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="err">}</span><span class="w"></span>
-
-<span class="w">      </span><span class="n">location</span><span class="w"> </span><span class="nv">@proxy_to_app</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">proxy_pass</span><span class="w"> </span><span class="nl">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="err">:</span><span class="mi">8000</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">          </span><span class="n">proxy_http_version</span><span class="w"> </span><span class="mf">1.1</span><span class="p">;</span><span class="w"></span>
-<span class="w">          </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">Upgrade</span><span class="w"> </span><span class="err">$</span><span class="n">http_upgrade</span><span class="p">;</span><span class="w"></span>
-<span class="w">          </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="k">Connection</span><span class="w"> </span><span class="ss">&quot;upgrade&quot;</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">          </span><span class="n">proxy_redirect</span><span class="w"> </span><span class="k">off</span><span class="p">;</span><span class="w"></span>
-<span class="w">          </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="err">$</span><span class="k">host</span><span class="p">;</span><span class="w"></span>
-<span class="w">          </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">X</span><span class="o">-</span><span class="nc">Real</span><span class="o">-</span><span class="n">IP</span><span class="w"> </span><span class="err">$</span><span class="n">remote_addr</span><span class="p">;</span><span class="w"></span>
-<span class="w">          </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="k">For</span><span class="w"> </span><span class="err">$</span><span class="n">proxy_add_x_forwarded_for</span><span class="p">;</span><span class="w"></span>
-<span class="w">          </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="k">Host</span><span class="w"> </span><span class="err">$</span><span class="n">server_name</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="err">}</span><span class="w"></span>
-<span class="w">   </span><span class="err">}</span><span class="w"></span>
-</code></pre></div>
-
-
-<p>```</p>
-<h2>Share</h2>
-<blockquote>
-<p>数据采集比较全面的介绍</p>
-<p>https://lovelybear.blog.csdn.net/article/details/73927750</p>
-<p>https://www.zhihu.com/question/28168585</p>
-</blockquote>
-<h3>nginx反采集</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">fake_useragent</span> <span class="kn">import</span> <span class="n">UserAgent</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-
-<span class="k">def</span> <span class="nf">spider_run</span><span class="p">():</span>
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span>
-            <span class="s1">&#39;application/json;charset=UTF-8&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;Cookie&#39;</span><span class="p">:</span>
-            <span class="s1">&#39;csrftoken=IoItQ0o4Iuuej8EaMwihhCRVzLcCaNz7hxLOeGwOU3MsVI7GVQgrMgnjSRJ1F7gK; sessionid=k3hbungs0mpua2ensuey7kzfncwjg75o&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;Accept&#39;</span><span class="p">:</span>
-            <span class="s1">&#39;application/json, text/javascript, */*; q=0.01&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;Accept-Encoding&#39;</span><span class="p">:</span>
-            <span class="s1">&#39;gzip, deflate&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;Accept-Language&#39;</span><span class="p">:</span>
-            <span class="s1">&#39;zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7&#39;</span><span class="p">,</span>
-        <span class="c1">#&#39;User-Agent&#39;:</span>
-        <span class="c1">#    UserAgent(verify_ssl=False)[&#39;random&#39;],</span>
-        <span class="c1">#&#39;Referer&#39;:</span>
-        <span class="c1">#    &#39;http://myspider.com/gaokao/schoollist.html&#39;</span>
-    <span class="p">}</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
-        <span class="s2">&quot;updatedt&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-04-05&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;schoolkey&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">0</span>
-    <span class="p">})</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://myspider.com/api/gaokao/scoollist/get.do&#39;</span><span class="p">,</span>
-                             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
-                             <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
-                             <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">spider_run</span><span class="p">()</span>
-</code></pre></div>
-
-
-<ul>
-<li>未加任何反采集措施，返回200</li>
-</ul>
-<h4>禁止某些user-agent</h4>
-<div class="highlight"><pre><span></span><code><span class="c1">#forbidden UA</span>
-<span class="k">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span><span class="sr">*</span> <span class="s">(Python|Scrapy|Curl|HttpClient))</span>
-<span class="p">{</span>
-    <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-
-<ul>
-<li>
-<p>再次请求，返回403</p>
-</li>
-<li>
-<p>加上user_agent，正常返回200</p>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">fake_useragent</span> <span class="kn">import</span> <span class="n">UserAgent</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="n">UserAgent</span><span class="p">(</span><span class="n">verify_ssl</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;random&#39;</span><span class="p">]}</span>
-</code></pre></div>
-
-
-<h4>禁止某些method</h4>
-<div class="highlight"><pre><span></span><code><span class="c1">#forbidden not GET|HEAD|POST method access</span>
-<span class="k">if</span> <span class="s">(</span><span class="nv">$request_method</span> <span class="s">!~</span> <span class="s">^(GET|HEAD|POST)</span>$<span class="s">)</span>
-<span class="p">{</span>
-    <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-
-<h4>禁止访问频率</h4>
-<ul>
-<li>limit_req_zone 限制单位时间内的请求数，速率限制,采用的漏桶算法</li>
-<li>limit_req_conn 限制同一时间连接数，并发限制，根据源IP限制单用户并发访问的连接数</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">http</span> <span class="p">{</span>
-    <span class="kn">limit_conn_log_level</span> <span class="s">error</span><span class="p">;</span>
-    <span class="kn">limit_conn_status</span> <span class="mi">503</span><span class="p">;</span>
-    <span class="kn">limit_conn_zone</span> <span class="nv">$binary_remote_addr</span> <span class="s">zone=one:10m</span><span class="p">;</span>
-    <span class="kn">limit_conn_zone</span> <span class="nv">$server_name</span> <span class="s">zone=perserver:10m</span><span class="p">;</span>
-    <span class="kn">limit_req_zone</span> <span class="nv">$binary_remote_addr</span> <span class="s">zone=allips:10m</span>   <span class="s">rate=20r/s</span><span class="p">;</span>
-
-    <span class="kn">server</span> <span class="p">{</span>
-        <span class="kn">limit_conn</span>  <span class="no">on</span><span class="s">e</span>  <span class="mi">50</span><span class="p">;</span>                                              
-        <span class="kn">limit_conn</span> <span class="s">perserver</span> <span class="mi">1000</span><span class="p">;</span>
-        <span class="kn">limit_req</span>   <span class="s">zone=allips</span>  <span class="s">burst=5</span>  <span class="s">nodelay</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
-
-<h4>限制下载速度</h4>
-<div class="highlight"><pre><span></span><code><span class="k">location</span> <span class="s">/file</span> <span class="p">{</span> 
-       <span class="kn">limit_rate_after</span> <span class="mi">10m</span><span class="p">;</span> 
-       <span class="kn">limit_rate</span> <span class="mi">128k</span><span class="p">;</span> 
-<span class="p">}</span> 
-</code></pre></div>
-
-
-<h4>限制referers</h4>
-<ul>
-<li>valide_referers指令</li>
-<li>none允许缺失的头部访问(默认)</li>
-<li>blocked允许referer没有对应值</li>
-<li>server_names:表示一个或多个主机名称，myspider.com表示通过myspider.com访问referers，*表示任意host主机</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">valid_referers</span> <span class="s">server_names</span> <span class="s">myspider.com</span><span class="p">;</span>
-<span class="k">if</span> <span class="s">(</span><span class="nv">$invalid_referer</span><span class="s">)</span> <span class="p">{</span>
-    <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">if</span> <span class="s">(</span><span class="nv">$http_referer</span> <span class="p">~</span><span class="sr">*</span> <span class="s">&quot;要拦截的域名&quot;)</span><span class="p">{</span>
-    <span class="kn">return</span> <span class="mi">301</span> <span class="s">要跳转的域名</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-
-<ul>
-<li>
-<p>再次请求，返回403</p>
-</li>
-<li>
-<p>加上referers，正常返回200</p>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Referer&#39;</span><span class="p">:</span> <span class="s1">&#39;http://myspider.com/gaokao/schoollist.html&#39;</span><span class="p">}</span>
-</code></pre></div></div>
-        <hr />
-    </div>
-		
+<li>如果临时解决方案出现问题，可能会创建新的临时方案解决这个临时方案的问题 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-san-zhou.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -464,48 +263,6 @@ https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-sho
 <li>代码脆弱 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-zhou.html">read more</a></div>
     </div>	
 				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="/artsdi-shi-jiu-zhou.html"><h2>ARTS第十九周</h2></a>
-        <div class= "well small"> 2021-03-17
-
-<a class="url fn">qianlizhixing</a>
-
-
- </div>
-        <div class="summary"><h2>Algorithm</h2>
-<p>leetcode 138 复制带随机指针的链表</p>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/copy-list-with-random-pointer/">原题</a></li>
-<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/138.cpp">解题</a></li>
-</ul>
-<h2>Review</h2>
-<blockquote>
-<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_18/</p>
-</blockquote>
-<h3>持续学习</h3>
-<ul>
-<li>随着编程越来越普遍，全球化越来越深入，开发者需要持续不断学习以保持竞争力</li>
-<li>有些it公司会慷慨提供培训，以扩宽员工技能；有些公司不会抽出时间或金钱进行培训；开发者要对自己的生涯负责</li>
-<li>持续学习的途径</li>
-<li>阅读博客，书籍</li>
-<li>要深入一种技术，要手动写些代码</li>
-<li>要和顶尖导师工作，如果找不到，考虑换个工作</li>
-<li>阅读顶尖博主的博客和书籍</li>
-<li>了解使用的框架和库的原理源码，试着调试源码</li>
-<li>遇到问题，理清问题本质，查看Google上其他人的回答</li>
-<li>学习的更好方法，复述或教授别人；当别人向你提问，你更有动力；尝试加入讨论</li>
-<li>加入或创建你感兴趣的技术学习小组</li>
-<li>参加大会，或者查看大会演讲</li>
-<li>在代码上运行静态分析工具或者查看ide警告，理解它们</li>
-<li>遵循实用程序员的建议，每年学习一种新技术或工具，尝试当前的技术栈中使用 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-shi-jiu-zhou.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -514,6 +271,7 @@ https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-sho
     <li class=""><a href="/index2.html">2</a></li>
     <li class=""><a href="/index3.html">3</a></li>
     <li class=""><a href="/index4.html">4</a></li>
+    <li class=""><a href="/index5.html">5</a></li>
 
     <li class="next"><a href="/index2.html">Next &rarr;</a></li>
 
