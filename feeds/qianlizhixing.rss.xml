@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>千里之行 始于足下 - qianlizhixing</title><link>/</link><description></description><lastBuildDate>Tue, 13 Apr 2021 00:00:00 +0800</lastBuildDate><item><title>完成leetcode300题</title><link>/wan-cheng-leetcode300ti.html</link><description>&lt;h3&gt;完成leetcode300题&lt;/h3&gt;
+<rss version="2.0"><channel><title>千里之行 始于足下 - qianlizhixing</title><link>/</link><description></description><lastBuildDate>Mon, 19 Apr 2021 00:00:00 +0800</lastBuildDate><item><title>ARTS第二十四周</title><link>/artsdi-er-shi-si-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 179 最大数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/largest-number/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/179.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;字符串比较&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_57/&lt;/p&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_60/&lt;/p&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_61/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;消息传递在并行系统中带来更好的可伸缩性&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;几乎所有并发问题都与共享可变内存的使用有关:竞争条件、死锁、活锁等。答案似乎很明显:要么放弃并发性，要么回避共享内存&lt;/li&gt;
+&lt;li&gt;可以使用进程和消息传递，而不是使用线程和共享内存作为编程模型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;测试员是你的朋友&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;因为测试人员报告琐碎的问题，开发看起来很糟糕&lt;/li&gt;
+&lt;li&gt;因为测试人员的QC，客户没有让开发修复那些“小东西”所困扰而感到兴奋时，开发看起来很棒 …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 19 Apr 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-04-19:/artsdi-er-shi-si-zhou.html</guid><category>ARTS</category><category>命令行解析</category><category>python库</category><category>argparse</category><category>getopt</category></item><item><title>完成leetcode300题</title><link>/wan-cheng-leetcode300ti.html</link><description>&lt;h3&gt;完成leetcode300题&lt;/h3&gt;
 &lt;p&gt;&lt;img src=".\img\leetcode 300.png" alt="leetcode 300" style="zoom: 25%;" /&gt;&lt;/p&gt;
 &lt;h4&gt;刷题经过&lt;/h4&gt;
 &lt;p&gt;二月之前都是断断续续在做题，二月因为后面的面试，在自习室刷了半个月，每天10到15道题节奏。&lt;/p&gt;

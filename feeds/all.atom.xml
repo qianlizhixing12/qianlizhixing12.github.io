@@ -1,5 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>千里之行 始于足下</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2021-04-13T00:00:00+08:00</updated><entry><title>完成leetcode300题</title><link href="/wan-cheng-leetcode300ti.html" rel="alternate"></link><published>2021-04-13T00:00:00+08:00</published><updated>2021-04-13T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-04-13:/wan-cheng-leetcode300ti.html</id><content type="html">&lt;h3&gt;完成leetcode300题&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>千里之行 始于足下</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2021-04-19T00:00:00+08:00</updated><entry><title>ARTS第二十四周</title><link href="/artsdi-er-shi-si-zhou.html" rel="alternate"></link><published>2021-04-19T00:00:00+08:00</published><updated>2021-04-19T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-04-19:/artsdi-er-shi-si-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 179 最大数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/largest-number/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/179.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;字符串比较&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_57/&lt;/p&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_60/&lt;/p&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_61/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;消息传递在并行系统中带来更好的可伸缩性&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;几乎所有并发问题都与共享可变内存的使用有关:竞争条件、死锁、活锁等。答案似乎很明显:要么放弃并发性，要么回避共享内存&lt;/li&gt;
+&lt;li&gt;可以使用进程和消息传递，而不是使用线程和共享内存作为编程模型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;测试员是你的朋友&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;因为测试人员报告琐碎的问题，开发看起来很糟糕&lt;/li&gt;
+&lt;li&gt;因为测试人员的QC，客户没有让开发修复那些“小东西”所困扰而感到兴奋时，开发看起来很棒 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 179 最大数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/largest-number/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/179.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;字符串比较&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_57/&lt;/p&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_60/&lt;/p&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_61/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;消息传递在并行系统中带来更好的可伸缩性&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;几乎所有并发问题都与共享可变内存的使用有关:竞争条件、死锁、活锁等。答案似乎很明显:要么放弃并发性，要么回避共享内存&lt;/li&gt;
+&lt;li&gt;可以使用进程和消息传递，而不是使用线程和共享内存作为编程模型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;测试员是你的朋友&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;因为测试人员报告琐碎的问题，开发看起来很糟糕&lt;/li&gt;
+&lt;li&gt;因为测试人员的QC，客户没有让开发修复那些“小东西”所困扰而感到兴奋时，开发看起来很棒&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;部署二进制文件&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;构建或部署重写了部分代码，为每个目标环境生成定制的二进制文件，这是糟糕的&lt;/li&gt;
+&lt;li&gt;为生产环境从头开始重建，意味着无法证明生产环境中的版本是经过测试的版本&lt;/li&gt;
+&lt;li&gt;规则很简单:构建一个单独的二进制文件，在发行渠道的所有阶段识别并提升它。在每个目标环境中保留特定环境的细节。例如，将目标环境配置保存在组件容器、已知文件或路径中&lt;/li&gt;
+&lt;li&gt;设计上将应用程序的核心功能和特定于平台的功能分开&lt;/li&gt;
+&lt;li&gt;保持环境信息的版本化，环境信息应该与代码分开进行版本管理，因为它们将以不同的速率和不同的原因进行更改。一些团队使用分布式版本控制系统(如bazaar和git)来实现这一点，可以更容易地将生产环境中的更改(不可避免地会发生)推回存储库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Tip&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://www.w3school.com.cn/jsref/dom_obj_all.asp&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;刚好需要在某博客平台发布个文章，有图片，markdown格式&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Typora打草稿，图片稍大，生成img标签，在浏览器(chrome)中缩小25%，该博客平台未生效&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;html
+  &amp;lt;img src=".\img\aaa.png" style="zoom: 25%;" /&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用width属性，浏览器和该博客平台都生效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;html
+  &amp;lt;img src=".\img\aaa.png" id="3" width="25%" /&amp;gt;
+  &amp;lt;--或者!--&amp;gt;
+  &amp;lt;img src=".\img\aaa.png" id="4" style="width: 25%;" /&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用transform属性，浏览器和该博客平台都生效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;html
+  &amp;lt;--success!--&amp;gt;
+  &amp;lt;img src=".\img\aaa.png" id="2" style="transform: scale(0.4, 0.4);" /&amp;gt;
+  &amp;lt;--fail!--&amp;gt;
+  &amp;lt;img src=".\img\aaa.png" id="1" transform="scale(0.4, 0.4);" /&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;transform为什么不能width使用，只能放在style中，继续测试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;javascript
+  document.getElementById('1').style
+  //输出 CSSStyleDeclaration {alignContent: "", alignItems: "", alignSelf: "", alignmentBaseline: "", all: "", …}
+  document.getElementById('1').attributes
+  //输出 NamedNodeMap {0: src, 1: id, 2: transform, src: src, id: id, transform: transform, length: 3}&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;总结，element.attributes，element.getAttribute()，element.getAttributeNode()都是HtmlDom节点的属性相关操作，element.attributes.style也是一个属性，属性属于节点；element.style样式，不是所有属性都能影响样式，哈哈自己这样推理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Share(命令行解析)&lt;/h2&gt;
+&lt;h3&gt;sys.argv变量&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;sys.argv类型List[str]，就是普通的列表，sys.argv[0]运行的脚本&lt;/li&gt;
+&lt;li&gt;因为每个参数都是str，不能直接解析参数(例如--time=0)&lt;/li&gt;
+&lt;li&gt;每个参数用空白字符分割，参数包含空白符的用单引号或双引号分开&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 测试脚本&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;#命令 python test.py --timeout=0  on=true  -p 80  &amp;#39;wait false&amp;#39; &amp;quot;save out.xml&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#输出 [&amp;#39;test.py&amp;#39;, &amp;#39;--timeout=0&amp;#39;, &amp;#39;on=true&amp;#39;, &amp;#39;-p&amp;#39;, &amp;#39;80&amp;#39;, &amp;#39;wait false&amp;#39;, &amp;#39;save out.xml&amp;#39;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;argparse模块&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;基于optparse(不推荐使用)&lt;/li&gt;
+&lt;li&gt;帮助信息，附加信息更全面，推荐使用&lt;/li&gt;
+&lt;li&gt;使用ArgumentParser类解析参数，支持-p 80或-p=80格式，即用=号或空白符分割参数名和参数值&lt;/li&gt;
+&lt;li&gt;构造ArgumentParser对象后调用add_argument定义命令行参数，--完整参数名，-简写参数名，default默认值&lt;/li&gt;
+&lt;li&gt;调用parse_args返回Namespace类对象，用属性访问(.)获取参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 测试脚本&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;argparse&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ArgumentParser&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;multiprocessing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;cpu_count&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse_option&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# 构造ArgumentParser&lt;/span&gt;
+    &lt;span class="n"&gt;parser&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ArgumentParser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prog&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;argparse test&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;usage&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;info&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;get option from cmdline&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;prefix_chars&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;-&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# print(parser.prog, parser.usage, parser.description)&lt;/span&gt;
+    &lt;span class="c1"&gt;# 定义命令行参数&lt;/span&gt;
+    &lt;span class="n"&gt;parser&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_argument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;-n&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                        &lt;span class="s1"&gt;&amp;#39;--num&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                        &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                        &lt;span class="n"&gt;dest&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;number&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                        &lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;cpu_count&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+    &lt;span class="n"&gt;parser&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_argument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;-f&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;--fun&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ping&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;parser&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_argument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;-m&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;--mode&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;proc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;parser&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_argument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;-p&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;--port&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;parser&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_argument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;-w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;--save&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;parser&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse_args&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;parse_option&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;#命令 python test_argparse.py -n 300 -f tcp --mode thread -p 80&lt;/span&gt;
+&lt;span class="c1"&gt;#输出 Namespace(fun=&amp;#39;tcp&amp;#39;, mode=&amp;#39;thread&amp;#39;, number=300, port=&amp;#39;80&amp;#39;, save=None)&lt;/span&gt;
+&lt;span class="c1"&gt;#    300 tcp thread 80 None&lt;/span&gt;
+
+&lt;span class="c1"&gt;#命令 python test_argparse.py -n 300 -f tcp --mode thread -p=80&lt;/span&gt;
+&lt;span class="c1"&gt;#输出 Namespace(fun=&amp;#39;tcp&amp;#39;, mode=&amp;#39;thread&amp;#39;, number=300, port=&amp;#39;80&amp;#39;, save=None)&lt;/span&gt;
+&lt;span class="c1"&gt;#    300 tcp thread 80 None&lt;/span&gt;
+
+&lt;span class="c1"&gt;#命令 python test_argparse.py -n 300 -f tcp --mode thread -p 80 -timeout 120&lt;/span&gt;
+&lt;span class="c1"&gt;#输出 usage: info&lt;/span&gt;
+&lt;span class="c1"&gt;#    argparse test: error: unrecognized arguments: -timeout 120&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;getopt模块&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;使用形式接近c语言getopt函数&lt;/li&gt;
+&lt;li&gt;使用getopt.getopt(args=args, shortopts, longopts=[])初始化&lt;/li&gt;
+&lt;li&gt;args要解析的参数数组，通常为sys.argv[1:]&lt;/li&gt;
+&lt;li&gt;shortopts短参数(-t)，有冒号(:)选项必须有值(-t 100或-t100都可，-t=100解析为=100)，没有冒号选项不能有值&lt;/li&gt;
+&lt;li&gt;longopts长参数(--timeout)，有等号(=)选项必须有值(--t 100或--t100及--t=100都解析100)，没有等号选项不能有值&lt;/li&gt;
+&lt;li&gt;返回一个两元素元组，第一个元素(option, value)格式的列表，第二元素是没匹配的内容列表&lt;/li&gt;
+&lt;li&gt;遇到未匹配的立即返回，shortopts必须在longopts前，没有匹配的args&lt;/li&gt;
+&lt;li&gt;返回值没有属性访问(.)或字典访问([])方法，后期处理没有argparse方便&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;getopt&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse_option&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# 解析命令行&lt;/span&gt;
+    &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;argv&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;getopt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getopt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;shortopts&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;n:t:f&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;longopts&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;num&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;timeout&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;fun&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;mode&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;port=&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;save&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;parse_option&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:])&lt;/span&gt;
+
+&lt;span class="c1"&gt;#命令 python .\test_getopt.py -n 10 -t 120 -f 200 --save 500&lt;/span&gt;
+&lt;span class="c1"&gt;#输出 [(&amp;#39;-n&amp;#39;, &amp;#39;10&amp;#39;), (&amp;#39;-t&amp;#39;, &amp;#39;120&amp;#39;), (&amp;#39;-f&amp;#39;, &amp;#39;&amp;#39;)]&lt;/span&gt;
+&lt;span class="c1"&gt;#    [&amp;#39;200&amp;#39;, &amp;#39;--save&amp;#39;, &amp;#39;500&amp;#39;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;#命令 python .\test_getopt.py -n 10 -t 120 -f --save --port 300&lt;/span&gt;
+&lt;span class="c1"&gt;#输出 [(&amp;#39;-n&amp;#39;, &amp;#39;10&amp;#39;), (&amp;#39;-t&amp;#39;, &amp;#39;120&amp;#39;), (&amp;#39;-f&amp;#39;, &amp;#39;&amp;#39;), (&amp;#39;--save&amp;#39;, &amp;#39;&amp;#39;), (&amp;#39;--port&amp;#39;, &amp;#39;300&amp;#39;)]&lt;/span&gt;
+&lt;span class="c1"&gt;#    []&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;其他模块&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;click&lt;/li&gt;
+&lt;li&gt;fire&lt;/li&gt;
+&lt;li&gt;个人认为这两个库设计上，不是单纯为了解析命令行参数目的&lt;/li&gt;
+&lt;/ul&gt;</content><category term="ARTS"></category><category term="命令行解析"></category><category term="python库"></category><category term="argparse"></category><category term="getopt"></category></entry><entry><title>完成leetcode300题</title><link href="/wan-cheng-leetcode300ti.html" rel="alternate"></link><published>2021-04-13T00:00:00+08:00</published><updated>2021-04-13T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-04-13:/wan-cheng-leetcode300ti.html</id><content type="html">&lt;h3&gt;完成leetcode300题&lt;/h3&gt;
 &lt;p&gt;&lt;img src=".\img\leetcode 300.png" alt="leetcode 300" style="zoom: 25%;" /&gt;&lt;/p&gt;
 &lt;h4&gt;刷题经过&lt;/h4&gt;
 &lt;p&gt;二月之前都是断断续续在做题，二月因为后面的面试，在自习室刷了半个月，每天10到15道题节奏。&lt;/p&gt;
