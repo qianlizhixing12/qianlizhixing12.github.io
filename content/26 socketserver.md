@@ -140,7 +140,7 @@ if __name__ == '__main__':
 #### 处理请求详细
 
 - process_request先调用finish_request正常处理请求后，再调用shutdown_request关闭请求
-- finish_request调用创建时RequestHandlerClass类，创建实例处理请求，大多设计都将接受请求数据和处理请求数据分开到两个类，解耦
+- finish_request调用创建时RequestHandlerClass类，创建实例处理请求，大多设计都将处理连接和处理请求数据分开到两个类，解耦
 - process_request可以放在线程或进程中处理提高并发处理
 
 #### RequestHandler
