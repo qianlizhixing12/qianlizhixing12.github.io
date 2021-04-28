@@ -50,8 +50,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="/artsdi-er-shi-wu-zhou.html"><h1>ARTS第二十五周</h1></a>
-2021-04-26
+            <a href="/artsdi-er-shi-liu-zhou.html"><h1>ARTS第二十六周</h1></a>
+2021-05-03
 
 <a class="url fn">qianlizhixing</a>
 
@@ -60,6 +60,213 @@
         </div>
         
         <div><h2>Algorithm</h2>
+<p>leetcode 377 组合总和Ⅳ</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/combination-sum-iv/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/377.py">解题</a></li>
+<li>缓存中间结果，动态规划</li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_88/</p>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_90/</p>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_92/</p>
+</blockquote>
+<h3>Unix工具是你的朋友</h3>
+<ul>
+<li>ide以特定的语言为目标，Unix工具可以处理任何以文本形式出现的内容</li>
+<li>每年都会涌现出新的语言和符号，学习以Unix的方式工作是一项投资，而且会不断获得回报</li>
+<li>通过组合小型但通用的Unix工具就可以创建自己的命令</li>
+</ul>
+<h3>冗长的日志记录</h3>
+<ul>
+<li>过多的日志记录可能就像没有日志一样毫无用处</li>
+<li>对于许多系统，出现问题的第一个指示是将一条日志消息写入某个日志</li>
+<li>杂乱的日志表明一旦系统进入生产状态，系统将难以控制</li>
+</ul>
+<h3>程序员和测试人员协作时</h3>
+<ul>
+<li>在缺陷跟踪系统中来回发送bug所花费的时间更少</li>
+<li>更少的时间被浪费在试图找出某个东西到底是一个bug还是一个新特性上</li>
+<li>更多的时间被花在开发好软件以满足客户的期望上</li>
+<li>在开始编写代码之前，就有很多开始协作的机会</li>
+</ul>
+<h3>客户并不能总是理解自己所说的</h3>
+<ul>
+<li>我还从未见过一个顾客不太乐意告诉我他们想要什么——通常是非常详细的。问题是顾客并不总是告诉你全部的真相。他们通常不会撒谎，但他们是以客户的方式说话，而不是以开发人员的方式。他们使用自己的术语和上下文。他们遗漏了重要的细节。他们会假设你已经在他们公司工作了20年，就像他们一样。这是由于许多客户实际上不知道他们想要什么在第一个地方!有些人可能对“大局”有所了解，但他们很少能够有效地沟通愿景的细节。其他人可能对完整的愿景不太重视，但他们知道自己不想要什么。那么，您怎么可能将一个软件项目交付给那些没有告诉您他们想要什么的全部真相的人呢?这是相当简单的。多和他们互动。</li>
+<li>尽早挑战你的客户，并经常挑战他们。不要简单地重申他们对你说的话。记住:他们的意思不是他们告诉你的。我经常这样做，在与他们交谈时，我和他们交换词语，判断他们的反应。你会惊讶地发现，“客户”这个术语有多少次与“客户”有完全不同的含义。然而，告诉你他想要在他的软件项目中做什么的人会交替使用这些术语，并希望你跟踪他说的是哪一个。你会感到困惑，你编写的软件也会受到影响。</li>
+<li>在你决定了解客户的需求之前，和他们多次讨论一些话题。试着和他们重复两三次这个问题。和他们谈谈刚刚发生在你谈论的话题之前或之后的事情，以获得更好的背景。如果可能的话，让很多人在不同的对话中告诉你同一个话题。他们几乎总是会告诉你不同的故事，而这些故事将揭示独立但相关的事实。两个人告诉你相同的话题经常会互相矛盾。你成功的最好机会是在你开始你的超级复杂的软件制作之前消除差异。</li>
+<li>在对话中使用视觉辅助。这可以像在会议中使用白板一样简单，也可以像在设计阶段早期创建视觉模型那样简单，也可以像制作功能原型那样复杂。众所周知，在谈话中使用视觉辅助可以延长我们的注意力持续时间，增加信息的留存率。利用这一事实，为你的项目成功做好准备。</li>
+<li>在过去的生活中，我是一个团队的“多媒体程序员”，制作的项目都很耀眼。我们的一个客户详细描述了他们对项目外观和感觉的想法。在设计会议上讨论的一般配色方案表明了展示的黑色背景。我们以为已经搞定了。图形设计师团队开始制作数百个分层的图形文件。大量的时间都花在了最终产品的塑造上。在我们向客户展示我们的劳动成果的那一天，一个令人吃惊的发现出现了。当她看到这个产品时，她对背景颜色的准确描述是“当我说黑色时，我指的是白色。”所以，你看，它永远不会像黑与白那样清晰。</li>
+</ul>
+<h2>Tip</h2>
+<h3>为什么要进行 URI 编码</h3>
+<ul>
+<li>传递数据中，如果存在用作分隔符的保留字符怎么办？</li>
+<li>对可能产生歧义性的数据编码</li>
+<li>不在 ASCII 码范围内的字符</li>
+<li>ASCII 码中不可显示的字符</li>
+<li>URI 中规定的保留字符</li>
+<li>不安全字符（传输环节中可能会被不正确处理），如空格、引号、尖括号等</li>
+</ul>
+<h3>保留字符与非保留字符</h3>
+<ul>
+<li>保留字符</li>
+<li>reserved = gen-delims / sub-delims<ul>
+<li>gen-delims = ":" / "/" / "?" / "#" / "[" / "]" / "@"</li>
+<li>sub-delims = "!" / "$" / "&amp;" / "'" / "(" / ")" / "*" / "+" / "," / ";" / "="</li>
+</ul>
+</li>
+<li>非保留字符</li>
+<li>unreserved = ALPHA / DIGIT / "-" / "." / "_" / "~"<ul>
+<li>ALPHA: %41-%5A and %61-%7A</li>
+<li>DIGIT: %30-%39</li>
+<li>-: %2D .: %2E _: %5F</li>
+<li>~: %7E，某些实现将其认为保留字符</li>
+</ul>
+</li>
+</ul>
+<h3>百分号编码的方式</h3>
+<ul>
+<li>pct-encoded = "%" HEXDIG HEXDIG</li>
+<li>US-ASCII：128 个字符（95 个可显示字符，33 个不可显示字符）</li>
+<li>非ASCII码字符（例如中文）：建议先 UTF8 编码，再 US-ASCII 编码</li>
+<li>对URI合法字符，编码与不编码是等价的</li>
+</ul>
+<h2>Share(socketserver源码分析)</h2>
+<p>socketserver用于建立服务端，讨论TCPServer，一步步简化代码，分析源码</p>
+<h4>建立连接</h4>
+<ul>
+<li>__init__，server_bind，server_activate对应打开套接字，绑定ip和port，监听端口</li>
+</ul>
+<h4>关闭连接</h4>
+<ul>
+<li>handle_request处理一段请求请求后，关闭连接</li>
+<li>serve_forever启动监听，采用多路复用提高吞吐量，shutdown用来关闭连接；serve_forever阻断当前线程，监听selector，shutdown必须在另一个线程设置__shutdown_request，两个线程采用threading.Event通信</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">service</span> <span class="k">as</span> <span class="nn">socketserver</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">socket</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;run begin&#39;</span><span class="p">)</span>
+    <span class="n">socket</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;run end&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">shutdown</span><span class="p">(</span><span class="n">socket</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shutdown begin&#39;</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shutdown exec&#39;</span><span class="p">)</span>
+    <span class="n">socket</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shutdown end&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">socket</span> <span class="o">=</span> <span class="n">socketserver</span><span class="o">.</span><span class="n">TCPServer</span><span class="p">((</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="mi">8081</span><span class="p">),</span> <span class="n">socketserver</span><span class="o">.</span><span class="n">BaseRequestHandler</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+        <span class="n">pool</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">socket</span><span class="p">)</span>
+        <span class="n">pool</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">shutdown</span><span class="p">,</span> <span class="n">socket</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># 输出</span>
+<span class="c1"># run begin</span>
+<span class="c1"># shutdown begin</span>
+<span class="c1"># shutdown exec</span>
+<span class="c1"># run end</span>
+<span class="c1"># shutdown end</span>
+</code></pre></div>
+
+
+<h4>处理请求</h4>
+<ul>
+<li>从selector接受到信号后，调用_handle_request_noblock处理连接请求</li>
+<li>_handle_request_noblock调用get_request(连接可能是tcp或udp)获取请求数据</li>
+<li>_handle_request_noblock调用process_request实际处理请求，失败时调用handle_error，shutdown_request关闭请求</li>
+</ul>
+<h4>处理请求详细</h4>
+<ul>
+<li>process_request先调用finish_request正常处理请求后，再调用shutdown_request关闭请求</li>
+<li>finish_request调用创建时RequestHandlerClass类，创建实例处理请求，大多设计都将接受请求数据和处理请求数据分开到两个类，解耦</li>
+<li>process_request可以放在线程或进程中处理提高并发处理</li>
+</ul>
+<h4>RequestHandler</h4>
+<ul>
+<li>BaseRequestHandler流程很清晰在构造中__init__中执行setup，handle，finish，执行完即销毁</li>
+<li>默认提供BaseRequestHandler及子类的handle没有处理过程，自己必须实现</li>
+<li>实现一个简单http请求返回demo</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 服务端</span>
+<span class="kn">import</span> <span class="nn">service</span> <span class="k">as</span> <span class="nn">socketserver</span>
+
+
+<span class="k">class</span> <span class="nc">HttpRequestHandle</span><span class="p">(</span><span class="n">socketserver</span><span class="o">.</span><span class="n">StreamRequestHandler</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">+=</span> <span class="sa">b</span><span class="s1">&#39;ok&#39;</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;HTTP/1.1 200 OK</span><span class="se">\r\n</span><span class="s1">content-type: application/json</span><span class="se">\r\n</span><span class="s1">date: Wed, 28 Apr 2021 16:20:04 GMT</span><span class="se">\r\n</span><span class="s1">server: socketserver</span><span class="se">\r\n\r\n</span><span class="s1">{&quot;code&quot;:&quot;0000&quot;,&quot;message&quot;:&quot;ok&quot;,&quot;data&quot;:</span><span class="si">{}</span><span class="s1">}&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">service_demo</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;service begin&#39;</span><span class="p">)</span>
+    <span class="n">socket</span> <span class="o">=</span> <span class="n">socketserver</span><span class="o">.</span><span class="n">TCPServer</span><span class="p">((</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="mi">8081</span><span class="p">),</span> <span class="n">HttpRequestHandle</span><span class="p">)</span>
+    <span class="n">socket</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;service end&#39;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">service_demo</span><span class="p">()</span>
+
+<span class="c1"># 客户端</span>
+<span class="kn">import</span> <span class="nn">http.client</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">client_demo</span><span class="p">():</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPConnection</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">8081</span><span class="p">)</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;test_head&#39;</span><span class="p">:</span> <span class="s1">&#39;nxx&#39;</span><span class="p">}</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/index.html&#39;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="n">respnese</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">respnese</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">client_demo</span><span class="p">()</span>
+
+
+<span class="c1"># 服务端输出</span>
+<span class="c1"># service begin</span>
+<span class="c1"># b&#39;GET /index.html HTTP/1.1\r\nHost: 127.0.0.1:8081\r\nAccept-Encoding: identity\r\ntest_head: nxx\r\n\r\n&#39;</span>
+
+<span class="c1"># 客户端输出</span>
+<span class="c1"># {&#39;code&#39;: &#39;0000&#39;, &#39;message&#39;: &#39;ok&#39;, &#39;data&#39;: {}}</span>
+</code></pre></div></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-er-shi-wu-zhou.html"><h2>ARTS第二十五周</h2></a>
+        <div class= "well small"> 2021-04-26
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
 <p>leetcode 220 存在重复元素III</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/contains-duplicate-iii/">原题</a></li>
@@ -82,193 +289,9 @@
 <h3>结对编程</h3>
 <ul>
 <li>作为一名团队成员，要对没有比你有经验的开发者有耐心</li>
-<li>直面你对被更熟练的开发人员吓倒的恐惧，要意识到每个人都是不同的，并重视这一点</li>
-<li>了解他团队成员的长处和短处，能从同事身上学到东西</li>
-</ul>
-<h3>版本控制</h3>
-<ul>
-<li>版本控制之下，可以跟踪历史，查看谁编写了什么代码</li>
-<li>可以毫无顾虑地进行大胆的代码更改</li>
-<li>将项目的所有资产置于版本控制之下，除了源代码，还包括文档、工具、构建脚本、测试用例、图片，库等</li>
-<li>在单独的操作中提交每个逻辑更改，将许多更改集中在一次提交中，以后很难将它们分开</li>
-<li>每个提交都附带一条解释信息，至少要简洁地描述您所更改的内容</li>
-<li>避免提交会破坏项目构建的代码，否则您将不受项目其他开发人员的欢迎</li>
-</ul>
-<h2>Tip(dataclass)</h2>
-<ul>
-<li>python3去掉了__cmp__魔术方法，使用__eq__和__lt__替代</li>
-<li>dataclass marshmallow pydantic都实现了ORM功能</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">PriorityQueue</span>
-
-
-<span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
-
-    <span class="k">def</span> <span class="nf">__cmp__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
-
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="si">}</span><span class="s1">&#39;</span>
-
-
-<span class="k">class</span> <span class="nc">NodeCmp</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
-
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
-
-    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
-
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="si">}</span><span class="s1">&#39;</span>
-
-
-<span class="nd">@dataclass</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">NodeDate</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="n">value</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">index</span><span class="p">:</span> <span class="nb">int</span>
-
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
-    <span class="n">q</span> <span class="o">=</span> <span class="n">PriorityQueue</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-        <span class="c1"># q.put(cls(i, num))</span>
-        <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">cls</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">q</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
-    <span class="n">obj</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="s1">&#39;sss&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
-    <span class="c1"># main(nums, Node)</span>
-    <span class="c1"># TypeError: &#39;&lt;&#39; not supported between instances of &#39;Node&#39; and &#39;Node&#39;</span>
-    <span class="c1"># main(nums, NodeCmp)</span>
-    <span class="n">main</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">NodeDate</span><span class="p">)</span>
-</code></pre></div>
-
-
-<h2>Share(socket编程)</h2>
-<ul>
-<li>socket比较底层，在网络通信中属于网络层(IP/TCP协议)</li>
-<li>套接字ip:port标识会话双方</li>
-<li>Unix一切皆文件，打开套接字类似打开文件</li>
-</ul>
-<h3>服务端</h3>
-<ul>
-<li>打开套接字，指定协议簇(相当约定使用哪种语言)</li>
-<li>绑定ip和port，指定身份</li>
-<li>准备监听port端口</li>
-<li>接受来自port端口的连接请求(阻断)</li>
-<li>在连接上接受发送数据</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">socket</span>
-<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span><span class="p">,</span> <span class="n">ProcessPoolExecutor</span>
-
-
-<span class="k">def</span> <span class="nf">init_server</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
-    <span class="c1"># pool = ThreadPoolExecutor(max_workers=4)</span>
-    <span class="n">pool</span> <span class="o">=</span> <span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-    <span class="c1"># socket.AF_INET, socket.SOCK_STREAM 协议</span>
-    <span class="n">server</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># 绑定套接字</span>
-        <span class="n">server</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
-        <span class="c1"># 监听</span>
-        <span class="n">server</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">conn</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-            <span class="c1"># todo 单独放在一个地方处理该对话(线程等)，不阻断其他连接</span>
-            <span class="n">pool</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">handle_session</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;error </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
-    <span class="k">finally</span><span class="p">:</span>
-        <span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="n">pool</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
-
-
-<span class="k">def</span> <span class="nf">handle_session</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
-    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="c1">#接收数据</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
-        <span class="c1"># ?判断客户端是否关闭连接</span>
-        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;recive </span><span class="si">{</span><span class="n">addr</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="c1">#发送数据</span>
-            <span class="n">conn</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">break</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">init_server</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">(),</span> <span class="mi">8888</span><span class="p">)</span>
-</code></pre></div>
-
-
-<h3>客户端</h3>
-<ul>
-<li>打开套接字，指定服务端相同协议簇(使用语言)</li>
-<li>客户端主动发消息，服务端被动应答，没必要指定客户端绑定的接口，系统随机分配</li>
-<li>主动建立连接，指定服务端ip和port</li>
-<li>在连接上发送接受数据</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">socket</span>
-<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ProcessPoolExecutor</span>
-
-
-<span class="k">def</span> <span class="nf">init_client</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
-    <span class="n">client</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
-        <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;id:</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1"> msg:hello&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;recv:&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-        <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;id:</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1"> msg:world&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;recv:&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;error </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
-    <span class="k">finally</span><span class="p">:</span>
-        <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="k">with</span> <span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
-        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
-            <span class="n">pool</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">init_client</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">(),</span> <span class="mi">8888</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
-</code></pre></div>
-
-
-<h3>demo输出</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># 客户端输出</span>
-recv: ID:1 MSG:HELLO
-recv: ID:2 MSG:HELLO
-recv: ID:1 MSG:WORLD
-recv: ID:2 MSG:WORLD
-recv: ID:3 MSG:HELLO
-recv: ID:3 MSG:WORLD
-
-<span class="c1">#服务端输出</span>
-recive <span class="o">(</span><span class="s1">&#39;192.168.3.86&#39;</span>, <span class="m">18384</span><span class="o">)</span>: id:1 msg:hello
-recive <span class="o">(</span><span class="s1">&#39;192.168.3.86&#39;</span>, <span class="m">18385</span><span class="o">)</span>: id:2 msg:hellorecive <span class="o">(</span><span class="s1">&#39;192.168.3.86&#39;</span>, <span class="m">18384</span><span class="o">)</span>: id:1 msg:world
-
-recive <span class="o">(</span><span class="s1">&#39;192.168.3.86&#39;</span>, <span class="m">18385</span><span class="o">)</span>: id:2 msg:world
-recive <span class="o">(</span><span class="s1">&#39;192.168.3.86&#39;</span>, <span class="m">18398</span><span class="o">)</span>: id:3 msg:hello
-recive <span class="o">(</span><span class="s1">&#39;192.168.3.86&#39;</span>, <span class="m">18398</span><span class="o">)</span>: id:3 msg:world
-</code></pre></div></div>
-        <hr />
-    </div>
-		
+<li>直面你对被更熟练的开发人员吓倒的恐惧，要意识到每个人都是不同的 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-wu-zhou.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -398,44 +421,6 @@ recive <span class="o">(</span><span class="s1">&#39;192.168.3.86&#39;</span>, <
 <p>性格测试和HR面，正常都能过吧，我也过了。跳槽是一个双向选择过程，性格测试和HR面注意不要故意’装好‘，反而会前后矛盾，网上也有小部分挂在这一关了。</p>
 <p>技术一面，本以为同在杭州，应该会到公司面试，结果是zoom视频面试。编程语言本身的问题回答的还可以，但是操作系统相关的感觉回答的很差，手撕算法编程也没有搞出来。面试官挺好，后面一直说很多人当面都写不出来，没关系。</p>
 <p>本以为技术一面挂掉了，后面又接到技术二面通知，定的时间不好，周六早上九点。技术细节答得还可以吧，设计能力我不知道怎么表达。出现了一个比较尴尬的情况，我其实是面试python岗位，但笔试的时候用了c++解题，后面面试官认为应聘c++岗位。面试官之前应该没看过简历，上来先让手撕算法编程题，没做出来。后面还有其他应聘者在后面排队 …</p> <a class="btn btn-info xsmall" href="/wo-tiao-liao-ge-ji-mo.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="/artsdi-er-shi-er-zhou.html"><h2>ARTS第二十二周</h2></a>
-        <div class= "well small"> 2021-04-05
-
-<a class="url fn">qianlizhixing</a>
-
-
- </div>
-        <div class="summary"><h2>Algorithm</h2>
-<p>leetcode 面试题17.21 直方图的水量</p>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/volume-of-histogram-lcci/">原题</a></li>
-<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/17.21.py">解题</a></li>
-<li>单调栈</li>
-<li>双指针</li>
-</ul>
-<h2>Review</h2>
-<blockquote>
-<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_41/
-https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_42/
-https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_43/</p>
-</blockquote>
-<h3>进程间通信影响应用程序响应时间</h3>
-<ul>
-<li>数据结构和算法，在某些情况下可能会对性能产生影响，但在现代多层企业应用程序中不太可能主导性能</li>
-<li>远程进程间通信的数量通常对性能占主导地位，每个远程进程间通信都会对总体响应时间造成一些不可忽略的延迟，这些影响会累积起来，特别是当它们依次发生时</li>
-<li>应用节俭原则，优化流程之间的接口，以便以最小的交互量交换手边正确的数据</li>
-<li>在可能的情况下并行处理进程间通信，这样总体响应时间主要由延迟时间最长的IPC驱动</li>
-<li>缓存以前的ipc的结果，这样将来的ipc就可以通过使用本地缓存来避免</li>
-<li>无论是通过缓存 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-er-zhou.html">read more</a></div>
     </div>	
 				
 <div class="pagination">

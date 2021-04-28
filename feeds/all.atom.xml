@@ -1,5 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>千里之行 始于足下</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2021-04-26T00:00:00+08:00</updated><entry><title>ARTS第二十五周</title><link href="/artsdi-er-shi-wu-zhou.html" rel="alternate"></link><published>2021-04-26T00:00:00+08:00</published><updated>2021-04-26T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-04-26:/artsdi-er-shi-wu-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>千里之行 始于足下</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2021-05-03T00:00:00+08:00</updated><entry><title>ARTS第二十六周</title><link href="/artsdi-er-shi-liu-zhou.html" rel="alternate"></link><published>2021-05-03T00:00:00+08:00</published><updated>2021-05-03T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-05-03:/artsdi-er-shi-liu-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 377 组合总和Ⅳ&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/combination-sum-iv/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/377.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;缓存中间结果，动态规划&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_88/&lt;/p&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_90/&lt;/p&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_92/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Unix工具是你的朋友&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;ide以特定的语言为目标，Unix工具可以处理任何以文本形式出现的内容&lt;/li&gt;
+&lt;li&gt;每年都会涌现出新的语言和符号，学习以Unix的方式工作是一项投资，而且会不断获得回报&lt;/li&gt;
+&lt;li&gt;通过组合小型但通用的Unix工具就可以创建自己的命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;冗长的日志记录&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;过多的日志记录可能就像没有日志一样毫无用处&lt;/li&gt;
+&lt;li&gt;对于许多系统，出现问题的第一个指示是将一条日志消息写入某个日志&lt;/li&gt;
+&lt;li&gt;杂乱的日志表明一旦系统进入生产状态，系统将难以控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;程序员和测试人员协作时&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;在缺陷跟踪系统中来回发送bug所花费的时间更少&lt;/li&gt;
+&lt;li&gt;更少的时间被浪费在试图找出某个东西到底是一个bug还是一个新特性上&lt;/li&gt;
+&lt;li&gt;更多的时间被花在开发好软件以满足客户的期望上 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 377 组合总和Ⅳ&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/combination-sum-iv/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/377.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;缓存中间结果，动态规划&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_88/&lt;/p&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_90/&lt;/p&gt;
+&lt;p&gt;https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_92/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Unix工具是你的朋友&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;ide以特定的语言为目标，Unix工具可以处理任何以文本形式出现的内容&lt;/li&gt;
+&lt;li&gt;每年都会涌现出新的语言和符号，学习以Unix的方式工作是一项投资，而且会不断获得回报&lt;/li&gt;
+&lt;li&gt;通过组合小型但通用的Unix工具就可以创建自己的命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;冗长的日志记录&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;过多的日志记录可能就像没有日志一样毫无用处&lt;/li&gt;
+&lt;li&gt;对于许多系统，出现问题的第一个指示是将一条日志消息写入某个日志&lt;/li&gt;
+&lt;li&gt;杂乱的日志表明一旦系统进入生产状态，系统将难以控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;程序员和测试人员协作时&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;在缺陷跟踪系统中来回发送bug所花费的时间更少&lt;/li&gt;
+&lt;li&gt;更少的时间被浪费在试图找出某个东西到底是一个bug还是一个新特性上&lt;/li&gt;
+&lt;li&gt;更多的时间被花在开发好软件以满足客户的期望上&lt;/li&gt;
+&lt;li&gt;在开始编写代码之前，就有很多开始协作的机会&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;客户并不能总是理解自己所说的&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;我还从未见过一个顾客不太乐意告诉我他们想要什么——通常是非常详细的。问题是顾客并不总是告诉你全部的真相。他们通常不会撒谎，但他们是以客户的方式说话，而不是以开发人员的方式。他们使用自己的术语和上下文。他们遗漏了重要的细节。他们会假设你已经在他们公司工作了20年，就像他们一样。这是由于许多客户实际上不知道他们想要什么在第一个地方!有些人可能对“大局”有所了解，但他们很少能够有效地沟通愿景的细节。其他人可能对完整的愿景不太重视，但他们知道自己不想要什么。那么，您怎么可能将一个软件项目交付给那些没有告诉您他们想要什么的全部真相的人呢?这是相当简单的。多和他们互动。&lt;/li&gt;
+&lt;li&gt;尽早挑战你的客户，并经常挑战他们。不要简单地重申他们对你说的话。记住:他们的意思不是他们告诉你的。我经常这样做，在与他们交谈时，我和他们交换词语，判断他们的反应。你会惊讶地发现，“客户”这个术语有多少次与“客户”有完全不同的含义。然而，告诉你他想要在他的软件项目中做什么的人会交替使用这些术语，并希望你跟踪他说的是哪一个。你会感到困惑，你编写的软件也会受到影响。&lt;/li&gt;
+&lt;li&gt;在你决定了解客户的需求之前，和他们多次讨论一些话题。试着和他们重复两三次这个问题。和他们谈谈刚刚发生在你谈论的话题之前或之后的事情，以获得更好的背景。如果可能的话，让很多人在不同的对话中告诉你同一个话题。他们几乎总是会告诉你不同的故事，而这些故事将揭示独立但相关的事实。两个人告诉你相同的话题经常会互相矛盾。你成功的最好机会是在你开始你的超级复杂的软件制作之前消除差异。&lt;/li&gt;
+&lt;li&gt;在对话中使用视觉辅助。这可以像在会议中使用白板一样简单，也可以像在设计阶段早期创建视觉模型那样简单，也可以像制作功能原型那样复杂。众所周知，在谈话中使用视觉辅助可以延长我们的注意力持续时间，增加信息的留存率。利用这一事实，为你的项目成功做好准备。&lt;/li&gt;
+&lt;li&gt;在过去的生活中，我是一个团队的“多媒体程序员”，制作的项目都很耀眼。我们的一个客户详细描述了他们对项目外观和感觉的想法。在设计会议上讨论的一般配色方案表明了展示的黑色背景。我们以为已经搞定了。图形设计师团队开始制作数百个分层的图形文件。大量的时间都花在了最终产品的塑造上。在我们向客户展示我们的劳动成果的那一天，一个令人吃惊的发现出现了。当她看到这个产品时，她对背景颜色的准确描述是“当我说黑色时，我指的是白色。”所以，你看，它永远不会像黑与白那样清晰。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Tip&lt;/h2&gt;
+&lt;h3&gt;为什么要进行 URI 编码&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;传递数据中，如果存在用作分隔符的保留字符怎么办？&lt;/li&gt;
+&lt;li&gt;对可能产生歧义性的数据编码&lt;/li&gt;
+&lt;li&gt;不在 ASCII 码范围内的字符&lt;/li&gt;
+&lt;li&gt;ASCII 码中不可显示的字符&lt;/li&gt;
+&lt;li&gt;URI 中规定的保留字符&lt;/li&gt;
+&lt;li&gt;不安全字符（传输环节中可能会被不正确处理），如空格、引号、尖括号等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;保留字符与非保留字符&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;保留字符&lt;/li&gt;
+&lt;li&gt;reserved = gen-delims / sub-delims&lt;ul&gt;
+&lt;li&gt;gen-delims = ":" / "/" / "?" / "#" / "[" / "]" / "@"&lt;/li&gt;
+&lt;li&gt;sub-delims = "!" / "$" / "&amp;amp;" / "'" / "(" / ")" / "*" / "+" / "," / ";" / "="&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;非保留字符&lt;/li&gt;
+&lt;li&gt;unreserved = ALPHA / DIGIT / "-" / "." / "_" / "~"&lt;ul&gt;
+&lt;li&gt;ALPHA: %41-%5A and %61-%7A&lt;/li&gt;
+&lt;li&gt;DIGIT: %30-%39&lt;/li&gt;
+&lt;li&gt;-: %2D .: %2E _: %5F&lt;/li&gt;
+&lt;li&gt;~: %7E，某些实现将其认为保留字符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;百分号编码的方式&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;pct-encoded = "%" HEXDIG HEXDIG&lt;/li&gt;
+&lt;li&gt;US-ASCII：128 个字符（95 个可显示字符，33 个不可显示字符）&lt;/li&gt;
+&lt;li&gt;非ASCII码字符（例如中文）：建议先 UTF8 编码，再 US-ASCII 编码&lt;/li&gt;
+&lt;li&gt;对URI合法字符，编码与不编码是等价的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Share(socketserver源码分析)&lt;/h2&gt;
+&lt;p&gt;socketserver用于建立服务端，讨论TCPServer，一步步简化代码，分析源码&lt;/p&gt;
+&lt;h4&gt;建立连接&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;__init__，server_bind，server_activate对应打开套接字，绑定ip和port，监听端口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;关闭连接&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;handle_request处理一段请求请求后，关闭连接&lt;/li&gt;
+&lt;li&gt;serve_forever启动监听，采用多路复用提高吞吐量，shutdown用来关闭连接；serve_forever阻断当前线程，监听selector，shutdown必须在另一个线程设置__shutdown_request，两个线程采用threading.Event通信&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;service&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;socketserver&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;concurrent.futures&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ThreadPoolExecutor&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;run begin&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;serve_forever&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;run end&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;shutdown&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;shutdown begin&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;shutdown exec&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shutdown&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;shutdown end&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;socketserver&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TCPServer&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;0.0.0.0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8081&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;socketserver&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BaseRequestHandler&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;ThreadPoolExecutor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;submit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;submit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shutdown&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 输出&lt;/span&gt;
+&lt;span class="c1"&gt;# run begin&lt;/span&gt;
+&lt;span class="c1"&gt;# shutdown begin&lt;/span&gt;
+&lt;span class="c1"&gt;# shutdown exec&lt;/span&gt;
+&lt;span class="c1"&gt;# run end&lt;/span&gt;
+&lt;span class="c1"&gt;# shutdown end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;处理请求&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;从selector接受到信号后，调用_handle_request_noblock处理连接请求&lt;/li&gt;
+&lt;li&gt;_handle_request_noblock调用get_request(连接可能是tcp或udp)获取请求数据&lt;/li&gt;
+&lt;li&gt;_handle_request_noblock调用process_request实际处理请求，失败时调用handle_error，shutdown_request关闭请求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;处理请求详细&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;process_request先调用finish_request正常处理请求后，再调用shutdown_request关闭请求&lt;/li&gt;
+&lt;li&gt;finish_request调用创建时RequestHandlerClass类，创建实例处理请求，大多设计都将接受请求数据和处理请求数据分开到两个类，解耦&lt;/li&gt;
+&lt;li&gt;process_request可以放在线程或进程中处理提高并发处理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;RequestHandler&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;BaseRequestHandler流程很清晰在构造中__init__中执行setup，handle，finish，执行完即销毁&lt;/li&gt;
+&lt;li&gt;默认提供BaseRequestHandler及子类的handle没有处理过程，自己必须实现&lt;/li&gt;
+&lt;li&gt;实现一个简单http请求返回demo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 服务端&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;service&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;socketserver&lt;/span&gt;
+
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;HttpRequestHandle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;socketserver&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;StreamRequestHandler&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;handle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;recv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ok&amp;#39;&lt;/span&gt;
+        &lt;span class="n"&gt;resp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;HTTP/1.1 200 OK&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s1"&gt;content-type: application/json&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s1"&gt;date: Wed, 28 Apr 2021 16:20:04 GMT&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s1"&gt;server: socketserver&lt;/span&gt;&lt;span class="se"&gt;\r\n\r\n&lt;/span&gt;&lt;span class="s1"&gt;{&amp;quot;code&amp;quot;:&amp;quot;0000&amp;quot;,&amp;quot;message&amp;quot;:&amp;quot;ok&amp;quot;,&amp;quot;data&amp;quot;:&lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s1"&gt;}&amp;#39;&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;service_demo&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;service begin&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;socketserver&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TCPServer&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;0.0.0.0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8081&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;HttpRequestHandle&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;serve_forever&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;service end&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;service_demo&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 客户端&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;http.client&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;client_demo&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HTTPConnection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8081&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;headers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;test_head&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;nxx&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;GET&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/index.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;respnese&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getresponse&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loads&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;respnese&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()))&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;client_demo&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# 服务端输出&lt;/span&gt;
+&lt;span class="c1"&gt;# service begin&lt;/span&gt;
+&lt;span class="c1"&gt;# b&amp;#39;GET /index.html HTTP/1.1\r\nHost: 127.0.0.1:8081\r\nAccept-Encoding: identity\r\ntest_head: nxx\r\n\r\n&amp;#39;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 客户端输出&lt;/span&gt;
+&lt;span class="c1"&gt;# {&amp;#39;code&amp;#39;: &amp;#39;0000&amp;#39;, &amp;#39;message&amp;#39;: &amp;#39;ok&amp;#39;, &amp;#39;data&amp;#39;: {}}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="ARTS"></category><category term="网络编程"></category><category term="python库"></category><category term="socketserver"></category></entry><entry><title>ARTS第二十五周</title><link href="/artsdi-er-shi-wu-zhou.html" rel="alternate"></link><published>2021-04-26T00:00:00+08:00</published><updated>2021-04-26T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-04-26:/artsdi-er-shi-wu-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 220 存在重复元素III&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/contains-duplicate-iii/"&gt;原题&lt;/a&gt;&lt;/li&gt;
