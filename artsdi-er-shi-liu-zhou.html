@@ -185,7 +185,7 @@
 <h4>处理请求详细</h4>
 <ul>
 <li>process_request先调用finish_request正常处理请求后，再调用shutdown_request关闭请求</li>
-<li>finish_request调用创建时RequestHandlerClass类，创建实例处理请求，大多设计都将接受请求数据和处理请求数据分开到两个类，解耦</li>
+<li>finish_request调用创建时RequestHandlerClass类，创建实例处理请求，大多设计都将处理连接和处理请求数据分开到两个类，解耦</li>
 <li>process_request可以放在线程或进程中处理提高并发处理</li>
 </ul>
 <h4>RequestHandler</h4>
@@ -242,6 +242,20 @@
 
 <span class="c1"># 客户端输出</span>
 <span class="c1"># {&#39;code&#39;: &#39;0000&#39;, &#39;message&#39;: &#39;ok&#39;, &#39;data&#39;: {}}</span>
+</code></pre></div>
+
+
+<h4>StreamRequestHandler</h4>
+<ul>
+<li>StreamRequestHandler默认将接受和发送关联到rfile，wfile，可以像读写文件一样处理请求</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 服务端</span>
+<span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rfile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">data</span> <span class="ow">and</span> <span class="n">data</span> <span class="o">!=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rfile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;HTTP/1.1 200 OK</span><span class="se">\r\n</span><span class="s1">content-type: application/json</span><span class="se">\r\n</span><span class="s1">date: Wed, 28 Apr 2021 16:20:04 GMT</span><span class="se">\r\n</span><span class="s1">server: socketserver</span><span class="se">\r\n\r\n</span><span class="s1">{&quot;code&quot;:&quot;0000&quot;,&quot;message&quot;:&quot;ok&quot;,&quot;data&quot;:</span><span class="si">{}</span><span class="s1">}&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
 </code></pre></div></div>
 
     <hr>

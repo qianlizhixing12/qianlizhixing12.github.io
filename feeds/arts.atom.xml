@@ -160,7 +160,7 @@
 &lt;h4&gt;处理请求详细&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;process_request先调用finish_request正常处理请求后，再调用shutdown_request关闭请求&lt;/li&gt;
-&lt;li&gt;finish_request调用创建时RequestHandlerClass类，创建实例处理请求，大多设计都将接受请求数据和处理请求数据分开到两个类，解耦&lt;/li&gt;
+&lt;li&gt;finish_request调用创建时RequestHandlerClass类，创建实例处理请求，大多设计都将处理连接和处理请求数据分开到两个类，解耦&lt;/li&gt;
 &lt;li&gt;process_request可以放在线程或进程中处理提高并发处理&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4&gt;RequestHandler&lt;/h4&gt;
@@ -217,6 +217,20 @@
 
 &lt;span class="c1"&gt;# 客户端输出&lt;/span&gt;
 &lt;span class="c1"&gt;# {&amp;#39;code&amp;#39;: &amp;#39;0000&amp;#39;, &amp;#39;message&amp;#39;: &amp;#39;ok&amp;#39;, &amp;#39;data&amp;#39;: {}}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;StreamRequestHandler&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;StreamRequestHandler默认将接受和发送关联到rfile，wfile，可以像读写文件一样处理请求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 服务端&lt;/span&gt;
+&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rfile&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;readline&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rfile&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;readline&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;resp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;HTTP/1.1 200 OK&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s1"&gt;content-type: application/json&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s1"&gt;date: Wed, 28 Apr 2021 16:20:04 GMT&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s1"&gt;server: socketserver&lt;/span&gt;&lt;span class="se"&gt;\r\n\r\n&lt;/span&gt;&lt;span class="s1"&gt;{&amp;quot;code&amp;quot;:&amp;quot;0000&amp;quot;,&amp;quot;message&amp;quot;:&amp;quot;ok&amp;quot;,&amp;quot;data&amp;quot;:&lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s1"&gt;}&amp;#39;&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wfile&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="ARTS"></category><category term="网络编程"></category><category term="python库"></category><category term="socketserver"></category></entry><entry><title>ARTS第二十五周</title><link href="/artsdi-er-shi-wu-zhou.html" rel="alternate"></link><published>2021-04-26T00:00:00+08:00</published><updated>2021-04-26T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-04-26:/artsdi-er-shi-wu-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 220 存在重复元素III&lt;/p&gt;
 &lt;ul&gt;
