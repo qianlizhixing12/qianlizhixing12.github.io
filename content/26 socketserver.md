@@ -200,3 +200,17 @@ if __name__ == '__main__':
 # {'code': '0000', 'message': 'ok', 'data': {}}
 ```
 
+#### StreamRequestHandler
+
+- StreamRequestHandler默认将接受和发送关联到rfile，wfile，可以像读写文件一样处理请求
+
+```python
+# 服务端
+data = self.rfile.readline()
+        while data and data != b'\r\n':
+            print(data)
+            data = self.rfile.readline()
+        resp = b'HTTP/1.1 200 OK\r\ncontent-type: application/json\r\ndate: Wed, 28 Apr 2021 16:20:04 GMT\r\nserver: socketserver\r\n\r\n{"code":"0000","message":"ok","data":{}}'
+        self.wfile.write(resp)
+```
+
