@@ -50,6 +50,52 @@
  
 
     <div class='article'>
+        <a href="/artsdi-shi-liu-zhou.html"><h2>ARTS第十六周</h2></a>
+        <div class= "well small"> 2020-08-10
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
+<p>leetcode 338 比特位计数</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/counting-bits/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/c/338.c">解题</a></li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_14/</p>
+</blockquote>
+<h4>代码评审</h4>
+<ul>
+<li>提高了代码质量并降低了缺陷率</li>
+<li>代码可能有很多细节涉及系统具体业务</li>
+<li>代码审查的目的不应该是简单地纠正代码中的错误，而应该是分享知识和建立共同的编码指南</li>
+<li>通过学习和理解代码来检查代码，而不是寻找错误</li>
+<li>代码审查期间要温和，确保你的评论是有建设性的，而不是刻薄的</li>
+<li>避免团队成员中的组织级别影响代码评审</li>
+<li>如果团队有通过工具检查的编码约定，那么代码审查将更容易进行。这样，代码格式化就不会在代码评审会议上讨论</li>
+<li>让代码审查变得有趣也许是成功的最重要因素</li>
+</ul>
+<h2>Tip</h2>
+<h2>Share</h2>
+<h3>Electron(六)</h3>
+<h4>多个渲染进程间通信</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">//cefmanage.js</span>
+<span class="kd">const</span> <span class="nx">uuid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;node-uuid&#39;</span><span class="p">);</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">ipcMain</span><span class="p">,</span> <span class="nx">ipcRenderer</span><span class="p">,</span> <span class="nx">remote</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">cefmanage …</span></code></pre></div> <a class="btn btn-info xsmall" href="/artsdi-shi-liu-zhou.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
         <a href="/artsdi-shi-wu-zhou.html"><h2>ARTS第十五周</h2></a>
         <div class= "well small"> 2020-08-03
 
@@ -81,8 +127,8 @@
 <h3>Electron(五)</h3>
 <h4>批量管理进程间通信</h4>
 <div class="highlight"><pre><span></span><code><span class="c1">// main.js</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">ipcMain</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">mssql</span> <span class="o">=</span> <span class="nx">require …</span></code></pre></div> <a class="btn btn-info xsmall" href="/artsdi-shi-wu-zhou.html">read more</a></div>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">ipcMain</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">mssql</span> <span class="o">=</span> <span class="nx">require …</span></code></pre></div> <a class="btn btn-info xsmall" href="/artsdi-shi-wu-zhou.html">read more</a></div>
     </div>	
 				
 
@@ -123,7 +169,7 @@
 <h4>跨域发送请求</h4>
 <div class="highlight"><pre><span></span><code><span class="c1">// main</span>
 <span class="c1">// node-adodb模块</span>
-  <span class="kr">const</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">)</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">);</span>
   <span class="nx">req</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">uri</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response …</span></code></pre></div> <a class="btn btn-info xsmall" href="/artsdi-shi-si-zhou.html">read more</a></div>
     </div>	
@@ -255,57 +301,6 @@
 <h4>top level</h4>
 <ul>
 <li>json api …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-shi-yi-zhou.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="/artsdi-shi-zhou.html"><h2>ARTS第十周</h2></a>
-        <div class= "well small"> 2020-06-29
-
-<a class="url fn">qianlizhixing</a>
-
-
- </div>
-        <div class="summary"><h2>Algorithm</h2>
-<p>leetcode 529 扫雷游戏</p>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/minesweeper/">原题</a></li>
-<li><a href="https://github.com/qianlizhixing12/leetcode/blob/master/python/529.py">解题</a></li>
-</ul>
-<h2>Review</h2>
-<blockquote>
-<p>https://medium.com/@amymaraisane/6-tips-to-success-as-a-self-taught-software-developer-ba5eebfb7a98</p>
-</blockquote>
-<h3>自学编程的6个技巧</h3>
-<ul>
-<li>写下你的问题</li>
-<li>搜索答案更容易，迫使你有意识地清晰地表达你的问题</li>
-<li>避免陷入浩瀚的文档中，意识主要方向</li>
-<li>有时会发现更好的答案，见证自己的成长</li>
-<li>记录花在编码上的时间</li>
-<li>展示自己学习成果</li>
-<li>向别人展示你的成果，推销自己</li>
-<li>为代码编写单元测试</li>
-<li>为解决现实需求编码</li>
-</ul>
-<h2>Tip</h2>
-<ul>
-<li>hash存储value-index，改变list的indexof循环判断value查找index</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># 客户是分级的，一级二级客户的code是不同的，现实中可能是层层代理商，找出代理商的级次</span>
-<span class="n">custom</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;001&#39;</span><span class="p">,</span> <span class="s1">&#39;00101&#39;</span><span class="p">,</span> <span class="s1">&#39;002&#39;</span><span class="p">,</span> <span class="s1">&#39;00201&#39;</span><span class="p">,</span> <span class="s1">&#39;00202&#39;</span><span class="p">,</span> <span class="s1">&#39;0020201&#39;</span><span class="p">]</span>
-
-<span class="c1"># 可能存在数据库中，或其他配置文件中，-分割每级长度</span>
-<span class="n">level</span> <span class="o">=</span> <span class="s1">&#39;3-2-2&#39;</span>
-
-
-<span class="c1"># 用数组索引当作级次，存放对应长度</span>
-<span class="k">def</span> <span class="nf">solution1</span><span class="p">(</span><span class="n">level …</span></code></pre></div> <a class="btn btn-info xsmall" href="/artsdi-shi-zhou.html">read more</a></div>
     </div>	
 				
 <div class="pagination">

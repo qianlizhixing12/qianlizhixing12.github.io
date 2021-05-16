@@ -174,7 +174,6 @@ from django.conf.urls import url</p>
 <span class="w">   </span><span class="err">}</span><span class="w"></span>
 </code></pre></div>
 
-
 <p>```</p>
 <h2>Share</h2>
 <blockquote>
@@ -222,7 +221,6 @@ from django.conf.urls import url</p>
     <span class="n">spider_run</span><span class="p">()</span>
 </code></pre></div>
 
-
 <ul>
 <li>未加任何反采集措施，返回200</li>
 </ul>
@@ -233,7 +231,6 @@ from django.conf.urls import url</p>
     <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <ul>
 <li>
@@ -247,7 +244,6 @@ from django.conf.urls import url</p>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="n">UserAgent</span><span class="p">(</span><span class="n">verify_ssl</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;random&#39;</span><span class="p">]}</span>
 </code></pre></div>
 
-
 <h4>禁止某些method</h4>
 <div class="highlight"><pre><span></span><code><span class="c1">#forbidden not GET|HEAD|POST method access</span>
 <span class="k">if</span> <span class="s">(</span><span class="nv">$request_method</span> <span class="s">!~</span> <span class="s">^(GET|HEAD|POST)</span>$<span class="s">)</span>
@@ -255,7 +251,6 @@ from django.conf.urls import url</p>
     <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <h4>禁止访问频率</h4>
 <ul>
@@ -277,14 +272,12 @@ from django.conf.urls import url</p>
 <span class="p">}</span>
 </code></pre></div>
 
-
 <h4>限制下载速度</h4>
 <div class="highlight"><pre><span></span><code><span class="k">location</span> <span class="s">/file</span> <span class="p">{</span> 
        <span class="kn">limit_rate_after</span> <span class="mi">10m</span><span class="p">;</span> 
        <span class="kn">limit_rate</span> <span class="mi">128k</span><span class="p">;</span> 
 <span class="p">}</span> 
 </code></pre></div>
-
 
 <h4>限制referers</h4>
 <ul>
@@ -302,7 +295,6 @@ from django.conf.urls import url</p>
     <span class="kn">return</span> <span class="mi">301</span> <span class="s">要跳转的域名</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <ul>
 <li>

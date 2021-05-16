@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>千里之行 始于足下 - qianlizhixing</title><link>/</link><description></description><lastBuildDate>Mon, 10 May 2021 00:00:00 +0800</lastBuildDate><item><title>ARTS第二十七周</title><link>/artsdi-er-shi-qi-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+<rss version="2.0"><channel><title>千里之行 始于足下 - qianlizhixing</title><link>/</link><description></description><lastBuildDate>Mon, 17 May 2021 00:00:00 +0800</lastBuildDate><item><title>ARTS第二十八周</title><link>/artsdi-er-shi-ba-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 1734 解码异或后的排列&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/decode-xored-permutation/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/1734.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;位运算&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review(websocket)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;http://www.websocket.org/quantum.html&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;轮询、长轮询、流方式&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;通常，当浏览器访问一个网页时，一个HTTP请求被发送到承载该网页的web服务器,web服务器确认这个请求并发回响应。如果想获得最新的实时信息，可以不断手动刷新页面，但这显然不是一个很好的解决方案。&lt;/li&gt;
+&lt;li&gt;目前提供实时web应用程序的尝试主要围绕轮询和其他服务器端推技术，最值得注意的是Comet，它延迟了向客户机传递消息的HTTP响应的完成。基于comet的推送通常用JavaScript实现，并使用长轮询或流媒体等连接策略。&lt;/li&gt;
+&lt;li&gt;通过轮询，浏览器定期发送HTTP请求并立即接收响应，这种技术是浏览器提供实时信息的第一次尝试。如果知道确切的消息传递间隔，这是一个很好的解决方案。然而，实时数据往往不是那么可预测的，使得不必要的请求不可避免，因此，许多连接在低消息率的情况下被不必要地打开和关闭。&lt;/li&gt;
+&lt;li&gt;使用长轮询，浏览器向服务器发送请求，服务器将请求保持打开一段时间。如果在这段时间内收到通知，将向客户端发送包含消息的响应。如果在设置的时间内没有收到通知，服务器将发送一个响应来终止打开的请求。但是，重要的是要理解，当消息量很大时 …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 17 May 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-05-17:/artsdi-er-shi-ba-zhou.html</guid><category>ARTS</category><category>网络编程</category><category>python库</category><category>websocket</category></item><item><title>ARTS第二十七周</title><link>/artsdi-er-shi-qi-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 403 青蛙过河&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/frog-jump/"&gt;原题&lt;/a&gt;&lt;/li&gt;
@@ -17,7 +33,7 @@
 &lt;p&gt;&lt;a href="https://camo.githubusercontent.com/1cd1a48c7e02ffee8f619d95fdec31fd05196940a98805770643d00b4c7da8be/687474703a2f2f6c69766f7261732e6769746875622e696f2f626c6f672f7669727475616c2d646f6d2f736f72742d7461626c652e706e67"&gt;&lt;img alt="sort-table" src="https://camo.githubusercontent.com/1cd1a48c7e02ffee8f619d95fdec31fd05196940a98805770643d00b4c7da8be/687474703a2f2f6c69766f7261732e6769746875622e696f2f626c6f672f7669727475616c2d646f6d2f736f72742d7461626c652e706e67"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;这个应用程序看起来很简单，你可以想出好几种不同的方式来写。最容易想到的可能是，在你的 JavaScript 代码里面存储这样的数据：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;sortKey&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;new&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;// 排序的字段，新增（new）、取消（cancel）、净关注（gain）、累积（cumulate）人数&lt;/span&gt;
-&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;sortType&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="c1"&gt;// 升序还是逆序&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;sortType&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1&lt;/span&gt; &lt;span class="c1"&gt;// 升序还是逆序&lt;/span&gt;
 &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[{...},&lt;/span&gt; &lt;span class="p"&gt;{...},&lt;/span&gt; &lt;span class="p"&gt;{..},&lt;/span&gt; &lt;span class="p"&gt;..]&lt;/span&gt; &lt;span class="c1"&gt;// 表格数据 …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 10 May 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-05-10:/artsdi-er-shi-qi-zhou.html</guid><category>ARTS</category><category>网络编程</category><category>python库</category><category>http</category></item><item><title>ARTS第二十六周</title><link>/artsdi-er-shi-liu-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 377 组合总和Ⅳ&lt;/p&gt;
 &lt;ul&gt;
@@ -317,8 +333,8 @@ https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-sho
 &lt;h3&gt;Electron(六)&lt;/h3&gt;
 &lt;h4&gt;多个渲染进程间通信&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;//cefmanage.js&lt;/span&gt;
-&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;uuid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;node-uuid&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;ipcMain&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;ipcRenderer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;remote&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;electron&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;uuid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;node-uuid&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;ipcMain&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;ipcRenderer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;remote&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;electron&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
 &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;cefmanage …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 10 Aug 2020 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2020-08-10:/artsdi-shi-liu-zhou.html</guid><category>ARTS</category><category>代码评审</category><category>electron</category></item><item><title>ARTS第十五周</title><link>/artsdi-shi-wu-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 190 颠倒二进制位&lt;/p&gt;
@@ -344,8 +360,8 @@ https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-sho
 &lt;h3&gt;Electron(五)&lt;/h3&gt;
 &lt;h4&gt;批量管理进程间通信&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;// main.js&lt;/span&gt;
-&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;ipcMain&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;electron&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;mssql&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 03 Aug 2020 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2020-08-03:/artsdi-shi-wu-zhou.html</guid><category>ARTS</category><category>代码布局</category><category>electron</category></item><item><title>ARTS第十四周</title><link>/artsdi-shi-si-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;ipcMain&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;electron&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;mssql&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 03 Aug 2020 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2020-08-03:/artsdi-shi-wu-zhou.html</guid><category>ARTS</category><category>代码布局</category><category>electron</category></item><item><title>ARTS第十四周</title><link>/artsdi-shi-si-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 191 位1的个数&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/number-of-1-bits/"&gt;原题&lt;/a&gt;&lt;/li&gt;
@@ -369,7 +385,7 @@ https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-sho
 &lt;h4&gt;跨域发送请求&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;// main&lt;/span&gt;
 &lt;span class="c1"&gt;// node-adodb模块&lt;/span&gt;
-  &lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;req&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;request&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;req&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;request&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;request&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;config&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
   &lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;request&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;response …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 27 Jul 2020 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2020-07-27:/artsdi-shi-si-zhou.html</guid><category>ARTS</category><category>electron</category></item><item><title>ARTS第十三周</title><link>/artsdi-shi-san-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 77 组合&lt;/p&gt;

@@ -85,8 +85,8 @@
 <h3>Electron(六)</h3>
 <h4>多个渲染进程间通信</h4>
 <div class="highlight"><pre><span></span><code><span class="c1">//cefmanage.js</span>
-<span class="kr">const</span> <span class="nx">uuid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;node-uuid&#39;</span><span class="p">);</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">ipcMain</span><span class="p">,</span> <span class="nx">ipcRenderer</span><span class="p">,</span> <span class="nx">remote</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">uuid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;node-uuid&#39;</span><span class="p">);</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">ipcMain</span><span class="p">,</span> <span class="nx">ipcRenderer</span><span class="p">,</span> <span class="nx">remote</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
 
 <span class="kd">function</span> <span class="nx">cefmanage</span><span class="p">()</span> <span class="p">{</span>
 
@@ -97,7 +97,7 @@
   <span class="k">this</span><span class="p">.</span><span class="nx">cefreg</span> <span class="o">=</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">exec</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">cefmap</span><span class="p">[</span><span class="nx">uri</span><span class="p">]</span> <span class="o">=</span> <span class="nx">exec</span><span class="p">;</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">ipcMain</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span><span class="p">[</span><span class="nx">uri</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span><span class="p">[</span><span class="nx">uri</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">ipcRenderer</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span> <span class="o">=</span> <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">sendSync</span><span class="p">(</span><span class="s1">&#39;maincef&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">remote</span><span class="p">.</span><span class="nx">getCurrentWebContents</span><span class="p">().</span><span class="nx">id</span><span class="p">]);</span>
@@ -136,8 +136,8 @@
 
   <span class="k">if</span> <span class="p">(</span><span class="nx">ipcMain</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">ipcMain</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;maincef&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">request</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span><span class="p">[</span><span class="nx">request</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">request</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mf">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span><span class="p">[</span><span class="nx">request</span><span class="p">[</span><span class="mf">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">request</span><span class="p">[</span><span class="mf">1</span><span class="p">];</span>
       <span class="p">}</span>
       <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span><span class="p">;</span>
     <span class="p">});</span>
@@ -158,7 +158,7 @@
         <span class="nx">uri</span><span class="o">:</span> <span class="nx">request</span><span class="p">.</span><span class="nx">uri</span><span class="p">,</span>
         <span class="nx">param</span><span class="o">:</span> <span class="nx">request</span><span class="p">.</span><span class="nx">param</span>
       <span class="p">};</span>
-      <span class="kr">debugger</span><span class="p">;</span>
+      <span class="k">debugger</span><span class="p">;</span>
       <span class="c1">//send 非str值没有传过去</span>
       <span class="kd">let</span> <span class="nx">srvid</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">srvmap</span><span class="p">[</span><span class="nx">request</span><span class="p">.</span><span class="nx">uri</span><span class="p">];</span>
       <span class="c1">// if (srvid == &#39;main&#39;) {</span>
@@ -188,9 +188,9 @@
   <span class="p">};</span>
 <span class="p">}</span>
 
-<span class="kr">const</span> <span class="nx">cef</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cefmanage</span><span class="p">();</span>
-<span class="kr">const</span> <span class="nx">cefreg</span> <span class="o">=</span> <span class="nx">cef</span><span class="p">.</span><span class="nx">cefreg</span><span class="p">;</span>
-<span class="kr">const</span> <span class="nx">cefquery</span> <span class="o">=</span> <span class="nx">cef</span><span class="p">.</span><span class="nx">cefquery</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">cef</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cefmanage</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">cefreg</span> <span class="o">=</span> <span class="nx">cef</span><span class="p">.</span><span class="nx">cefreg</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">cefquery</span> <span class="o">=</span> <span class="nx">cef</span><span class="p">.</span><span class="nx">cefquery</span><span class="p">;</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">ipcMain</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">cefreg</span> <span class="p">};</span>
@@ -201,9 +201,9 @@
 
 <span class="c1">//mainservice.js</span>
 <span class="c1">// const mssql = require(&#39;mssql&#39;);</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">Connection</span><span class="p">,</span> <span class="nx">Request</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;tedious&#39;</span><span class="p">)</span>
-<span class="kr">const</span> <span class="nx">adodb</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;node-adodb&#39;</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">)</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">Connection</span><span class="p">,</span> <span class="nx">Request</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;tedious&#39;</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">adodb</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;node-adodb&#39;</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">)</span>
 
 <span class="kd">function</span> <span class="nx">mssqlall</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// return mssql.connect(param.config).then(pool =&gt; {</span>
@@ -247,7 +247,7 @@
 
 <span class="c1">// node-adodb模块</span>
 <span class="kd">function</span> <span class="nx">accessall</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="sb">`Provider=Microsoft.Jet.OLEDB.4.0;Data Source=</span><span class="si">${</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">database</span><span class="si">}</span><span class="sb">;Jet OLEDB:System Database=</span><span class="si">${</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">systemdb</span><span class="si">}</span><span class="sb">;User ID=</span><span class="si">${</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">user</span><span class="si">}</span><span class="sb">;Password=</span><span class="si">${</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">password</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="sb">`Provider=Microsoft.Jet.OLEDB.4.0;Data Source=</span><span class="si">${</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">database</span><span class="si">}</span><span class="sb">;Jet OLEDB:System Database=</span><span class="si">${</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">systemdb</span><span class="si">}</span><span class="sb">;User ID=</span><span class="si">${</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">user</span><span class="si">}</span><span class="sb">;Password=</span><span class="si">${</span><span class="nx">param</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">password</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
   <span class="k">return</span> <span class="nx">adodb</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">config</span><span class="p">).</span><span class="nx">query</span><span class="p">(</span><span class="nx">param</span><span class="p">.</span><span class="nx">sql</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
   <span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
@@ -277,10 +277,10 @@
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">mssqlall</span><span class="p">,</span> <span class="nx">accessall</span><span class="p">,</span> <span class="nx">httpall</span> <span class="p">};</span>
 
 <span class="c1">//main.js</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">BrowserWindow</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">)</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">BrowserWindow</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">)</span>
 <span class="c1">// require(&#39;./main-cefQuery&#39;);</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">cefreg</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./cefmanage&#39;</span><span class="p">);</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">mssqlall</span><span class="p">,</span> <span class="nx">accessall</span><span class="p">,</span> <span class="nx">httpall</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./mainservice&#39;</span><span class="p">);</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">cefreg</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./cefmanage&#39;</span><span class="p">);</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">mssqlall</span><span class="p">,</span> <span class="nx">accessall</span><span class="p">,</span> <span class="nx">httpall</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./mainservice&#39;</span><span class="p">);</span>
 
 <span class="kd">function</span> <span class="nx">createService</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">cefreg</span><span class="p">(</span><span class="s1">&#39;access.all&#39;</span><span class="p">,</span> <span class="nx">accessall</span><span class="p">);</span>
@@ -290,8 +290,8 @@
 <span class="kd">function</span> <span class="nx">createMainWindow</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">// Create the browser window.</span>
   <span class="kd">let</span> <span class="nx">win</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">800</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">800</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">600</span><span class="p">,</span>
     <span class="nx">webPreferences</span><span class="o">:</span> <span class="p">{</span>
       <span class="nx">nodeIntegration</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
       <span class="nx">allowRunningInsecureContent</span><span class="o">:</span> <span class="kc">true</span>
@@ -314,8 +314,8 @@
 <span class="kd">function</span> <span class="nx">createServiceWindow</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">// Create the browser window.</span>
   <span class="kd">let</span> <span class="nx">win</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">800</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">800</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">600</span><span class="p">,</span>
     <span class="nx">show</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">webPreferences</span><span class="o">:</span> <span class="p">{</span>
       <span class="nx">nodeIntegration</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -368,7 +368,7 @@
 
 <span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
   <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-    <span class="kr">const</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span>
       <span class="nx">cefreg</span>
     <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./cefmanage&#39;</span><span class="p">);</span>
 
@@ -398,7 +398,7 @@
 <span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
   <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!&lt;</span><span class="err">/h1&gt;</span>
   <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-    <span class="kr">const</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span>
       <span class="nx">cefquery</span>
     <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./cefmanage&#39;</span><span class="p">);</span>
 
@@ -437,7 +437,7 @@
       <span class="nx">cefquery</span><span class="p">({</span>
         <span class="nx">uri</span><span class="o">:</span> <span class="s1">&#39;service.test&#39;</span><span class="p">,</span>
         <span class="nx">param</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s1">&#39;e3e&#39;</span><span class="o">:</span> <span class="mi">345</span>
+          <span class="s1">&#39;e3e&#39;</span><span class="o">:</span> <span class="mf">345</span>
         <span class="p">},</span>
         <span class="nx">onSuccess</span><span class="o">:</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
           <span class="nx">resolve</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>

@@ -77,10 +77,9 @@
 <p><a href="https://camo.githubusercontent.com/1cd1a48c7e02ffee8f619d95fdec31fd05196940a98805770643d00b4c7da8be/687474703a2f2f6c69766f7261732e6769746875622e696f2f626c6f672f7669727475616c2d646f6d2f736f72742d7461626c652e706e67"><img alt="sort-table" src="https://camo.githubusercontent.com/1cd1a48c7e02ffee8f619d95fdec31fd05196940a98805770643d00b4c7da8be/687474703a2f2f6c69766f7261732e6769746875622e696f2f626c6f672f7669727475616c2d646f6d2f736f72742d7461626c652e706e67"></a></p>
 <p>这个应用程序看起来很简单，你可以想出好几种不同的方式来写。最容易想到的可能是，在你的 JavaScript 代码里面存储这样的数据：</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sortKey</span> <span class="o">=</span> <span class="s2">&quot;new&quot;</span> <span class="c1">// 排序的字段，新增（new）、取消（cancel）、净关注（gain）、累积（cumulate）人数</span>
-<span class="kd">var</span> <span class="nx">sortType</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">// 升序还是逆序</span>
+<span class="kd">var</span> <span class="nx">sortType</span> <span class="o">=</span> <span class="mf">1</span> <span class="c1">// 升序还是逆序</span>
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[{...},</span> <span class="p">{...},</span> <span class="p">{..},</span> <span class="p">..]</span> <span class="c1">// 表格数据</span>
 </code></pre></div>
-
 
 <p>用三个字段分别存储当前排序的字段、排序方向、还有表格数据；然后给表格头部加点击事件：当用户点击特定的字段的时候，根据上面几个字段存储的内容来对内容进行排序，然后用 JS 或者 jQuery 操作 DOM，更新页面的排序状态（表头的那几个箭头表示当前排序状态，也需要更新）和表格内容。</p>
 <p>这样做会导致的后果就是，随着应用程序越来越复杂，需要在JS里面维护的字段也越来越多，需要监听事件和在事件回调用更新页面的DOM操作也越来越多，应用程序会变得非常难维护。后来人们使用了 MVC、MVP 的架构模式，希望能从代码组织方式来降低维护这种复杂应用程序的难度。但是 MVC 架构没办法减少你所维护的状态，也没有降低状态更新你需要对页面的更新操作（前端来说就是DOM操作），你需要操作的DOM还是需要操作，只是换了个地方。</p>
@@ -100,13 +99,12 @@
     <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;list&#39;</span>
   <span class="p">},</span>
   <span class="nx">children</span><span class="o">:</span> <span class="p">[</span> <span class="c1">// 该节点的子节点</span>
-    <span class="p">{</span><span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span><span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Item 1&quot;</span><span class="p">]},</span>
-    <span class="p">{</span><span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span><span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Item 2&quot;</span><span class="p">]},</span>
-    <span class="p">{</span><span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span><span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Item 3&quot;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span><span class="kd">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Item 1&quot;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span><span class="kd">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Item 2&quot;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span><span class="kd">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Item 3&quot;</span><span class="p">]},</span>
   <span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <p>上面对应的HTML写法是：</p>
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;list&#39;</span><span class="p">&gt;</span>
@@ -115,7 +113,6 @@
   <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&#39;item&#39;</span><span class="p">&gt;</span>Item 3<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
 </code></pre></div>
-
 
 <p>既然原来 DOM 树的信息都可以用 JavaScript 对象来表示，反过来，你就可以根据这个用 JavaScript 对象表示的树结构来构建一棵真正的DOM树。</p>
 <p>之前的章节所说的，状态变更-&gt;重新渲染整个视图的方式可以稍微修改一下：用 JavaScript 对象表示 DOM 信息和结构，当状态变更的时候，重新渲染这个 JavaScript 的对象结构。当然这样做其实没什么卵用，因为真正的页面其实没有改变。</p>
@@ -142,17 +139,15 @@
 <span class="p">}</span>
 </code></pre></div>
 
-
 <p>例如上面的 DOM 结构就可以简单的表示：</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./element&#39;</span><span class="p">)</span>
 
 <span class="kd">var</span> <span class="nx">ul</span> <span class="o">=</span> <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;list&#39;</span><span class="p">},</span> <span class="p">[</span>
-  <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="p">{</span><span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;Item 1&#39;</span><span class="p">]),</span>
-  <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="p">{</span><span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;Item 2&#39;</span><span class="p">]),</span>
-  <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="p">{</span><span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;Item 3&#39;</span><span class="p">])</span>
+  <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="p">{</span><span class="kd">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;Item 1&#39;</span><span class="p">]),</span>
+  <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="p">{</span><span class="kd">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;Item 2&#39;</span><span class="p">]),</span>
+  <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="p">{</span><span class="kd">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;Item 3&#39;</span><span class="p">])</span>
 <span class="p">])</span>
 </code></pre></div>
-
 
 <p>现在<code>ul</code>只是一个 JavaScript 对象表示的 DOM 结构，页面上并没有这个结构。我们可以根据这个<code>ul</code>构建真正的<code>&lt;ul&gt;</code>：</p>
 <div class="highlight"><pre><span></span><code><span class="nx">Element</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">render</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
@@ -177,12 +172,10 @@
 <span class="p">}</span>
 </code></pre></div>
 
-
 <p><code>render</code>方法会根据<code>tagName</code>构建一个真正的DOM节点，然后设置这个节点的属性，最后递归地把自己的子节点也构建起来。所以只需要：</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">ulRoot</span> <span class="o">=</span> <span class="nx">ul</span><span class="p">.</span><span class="nx">render</span><span class="p">()</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">ulRoot</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>上面的<code>ulRoot</code>是真正的DOM节点，把它塞入文档中，这样<code>body</code>里面就有了真正的<code>&lt;ul&gt;</code>的DOM结构：</p>
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;list&#39;</span><span class="p">&gt;</span>
@@ -191,7 +184,6 @@
   <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&#39;item&#39;</span><span class="p">&gt;</span>Item 3<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
 </code></pre></div>
-
 
 <p>完整代码可见 <a href="https://github.com/livoras/simple-virtual-dom/blob/master/lib/element.js">element.js</a>。</p>
 <h4>步骤二：比较两棵虚拟DOM树的差异</h4>
@@ -204,7 +196,7 @@
 <p>在深度优先遍历的时候，每遍历到一个节点就把该节点和新的的树进行对比。如果有差异的话就记录到一个对象里面。</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// diff 函数，对比两棵树</span>
 <span class="kd">function</span> <span class="nx">diff</span> <span class="p">(</span><span class="nx">oldTree</span><span class="p">,</span> <span class="nx">newTree</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">// 当前节点的标志</span>
+  <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="mf">0</span> <span class="c1">// 当前节点的标志</span>
   <span class="kd">var</span> <span class="nx">patches</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">// 用来记录每个节点差异的对象</span>
   <span class="nx">dfsWalk</span><span class="p">(</span><span class="nx">oldTree</span><span class="p">,</span> <span class="nx">newTree</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span>
   <span class="k">return</span> <span class="nx">patches</span>
@@ -225,19 +217,17 @@
   <span class="nx">oldChildren</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">newChild</span> <span class="o">=</span> <span class="nx">newChildren</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
     <span class="nx">currentNodeIndex</span> <span class="o">=</span> <span class="p">(</span><span class="nx">leftNode</span> <span class="o">&amp;&amp;</span> <span class="nx">leftNode</span><span class="p">.</span><span class="nx">count</span><span class="p">)</span> <span class="c1">// 计算节点的标识</span>
-      <span class="o">?</span> <span class="nx">currentNodeIndex</span> <span class="o">+</span> <span class="nx">leftNode</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span>
-      <span class="o">:</span> <span class="nx">currentNodeIndex</span> <span class="o">+</span> <span class="mi">1</span>
+      <span class="o">?</span> <span class="nx">currentNodeIndex</span> <span class="o">+</span> <span class="nx">leftNode</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mf">1</span>
+      <span class="o">:</span> <span class="nx">currentNodeIndex</span> <span class="o">+</span> <span class="mf">1</span>
     <span class="nx">dfsWalk</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">newChild</span><span class="p">,</span> <span class="nx">currentNodeIndex</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span> <span class="c1">// 深度遍历子节点</span>
     <span class="nx">leftNode</span> <span class="o">=</span> <span class="nx">child</span>
   <span class="p">})</span>
 <span class="p">}</span>
 </code></pre></div>
 
-
 <p>例如，上面的<code>div</code>和新的<code>div</code>有差异，当前的标记是0，那么：</p>
-<div class="highlight"><pre><span></span><code><span class="nx">patches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">difference</span><span class="p">},</span> <span class="p">{</span><span class="nx">difference</span><span class="p">},</span> <span class="p">...]</span> <span class="c1">// 用数组存储新旧节点的不同</span>
+<div class="highlight"><pre><span></span><code><span class="nx">patches</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">difference</span><span class="p">},</span> <span class="p">{</span><span class="nx">difference</span><span class="p">},</span> <span class="p">...]</span> <span class="c1">// 用数组存储新旧节点的不同</span>
 </code></pre></div>
-
 
 <p>同理<code>p</code>是<code>patches[1]</code>，<code>ul</code>是<code>patches[3]</code>，类推。</p>
 <h5>差异类型</h5>
@@ -249,23 +239,21 @@
 <li>对于文本节点，文本内容可能会改变。例如修改上面的文本节点2内容为<code>Virtual DOM 2</code>。</li>
 </ol>
 <p>所以我们定义了几种差异类型：</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">REPLACE</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="kd">var</span> <span class="nx">REORDER</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="kd">var</span> <span class="nx">PROPS</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="kd">var</span> <span class="nx">TEXT</span> <span class="o">=</span> <span class="mi">3</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">REPLACE</span> <span class="o">=</span> <span class="mf">0</span>
+<span class="kd">var</span> <span class="nx">REORDER</span> <span class="o">=</span> <span class="mf">1</span>
+<span class="kd">var</span> <span class="nx">PROPS</span> <span class="o">=</span> <span class="mf">2</span>
+<span class="kd">var</span> <span class="nx">TEXT</span> <span class="o">=</span> <span class="mf">3</span>
 </code></pre></div>
 
-
 <p>对于节点替换，很简单。判断新旧节点的<code>tagName</code>和是不是一样的，如果不一样的说明需要替换掉。如<code>div</code>换成<code>section</code>，就记录下：</p>
-<div class="highlight"><pre><span></span><code><span class="nx">patches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">patches</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span>
   <span class="nx">type</span><span class="o">:</span> <span class="nx">REPALCE</span><span class="p">,</span>
   <span class="nx">node</span><span class="o">:</span> <span class="nx">newNode</span> <span class="c1">// el(&#39;section&#39;, props, children)</span>
 <span class="p">}]</span>
 </code></pre></div>
 
-
 <p>如果给<code>div</code>新增了属性<code>id</code>为<code>container</code>，就记录下：</p>
-<div class="highlight"><pre><span></span><code><span class="nx">patches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">patches</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span>
   <span class="nx">type</span><span class="o">:</span> <span class="nx">REPALCE</span><span class="p">,</span>
   <span class="nx">node</span><span class="o">:</span> <span class="nx">newNode</span> <span class="c1">// el(&#39;section&#39;, props, children)</span>
 <span class="p">},</span> <span class="p">{</span>
@@ -276,45 +264,40 @@
 <span class="p">}]</span>
 </code></pre></div>
 
-
 <p>如果是文本节点，如上面的文本节点2，就记录下：</p>
-<div class="highlight"><pre><span></span><code><span class="nx">patches</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">patches</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span>
   <span class="nx">type</span><span class="o">:</span> <span class="nx">TEXT</span><span class="p">,</span>
   <span class="nx">content</span><span class="o">:</span> <span class="s2">&quot;Virtual DOM2&quot;</span>
 <span class="p">}]</span>
 </code></pre></div>
-
 
 <p>那如果把我<code>div</code>的子节点重新排序呢？例如<code>p, ul, div</code>的顺序换成了<code>div, p, ul</code>。这个该怎么对比？如果按照同层级进行顺序对比的话，它们都会被替换掉。如<code>p</code>和<code>div</code>的<code>tagName</code>不同，<code>p</code>会被<code>div</code>所替代。最终，三个节点都会被替换，这样DOM开销就非常大。而实际上是不需要替换节点，而只需要经过节点移动就可以达到，我们只需知道怎么进行移动。</p>
 <p>这牵涉到两个列表的对比算法，需要另外起一个小节来讨论。</p>
 <h5>列表对比算法</h5>
 <p>假设现在可以英文字母唯一地标识每一个子节点：</p>
 <p>旧的节点顺序：</p>
-<div class="highlight"><pre><span></span><code><span class="err">a b c d e f g h i</span>
+<div class="highlight"><pre><span></span><code>a b c d e f g h i
 </code></pre></div>
-
 
 <p>现在对节点进行了删除、插入、移动的操作。新增<code>j</code>节点，删除<code>e</code>节点，移动<code>h</code>节点：</p>
 <p>新的节点顺序：</p>
-<div class="highlight"><pre><span></span><code><span class="err">a b c h d f g i j</span>
+<div class="highlight"><pre><span></span><code>a b c h d f g i j
 </code></pre></div>
-
 
 <p>现在知道了新旧的顺序，求最小的插入、删除操作（移动可以看成是删除和插入操作的结合）。这个问题抽象出来其实是字符串的最小编辑距离问题（<a href="https://en.wikipedia.org/wiki/Edit_distance">Edition Distance</a>），最常见的解决算法是 <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein Distance</a>，通过动态规划求解，时间复杂度为 O(M * N)。但是我们并不需要真的达到最小的操作，我们只需要优化一些比较常见的移动情况，牺牲一定DOM操作，让算法时间复杂度达到线性的（O(max(M, N))。具体算法细节比较多，这里不累述，有兴趣可以参考<a href="https://github.com/livoras/list-diff/blob/master/lib/diff.js">代码</a>。</p>
 <p>我们能够获取到某个父节点的子节点的操作，就可以记录下来：</p>
-<div class="highlight"><pre><span></span><code><span class="err">patches[0] = [{</span>
-<span class="err">  type: REORDER,</span>
-<span class="err">  moves: [{remove or insert}, {remove or insert}, ...]</span>
-<span class="err">}]</span>
+<div class="highlight"><pre><span></span><code>patches[0] = [{
+  type: REORDER,
+  moves: [{remove or insert}, {remove or insert}, ...]
+}]
 </code></pre></div>
-
 
 <p>但是要注意的是，因为<code>tagName</code>是可重复的，不能用这个来进行对比。所以需要给子节点加上唯一标识<code>key</code>，列表对比的时候，使用<code>key</code>进行对比，这样才能复用老的 DOM 树上的节点。</p>
 <p>这样，我们就可以通过深度优先遍历两棵树，每层的节点进行对比，记录下每个节点的差异了。完整 diff 算法代码可见 <a href="https://github.com/livoras/simple-virtual-dom/blob/master/lib/diff.js">diff.js</a>。</p>
 <h4>步骤三：把差异应用到真正的DOM树上</h4>
 <p>因为步骤一所构建的 JavaScript 对象树和<code>render</code>出来真正的DOM树的信息、结构是一样的。所以我们可以对那棵DOM树也进行深度优先的遍历，遍历的时候从步骤二生成的<code>patches</code>对象中找出当前遍历的节点差异，然后进行 DOM 操作。</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">patch</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">walker</span> <span class="o">=</span> <span class="p">{</span><span class="nx">index</span><span class="o">:</span> <span class="mi">0</span><span class="p">}</span>
+  <span class="kd">var</span> <span class="nx">walker</span> <span class="o">=</span> <span class="p">{</span><span class="nx">index</span><span class="o">:</span> <span class="mf">0</span><span class="p">}</span>
   <span class="nx">dfsWalk</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">walker</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -323,8 +306,8 @@
 
   <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">childNodes</span>
     <span class="o">?</span> <span class="nx">node</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">.</span><span class="nx">length</span>
-    <span class="o">:</span> <span class="mi">0</span>
-  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 深度遍历子节点</span>
+    <span class="o">:</span> <span class="mf">0</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 深度遍历子节点</span>
     <span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
     <span class="nx">walker</span><span class="p">.</span><span class="nx">index</span><span class="o">++</span>
     <span class="nx">dfsWalk</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">walker</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span>
@@ -335,7 +318,6 @@
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <p>applyPatches，根据不同类型的差异对当前节点进行 DOM 操作：</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">applyPatches</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">currentPatches</span><span class="p">)</span> <span class="p">{</span>
@@ -359,7 +341,6 @@
   <span class="p">})</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <p>完整代码可见 <a href="https://github.com/livoras/simple-virtual-dom/blob/master/lib/patch.js">patch.js</a>。</p>
 <h3>结语</h3>
@@ -388,7 +369,6 @@
 <span class="c1">// 5. 在真正的DOM元素上应用变更</span>
 <span class="nx">patch</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>当然这是非常粗糙的实践，实际中还需要处理事件监听等；生成虚拟 DOM 的时候也可以加入 JSX 语法。这些事情都做了的话，就可以构造一个简单的ReactJS了。</p>
 <p>本文所实现的完整代码存放在 <a href="https://github.com/livoras/simple-virtual-dom">Github</a>，仅供学习。</p>

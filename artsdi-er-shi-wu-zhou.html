@@ -151,7 +151,6 @@
     <span class="n">main</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">NodeDate</span><span class="p">)</span>
 </code></pre></div>
 
-
 <h2>Share(socket编程)</h2>
 <ul>
 <li>socket比较底层，在网络通信中属于网络层(IP/TCP协议)</li>
@@ -208,7 +207,6 @@
     <span class="n">init_server</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">(),</span> <span class="mi">8888</span><span class="p">)</span>
 </code></pre></div>
 
-
 <h3>客户端</h3>
 <ul>
 <li>打开套接字，指定服务端相同协议簇(使用语言)</li>
@@ -241,7 +239,6 @@
         <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
             <span class="n">pool</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">init_client</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">(),</span> <span class="mi">8888</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
 </code></pre></div>
-
 
 <h3>demo输出</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># 客户端输出</span>

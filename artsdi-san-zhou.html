@@ -143,7 +143,6 @@
  <span class="mi">215</span><span class="p">:</span>         <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">tail</span> <span class="o">=</span> <span class="p">(</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">elements</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="n">head</span><span class="p">)</span>
 </code></pre></div>
 
-
 <h2>Share</h2>
 <blockquote>
 <p>https://www.electronjs.org/docs</p>
@@ -163,13 +162,13 @@
 <span class="nx">electron</span> <span class="p">.</span>
 
 <span class="c1">//main.js</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">BrowserWindow</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">)</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">BrowserWindow</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">)</span>
 
 <span class="kd">function</span> <span class="nx">createWindow</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">// Create the browser window.</span>
   <span class="kd">let</span> <span class="nx">win</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">800</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">800</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">600</span><span class="p">,</span>
     <span class="nx">webPreferences</span><span class="o">:</span> <span class="p">{</span>
       <span class="nx">nodeIntegration</span><span class="o">:</span> <span class="kc">true</span>
     <span class="p">}</span>
@@ -199,12 +198,11 @@
 <span class="nx">app</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;activate&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="c1">// On macOS it&#39;s common to re-create a window in the app when the</span>
   <span class="c1">// dock icon is clicked and there are no other windows open.</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">BrowserWindow</span><span class="p">.</span><span class="nx">getAllWindows</span><span class="p">().</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">BrowserWindow</span><span class="p">.</span><span class="nx">getAllWindows</span><span class="p">().</span><span class="nx">length</span> <span class="o">===</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">createWindow</span><span class="p">()</span>
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre></div>
-
 
 <p>如果报错Electron failed to install correctly, please delete node_modules/electron and try installing again，改用6.0版本</p></div>
 

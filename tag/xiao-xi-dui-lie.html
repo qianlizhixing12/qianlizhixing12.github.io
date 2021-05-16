@@ -177,7 +177,6 @@
 <span class="p">)</span>
 </code></pre></div>
 
-
 <ul>
 <li>name 包名</li>
 <li>version 版本</li>
@@ -190,19 +189,16 @@
 <div class="highlight"><pre><span></span><code>python setup.py sdist
 </code></pre></div>
 
-
 <p>sdist命令会创建一个archive 文件（比如Unix上的tar文件，Windows上的zip文件），它包含setup.py， 源码文件。该archive文件命名为aaa-1.0.0.tar.gz(zip)</p>
 <h5>安装模块</h5>
 <p>用户希望安装aaa模块，他只需要下载aaa-1.0.0.tar.gz，解压，进入aaa-1.0.0目录，然后运行</p>
 <div class="highlight"><pre><span></span><code>python setup.py install
 </code></pre></div>
 
-
 <p>该命令最终会将foo.py复制到Python环境存放第三方模块的目录中</p>
 <h5>构建发布</h5>
 <div class="highlight"><pre><span></span><code>python setup.py bdist
 </code></pre></div>
-
 
 <h3>setuptools</h3>
 <blockquote>
@@ -237,7 +233,6 @@
 <span class="p">)</span>
 </code></pre></div>
 
-
 <ul>
 <li>name 包名</li>
 <li>version 版本</li>
@@ -252,7 +247,6 @@
 <div class="highlight"><pre><span></span><code>python setup.py bdist_egg
 </code></pre></div>
 
-
 <p>当前目录下的dist目录内创建一个egg文件，名为aaa-1.0-py3.7.egg（zip压缩文件）， 文件名格式就是”应用名-版本号-Python版本.egg”。</p>
 <p>当前目录多了”build”和”MyApp.egg-info”子目录来存放打包的中间结果。</p>
 <h5>安装</h5>
@@ -264,7 +258,6 @@ pip install aaa-1.0-py3.7.wheel
 <span class="c1"># 或者</span>
 python setup.py install
 </code></pre></div>
-
 
 <h3>通用命令</h3>
 <ul>

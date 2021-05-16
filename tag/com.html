@@ -135,7 +135,7 @@
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reponse</span><span class="p">);</span>
     <span class="p">});</span>
 
-    <span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="p">{</span>
       <span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;sa&#39;</span><span class="p">,</span>
         <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;******&#39;</span><span class="p">,</span>
@@ -150,13 +150,12 @@
     <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;mssql.all&#39;</span><span class="p">,</span> <span class="nx">request</span><span class="p">);</span>
 </code></pre></div>
 
-
 <h4>访问access</h4>
 <div class="highlight"><pre><span></span><code><span class="c1">// main</span>
 <span class="c1">// node-adodb模块</span>
 <span class="nx">ipcMain</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;access.all&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">request</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">,</span> <span class="nx">request</span><span class="p">.</span><span class="nx">sql</span><span class="p">);</span>
-  <span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="sb">`Provider=Microsoft.Jet.OLEDB.4.0;Data Source=</span><span class="si">${</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">database</span><span class="si">}</span><span class="sb">;Jet OLEDB:System Database=</span><span class="si">${</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">systemdb</span><span class="si">}</span><span class="sb">;User ID=</span><span class="si">${</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">user</span><span class="si">}</span><span class="sb">;Password=</span><span class="si">${</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">password</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="sb">`Provider=Microsoft.Jet.OLEDB.4.0;Data Source=</span><span class="si">${</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">database</span><span class="si">}</span><span class="sb">;Jet OLEDB:System Database=</span><span class="si">${</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">systemdb</span><span class="si">}</span><span class="sb">;User ID=</span><span class="si">${</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">user</span><span class="si">}</span><span class="sb">;Password=</span><span class="si">${</span><span class="nx">request</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">password</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
   <span class="k">try</span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">conn</span> <span class="o">=</span> <span class="nx">adodb</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
     <span class="nx">conn</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">sql</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="p">=&gt;</span> <span class="p">{</span>
@@ -174,7 +173,7 @@
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reponse</span><span class="p">);</span>
     <span class="p">});</span>
 
-    <span class="kr">const</span> <span class="nx">requestAccess</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">requestAccess</span> <span class="o">=</span> <span class="p">{</span>
       <span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;******&#39;</span><span class="p">,</span>
         <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;******&#39;</span><span class="p">,</span>

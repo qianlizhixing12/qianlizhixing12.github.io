@@ -120,7 +120,6 @@
 <span class="n">solution2</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">custom</span><span class="p">)</span>
 </code></pre></div>
 
-
 <h2>Share</h2>
 <blockquote>
 <p>https://en.wikipedia.org/wiki/Unit_testing</p>
@@ -212,9 +211,8 @@
    </em>/
   static void increment_value_fail(void </strong>state) {
       (void) state;</p>
-<div class="highlight"><pre><span></span><code><span class="err">  increment_value(NULL);</span>
+<div class="highlight"><pre><span></span><code>  increment_value(NULL);
 </code></pre></div>
-
 
 <p>}</p>
 <p>/<strong>
@@ -225,9 +223,8 @@
    * pointer. */
   static void increment_value_assert(void </strong>state) {
       (void) state;</p>
-<div class="highlight"><pre><span></span><code><span class="err">  expect_assert_failure(increment_value(NULL));</span>
+<div class="highlight"><pre><span></span><code>  expect_assert_failure(increment_value(NULL));
 </code></pre></div>
-
 
 <p>}</p>
 <p>/<strong>
@@ -236,9 +233,8 @@
    </em>/
   static void decrement_value_fail(void </strong>state) {
       (void) state;</p>
-<div class="highlight"><pre><span></span><code><span class="err">  expect_assert_failure(decrement_value(NULL));</span>
+<div class="highlight"><pre><span></span><code>  expect_assert_failure(decrement_value(NULL));
 </code></pre></div>
-
 
 <p>}</p>
 <p>int main(void) {
@@ -259,13 +255,12 @@
       int x = 5;
       increment_value(&amp;x);
       printf(“5加1后：%d\n”, x);</p>
-<div class="highlight"><pre><span></span><code>  <span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
-  <span class="n">decrement_value</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="mi">9</span><span class="err">减</span><span class="mi">1</span><span class="err">后：</span><span class="o">%</span><span class="n">d</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code>  <span class="nv">int</span> <span class="nv">y</span> <span class="o">=</span> <span class="mi">9</span><span class="c1">;</span>
+  <span class="nv">decrement_value</span><span class="ss">(</span><span class="o">&amp;</span><span class="nv">y</span><span class="ss">)</span><span class="c1">;</span>
+  <span class="nv">printf</span><span class="ss">(</span>“<span class="mi">9</span>减<span class="mi">1</span>后：<span class="o">%</span><span class="nv">d</span>\<span class="nv">n</span>”, <span class="nv">y</span><span class="ss">)</span><span class="c1">;</span>
 
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="c1">;</span>
 </code></pre></div>
-
 
 <p>}
   ```</p>
@@ -297,25 +292,24 @@
     if (!value) {
       return false;
     }</p>
-<div class="highlight"><pre><span></span><code><span class="o">//</span><span class="err">正负标志在第一位跳过</span>
-<span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span> <span class="o">||</span> <span class="o">*</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span> <span class="err">{</span>
-  <span class="n">value</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="err">}</span>
+<div class="highlight"><pre><span></span><code><span class="o">//</span>正负标志在第一位跳过
+<span class="k">if</span> <span class="ss">(</span><span class="o">*</span><span class="nv">value</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">-</span><span class="s1">&#39;</span> <span class="o">||</span> <span class="o">*</span><span class="nv">value</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">+</span><span class="s1">&#39;</span><span class="ss">)</span> {
+  <span class="nv">value</span> <span class="o">+=</span> <span class="mi">1</span><span class="c1">;</span>
+}
 
-<span class="nb">int</span> <span class="k">position</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="n">while</span> <span class="p">(</span><span class="o">*</span><span class="n">value</span><span class="p">)</span> <span class="err">{</span>
-  <span class="nb">char</span> <span class="k">c</span> <span class="o">=</span> <span class="o">*</span><span class="n">value</span><span class="p">;</span>
-  <span class="o">//</span><span class="err">数字</span>
-  <span class="k">if</span> <span class="p">(</span><span class="k">c</span> <span class="o">&lt;</span> <span class="s1">&#39;0&#39;</span> <span class="o">||</span> <span class="k">c</span> <span class="o">&gt;</span> <span class="s1">&#39;9&#39;</span><span class="p">)</span> <span class="err">{</span>
-    <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
-  <span class="err">}</span>
-  <span class="k">position</span><span class="o">++</span><span class="p">;</span>
-  <span class="n">value</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="err">}</span>
+<span class="nv">int</span> <span class="nv">position</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">;</span>
+<span class="k">while</span> <span class="ss">(</span><span class="o">*</span><span class="nv">value</span><span class="ss">)</span> {
+  <span class="nv">char</span> <span class="nv">c</span> <span class="o">=</span> <span class="o">*</span><span class="nv">value</span><span class="c1">;</span>
+  <span class="o">//</span>数字
+  <span class="k">if</span> <span class="ss">(</span><span class="nv">c</span> <span class="o">&lt;</span> <span class="s1">&#39;</span><span class="s">0</span><span class="s1">&#39;</span> <span class="o">||</span> <span class="nv">c</span> <span class="o">&gt;</span> <span class="s1">&#39;</span><span class="s">9</span><span class="s1">&#39;</span><span class="ss">)</span> {
+    <span class="k">return</span> <span class="nv">false</span><span class="c1">;</span>
+  }
+  <span class="nv">position</span><span class="o">++</span><span class="c1">;</span>
+  <span class="nv">value</span> <span class="o">+=</span> <span class="mi">1</span><span class="c1">;</span>
+}
 
-<span class="k">return</span> <span class="k">position</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">return</span> <span class="nv">position</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="c1">;</span>
 </code></pre></div>
-
 
 <p>}</p>
 <p>/<em>
@@ -361,9 +355,8 @@
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_isValidNum_1), cmocka_unit_test(test_isValidNum_2),
         cmocka_unit_test(test_isValidNum_3), cmocka_unit_test(isValidNum_4)};</p>
-<div class="highlight"><pre><span></span><code><span class="err">return cmocka_run_group_tests(tests, NULL, NULL);</span>
+<div class="highlight"><pre><span></span><code><span class="k">return</span> <span class="nv">cmocka_run_group_tests</span><span class="ss">(</span><span class="nv">tests</span>, <span class="nv">NULL</span>, <span class="nv">NULL</span><span class="ss">)</span><span class="c1">;</span>
 </code></pre></div>
-
 
 <p>}</p>
 <p>/<em>
@@ -375,18 +368,17 @@
   #include "tool.h"</p>
 <p>int main(int argc, char **argv) {
     char tmp[255];</p>
-<div class="highlight"><pre><span></span><code><span class="n">while</span> <span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="err">{</span>
-  <span class="n">readline</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">isValidNum</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span> <span class="err">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="ss">&quot;%s is number!\n&quot;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
-  <span class="err">}</span> <span class="k">else</span> <span class="err">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="ss">&quot;%s is not number!\n&quot;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
-  <span class="err">}</span>
-<span class="err">}</span>
+<div class="highlight"><pre><span></span><code><span class="k">while</span> <span class="ss">(</span><span class="nv">true</span><span class="ss">)</span> {
+  <span class="nv">readline</span><span class="ss">(</span><span class="nv">tmp</span><span class="ss">)</span><span class="c1">;</span>
+  <span class="k">if</span> <span class="ss">(</span><span class="nv">isValidNum</span><span class="ss">(</span><span class="nv">tmp</span><span class="ss">))</span> {
+    <span class="nv">printf</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">%s is number!</span><span class="se">\n</span><span class="s2">&quot;</span>, <span class="nv">tmp</span><span class="ss">)</span><span class="c1">;</span>
+  } <span class="k">else</span> {
+    <span class="nv">printf</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">%s is not number!</span><span class="se">\n</span><span class="s2">&quot;</span>, <span class="nv">tmp</span><span class="ss">)</span><span class="c1">;</span>
+  }
+}
 
-<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">return</span> <span class="mi">0</span><span class="c1">;</span>
 </code></pre></div>
-
 
 <p>}
   ```</p>
@@ -431,62 +423,58 @@
   }</p>
 <p>#widget.py
   class Widget():</p>
-<div class="highlight"><pre><span></span><code><span class="n">def</span> <span class="n">__init__</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-  <span class="k">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-  <span class="k">self</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">50</span>
-  <span class="k">self</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">50</span>
+<div class="highlight"><pre><span></span><code><span class="nv">def</span> <span class="nv">__init__</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">name</span><span class="ss">)</span>:
+  <span class="nv">self</span>.<span class="nv">name</span> <span class="o">=</span> <span class="nv">name</span>
+  <span class="nv">self</span>.<span class="nv">width</span> <span class="o">=</span> <span class="mi">50</span>
+  <span class="nv">self</span>.<span class="nv">height</span> <span class="o">=</span> <span class="mi">50</span>
 
-<span class="n">def</span> <span class="k">size</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
-  <span class="k">return</span> <span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="k">self</span><span class="p">.</span><span class="n">height</span><span class="p">)</span>
+<span class="nv">def</span> <span class="nv">size</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
+  <span class="k">return</span> <span class="ss">(</span><span class="nv">self</span>.<span class="nv">width</span>, <span class="nv">self</span>.<span class="nv">height</span><span class="ss">)</span>
 
-<span class="n">def</span> <span class="n">resize</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
-  <span class="k">self</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
-  <span class="k">self</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+<span class="nv">def</span> <span class="nv">resize</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">width</span>, <span class="nv">height</span><span class="ss">)</span>:
+  <span class="nv">self</span>.<span class="nv">width</span> <span class="o">=</span> <span class="nv">width</span>
+  <span class="nv">self</span>.<span class="nv">height</span> <span class="o">=</span> <span class="nv">height</span>
 </code></pre></div>
-
 
 <p>#demo.py
   import unittest
   from widget import Widget</p>
 <p># unittest.TestCase提供了测试样例运行的基本框架
   class Demo(unittest.TestCase):</p>
-<div class="highlight"><pre><span></span><code><span class="o">#</span> <span class="err">每一个测试用例必须以</span><span class="n">test开头</span><span class="err">，</span><span class="n">assert开头方法比较预期值和运行值</span>
-<span class="n">def</span> <span class="n">test_upper</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
-  <span class="k">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">.</span><span class="k">upper</span><span class="p">(),</span> <span class="s1">&#39;FOO&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code># 每一个测试用例必须以test开头，assert开头方法比较预期值和运行值
+def test_upper(self):
+  self.assertEqual(&#39;foo&#39;.upper(), &#39;FOO&#39;)
 
-<span class="n">def</span> <span class="n">testadd</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
-  <span class="k">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)</span>
+def testadd(self):
+  self.assertTrue(2 + 3 == 6)
 
-<span class="n">def</span> <span class="n">tstadd</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
-  <span class="k">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span>
+def tstadd(self):
+  self.assertTrue(2 + 3 == 5)
 </code></pre></div>
-
 
 <p>class Tst(unittest.TestCase):</p>
-<div class="highlight"><pre><span></span><code><span class="err">def testin(self):</span>
-<span class="err">  self.assertNotIn(&#39;n&#39;, [&#39;h&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;, &#39;o&#39;])</span>
+<div class="highlight"><pre><span></span><code>def testin(self):
+  self.assertNotIn(&#39;n&#39;, [&#39;h&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;, &#39;o&#39;])
 </code></pre></div>
-
 
 <p>class WidgetTest(unittest.TestCase):</p>
-<div class="highlight"><pre><span></span><code><span class="o">#</span><span class="err">前置操作，创建资源等</span>
-<span class="n">def</span> <span class="n">setUp</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
-  <span class="k">self</span><span class="p">.</span><span class="n">widget</span> <span class="o">=</span> <span class="n">Widget</span><span class="p">(</span><span class="s1">&#39;The widget&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code>#前置操作，创建资源等
+def setUp(self):
+  self.widget = Widget(&#39;The widget&#39;)
 
-<span class="n">def</span> <span class="n">test_default_widget_size</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
-  <span class="n">value</span> <span class="o">=</span> <span class="k">self</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="k">size</span><span class="p">()</span>
-  <span class="k">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="s1">&#39;incorrect default size&#39;</span><span class="p">)</span>
+def test_default_widget_size(self):
+  value = self.widget.size()
+  self.assertEqual(value, (50, 50), &#39;incorrect default size&#39;)
 
-<span class="n">def</span> <span class="n">test_widget_resize</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
-  <span class="k">self</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
-  <span class="n">value</span> <span class="o">=</span> <span class="k">self</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="k">size</span><span class="p">()</span>
-  <span class="k">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="s1">&#39;wrong size after resize&#39;</span><span class="p">)</span>
+def test_widget_resize(self):
+  self.widget.resize(100, 150)
+  value = self.widget.size()
+  self.assertEqual(value, (100, 150), &#39;wrong size after resize&#39;)
 
-<span class="o">#</span><span class="err">后置操作，清理资源等</span>
-<span class="n">def</span> <span class="n">tearDown</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
-  <span class="n">pass</span>
+#后置操作，清理资源等
+def tearDown(self):
+  pass
 </code></pre></div>
-
 
 <p>if <strong>name</strong> == '<strong>main</strong>':
     #launch配置-v显示更详细信息
@@ -566,10 +554,9 @@
 <p>def test_answer():
     assert inc(3) == 5</p>
 <p>class TestDemo():</p>
-<div class="highlight"><pre><span></span><code><span class="err">def testinc(self):</span>
-<span class="err">  assert inc(8) == 9</span>
+<div class="highlight"><pre><span></span><code>def testinc(self):
+  assert inc(8) == 9
 </code></pre></div>
-
 
 <p>'''
   =========================================================== test session starts ============================================================
@@ -579,14 +566,12 @@
 <p>test_demo.py F.                                                                                                                       [100%] </p>
 <p>================================================================= FAILURES ================================================================= 
   <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong> test_answer <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>_ </p>
-<div class="highlight"><pre><span></span><code><span class="err">  def test_answer():</span>
+<div class="highlight"><pre><span></span><code>  def test_answer():
 </code></pre></div>
-
 
 <blockquote>
-<div class="highlight"><pre><span></span><code><span class="err">assert inc(3) == 5</span>
+<div class="highlight"><pre><span></span><code>assert inc(3) == 5
 </code></pre></div>
-
 
 <p>E     assert 4 == 5
   E      +  where 4 = inc(3)</p>

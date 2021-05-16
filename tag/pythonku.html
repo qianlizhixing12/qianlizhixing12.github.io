@@ -50,8 +50,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="/artsdi-er-shi-qi-zhou.html"><h1>ARTS第二十七周</h1></a>
-2021-05-10
+            <a href="/artsdi-er-shi-ba-zhou.html"><h1>ARTS第二十八周</h1></a>
+2021-05-17
 
 <a class="url fn">qianlizhixing</a>
 
@@ -60,6 +60,140 @@
         </div>
         
         <div><h2>Algorithm</h2>
+<p>leetcode 1734 解码异或后的排列</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/decode-xored-permutation/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/1734.py">解题</a></li>
+<li>位运算</li>
+</ul>
+<h2>Review(websocket)</h2>
+<blockquote>
+<p>http://www.websocket.org/quantum.html</p>
+</blockquote>
+<h3>轮询、长轮询、流方式</h3>
+<ul>
+<li>通常，当浏览器访问一个网页时，一个HTTP请求被发送到承载该网页的web服务器,web服务器确认这个请求并发回响应。如果想获得最新的实时信息，可以不断手动刷新页面，但这显然不是一个很好的解决方案。</li>
+<li>目前提供实时web应用程序的尝试主要围绕轮询和其他服务器端推技术，最值得注意的是Comet，它延迟了向客户机传递消息的HTTP响应的完成。基于comet的推送通常用JavaScript实现，并使用长轮询或流媒体等连接策略。</li>
+<li>通过轮询，浏览器定期发送HTTP请求并立即接收响应，这种技术是浏览器提供实时信息的第一次尝试。如果知道确切的消息传递间隔，这是一个很好的解决方案。然而，实时数据往往不是那么可预测的，使得不必要的请求不可避免，因此，许多连接在低消息率的情况下被不必要地打开和关闭。</li>
+<li>使用长轮询，浏览器向服务器发送请求，服务器将请求保持打开一段时间。如果在这段时间内收到通知，将向客户端发送包含消息的响应。如果在设置的时间内没有收到通知，服务器将发送一个响应来终止打开的请求。但是，重要的是要理解，当消息量很大时，长轮询与传统轮询相比并没有提供任何实质性的性能改进。事实上，情况可能会更糟，因为长期投票可能会失去控制，变成一个不受控制的、连续的即时投票循环。</li>
+<li>使用流媒体，浏览器发送一个完整的请求，但服务器发送并维护一个打开的响应，该响应不断更新并无限期地(或在一段时间内)保持打开状态。然后，每当准备发送消息时，响应就会更新，但是服务器永远不会发出完成响应的信号，因此保持连接打开以交付未来的消息。但是，由于流媒体仍然封装在HTTP中，中间的防火墙和代理服务器可能会选择缓冲响应，从而增加了消息传递的延迟。因此，如果检测到缓冲代理服务器，许多流Comet解决方案会退回到长轮询。或者，可以使用TLS (SSL)连接来避免缓冲响应，但在这种情况下，每个连接的建立和拆除会增加可用服务器资源的负担。</li>
+<li>最终，所有这些提供实时数据的方法都涉及到HTTP请求和响应头，这些头包含了大量额外的、不必要的头数据，并引入了延迟。最重要的是，全双工连接需要的不仅仅是从服务器到客户机的下行连接。为了在半双工HTTP上模拟全双工通信，今天的许多解决方案使用两个连接:一个用于下游，一个用于上游。这两个连接的维护和协调带来了巨大的资源消耗开销，并增加了很多复杂性。简单地说，HTTP不是为实时、全双工通信而设计的，如下图所示，这显示了构建使用半双工HTTP上的发布/订阅模型从后端数据源显示实时数据的Comet web应用程序的复杂性。</li>
+</ul>
+<h3>HTML5 WebSocket</h3>
+<ul>
+<li>HTML5 Web Sockets代表了Web通信的下一个进化——通过Web上的单个套接字操作的全双工、双向通信通道。HTML5 Web Sockets提供了一个真正的标准，你可以用它来构建可伸缩的实时Web应用程序。此外，由于它提供了浏览器本地的套接字，因此消除了Comet解决方案容易出现的许多问题。Web Sockets消除了开销并显著降低了复杂性。</li>
+<li>目前，只有谷歌的Chrome浏览器原生支持HTML5 Web Sockets，但其他浏览器很快也会跟进。然而，为了解决这个限制，Kaazing WebSocket Gateway为所有老式浏览器(即5.5+，Firefox 1.5+， Safari 3.0+和Opera 9.5+)提供了完整的WebSocket模拟，所以你现在就可以开始使用HTML5 WebSocket api了。</li>
+</ul>
+<h2>Tip(inspect.ismethod)</h2>
+<ul>
+<li>python中函数和方法的不同，函数可以独立存在，方法和对象绑定在一起</li>
+<li>inspect.ismethod判断方法时，注意对象</li>
+<li>方法带有__self__，即绑定的对象</li>
+</ul>
+<h2>Share(websocket建立连接)</h2>
+<h3>http websocket对比</h3>
+<ul>
+<li>http只能是客户端发起请求，服务端被动响应；因此如果要实时获取服务端某些数据，客户端只能轮询发请求</li>
+<li>websocket弱化了客户端服务端的区别，双方可以主动发信息</li>
+<li>二者都是构建在tcp协议之上，实现在socket编程之上</li>
+</ul>
+<h3>websocket建立连接</h3>
+<h4>客户端消息格式</h4>
+<ul>
+<li>"ws:" "//" host [ ":" port ] path [ "?" query ] 默认 port 端口 80</li>
+<li>"wss:" "//" host [ ":" port ] path [ "?" query ] 默认 port 端口 443</li>
+<li>客户端提供信息（放在http或https头headers里面）</li>
+<li>host 与 port：主机名与端口</li>
+<li>shema：是否基于 SSL</li>
+<li>访问资源：URI</li>
+<li>握手随机数：Sec-WebSocket-Key</li>
+<li>选择子协议： Sec-WebSocket-Protocol</li>
+<li>扩展协议： Sec-WebSocket-Extensions</li>
+<li>CORS 跨域：Origin</li>
+</ul>
+<h4>服务端消息格式</h4>
+<ul>
+<li>HTTP/1.1 101 Web Socket Protocol Handshake // 101连接建立成功</li>
+<li>Connection: upgrade</li>
+<li>握手随机数：Sec-WebSocket-Key</li>
+<li>Upgrade: websocket</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">encodebytes</span> <span class="k">as</span> <span class="n">base64encode</span>
+<span class="kn">import</span> <span class="nn">websocket</span>
+
+
+<span class="k">def</span> <span class="nf">do_request_</span><span class="p">():</span>
+    <span class="c1"># ws = websocket.create_connection(&quot;wss://echo.websocket.org&quot;)</span>
+    <span class="n">ws</span> <span class="o">=</span> <span class="n">websocket</span><span class="o">.</span><span class="n">create_connection</span><span class="p">(</span><span class="s2">&quot;ws://echo.websocket.org&quot;</span><span class="p">)</span>
+    <span class="n">ws</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;test aaa!&quot;</span><span class="p">)</span>
+    <span class="n">ws</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;test bbb!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ws</span><span class="o">.</span><span class="n">recv</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ws</span><span class="o">.</span><span class="n">recv</span><span class="p">())</span>
+
+
+<span class="k">def</span> <span class="nf">_create_sec_websocket_key</span><span class="p">():</span>
+    <span class="n">randomness</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">base64encode</span><span class="p">(</span><span class="n">randomness</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">get_headers</span><span class="p">():</span>
+    <span class="n">websocket_key</span> <span class="o">=</span> <span class="n">_create_sec_websocket_key</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">websocket_key</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;----&quot;</span><span class="p">)</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Host&quot;</span><span class="p">:</span> <span class="s2">&quot;echo.websocket.org&quot;</span><span class="p">,</span> <span class="s2">&quot;Sec-WebSocket-Version&quot;</span><span class="p">:</span> <span class="s2">&quot;13&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;Sec-WebSocket-Key&quot;</span><span class="p">:</span> <span class="n">websocket_key</span><span class="p">,</span> <span class="s2">&quot;Connection&quot;</span><span class="p">:</span> <span class="s2">&quot;keep-alive, Upgrade&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;Sec-WebSocket-Extensions&quot;</span><span class="p">:</span> <span class="s2">&quot;permessage-deflate&quot;</span><span class="p">,</span> <span class="s2">&quot;Upgrade&quot;</span><span class="p">:</span> <span class="s2">&quot;websocket&quot;</span><span class="p">}</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="k">return</span> <span class="s2">&quot;GET / HTTP/1.1</span><span class="se">\r\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">do_request</span><span class="p">():</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="n">get_headers</span><span class="p">()</span>
+        <span class="c1"># client.connect((&quot;echo.websocket.org&quot;, 80))</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s2">&quot;121.40.165.18&quot;</span><span class="p">,</span> <span class="mi">8800</span><span class="p">))</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">headers</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;error </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">do_request</span><span class="p">()</span>
+
+
+<span class="c1"># 输出</span>
+<span class="c1"># Sec-WebSocket-Accept:  gk6AiBD48FKZC2RUFMH/ow==</span>
+<span class="c1"># ----</span>
+<span class="c1"># HTTP/1.1 101 Switching Protocols</span>
+<span class="c1"># Upgrade: websocket</span>
+<span class="c1"># Connection: Upgrade</span>
+<span class="c1"># Sec-WebSocket-Accept: e5/mWaJy8r13Fsq0la9Rql8R27k=</span>
+</code></pre></div></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-er-shi-qi-zhou.html"><h2>ARTS第二十七周</h2></a>
+        <div class= "well small"> 2021-05-10
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
 <p>leetcode 403 青蛙过河</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/frog-jump/">原题</a></li>
@@ -77,406 +211,10 @@
 <p><a href="https://camo.githubusercontent.com/1cd1a48c7e02ffee8f619d95fdec31fd05196940a98805770643d00b4c7da8be/687474703a2f2f6c69766f7261732e6769746875622e696f2f626c6f672f7669727475616c2d646f6d2f736f72742d7461626c652e706e67"><img alt="sort-table" src="https://camo.githubusercontent.com/1cd1a48c7e02ffee8f619d95fdec31fd05196940a98805770643d00b4c7da8be/687474703a2f2f6c69766f7261732e6769746875622e696f2f626c6f672f7669727475616c2d646f6d2f736f72742d7461626c652e706e67"></a></p>
 <p>这个应用程序看起来很简单，你可以想出好几种不同的方式来写。最容易想到的可能是，在你的 JavaScript 代码里面存储这样的数据：</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sortKey</span> <span class="o">=</span> <span class="s2">&quot;new&quot;</span> <span class="c1">// 排序的字段，新增（new）、取消（cancel）、净关注（gain）、累积（cumulate）人数</span>
-<span class="kd">var</span> <span class="nx">sortType</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">// 升序还是逆序</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[{...},</span> <span class="p">{...},</span> <span class="p">{..},</span> <span class="p">..]</span> <span class="c1">// 表格数据</span>
-</code></pre></div>
-
-
-<p>用三个字段分别存储当前排序的字段、排序方向、还有表格数据；然后给表格头部加点击事件：当用户点击特定的字段的时候，根据上面几个字段存储的内容来对内容进行排序，然后用 JS 或者 jQuery 操作 DOM，更新页面的排序状态（表头的那几个箭头表示当前排序状态，也需要更新）和表格内容。</p>
-<p>这样做会导致的后果就是，随着应用程序越来越复杂，需要在JS里面维护的字段也越来越多，需要监听事件和在事件回调用更新页面的DOM操作也越来越多，应用程序会变得非常难维护。后来人们使用了 MVC、MVP 的架构模式，希望能从代码组织方式来降低维护这种复杂应用程序的难度。但是 MVC 架构没办法减少你所维护的状态，也没有降低状态更新你需要对页面的更新操作（前端来说就是DOM操作），你需要操作的DOM还是需要操作，只是换了个地方。</p>
-<p>既然状态改变了要操作相应的DOM元素，为什么不做一个东西可以让视图和状态进行绑定，状态变更了视图自动变更，就不用手动更新页面了。这就是后来人们想出了 MVVM 模式，只要在模版中声明视图组件是和什么状态进行绑定的，双向绑定引擎就会在状态更新的时候自动更新视图（关于MV*模式的内容，可以看<a href="https://github.com/livoras/blog/issues/11">这篇介绍</a>）。</p>
-<p>MVVM 可以很好的降低我们维护状态 -&gt; 视图的复杂程度（大大减少代码中的视图更新逻辑）。但是这不是唯一的办法，还有一个非常直观的方法，可以大大降低视图更新的操作：一旦状态发生了变化，就用模版引擎重新渲染<strong>整个视图</strong>，然后用新的视图更换掉旧的视图。就像上面的表格，当用户点击的时候，还是在JS里面更新状态，但是页面更新就不用手动操作 DOM 了，直接把整个表格用模版引擎重新渲染一遍，然后设置一下<code>innerHTML</code>就完事了。</p>
-<p>听到这样的做法，经验丰富的你一定第一时间意识这样的做法会导致很多的问题。最大的问题就是这样做会很慢，因为即使一个小小的状态变更都要重新构造整棵 DOM，性价比太低；而且这样做的话，<code>input</code>和<code>textarea</code>的会失去原有的焦点。最后的结论会是：对于局部的小视图的更新，没有问题（Backbone就是这么干的）；但是对于大型视图，如全局应用状态变更的时候，需要更新页面较多局部视图的时候，这样的做法不可取。</p>
-<p><strong>但是这里要明白和记住这种做法</strong>，因为后面你会发现，<strong>其实 Virtual DOM 就是这么做的，只是加了一些特别的步骤来避免了整棵 DOM 树变更</strong>。</p>
-<p>另外一点需要注意的就是，上面提供的几种方法，其实都在解决同一个问题：<strong>维护状态，更新视图</strong>。在一般的应用当中，如果能够很好方案来应对这个问题，那么就几乎降低了大部分复杂性。</p>
-<h3>Virtual DOM算法</h3>
-<p>DOM是很慢的。如果我们把一个简单的<code>div</code>元素的属性都打印出来，你会看到：</p>
-<p><a href="https://camo.githubusercontent.com/031ccafc5859e6eb7c9d8dc528caeb5c239b1e86060e16197a5982341b8df363/687474703a2f2f6c69766f7261732e6769746875622e696f2f626c6f672f7669727475616c2d646f6d2f646f6d2d617474726962757465732e706e67"><img alt="dom-attr" src="https://camo.githubusercontent.com/031ccafc5859e6eb7c9d8dc528caeb5c239b1e86060e16197a5982341b8df363/687474703a2f2f6c69766f7261732e6769746875622e696f2f626c6f672f7669727475616c2d646f6d2f646f6d2d617474726962757465732e706e67"></a></p>
-<p>而这仅仅是第一层。真正的 DOM 元素非常庞大，这是因为标准就是这么设计的。而且操作它们的时候你要小心翼翼，轻微的触碰可能就会导致页面重排，这可是杀死性能的罪魁祸首。</p>
-<p>相对于 DOM 对象，原生的 JavaScript 对象处理起来更快，而且更简单。DOM 树上的结构、属性信息我们都可以很容易地用 JavaScript 对象表示出来：</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="c1">// 节点标签名</span>
-  <span class="nx">props</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// DOM的属性，用一个对象存储键值对</span>
-    <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;list&#39;</span>
-  <span class="p">},</span>
-  <span class="nx">children</span><span class="o">:</span> <span class="p">[</span> <span class="c1">// 该节点的子节点</span>
-    <span class="p">{</span><span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span><span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Item 1&quot;</span><span class="p">]},</span>
-    <span class="p">{</span><span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span><span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Item 2&quot;</span><span class="p">]},</span>
-    <span class="p">{</span><span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span><span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Item 3&quot;</span><span class="p">]},</span>
-  <span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div>
-
-
-<p>上面对应的HTML写法是：</p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;list&#39;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&#39;item&#39;</span><span class="p">&gt;</span>Item 1<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&#39;item&#39;</span><span class="p">&gt;</span>Item 2<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&#39;item&#39;</span><span class="p">&gt;</span>Item 3<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-</code></pre></div>
-
-
-<p>既然原来 DOM 树的信息都可以用 JavaScript 对象来表示，反过来，你就可以根据这个用 JavaScript 对象表示的树结构来构建一棵真正的DOM树。</p>
-<p>之前的章节所说的，状态变更-&gt;重新渲染整个视图的方式可以稍微修改一下：用 JavaScript 对象表示 DOM 信息和结构，当状态变更的时候，重新渲染这个 JavaScript 的对象结构。当然这样做其实没什么卵用，因为真正的页面其实没有改变。</p>
-<p>但是可以用新渲染的对象树去和旧的树进行对比，记录这两棵树差异。记录下来的不同就是我们需要对页面真正的 DOM 操作，然后把它们应用在真正的 DOM 树上，页面就变更了。这样就可以做到：视图的结构确实是整个全新渲染了，但是最后操作DOM的时候确实只变更有不同的地方。</p>
-<p>这就是所谓的 Virtual DOM 算法。包括几个步骤：</p>
-<ol>
-<li>用 JavaScript 对象结构表示 DOM 树的结构；然后用这个树构建一个真正的 DOM 树，插到文档当中</li>
-<li>当状态变更的时候，重新构造一棵新的对象树。然后用新的树和旧的树进行比较，记录两棵树差异</li>
-<li>把2所记录的差异应用到步骤1所构建的真正的DOM树上，视图就更新了</li>
-</ol>
-<p>Virtual DOM 本质上就是在 JS 和 DOM 之间做了一个缓存。可以类比 CPU 和硬盘，既然硬盘这么慢，我们就在它们之间加个缓存：既然 DOM 这么慢，我们就在它们 JS 和 DOM 之间加个缓存。CPU（JS）只操作内存（Virtual DOM），最后的时候再把变更写入硬盘（DOM）。</p>
-<h3>算法实现</h3>
-<h4>步骤一：用JS对象模拟DOM树</h4>
-<p>用 JavaScript 来表示一个 DOM 节点是很简单的事情，你只需要记录它的节点类型、属性，还有子节点：</p>
-<p>element.js</p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">Element</span> <span class="p">(</span><span class="nx">tagName</span><span class="p">,</span> <span class="nx">props</span><span class="p">,</span> <span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">this</span><span class="p">.</span><span class="nx">tagName</span> <span class="o">=</span> <span class="nx">tagName</span>
-  <span class="k">this</span><span class="p">.</span><span class="nx">props</span> <span class="o">=</span> <span class="nx">props</span>
-  <span class="k">this</span><span class="p">.</span><span class="nx">children</span> <span class="o">=</span> <span class="nx">children</span>
-<span class="p">}</span>
-
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">tagName</span><span class="p">,</span> <span class="nx">props</span><span class="p">,</span> <span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="k">new</span> <span class="nx">Element</span><span class="p">(</span><span class="nx">tagName</span><span class="p">,</span> <span class="nx">props</span><span class="p">,</span> <span class="nx">children</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div>
-
-
-<p>例如上面的 DOM 结构就可以简单的表示：</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./element&#39;</span><span class="p">)</span>
-
-<span class="kd">var</span> <span class="nx">ul</span> <span class="o">=</span> <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;list&#39;</span><span class="p">},</span> <span class="p">[</span>
-  <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="p">{</span><span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;Item 1&#39;</span><span class="p">]),</span>
-  <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="p">{</span><span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;Item 2&#39;</span><span class="p">]),</span>
-  <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="p">{</span><span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;Item 3&#39;</span><span class="p">])</span>
-<span class="p">])</span>
-</code></pre></div>
-
-
-<p>现在<code>ul</code>只是一个 JavaScript 对象表示的 DOM 结构，页面上并没有这个结构。我们可以根据这个<code>ul</code>构建真正的<code>&lt;ul&gt;</code>：</p>
-<div class="highlight"><pre><span></span><code><span class="nx">Element</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">render</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tagName</span><span class="p">)</span> <span class="c1">// 根据tagName构建</span>
-  <span class="kd">var</span> <span class="nx">props</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span>
-
-  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">propName</span> <span class="k">in</span> <span class="nx">props</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 设置节点的DOM属性</span>
-    <span class="kd">var</span> <span class="nx">propValue</span> <span class="o">=</span> <span class="nx">props</span><span class="p">[</span><span class="nx">propName</span><span class="p">]</span>
-    <span class="nx">el</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="nx">propName</span><span class="p">,</span> <span class="nx">propValue</span><span class="p">)</span>
-  <span class="p">}</span>
-
-  <span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">children</span> <span class="o">||</span> <span class="p">[]</span>
-
-  <span class="nx">children</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">child</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">childEl</span> <span class="o">=</span> <span class="p">(</span><span class="nx">child</span> <span class="k">instanceof</span> <span class="nx">Element</span><span class="p">)</span>
-      <span class="o">?</span> <span class="nx">child</span><span class="p">.</span><span class="nx">render</span><span class="p">()</span> <span class="c1">// 如果子节点也是虚拟DOM，递归构建DOM节点</span>
-      <span class="o">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createTextNode</span><span class="p">(</span><span class="nx">child</span><span class="p">)</span> <span class="c1">// 如果字符串，只构建文本节点</span>
-    <span class="nx">el</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">childEl</span><span class="p">)</span>
-  <span class="p">})</span>
-
-  <span class="k">return</span> <span class="nx">el</span>
-<span class="p">}</span>
-</code></pre></div>
-
-
-<p><code>render</code>方法会根据<code>tagName</code>构建一个真正的DOM节点，然后设置这个节点的属性，最后递归地把自己的子节点也构建起来。所以只需要：</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">ulRoot</span> <span class="o">=</span> <span class="nx">ul</span><span class="p">.</span><span class="nx">render</span><span class="p">()</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">ulRoot</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p>上面的<code>ulRoot</code>是真正的DOM节点，把它塞入文档中，这样<code>body</code>里面就有了真正的<code>&lt;ul&gt;</code>的DOM结构：</p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;list&#39;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&#39;item&#39;</span><span class="p">&gt;</span>Item 1<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&#39;item&#39;</span><span class="p">&gt;</span>Item 2<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&#39;item&#39;</span><span class="p">&gt;</span>Item 3<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-</code></pre></div>
-
-
-<p>完整代码可见 <a href="https://github.com/livoras/simple-virtual-dom/blob/master/lib/element.js">element.js</a>。</p>
-<h4>步骤二：比较两棵虚拟DOM树的差异</h4>
-<p>正如你所预料的，比较两棵DOM树的差异是 Virtual DOM 算法最核心的部分，这也是所谓的 Virtual DOM 的 diff 算法。两个树的完全的 diff 算法是一个时间复杂度为 O(n^3) 的问题。但是在前端当中，你很少会跨越层级地移动DOM元素。所以 Virtual DOM 只会对同一个层级的元素进行对比：</p>
-<p><a href="https://camo.githubusercontent.com/8589323ee9f10643f1c1e0b98b7676ca3a1e4d6c5ef29e99ff028d1dcbf9c5da/687474703a2f2f6c69766f7261732e6769746875622e696f2f626c6f672f7669727475616c2d646f6d2f636f6d706172652d696e2d6c6576656c2e706e67"><img alt="compare-in-level" src="https://camo.githubusercontent.com/8589323ee9f10643f1c1e0b98b7676ca3a1e4d6c5ef29e99ff028d1dcbf9c5da/687474703a2f2f6c69766f7261732e6769746875622e696f2f626c6f672f7669727475616c2d646f6d2f636f6d706172652d696e2d6c6576656c2e706e67"></a></p>
-<p>上面的<code>div</code>只会和同一层级的<code>div</code>对比，第二层级的只会跟第二层级对比。这样算法复杂度就可以达到 O(n)。</p>
-<h5>深度优先遍历，记录差异</h5>
-<p>在实际的代码中，会对新旧两棵树进行一个深度优先的遍历，这样每个节点都会有一个唯一的标记：</p>
-<p><a href="https://camo.githubusercontent.com/b698f28c8fc76b4ee9a1c92ec9c29ab56fd246f60a1f207099e6b7e89c62a52c/687474703a2f2f6c69766f7261732e6769746875622e696f2f626c6f672f7669727475616c2d646f6d2f6466732d77616c6b2e706e67"><img alt="dfs-walk" src="https://camo.githubusercontent.com/b698f28c8fc76b4ee9a1c92ec9c29ab56fd246f60a1f207099e6b7e89c62a52c/687474703a2f2f6c69766f7261732e6769746875622e696f2f626c6f672f7669727475616c2d646f6d2f6466732d77616c6b2e706e67"></a></p>
-<p>在深度优先遍历的时候，每遍历到一个节点就把该节点和新的的树进行对比。如果有差异的话就记录到一个对象里面。</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// diff 函数，对比两棵树</span>
-<span class="kd">function</span> <span class="nx">diff</span> <span class="p">(</span><span class="nx">oldTree</span><span class="p">,</span> <span class="nx">newTree</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">// 当前节点的标志</span>
-  <span class="kd">var</span> <span class="nx">patches</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">// 用来记录每个节点差异的对象</span>
-  <span class="nx">dfsWalk</span><span class="p">(</span><span class="nx">oldTree</span><span class="p">,</span> <span class="nx">newTree</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span>
-  <span class="k">return</span> <span class="nx">patches</span>
-<span class="p">}</span>
-
-<span class="c1">// 对两棵树进行深度优先遍历</span>
-<span class="kd">function</span> <span class="nx">dfsWalk</span> <span class="p">(</span><span class="nx">oldNode</span><span class="p">,</span> <span class="nx">newNode</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// 对比oldNode和newNode的不同，记录下来</span>
-  <span class="nx">patches</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">[...]</span>
-
-  <span class="nx">diffChildren</span><span class="p">(</span><span class="nx">oldNode</span><span class="p">.</span><span class="nx">children</span><span class="p">,</span> <span class="nx">newNode</span><span class="p">.</span><span class="nx">children</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">// 遍历子节点</span>
-<span class="kd">function</span> <span class="nx">diffChildren</span> <span class="p">(</span><span class="nx">oldChildren</span><span class="p">,</span> <span class="nx">newChildren</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">leftNode</span> <span class="o">=</span> <span class="kc">null</span>
-  <span class="kd">var</span> <span class="nx">currentNodeIndex</span> <span class="o">=</span> <span class="nx">index</span>
-  <span class="nx">oldChildren</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">newChild</span> <span class="o">=</span> <span class="nx">newChildren</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
-    <span class="nx">currentNodeIndex</span> <span class="o">=</span> <span class="p">(</span><span class="nx">leftNode</span> <span class="o">&amp;&amp;</span> <span class="nx">leftNode</span><span class="p">.</span><span class="nx">count</span><span class="p">)</span> <span class="c1">// 计算节点的标识</span>
-      <span class="o">?</span> <span class="nx">currentNodeIndex</span> <span class="o">+</span> <span class="nx">leftNode</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span>
-      <span class="o">:</span> <span class="nx">currentNodeIndex</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="nx">dfsWalk</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">newChild</span><span class="p">,</span> <span class="nx">currentNodeIndex</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span> <span class="c1">// 深度遍历子节点</span>
-    <span class="nx">leftNode</span> <span class="o">=</span> <span class="nx">child</span>
-  <span class="p">})</span>
-<span class="p">}</span>
-</code></pre></div>
-
-
-<p>例如，上面的<code>div</code>和新的<code>div</code>有差异，当前的标记是0，那么：</p>
-<div class="highlight"><pre><span></span><code><span class="nx">patches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">difference</span><span class="p">},</span> <span class="p">{</span><span class="nx">difference</span><span class="p">},</span> <span class="p">...]</span> <span class="c1">// 用数组存储新旧节点的不同</span>
-</code></pre></div>
-
-
-<p>同理<code>p</code>是<code>patches[1]</code>，<code>ul</code>是<code>patches[3]</code>，类推。</p>
-<h5>差异类型</h5>
-<p>上面说的节点的差异指的是什么呢？对 DOM 操作可能会：</p>
-<ol>
-<li>替换掉原来的节点，例如把上面的<code>div</code>换成了<code>section</code></li>
-<li>移动、删除、新增子节点，例如上面<code>div</code>的子节点，把<code>p</code>和<code>ul</code>顺序互换</li>
-<li>修改了节点的属性</li>
-<li>对于文本节点，文本内容可能会改变。例如修改上面的文本节点2内容为<code>Virtual DOM 2</code>。</li>
-</ol>
-<p>所以我们定义了几种差异类型：</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">REPLACE</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="kd">var</span> <span class="nx">REORDER</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="kd">var</span> <span class="nx">PROPS</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="kd">var</span> <span class="nx">TEXT</span> <span class="o">=</span> <span class="mi">3</span>
-</code></pre></div>
-
-
-<p>对于节点替换，很简单。判断新旧节点的<code>tagName</code>和是不是一样的，如果不一样的说明需要替换掉。如<code>div</code>换成<code>section</code>，就记录下：</p>
-<div class="highlight"><pre><span></span><code><span class="nx">patches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span>
-  <span class="nx">type</span><span class="o">:</span> <span class="nx">REPALCE</span><span class="p">,</span>
-  <span class="nx">node</span><span class="o">:</span> <span class="nx">newNode</span> <span class="c1">// el(&#39;section&#39;, props, children)</span>
-<span class="p">}]</span>
-</code></pre></div>
-
-
-<p>如果给<code>div</code>新增了属性<code>id</code>为<code>container</code>，就记录下：</p>
-<div class="highlight"><pre><span></span><code><span class="nx">patches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span>
-  <span class="nx">type</span><span class="o">:</span> <span class="nx">REPALCE</span><span class="p">,</span>
-  <span class="nx">node</span><span class="o">:</span> <span class="nx">newNode</span> <span class="c1">// el(&#39;section&#39;, props, children)</span>
-<span class="p">},</span> <span class="p">{</span>
-  <span class="nx">type</span><span class="o">:</span> <span class="nx">PROPS</span><span class="p">,</span>
-  <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">id</span><span class="o">:</span> <span class="s2">&quot;container&quot;</span>
-  <span class="p">}</span>
-<span class="p">}]</span>
-</code></pre></div>
-
-
-<p>如果是文本节点，如上面的文本节点2，就记录下：</p>
-<div class="highlight"><pre><span></span><code><span class="nx">patches</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span>
-  <span class="nx">type</span><span class="o">:</span> <span class="nx">TEXT</span><span class="p">,</span>
-  <span class="nx">content</span><span class="o">:</span> <span class="s2">&quot;Virtual DOM2&quot;</span>
-<span class="p">}]</span>
-</code></pre></div>
-
-
-<p>那如果把我<code>div</code>的子节点重新排序呢？例如<code>p, ul, div</code>的顺序换成了<code>div, p, ul</code>。这个该怎么对比？如果按照同层级进行顺序对比的话，它们都会被替换掉。如<code>p</code>和<code>div</code>的<code>tagName</code>不同，<code>p</code>会被<code>div</code>所替代。最终，三个节点都会被替换，这样DOM开销就非常大。而实际上是不需要替换节点，而只需要经过节点移动就可以达到，我们只需知道怎么进行移动。</p>
-<p>这牵涉到两个列表的对比算法，需要另外起一个小节来讨论。</p>
-<h5>列表对比算法</h5>
-<p>假设现在可以英文字母唯一地标识每一个子节点：</p>
-<p>旧的节点顺序：</p>
-<div class="highlight"><pre><span></span><code><span class="err">a b c d e f g h i</span>
-</code></pre></div>
-
-
-<p>现在对节点进行了删除、插入、移动的操作。新增<code>j</code>节点，删除<code>e</code>节点，移动<code>h</code>节点：</p>
-<p>新的节点顺序：</p>
-<div class="highlight"><pre><span></span><code><span class="err">a b c h d f g i j</span>
-</code></pre></div>
-
-
-<p>现在知道了新旧的顺序，求最小的插入、删除操作（移动可以看成是删除和插入操作的结合）。这个问题抽象出来其实是字符串的最小编辑距离问题（<a href="https://en.wikipedia.org/wiki/Edit_distance">Edition Distance</a>），最常见的解决算法是 <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein Distance</a>，通过动态规划求解，时间复杂度为 O(M * N)。但是我们并不需要真的达到最小的操作，我们只需要优化一些比较常见的移动情况，牺牲一定DOM操作，让算法时间复杂度达到线性的（O(max(M, N))。具体算法细节比较多，这里不累述，有兴趣可以参考<a href="https://github.com/livoras/list-diff/blob/master/lib/diff.js">代码</a>。</p>
-<p>我们能够获取到某个父节点的子节点的操作，就可以记录下来：</p>
-<div class="highlight"><pre><span></span><code><span class="err">patches[0] = [{</span>
-<span class="err">  type: REORDER,</span>
-<span class="err">  moves: [{remove or insert}, {remove or insert}, ...]</span>
-<span class="err">}]</span>
-</code></pre></div>
-
-
-<p>但是要注意的是，因为<code>tagName</code>是可重复的，不能用这个来进行对比。所以需要给子节点加上唯一标识<code>key</code>，列表对比的时候，使用<code>key</code>进行对比，这样才能复用老的 DOM 树上的节点。</p>
-<p>这样，我们就可以通过深度优先遍历两棵树，每层的节点进行对比，记录下每个节点的差异了。完整 diff 算法代码可见 <a href="https://github.com/livoras/simple-virtual-dom/blob/master/lib/diff.js">diff.js</a>。</p>
-<h4>步骤三：把差异应用到真正的DOM树上</h4>
-<p>因为步骤一所构建的 JavaScript 对象树和<code>render</code>出来真正的DOM树的信息、结构是一样的。所以我们可以对那棵DOM树也进行深度优先的遍历，遍历的时候从步骤二生成的<code>patches</code>对象中找出当前遍历的节点差异，然后进行 DOM 操作。</p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">patch</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">walker</span> <span class="o">=</span> <span class="p">{</span><span class="nx">index</span><span class="o">:</span> <span class="mi">0</span><span class="p">}</span>
-  <span class="nx">dfsWalk</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">walker</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="kd">function</span> <span class="nx">dfsWalk</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">walker</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">currentPatches</span> <span class="o">=</span> <span class="nx">patches</span><span class="p">[</span><span class="nx">walker</span><span class="p">.</span><span class="nx">index</span><span class="p">]</span> <span class="c1">// 从patches拿出当前节点的差异</span>
-
-  <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">childNodes</span>
-    <span class="o">?</span> <span class="nx">node</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">.</span><span class="nx">length</span>
-    <span class="o">:</span> <span class="mi">0</span>
-  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 深度遍历子节点</span>
-    <span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
-    <span class="nx">walker</span><span class="p">.</span><span class="nx">index</span><span class="o">++</span>
-    <span class="nx">dfsWalk</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">walker</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span>
-  <span class="p">}</span>
-
-  <span class="k">if</span> <span class="p">(</span><span class="nx">currentPatches</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">applyPatches</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">currentPatches</span><span class="p">)</span> <span class="c1">// 对当前节点进行DOM操作</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
-
-<p>applyPatches，根据不同类型的差异对当前节点进行 DOM 操作：</p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">applyPatches</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">currentPatches</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">currentPatches</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">currentPatch</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">switch</span> <span class="p">(</span><span class="nx">currentPatch</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">case</span> <span class="nx">REPLACE</span><span class="o">:</span>
-        <span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">replaceChild</span><span class="p">(</span><span class="nx">currentPatch</span><span class="p">.</span><span class="nx">node</span><span class="p">.</span><span class="nx">render</span><span class="p">(),</span> <span class="nx">node</span><span class="p">)</span>
-        <span class="k">break</span>
-      <span class="k">case</span> <span class="nx">REORDER</span><span class="o">:</span>
-        <span class="nx">reorderChildren</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">currentPatch</span><span class="p">.</span><span class="nx">moves</span><span class="p">)</span>
-        <span class="k">break</span>
-      <span class="k">case</span> <span class="nx">PROPS</span><span class="o">:</span>
-        <span class="nx">setProps</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">currentPatch</span><span class="p">.</span><span class="nx">props</span><span class="p">)</span>
-        <span class="k">break</span>
-      <span class="k">case</span> <span class="nx">TEXT</span><span class="o">:</span>
-        <span class="nx">node</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">currentPatch</span><span class="p">.</span><span class="nx">content</span>
-        <span class="k">break</span>
-      <span class="k">default</span><span class="o">:</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Unknown patch type &#39;</span> <span class="o">+</span> <span class="nx">currentPatch</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span>
-    <span class="p">}</span>
-  <span class="p">})</span>
-<span class="p">}</span>
-</code></pre></div>
-
-
-<p>完整代码可见 <a href="https://github.com/livoras/simple-virtual-dom/blob/master/lib/patch.js">patch.js</a>。</p>
-<h3>结语</h3>
-<p>Virtual DOM 算法主要是实现上面步骤的三个函数：<a href="https://github.com/livoras/simple-virtual-dom/blob/master/lib/element.js">element</a>，<a href="https://github.com/livoras/simple-virtual-dom/blob/master/lib/diff.js">diff</a>，<a href="https://github.com/livoras/simple-virtual-dom/blob/master/lib/patch.js">patch</a>。然后就可以实际的进行使用：</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// 1. 构建虚拟DOM</span>
-<span class="kd">var</span> <span class="nx">tree</span> <span class="o">=</span> <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">},</span> <span class="p">[</span>
-    <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">style</span><span class="o">:</span> <span class="s1">&#39;color: blue&#39;</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;simple virtal dom&#39;</span><span class="p">]),</span>
-    <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Hello, virtual-dom&#39;</span><span class="p">]),</span>
-    <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">el</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">)])</span>
-<span class="p">])</span>
-
-<span class="c1">// 2. 通过虚拟DOM构建真正的DOM</span>
-<span class="kd">var</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">tree</span><span class="p">.</span><span class="nx">render</span><span class="p">()</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">root</span><span class="p">)</span>
-
-<span class="c1">// 3. 生成新的虚拟DOM</span>
-<span class="kd">var</span> <span class="nx">newTree</span> <span class="o">=</span> <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">},</span> <span class="p">[</span>
-    <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">style</span><span class="o">:</span> <span class="s1">&#39;color: red&#39;</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;simple virtal dom&#39;</span><span class="p">]),</span>
-    <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Hello, virtual-dom&#39;</span><span class="p">]),</span>
-    <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">el</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">),</span> <span class="nx">el</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">)])</span>
-<span class="p">])</span>
-
-<span class="c1">// 4. 比较两棵虚拟DOM树的不同</span>
-<span class="kd">var</span> <span class="nx">patches</span> <span class="o">=</span> <span class="nx">diff</span><span class="p">(</span><span class="nx">tree</span><span class="p">,</span> <span class="nx">newTree</span><span class="p">)</span>
-
-<span class="c1">// 5. 在真正的DOM元素上应用变更</span>
-<span class="nx">patch</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">patches</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p>当然这是非常粗糙的实践，实际中还需要处理事件监听等；生成虚拟 DOM 的时候也可以加入 JSX 语法。这些事情都做了的话，就可以构造一个简单的ReactJS了。</p>
-<p>本文所实现的完整代码存放在 <a href="https://github.com/livoras/simple-virtual-dom">Github</a>，仅供学习。</p>
-<h3>References</h3>
-<p>https://github.com/Matt-Esch/virtual-dom/blob/master/vtree/diff.js</p>
-<h2>Tip</h2>
-<h2>Share(http源码分析)</h2>
-<h3>服务管理</h3>
-<ul>
-<li>HTTPServer继承socketserver.TCPServer，建立实例后serve_forever监听客户端请求</li>
-</ul>
-<h3>请求头校验</h3>
-<ul>
-<li>http请求完整请求HTTP-message = start-line *( header-field CRLF ) CRLF [ message-body ]</li>
-<li>http请求头行格式request-start-line = method SP request-target SP HTTP-version CRLF(SP空格 CRLF \r\n)</li>
-<li>http请求头格式header-field = field-name ":" OWS field-value OWS(OWS空格或制表符)</li>
-<li>SimpleHTTPRequestHandler请求入口handle，handle_one_request处理具体请求</li>
-<li>handle_one_request先检测第一行长度，调用parse_request详细解析第一行</li>
-<li>请求方法不能忽略不传，调用请求方法处理请求内容</li>
-<li>parse_request中做的校验</li>
-<li>版本大于HTTP/1.1才支持多次请求，否则解析完本次请求后结束</li>
-<li>不支持HTTP/2.0及以上版本</li>
-<li>客户端不传版本默认HTTP/0.9，只支持GET请求</li>
-<li>请求头Connection代表客户端要求一次请求或多次请求</li>
-<li>http.client.parse_headers处理请求头</li>
-<li>独行'\r\n', '\n', ''代表请求头结束</li>
-</ul>
-<h3>请求方法处理请求返回(GET流程)</h3>
-<ul>
-<li>http请求返回格式HTTP-message = start-line *( header-field CRLF ) CRLF [ message-body ]</li>
-<li>http请求返回头行格式status-line = HTTP-version SP status-code SP reason-phrase CRLF(SP空格 CRLF \r\n)</li>
-<li>
-<p>http请求头格式header-field = field-name ":" OWS field-value OWS(OWS空格或制表符)</p>
-</li>
-<li>
-<p>send_head设置返回请求头，调用translate_path处理资源，</p>
-</li>
-<li>translate_path处理资源路径，以?或#结束资源路径，urllib.parse.unquote处理url编码，资源本地绝对路径为程序当前路径加请求资源路径</li>
-<li>guess_type处理请求资源类型</li>
-<li>资源文件不存在返回404，资源文件存在返回200</li>
-<li>send_response_only生成status-line</li>
-<li>send_header生成header-field，HTTP/0.9不支持其他头字段</li>
-<li>send_response生成Server信息和Date信息</li>
-<li>生成Content-type信息和Content-Length信息</li>
-<li>
-<p>end_headers以\r\n结束请求头</p>
-</li>
-<li>
-<p>SimpleHTTPRequestHandler没有实现do_POST方法，不支持post请求</p>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># 服务端</span>
-<span class="kn">from</span> <span class="nn">server</span> <span class="kn">import</span> <span class="n">HTTPServer</span><span class="p">,</span> <span class="n">SimpleHTTPRequestHandler</span>
-
-
-<span class="k">def</span> <span class="nf">service_demo</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;service begin&#39;</span><span class="p">)</span>
-    <span class="n">http</span> <span class="o">=</span> <span class="n">HTTPServer</span><span class="p">((</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="mi">8081</span><span class="p">),</span> <span class="n">SimpleHTTPRequestHandler</span><span class="p">)</span>
-    <span class="n">http</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;service end&#39;</span><span class="p">)</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">service_demo</span><span class="p">()</span>
-
-<span class="c1"># 客户端</span>
-<span class="kn">from</span> <span class="nn">client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-
-<span class="k">def</span> <span class="nf">client_demo</span><span class="p">():</span>
-    <span class="n">client</span> <span class="o">=</span> <span class="n">HTTPConnection</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">8081</span><span class="p">)</span>
-    <span class="c1"># headers = {&#39;test_head&#39;: &#39;nxx&#39;}</span>
-    <span class="c1"># client.request(&#39;GET&#39;, &#39;/index.html&#39;, headers=headers)</span>
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Connection&#39;</span><span class="p">:</span> <span class="s1">&#39;keep-alive&#39;</span><span class="p">}</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;test_head&#39;</span><span class="p">:</span> <span class="s1">&#39;nxx&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-    <span class="n">client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;/api/books&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-    <span class="n">respnese</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">respnese</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-    <span class="c1"># print(json.loads(respnese.read()))</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">client_demo</span><span class="p">()</span>
-</code></pre></div></div>
-        <hr />
-    </div>
-		
+<span class="kd">var</span> <span class="nx">sortType</span> <span class="o">=</span> <span class="mf">1</span> <span class="c1">// 升序还是逆序</span>
+<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[{...},</span> <span class="p">{...},</span> <span class="p">{..},</span> <span class="p">..]</span> <span class="c1">// 表格数据 …</span></code></pre></div> <a class="btn btn-info xsmall" href="/artsdi-er-shi-qi-zhou.html">read more</a></div>
+    </div>	
+				
 
  
         
