@@ -3,7 +3,7 @@ Category: ARTS
 Author: qianlizhixing
 Title: ARTS第二十九周
 Date: 2021-05-24
-Tags: 网络编程, python库, https
+Tags: 网络编程, python库, cgi
 ---
 
 ## Algorithm
