@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>千里之行 始于足下 - qianlizhixing</title><link>/</link><description></description><lastBuildDate>Mon, 17 May 2021 00:00:00 +0800</lastBuildDate><item><title>ARTS第二十八周</title><link>/artsdi-er-shi-ba-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+<rss version="2.0"><channel><title>千里之行 始于足下 - qianlizhixing</title><link>/</link><description></description><lastBuildDate>Mon, 24 May 2021 00:00:00 +0800</lastBuildDate><item><title>ARTS第二十九周</title><link>/artsdi-er-shi-jiu-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 421 数组中两个数的最大异或值&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/maximum-xor-of-two-numbers-in-an-array/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/421.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;前缀树&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://www.keycdn.com/blog/http-security-headers&lt;/p&gt;
+&lt;p&gt;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy&lt;/p&gt;
+&lt;p&gt;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection&lt;/p&gt;
+&lt;p&gt;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;加固http安全头&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;HTTP安全头通过帮助减轻攻击和安全漏洞提供了另一层安全&lt;/li&gt;
+&lt;li&gt;HTTP安全头，它告诉浏览器在处理网站内容时该如何操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Content-Security-Policy&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Content-Security-Policy通过定义经过批准的内容源 …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">qianlizhixing</dc:creator><pubDate>Mon, 24 May 2021 00:00:00 +0800</pubDate><guid isPermaLink="false">tag:None,2021-05-24:/artsdi-er-shi-jiu-zhou.html</guid><category>ARTS</category><category>网络编程</category><category>python库</category><category>cgi</category></item><item><title>ARTS第二十八周</title><link>/artsdi-er-shi-ba-zhou.html</link><description>&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 1734 解码异或后的排列&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/decode-xored-permutation/"&gt;原题&lt;/a&gt;&lt;/li&gt;

@@ -1,5 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>千里之行 始于足下</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2021-05-17T00:00:00+08:00</updated><entry><title>ARTS第二十八周</title><link href="/artsdi-er-shi-ba-zhou.html" rel="alternate"></link><published>2021-05-17T00:00:00+08:00</published><updated>2021-05-17T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-05-17:/artsdi-er-shi-ba-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>千里之行 始于足下</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2021-05-24T00:00:00+08:00</updated><entry><title>ARTS第二十九周</title><link href="/artsdi-er-shi-jiu-zhou.html" rel="alternate"></link><published>2021-05-24T00:00:00+08:00</published><updated>2021-05-24T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-05-24:/artsdi-er-shi-jiu-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 421 数组中两个数的最大异或值&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/maximum-xor-of-two-numbers-in-an-array/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/421.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;前缀树&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://www.keycdn.com/blog/http-security-headers&lt;/p&gt;
+&lt;p&gt;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy&lt;/p&gt;
+&lt;p&gt;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection&lt;/p&gt;
+&lt;p&gt;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;加固http安全头&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;HTTP安全头通过帮助减轻攻击和安全漏洞提供了另一层安全&lt;/li&gt;
+&lt;li&gt;HTTP安全头，它告诉浏览器在处理网站内容时该如何操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Content-Security-Policy&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Content-Security-Policy通过定义经过批准的内容源 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 421 数组中两个数的最大异或值&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/maximum-xor-of-two-numbers-in-an-array/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/421.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;前缀树&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://www.keycdn.com/blog/http-security-headers&lt;/p&gt;
+&lt;p&gt;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy&lt;/p&gt;
+&lt;p&gt;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection&lt;/p&gt;
+&lt;p&gt;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;加固http安全头&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;HTTP安全头通过帮助减轻攻击和安全漏洞提供了另一层安全&lt;/li&gt;
+&lt;li&gt;HTTP安全头，它告诉浏览器在处理网站内容时该如何操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Content-Security-Policy&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Content-Security-Policy通过定义经过批准的内容源，从而允许浏览器加载这些内容源，从而帮助防止诸如跨站点脚本(Cross Site Scripting, XSS)和其他代码注入攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;X-XSS-Protection&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;X-XSS-Protection被设计用来支持内置在浏览器中的跨站点脚本(XSS)过滤器，即当浏览器检测到xss攻击时的行为&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# nginx配置&lt;/span&gt;
+&lt;span class="k"&gt;add_header&lt;/span&gt; &lt;span class="s"&gt;X-XSS-Protection&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;mode=block&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;always&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# apache配置&lt;/span&gt;
+&lt;span class="k"&gt;header&lt;/span&gt; &lt;span class="s"&gt;always&lt;/span&gt; &lt;span class="s"&gt;set&lt;/span&gt; &lt;span class="s"&gt;X-XSS-Protection&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;mode=block&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;Strict Transport Security&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Strict-Transport-Security限制浏览器只能通过HTTPS访问服务器。这确保了连接不能通过不安全的HTTP连接建立，而不安全的HTTP连接容易受到攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;X-Frame-Options&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;X-Frame-Options提供了点击劫持保护，不允许在你的网站上加载iframes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# nginx配置&lt;/span&gt;
+&lt;span class="k"&gt;add_header&lt;/span&gt; &lt;span class="s"&gt;X-Frame-Options&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;SAMEORIGIN&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;always&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# apache配置&lt;/span&gt;
+&lt;span class="k"&gt;header&lt;/span&gt; &lt;span class="s"&gt;always&lt;/span&gt; &lt;span class="s"&gt;set&lt;/span&gt; &lt;span class="s"&gt;X-Frame-Options&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;SAMEORIGIN&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;Expect-CT&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Expect-CT允许网站报告并选择性地强制执行证书透明度要求，从而防止使用错误颁发的证书。当启用此头部时，网站请求浏览器验证证书是否出现在公共CT日志中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;X-Content-Type-Options&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;X-Content-Type-Options阻止浏览器从声明的Content-Type中嗅探响应&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Feature-Policy&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Feature-Policy授予允许或拒绝浏览器特性的能力，无论是在它自己的框架中还是在一个内联框架元&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Tip&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;python3中OrderedDict是按插入顺序排序，不是按keys或values值大小关系排序&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;OrderedDict&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_ordereddict&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;words&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;counts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dd&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;aa&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;bb&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;cc&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;dic&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OrderedDict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;zip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;counts&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;dic&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;test_ordereddict&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 输出&lt;/span&gt;
+&lt;span class="c1"&gt;# 5 dd&lt;/span&gt;
+&lt;span class="c1"&gt;# 3 aa&lt;/span&gt;
+&lt;span class="c1"&gt;# 4 bb&lt;/span&gt;
+&lt;span class="c1"&gt;# 6 cc&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Share(CGI)&lt;/h2&gt;
+&lt;h3&gt;CGI请求流程&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;CGI是指WEB server 与 WEB 应用程序之间的通用接口标准, 即: Common Gateway Interface&lt;/li&gt;
+&lt;li&gt;前端通过表单可以向服务器发送一个URL&lt;/li&gt;
+&lt;li&gt;服务器获取到很多参数（get或post请求的参数、服务器和客服端的信息，cookie等等）&lt;/li&gt;
+&lt;li&gt;服务器开启CGI模块将参数存到环境变量中，并调用一个CGI程序&lt;/li&gt;
+&lt;li&gt;CGI程序从环境变量中解析出这样请求的具体参数，向标准输出输出内容，发送到了你的浏览器&lt;/li&gt;
+&lt;li&gt;浏览器收到http请求，解析html代码，然后渲染出了网页&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;CGI请求缺点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;大量消耗服务端资源(一般执行CGI脚本，要单独开启一个进程执行)&lt;/li&gt;
+&lt;li&gt;没有做到前后端分层，前端不但要知道任务做什么，还要知道任务怎么做调用相应CGI脚本，后端要返回组装的html内容&lt;/li&gt;
+&lt;li&gt;如果CGI脚本有bug被利用，容易对服务器造成攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;http中CGIHTTPRequestHandler处理&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;GET请求非cgi程序按照SimpleHTTPRequestHandler处理(获取本地资源)，POST请求非cgi返回501&lt;/li&gt;
+&lt;li&gt;cgi资源请求要求host后面跟'/cgi-bin', '/htbin'两个路径之一&lt;/li&gt;
+&lt;li&gt;run_cgi处理url先判断服务器目录'/cgi-bin', '/htbin'目录下cgi脚本是否存在，url中?后面为参数&lt;/li&gt;
+&lt;li&gt;run_cgi将服务端当前env加上服务信息http请求上下文(headers信息，参数信息)组装&lt;/li&gt;
+&lt;li&gt;run_cgi启动子进程运行脚本p = subprocess.Popen(cmdline, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# cgi服务端&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;http.server&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;open_server&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HTTPServer&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;0.0.0.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8088&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CGIHTTPRequestHandler&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;serve_forever&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;Exception&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;finally&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;server_close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;open_server&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="c1"&gt;# cgi脚本 cgi-bin/math.py&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;cgi&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;do_exec&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Content-type: text/html&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;form&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cgi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FieldStorage&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;func_argv&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;field&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;form&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;field&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;func&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;func_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;field&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;
+                &lt;span class="n"&gt;func_exec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;func_name&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;func_argv&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;field&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="n"&gt;func_result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func_exec&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func_argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;func_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; result: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;func_result&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;except&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;cgi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;print_exception&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+
+&lt;span class="n"&gt;register&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;do_exec&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Request URL: http://127.0.0.1:8088/cgi-bin/math.py?func=add&amp;amp;a=1&amp;amp;b=2&lt;/span&gt;
+&lt;span class="err"&gt;Request Method: GET&lt;/span&gt;
+&lt;span class="err"&gt;Status Code: 200 Script output follows&lt;/span&gt;
+&lt;span class="err"&gt;Remote Address: 127.0.0.1:8088&lt;/span&gt;
+&lt;span class="err"&gt;Referrer Policy: strict-origin-when-cross-origin&lt;/span&gt;
+
+
+&lt;span class="kr"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;1.0&lt;/span&gt; &lt;span class="m"&gt;200&lt;/span&gt; &lt;span class="ne"&gt;Script output follows&lt;/span&gt;
+&lt;span class="na"&gt;Server&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;SimpleHTTP/0.6 Python/3.7.8&lt;/span&gt;
+&lt;span class="na"&gt;Date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;Tue, 18 May 2021 15:56:14 GMT&lt;/span&gt;
+&lt;span class="na"&gt;Content-type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;text/html&lt;/span&gt;
+
+add result: 3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="ARTS"></category><category term="网络编程"></category><category term="python库"></category><category term="cgi"></category></entry><entry><title>ARTS第二十八周</title><link href="/artsdi-er-shi-ba-zhou.html" rel="alternate"></link><published>2021-05-17T00:00:00+08:00</published><updated>2021-05-17T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-05-17:/artsdi-er-shi-ba-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 1734 解码异或后的排列&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/decode-xored-permutation/"&gt;原题&lt;/a&gt;&lt;/li&gt;
