@@ -486,6 +486,22 @@ def client_demo():
 
 if __name__ == '__main__':
     client_demo()
+  
+# 客户端https
+from http.client import HTTPSConnection
+import ssl
+import json
+
+
+def client_demo():
+    client = HTTPSConnection('blog.csdn.net', context=ssl._create_unverified_context())
+    client.request('GET', '/community/home-api/v1/get-business-list?page=1&size=20&businessType=blog&orderby=&noMore=false&username=weixin_37702639')
+    respnese = client.getresponse()
+    print(json.loads(respnese.read()))
+
+
+if __name__ == '__main__':
+    client_demo()
 ```
 
 ### 简化源码辅助理解主流程
