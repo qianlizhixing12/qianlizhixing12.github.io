@@ -603,6 +603,64 @@ solution2(level, custom)
 - conftest.py共享初始化
 - @pytest.fixtures(params=)，params可循环序列，request.param . 无需更改测试功能代码。让我们再跑一次
 
+```python
+import pytest
+from sqlalchemy import create_engine, exc, inspect, text
+
+
+@pytest.fixture(
+    params=[
+        # request: (sql_url_id, sql_url_template)
+        ('sqlite_memory', 'sqlite:///:memory:'),
+        ('sqlite_file', 'sqlite:///{dbfile}'),
+        # ('psql', 'postgresql://records:records@localhost/records')
+    ],
+    ids=lambda r: r[0]
+)
+def db(request, tmpdir):
+    """Instance of `records.Database(dburl)`
+
+    Ensure, it gets closed after being used in a test or fixture.
+
+    Parametrized with (sql_url_id, sql_url_template) tuple.
+    If `sql_url_template` contains `{dbfile}` it is replaced with path to a
+    temporary file.
+
+    Feel free to parametrize for other databases and experiment with them.
+    """
+    id, url = request.param
+    # replace {dbfile} in url with temporary db file path
+    url = url.format(dbfile=str(tmpdir / "db.sqlite"))
+    print('request:', id, url)
+    print('tmpdir:', tmpdir)
+    _engine = create_engine(url)
+    yield _engine  # providing fixture value for a test case
+    # tear_down
+    _engine.dispose()
+
+
+@pytest.fixture
+def foo_table(db):
+    """Database with table `foo` created
+
+    tear_down drops the table.
+
+    Typically applied by `@pytest.mark.usefixtures('foo_table')`
+    """
+    db.connect().execute(text('CREATE TABLE foo (a integer)'))
+    yield
+    db.connect().execute(text('DROP TABLE foo'))
+
+
+def test_aaa(db):
+    db.connect().execute(text("CREATE table users (id text)"))
+    db.connect().execute(text("SELECT * FROM users WHERE id = :user"), user="Te'ArnaLambert")
+
+
+if __name__ == "__main__":
+    pytest.main([__file__])
+```
+
 ### 总结
 
 - 单元测试框架上手快
