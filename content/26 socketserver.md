@@ -214,3 +214,326 @@ data = self.rfile.readline()
         self.wfile.write(resp)
 ```
 
+
+#### 简化源码辅助理解主流程
+
+```python
+# Author of the BaseServer patch: Luke Kenneth Casson Leighton
+
+__version__ = "0.4"
+
+import socket
+import selectors
+import os
+import sys
+from io import BufferedIOBase
+from time import monotonic as time
+
+__all__ = ["BaseServer", "TCPServer", "BaseRequestHandler", "StreamRequestHandler", "DatagramRequestHandler"]
+
+# poll/select have the advantage of not requiring any extra file descriptor,
+# contrarily to epoll/kqueue (also, they require a single syscall).
+_ServerSelector = selectors.SelectSelector
+
+
+class BaseServer:
+
+    timeout = None
+
+    def __init__(self, server_address, RequestHandlerClass):
+        """Constructor.  May be extended, do not override."""
+        self.server_address = server_address
+        self.RequestHandlerClass = RequestHandlerClass
+
+    def serve_forever(self, poll_interval=0.5):
+        try:
+            # XXX: Consider using another file descriptor or connecting to the
+            # socket to wake this up instead of polling. Polling reduces our
+            # responsiveness to a shutdown request and wastes cpu at all other
+            # times.
+            with _ServerSelector() as selector:
+                selector.register(self, selectors.EVENT_READ)
+                while True:
+                    ready = selector.select(poll_interval)
+                    if ready:
+                        self._handle_request_noblock()
+        finally:
+            pass
+
+    def handle_request(self):
+        """Handle one request, possibly blocking.
+
+        Respects self.timeout.
+        """
+        # Support people who used socket.settimeout() to escape
+        # handle_request before self.timeout was available.
+        timeout = self.socket.gettimeout()
+        if timeout is None:
+            timeout = self.timeout
+        elif self.timeout is not None:
+            timeout = min(timeout, self.timeout)
+        if timeout is not None:
+            deadline = time() + timeout
+
+        # Wait until a request arrives or the timeout expires - the loop is
+        # necessary to accommodate early wakeups due to EINTR.
+        with _ServerSelector() as selector:
+            selector.register(self, selectors.EVENT_READ)
+
+            while True:
+                ready = selector.select(timeout)
+                if ready:
+                    return self._handle_request_noblock()
+                else:
+                    if timeout is not None:
+                        timeout = deadline - time()
+                        if timeout < 0:
+                            return self.handle_timeout()
+
+    def _handle_request_noblock(self):
+        """Handle one request, without blocking.
+
+        I assume that selector.select() has returned that the socket is
+        readable before this function was called, so there should be no risk of
+        blocking in get_request().
+        """
+        try:
+            request, client_address = self.get_request()
+        except OSError:
+            return
+
+        try:
+            self.process_request(request, client_address)
+        except Exception:
+            self.handle_error(request, client_address)
+            self.shutdown_request(request)
+        except:
+            self.shutdown_request(request)
+            raise
+
+    def handle_timeout(self):
+        """Called if no new request arrives within self.timeout.
+
+        Overridden by ForkingMixIn.
+        """
+        pass
+
+    def process_request(self, request, client_address):
+        """Call finish_request.
+
+        Overridden by ForkingMixIn and ThreadingMixIn.
+
+        """
+        self.finish_request(request, client_address)
+        self.shutdown_request(request)
+
+    def finish_request(self, request, client_address):
+        """Finish one request by instantiating RequestHandlerClass."""
+        self.RequestHandlerClass(request, client_address, self)
+
+    def shutdown_request(self, request):
+        """Called to shutdown and close an individual request."""
+        self.close_request(request)
+
+    def close_request(self, request):
+        """Called to clean up an individual request."""
+        pass
+
+    def handle_error(self, request, client_address):
+        """Handle an error gracefully.  May be overridden.
+
+        The default is to print a traceback and continue.
+
+        """
+        print('-' * 40, file=sys.stderr)
+        print('Exception happened during processing of request from', client_address, file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        print('-' * 40, file=sys.stderr)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.server_close()
+
+
+class TCPServer(BaseServer):
+
+    address_family = socket.AF_INET
+
+    socket_type = socket.SOCK_STREAM
+
+    request_queue_size = 5
+
+    allow_reuse_address = False
+
+    def __init__(self, server_address, RequestHandlerClass, bind_and_activate=True):
+        """Constructor.  May be extended, do not override."""
+        BaseServer.__init__(self, server_address, RequestHandlerClass)
+        self.socket = socket.socket(self.address_family, self.socket_type)
+        if bind_and_activate:
+            try:
+                self.server_bind()
+                self.server_activate()
+            except:
+                self.server_close()
+                raise
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+
+        May be overridden.
+
+        """
+        if self.allow_reuse_address:
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.socket.bind(self.server_address)
+        self.server_address = self.socket.getsockname()
+
+    def server_activate(self):
+        """Called by constructor to activate the server.
+
+        May be overridden.
+
+        """
+        self.socket.listen(self.request_queue_size)
+
+    def server_close(self):
+        """Called to clean-up the server.
+
+        May be overridden.
+
+        """
+        self.socket.close()
+
+    def fileno(self):
+        """Return socket file number.
+
+        Interface required by selector.
+
+        """
+        return self.socket.fileno()
+
+    def get_request(self):
+        """Get the request and client address from the socket.
+
+        May be overridden.
+
+        """
+        return self.socket.accept()
+
+    def shutdown_request(self, request):
+        """Called to shutdown and close an individual request."""
+        try:
+            #explicitly shutdown.  socket.close() merely releases
+            #the socket and waits for GC to perform the actual close.
+            request.shutdown(socket.SHUT_WR)
+        except OSError:
+            pass  #some platforms may raise ENOTCONN here
+        self.close_request(request)
+
+    def close_request(self, request):
+        """Called to clean up an individual request."""
+        request.close()
+
+
+class BaseRequestHandler:
+
+    def __init__(self, request, client_address, server):
+        self.request = request
+        self.client_address = client_address
+        self.server = server
+        self.setup()
+        try:
+            self.handle()
+        finally:
+            self.finish()
+
+    def setup(self):
+        pass
+
+    def handle(self):
+        pass
+
+    def finish(self):
+        pass
+
+
+class StreamRequestHandler(BaseRequestHandler):
+    """Define self.rfile and self.wfile for stream sockets."""
+
+    # Default buffer sizes for rfile, wfile.
+    # We default rfile to buffered because otherwise it could be
+    # really slow for large data (a getc() call per byte); we make
+    # wfile unbuffered because (a) often after a write() we want to
+    # read and we need to flush the line; (b) big writes to unbuffered
+    # files are typically optimized by stdio even when big reads
+    # aren't.
+    rbufsize = -1
+    wbufsize = 0
+
+    # A timeout to apply to the request socket, if not None.
+    timeout = None
+
+    # Disable nagle algorithm for this socket, if True.
+    # Use only when wbufsize != 0, to avoid small packets.
+    disable_nagle_algorithm = False
+
+    def setup(self):
+        self.connection = self.request
+        if self.timeout is not None:
+            self.connection.settimeout(self.timeout)
+        if self.disable_nagle_algorithm:
+            self.connection.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, True)
+        self.rfile = self.connection.makefile('rb', self.rbufsize)
+        if self.wbufsize == 0:
+            self.wfile = _SocketWriter(self.connection)
+        else:
+            self.wfile = self.connection.makefile('wb', self.wbufsize)
+
+    def finish(self):
+        if not self.wfile.closed:
+            try:
+                self.wfile.flush()
+            except socket.error:
+                # A final socket error may have occurred here, such as
+                # the local error ECONNABORTED.
+                pass
+        self.wfile.close()
+        self.rfile.close()
+
+
+class _SocketWriter(BufferedIOBase):
+    """Simple writable BufferedIOBase implementation for a socket
+
+    Does not hold data in a buffer, avoiding any need to call flush()."""
+
+    def __init__(self, sock):
+        self._sock = sock
+
+    def writable(self):
+        return True
+
+    def write(self, b):
+        self._sock.sendall(b)
+        with memoryview(b) as view:
+            return view.nbytes
+
+    def fileno(self):
+        return self._sock.fileno()
+
+
+class DatagramRequestHandler(BaseRequestHandler):
+    """Define self.rfile and self.wfile for datagram sockets."""
+
+    def setup(self):
+        from io import BytesIO
+        self.packet, self.socket = self.request
+        self.rfile = BytesIO(self.packet)
+        self.wfile = BytesIO()
+
+    def finish(self):
+        self.socket.sendto(self.wfile.getvalue(), self.client_address)
+```
+
