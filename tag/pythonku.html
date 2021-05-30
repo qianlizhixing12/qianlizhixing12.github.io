@@ -50,8 +50,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="/artsdi-er-shi-jiu-zhou.html"><h1>ARTS第二十九周</h1></a>
-2021-05-24
+            <a href="/artsdi-san-shi-zhou.html"><h1>ARTS第三十周</h1></a>
+2021-05-31
 
 <a class="url fn">qianlizhixing</a>
 
@@ -60,6 +60,121 @@
         </div>
         
         <div><h2>Algorithm</h2>
+<p>leetcode 1707 与数组中元素的最大异或值</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/maximum-xor-with-an-element-from-array/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/1707.py">解题</a></li>
+<li>字典树</li>
+</ul>
+<h2>Review</h2>
+<ul>
+<li>
+<p>https://clang.llvm.org/docs/ClangFormatStyleOptions.html</p>
+</li>
+<li>
+<p>样式定义-style=llve或-style=file(查找目录下.clang-format文件,YAML格式)</p>
+</li>
+<li>自动基于文件名检测编程语言，-assume-filename=强制指定编程语言</li>
+<li>源码// clang-format off到// clang-format on之间代码不被格式化</li>
+<li>AlignAfterOpenBracket换行时对齐方式</li>
+<li>AccessModifierOffset访问修饰符缩进控制(private,public)</li>
+<li>AlignConsecutiveAssignments连续任务对齐方式</li>
+<li>AlignConsecutiveBitFields</li>
+<li>AlignConsecutiveDeclarations连续变量声明对齐方式</li>
+<li>AlignConsecutiveMacros连续宏定义对齐方式</li>
+</ul>
+<h2>Tip</h2>
+<h2>Share(WSGI)</h2>
+<blockquote>
+<p>https://www.python.org/dev/peps/pep-0333/</p>
+<p>https://www.python.org/dev/peps/pep-3333/</p>
+</blockquote>
+<ul>
+<li>WSGI服务器<a href="https://baike.baidu.com/item/网关">网关</a>接口（Python Web Server Gateway Interface)是Python应用程序或框架和Web服务器之间的一种接口协议，类似于Java中的servlet API，让服务器和业务分离解耦</li>
+<li>WSGI接口有两个方面:服务器网关端，应用程序框架端。服务器端调用由应用程序端提供的可调用对象。提供该对象的具体方式取决于服务器或网关。假设一些服务器或网关需要应用程序的部署人员编写一个简短的脚本来创建服务器或网关的实例，并为其提供应用程序对象。其他服务器和网关可能使用配置文件或其他机制来指定应该从何处导入应用程序对象，或以其他方式获取应用程序对象</li>
+<li>除了“纯”服务器/网关和应用程序/框架之外，还可以创建“中间件”组件来实现该规范的两个方面。这些组件充当包含它们的服务器的应用程序和包含它们的应用程序的服务器，可以用来提供扩展的api、内容转换、导航和其他有用的功能</li>
+<li>实现可调用对象的服务器、网关或应用程序可以根据自己的需要选择适当的实现技术。相反，正在调用可调用对象的服务器、网关或应用程序必须不依赖于提供给它的可调用对象的类型。可调用对象只被调用，而不是被自省</li>
+</ul>
+<h3>WSGI处理</h3>
+<ul>
+<li>WSGIServer继承HTTPServer，WSGIRequestHandler继承BaseHTTPRequestHandler，继承了http库的风格，tcp层(socket)和http层分离</li>
+<li>WSGIRequestHandler仅仅使用了基类parse_request校验处理http协议版本，http头headers功能，就将流程转给ServerHandler.run。按道理ServerHandler和WSGIRequestHandler合二为一像CGIHTTPRequestHandler一样继承BaseHTTPRequestHandler处理http协议层应该是没问题的，ServerHandler也确实有大量处理http协议的代码，应该是为了处理WSGI细节和WSGI和CGI的转化</li>
+<li>对业务开发来讲，application唯一入口WSGIServer，注入application启动WSGIServer，遵守协议处理业务需求。所以application从WSGIServer一直传递到ServerHandler.run中，待application处理完业务后，将处理结果状态通过回调start_response给ServerHandler.status，ServerHandler.headers，将处理结果数据通过返回结果给ServerHandler.result，ServerHandler负责http协议层返回</li>
+<li>ServerHandler传给application的env信息和start_response回调，env都包含那些内容?WSGIServer.setup_environ添加tcp层服务器和端口信息，WSGIRequestHandler.get_environ添加http层本次请求的方法资源路径头信息等，ServerHandler.setup_environ添加WSGI协议信息</li>
+<li>environ["PATH_INFO"]，environ["QUERY_STRING"]，environ["wsgi.input"]包含了业务数据</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 服务端</span>
+<span class="kn">from</span> <span class="nn">wsgiref.simple_server</span> <span class="kn">import</span> <span class="n">WSGIServer</span><span class="p">,</span> <span class="n">WSGIRequestHandler</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">demo_app</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;REQUEST_METHOD&quot;</span><span class="p">],</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PATH_INFO&quot;</span><span class="p">],</span> <span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;QUERY_STRING&quot;</span><span class="p">]}</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;wsgi.input&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CONTENT_LENGTH&quot;</span><span class="p">]))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">body</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+    <span class="n">stdout</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;request info:&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">stdout</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">stdout</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">stdout</span><span class="p">)</span>
+
+    <span class="n">start_response</span><span class="p">(</span><span class="s2">&quot;200 OK&quot;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/plain; charset=utf-8&#39;</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">stdout</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)]</span>
+
+
+<span class="k">def</span> <span class="nf">make_server</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">server_class</span><span class="o">=</span><span class="n">WSGIServer</span><span class="p">,</span> <span class="n">handler_class</span><span class="o">=</span><span class="n">WSGIRequestHandler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a new WSGI server listening on `host` and `port` for `app`&quot;&quot;&quot;</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="n">server_class</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">),</span> <span class="n">handler_class</span><span class="p">)</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">set_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">server</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">make_server</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">8000</span><span class="p">,</span> <span class="n">demo_app</span><span class="p">)</span> <span class="k">as</span> <span class="n">httpd</span><span class="p">:</span>
+        <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+
+<span class="c1"># 客户端</span>
+<span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">client_demo</span><span class="p">():</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">HTTPConnection</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">8000</span><span class="p">)</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;param1&#39;</span><span class="p">:</span> <span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="s1">&#39;param2&#39;</span><span class="p">:</span> <span class="s1">&#39;yyy&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;trace&#39;</span><span class="p">:</span> <span class="s1">&#39;zzz&#39;</span><span class="p">,</span> <span class="s1">&#39;Content-Length&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">)}</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;/wsgi_text?user=go&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="n">respnese</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">respnese</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">client_demo</span><span class="p">()</span>
+
+<span class="c1"># output</span>
+<span class="c1"># request info:</span>
+
+<span class="c1"># {&quot;method&quot;: &quot;POST&quot;, &quot;path&quot;: &quot;/wsgi_text&quot;, &quot;query&quot;: &quot;user=go&quot;, &quot;param1&quot;: &quot;xxx&quot;, &quot;param2&quot;: &quot;yyy&quot;}</span>
+</code></pre></div></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-er-shi-jiu-zhou.html"><h2>ARTS第二十九周</h2></a>
+        <div class= "well small"> 2021-05-24
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
 <p>leetcode 421 数组中两个数的最大异或值</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/maximum-xor-of-two-numbers-in-an-array/">原题</a></li>
@@ -80,160 +195,9 @@
 </ul>
 <h4>Content-Security-Policy</h4>
 <ul>
-<li>Content-Security-Policy通过定义经过批准的内容源，从而允许浏览器加载这些内容源，从而帮助防止诸如跨站点脚本(Cross Site Scripting, XSS)和其他代码注入攻击</li>
-</ul>
-<h4>X-XSS-Protection</h4>
-<ul>
-<li>X-XSS-Protection被设计用来支持内置在浏览器中的跨站点脚本(XSS)过滤器，即当浏览器检测到xss攻击时的行为</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># nginx配置</span>
-<span class="k">add_header</span> <span class="s">X-XSS-Protection</span> <span class="s">&quot;1</span><span class="p">;</span> <span class="k">mode=block&quot;</span> <span class="s">always</span><span class="p">;</span>
-
-<span class="c1"># apache配置</span>
-<span class="k">header</span> <span class="s">always</span> <span class="s">set</span> <span class="s">X-XSS-Protection</span> <span class="s">&quot;1</span><span class="p">;</span> <span class="k">mode=block&quot;</span>
-</code></pre></div>
-
-<h4>Strict Transport Security</h4>
-<ul>
-<li>Strict-Transport-Security限制浏览器只能通过HTTPS访问服务器。这确保了连接不能通过不安全的HTTP连接建立，而不安全的HTTP连接容易受到攻击</li>
-</ul>
-<h4>X-Frame-Options</h4>
-<ul>
-<li>X-Frame-Options提供了点击劫持保护，不允许在你的网站上加载iframes</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># nginx配置</span>
-<span class="k">add_header</span> <span class="s">X-Frame-Options</span> <span class="s">&quot;SAMEORIGIN&quot;</span> <span class="s">always</span><span class="p">;</span>
-
-<span class="c1"># apache配置</span>
-<span class="k">header</span> <span class="s">always</span> <span class="s">set</span> <span class="s">X-Frame-Options</span> <span class="s">&quot;SAMEORIGIN&quot;</span>
-</code></pre></div>
-
-<h4>Expect-CT</h4>
-<ul>
-<li>Expect-CT允许网站报告并选择性地强制执行证书透明度要求，从而防止使用错误颁发的证书。当启用此头部时，网站请求浏览器验证证书是否出现在公共CT日志中。</li>
-</ul>
-<h4>X-Content-Type-Options</h4>
-<ul>
-<li>X-Content-Type-Options阻止浏览器从声明的Content-Type中嗅探响应</li>
-</ul>
-<h4>Feature-Policy</h4>
-<ul>
-<li>Feature-Policy授予允许或拒绝浏览器特性的能力，无论是在它自己的框架中还是在一个内联框架元</li>
-</ul>
-<h2>Tip</h2>
-<ul>
-<li>python3中OrderedDict是按插入顺序排序，不是按keys或values值大小关系排序</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-
-
-<span class="k">def</span> <span class="nf">test_ordereddict</span><span class="p">():</span>
-    <span class="n">words</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dd&quot;</span><span class="p">,</span> <span class="s2">&quot;aa&quot;</span><span class="p">,</span> <span class="s2">&quot;bb&quot;</span><span class="p">,</span> <span class="s2">&quot;cc&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
-    <span class="n">dic</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">test_ordereddict</span><span class="p">()</span>
-
-<span class="c1"># 输出</span>
-<span class="c1"># 5 dd</span>
-<span class="c1"># 3 aa</span>
-<span class="c1"># 4 bb</span>
-<span class="c1"># 6 cc</span>
-</code></pre></div>
-
-<h2>Share(CGI)</h2>
-<h3>CGI请求流程</h3>
-<ul>
-<li>CGI是指WEB server 与 WEB 应用程序之间的通用接口标准, 即: Common Gateway Interface</li>
-<li>前端通过表单可以向服务器发送一个URL</li>
-<li>服务器获取到很多参数（get或post请求的参数、服务器和客服端的信息，cookie等等）</li>
-<li>服务器开启CGI模块将参数存到环境变量中，并调用一个CGI程序</li>
-<li>CGI程序从环境变量中解析出这样请求的具体参数，向标准输出输出内容，发送到了你的浏览器</li>
-<li>浏览器收到http请求，解析html代码，然后渲染出了网页</li>
-</ul>
-<h3>CGI请求缺点</h3>
-<ul>
-<li>大量消耗服务端资源(一般执行CGI脚本，要单独开启一个进程执行)</li>
-<li>没有做到前后端分层，前端不但要知道任务做什么，还要知道任务怎么做调用相应CGI脚本，后端要返回组装的html内容</li>
-<li>如果CGI脚本有bug被利用，容易对服务器造成攻击</li>
-</ul>
-<h3>http中CGIHTTPRequestHandler处理</h3>
-<ul>
-<li>GET请求非cgi程序按照SimpleHTTPRequestHandler处理(获取本地资源)，POST请求非cgi返回501</li>
-<li>cgi资源请求要求host后面跟'/cgi-bin', '/htbin'两个路径之一</li>
-<li>run_cgi处理url先判断服务器目录'/cgi-bin', '/htbin'目录下cgi脚本是否存在，url中?后面为参数</li>
-<li>run_cgi将服务端当前env加上服务信息http请求上下文(headers信息，参数信息)组装</li>
-<li>run_cgi启动子进程运行脚本p = subprocess.Popen(cmdline, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env)</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># cgi服务端</span>
-<span class="kn">import</span> <span class="nn">http.server</span>
-
-
-<span class="k">def</span> <span class="nf">open_server</span><span class="p">():</span>
-    <span class="n">server</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">HTTPServer</span><span class="p">((</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="mi">8088</span><span class="p">),</span> <span class="n">http</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">CGIHTTPRequestHandler</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-    <span class="k">finally</span><span class="p">:</span>
-        <span class="n">server</span><span class="o">.</span><span class="n">server_close</span><span class="p">()</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">open_server</span><span class="p">()</span>
-
-<span class="c1"># cgi脚本 cgi-bin/math.py</span>
-<span class="kn">import</span> <span class="nn">cgi</span>
-
-
-<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="o">*</span><span class="n">argv</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="o">*</span><span class="n">argv</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">do_exec</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Content-type: text/html&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">()</span>
-    <span class="n">form</span> <span class="o">=</span> <span class="n">cgi</span><span class="o">.</span><span class="n">FieldStorage</span><span class="p">()</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">func_argv</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">form</span><span class="o">.</span><span class="n">list</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;func&quot;</span><span class="p">:</span>
-                <span class="n">func_name</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">value</span>
-                <span class="n">func_exec</span> <span class="o">=</span> <span class="n">register</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">func_argv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
-        <span class="n">func_result</span> <span class="o">=</span> <span class="n">func_exec</span><span class="p">(</span><span class="n">func_argv</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2"> result: </span><span class="si">{</span><span class="n">func_result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
-        <span class="n">cgi</span><span class="o">.</span><span class="n">print_exception</span><span class="p">()</span>
-
-
-<span class="n">register</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;add&quot;</span><span class="p">:</span> <span class="n">add</span><span class="p">}</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">do_exec</span><span class="p">()</span>
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="err">Request URL: http://127.0.0.1:8088/cgi-bin/math.py?func=add&amp;a=1&amp;b=2</span>
-<span class="err">Request Method: GET</span>
-<span class="err">Status Code: 200 Script output follows</span>
-<span class="err">Remote Address: 127.0.0.1:8088</span>
-<span class="err">Referrer Policy: strict-origin-when-cross-origin</span>
-
-
-<span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">200</span> <span class="ne">Script output follows</span>
-<span class="na">Server</span><span class="o">:</span> <span class="l">SimpleHTTP/0.6 Python/3.7.8</span>
-<span class="na">Date</span><span class="o">:</span> <span class="l">Tue, 18 May 2021 15:56:14 GMT</span>
-<span class="na">Content-type</span><span class="o">:</span> <span class="l">text/html</span>
-
-add result: 3
-</code></pre></div></div>
-        <hr />
-    </div>
-		
+<li>Content-Security-Policy通过定义经过批准的内容源 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-jiu-zhou.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -389,51 +353,14 @@ add result: 3
 <li>直面你对被更熟练的开发人员吓倒的恐惧，要意识到每个人都是不同的 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-wu-zhou.html">read more</a></div>
     </div>	
 				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="/artsdi-er-shi-si-zhou.html"><h2>ARTS第二十四周</h2></a>
-        <div class= "well small"> 2021-04-19
-
-<a class="url fn">qianlizhixing</a>
-
-
- </div>
-        <div class="summary"><h2>Algorithm</h2>
-<p>leetcode 179 最大数</p>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/largest-number/">原题</a></li>
-<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/179.py">解题</a></li>
-<li>字符串比较</li>
-</ul>
-<h2>Review</h2>
-<blockquote>
-<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_57/</p>
-<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_60/</p>
-<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_61/</p>
-</blockquote>
-<h3>消息传递在并行系统中带来更好的可伸缩性</h3>
-<ul>
-<li>几乎所有并发问题都与共享可变内存的使用有关:竞争条件、死锁、活锁等。答案似乎很明显:要么放弃并发性，要么回避共享内存</li>
-<li>可以使用进程和消息传递，而不是使用线程和共享内存作为编程模型</li>
-</ul>
-<h3>测试员是你的朋友</h3>
-<ul>
-<li>因为测试人员报告琐碎的问题，开发看起来很糟糕</li>
-<li>因为测试人员的QC，客户没有让开发修复那些“小东西”所困扰而感到兴奋时，开发看起来很棒 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-si-zhou.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
     <li class="active"><a href="/tag/pythonku.html">1</a></li>
+    <li class=""><a href="/tag/pythonku2.html">2</a></li>
 
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+    <li class="next"><a href="/tag/pythonku2.html">Next &rarr;</a></li>
 
 </ul>
 </div>

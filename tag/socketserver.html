@@ -260,6 +260,326 @@
             <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rfile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
         <span class="n">resp</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;HTTP/1.1 200 OK</span><span class="se">\r\n</span><span class="s1">content-type: application/json</span><span class="se">\r\n</span><span class="s1">date: Wed, 28 Apr 2021 16:20:04 GMT</span><span class="se">\r\n</span><span class="s1">server: socketserver</span><span class="se">\r\n\r\n</span><span class="s1">{&quot;code&quot;:&quot;0000&quot;,&quot;message&quot;:&quot;ok&quot;,&quot;data&quot;:</span><span class="si">{}</span><span class="s1">}&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>简化源码辅助理解主流程</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Author of the BaseServer patch: Luke Kenneth Casson Leighton</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.4&quot;</span>
+
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">selectors</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BufferedIOBase</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">monotonic</span> <span class="k">as</span> <span class="n">time</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BaseServer&quot;</span><span class="p">,</span> <span class="s2">&quot;TCPServer&quot;</span><span class="p">,</span> <span class="s2">&quot;BaseRequestHandler&quot;</span><span class="p">,</span> <span class="s2">&quot;StreamRequestHandler&quot;</span><span class="p">,</span> <span class="s2">&quot;DatagramRequestHandler&quot;</span><span class="p">]</span>
+
+<span class="c1"># poll/select have the advantage of not requiring any extra file descriptor,</span>
+<span class="c1"># contrarily to epoll/kqueue (also, they require a single syscall).</span>
+<span class="n">_ServerSelector</span> <span class="o">=</span> <span class="n">selectors</span><span class="o">.</span><span class="n">SelectSelector</span>
+
+
+<span class="k">class</span> <span class="nc">BaseServer</span><span class="p">:</span>
+
+    <span class="n">timeout</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_address</span><span class="p">,</span> <span class="n">RequestHandlerClass</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor.  May be extended, do not override.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server_address</span> <span class="o">=</span> <span class="n">server_address</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">RequestHandlerClass</span> <span class="o">=</span> <span class="n">RequestHandlerClass</span>
+
+    <span class="k">def</span> <span class="nf">serve_forever</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poll_interval</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># XXX: Consider using another file descriptor or connecting to the</span>
+            <span class="c1"># socket to wake this up instead of polling. Polling reduces our</span>
+            <span class="c1"># responsiveness to a shutdown request and wastes cpu at all other</span>
+            <span class="c1"># times.</span>
+            <span class="k">with</span> <span class="n">_ServerSelector</span><span class="p">()</span> <span class="k">as</span> <span class="n">selector</span><span class="p">:</span>
+                <span class="n">selector</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selectors</span><span class="o">.</span><span class="n">EVENT_READ</span><span class="p">)</span>
+                <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="n">ready</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">poll_interval</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">ready</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request_noblock</span><span class="p">()</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">handle_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Handle one request, possibly blocking.</span>
+
+<span class="sd">        Respects self.timeout.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Support people who used socket.settimeout() to escape</span>
+        <span class="c1"># handle_request before self.timeout was available.</span>
+        <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">gettimeout</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">timeout</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">deadline</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span>
+
+        <span class="c1"># Wait until a request arrives or the timeout expires - the loop is</span>
+        <span class="c1"># necessary to accommodate early wakeups due to EINTR.</span>
+        <span class="k">with</span> <span class="n">_ServerSelector</span><span class="p">()</span> <span class="k">as</span> <span class="n">selector</span><span class="p">:</span>
+            <span class="n">selector</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selectors</span><span class="o">.</span><span class="n">EVENT_READ</span><span class="p">)</span>
+
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">ready</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">ready</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request_noblock</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">timeout</span> <span class="o">=</span> <span class="n">deadline</span> <span class="o">-</span> <span class="n">time</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">timeout</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_timeout</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_handle_request_noblock</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Handle one request, without blocking.</span>
+
+<span class="sd">        I assume that selector.select() has returned that the socket is</span>
+<span class="sd">        readable before this function was called, so there should be no risk of</span>
+<span class="sd">        blocking in get_request().</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">request</span><span class="p">,</span> <span class="n">client_address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_request</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">process_request</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handle_error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shutdown_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shutdown_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+    <span class="k">def</span> <span class="nf">handle_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called if no new request arrives within self.timeout.</span>
+
+<span class="sd">        Overridden by ForkingMixIn.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">process_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Call finish_request.</span>
+
+<span class="sd">        Overridden by ForkingMixIn and ThreadingMixIn.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finish_request</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shutdown_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">finish_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Finish one request by instantiating RequestHandlerClass.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">RequestHandlerClass</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">shutdown_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called to shutdown and close an individual request.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">close_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called to clean up an individual request.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">handle_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Handle an error gracefully.  May be overridden.</span>
+
+<span class="sd">        The default is to print a traceback and continue.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exception happened during processing of request from&#39;</span><span class="p">,</span> <span class="n">client_address</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+        <span class="kn">import</span> <span class="nn">traceback</span>
+        <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server_close</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">TCPServer</span><span class="p">(</span><span class="n">BaseServer</span><span class="p">):</span>
+
+    <span class="n">address_family</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span>
+
+    <span class="n">socket_type</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span>
+
+    <span class="n">request_queue_size</span> <span class="o">=</span> <span class="mi">5</span>
+
+    <span class="n">allow_reuse_address</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_address</span><span class="p">,</span> <span class="n">RequestHandlerClass</span><span class="p">,</span> <span class="n">bind_and_activate</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor.  May be extended, do not override.&quot;&quot;&quot;</span>
+        <span class="n">BaseServer</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_address</span><span class="p">,</span> <span class="n">RequestHandlerClass</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address_family</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">bind_and_activate</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">server_bind</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">server_activate</span><span class="p">()</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">server_close</span><span class="p">()</span>
+                <span class="k">raise</span>
+
+    <span class="k">def</span> <span class="nf">server_bind</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called by constructor to bind the socket.</span>
+
+<span class="sd">        May be overridden.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">allow_reuse_address</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server_address</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server_address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">server_activate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called by constructor to activate the server.</span>
+
+<span class="sd">        May be overridden.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request_queue_size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">server_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called to clean-up the server.</span>
+
+<span class="sd">        May be overridden.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">fileno</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return socket file number.</span>
+
+<span class="sd">        Interface required by selector.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">fileno</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the request and client address from the socket.</span>
+
+<span class="sd">        May be overridden.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">shutdown_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called to shutdown and close an individual request.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1">#explicitly shutdown.  socket.close() merely releases</span>
+            <span class="c1">#the socket and waits for GC to perform the actual close.</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">shutdown</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SHUT_WR</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+            <span class="k">pass</span>  <span class="c1">#some platforms may raise ENOTCONN here</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">close_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called to clean up an individual request.&quot;&quot;&quot;</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">BaseRequestHandler</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">,</span> <span class="n">server</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">request</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client_address</span> <span class="o">=</span> <span class="n">client_address</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">server</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">()</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">finish</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">StreamRequestHandler</span><span class="p">(</span><span class="n">BaseRequestHandler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Define self.rfile and self.wfile for stream sockets.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Default buffer sizes for rfile, wfile.</span>
+    <span class="c1"># We default rfile to buffered because otherwise it could be</span>
+    <span class="c1"># really slow for large data (a getc() call per byte); we make</span>
+    <span class="c1"># wfile unbuffered because (a) often after a write() we want to</span>
+    <span class="c1"># read and we need to flush the line; (b) big writes to unbuffered</span>
+    <span class="c1"># files are typically optimized by stdio even when big reads</span>
+    <span class="c1"># aren&#39;t.</span>
+    <span class="n">rbufsize</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">wbufsize</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># A timeout to apply to the request socket, if not None.</span>
+    <span class="n">timeout</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Disable nagle algorithm for this socket, if True.</span>
+    <span class="c1"># Use only when wbufsize != 0, to avoid small packets.</span>
+    <span class="n">disable_nagle_algorithm</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">disable_nagle_algorithm</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">IPPROTO_TCP</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">TCP_NODELAY</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">makefile</span><span class="p">(</span><span class="s1">&#39;rb&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbufsize</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">wbufsize</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span> <span class="o">=</span> <span class="n">_SocketWriter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">makefile</span><span class="p">(</span><span class="s1">&#39;wb&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wbufsize</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">finish</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
+                <span class="c1"># A final socket error may have occurred here, such as</span>
+                <span class="c1"># the local error ECONNABORTED.</span>
+                <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">_SocketWriter</span><span class="p">(</span><span class="n">BufferedIOBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Simple writable BufferedIOBase implementation for a socket</span>
+
+<span class="sd">    Does not hold data in a buffer, avoiding any need to call flush().&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sock</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span> <span class="o">=</span> <span class="n">sock</span>
+
+    <span class="k">def</span> <span class="nf">writable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">memoryview</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">as</span> <span class="n">view</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">view</span><span class="o">.</span><span class="n">nbytes</span>
+
+    <span class="k">def</span> <span class="nf">fileno</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">fileno</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">DatagramRequestHandler</span><span class="p">(</span><span class="n">BaseRequestHandler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Define self.rfile and self.wfile for datagram sockets.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">packet</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rfile</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">packet</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">finish</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">client_address</span><span class="p">)</span>
 </code></pre></div></div>
         <hr />
     </div>

@@ -633,6 +633,63 @@ def tearDown(self):
 <li>conftest.py共享初始化</li>
 <li>@pytest.fixtures(params=)，params可循环序列，request.param . 无需更改测试功能代码。让我们再跑一次</li>
 </ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">inspect</span><span class="p">,</span> <span class="n">text</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">[</span>
+        <span class="c1"># request: (sql_url_id, sql_url_template)</span>
+        <span class="p">(</span><span class="s1">&#39;sqlite_memory&#39;</span><span class="p">,</span> <span class="s1">&#39;sqlite:///:memory:&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;sqlite_file&#39;</span><span class="p">,</span> <span class="s1">&#39;sqlite:///</span><span class="si">{dbfile}</span><span class="s1">&#39;</span><span class="p">),</span>
+        <span class="c1"># (&#39;psql&#39;, &#39;postgresql://records:records@localhost/records&#39;)</span>
+    <span class="p">],</span>
+    <span class="n">ids</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">db</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">tmpdir</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Instance of `records.Database(dburl)`</span>
+
+<span class="sd">    Ensure, it gets closed after being used in a test or fixture.</span>
+
+<span class="sd">    Parametrized with (sql_url_id, sql_url_template) tuple.</span>
+<span class="sd">    If `sql_url_template` contains `{dbfile}` it is replaced with path to a</span>
+<span class="sd">    temporary file.</span>
+
+<span class="sd">    Feel free to parametrize for other databases and experiment with them.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">id</span><span class="p">,</span> <span class="n">url</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">param</span>
+    <span class="c1"># replace {dbfile} in url with temporary db file path</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dbfile</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">tmpdir</span> <span class="o">/</span> <span class="s2">&quot;db.sqlite&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;request:&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;tmpdir:&#39;</span><span class="p">,</span> <span class="n">tmpdir</span><span class="p">)</span>
+    <span class="n">_engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">_engine</span>  <span class="c1"># providing fixture value for a test case</span>
+    <span class="c1"># tear_down</span>
+    <span class="n">_engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">foo_table</span><span class="p">(</span><span class="n">db</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Database with table `foo` created</span>
+
+<span class="sd">    tear_down drops the table.</span>
+
+<span class="sd">    Typically applied by `@pytest.mark.usefixtures(&#39;foo_table&#39;)`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;CREATE TABLE foo (a integer)&#39;</span><span class="p">))</span>
+    <span class="k">yield</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;DROP TABLE foo&#39;</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">test_aaa</span><span class="p">(</span><span class="n">db</span><span class="p">):</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;CREATE table users (id text)&quot;</span><span class="p">))</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users WHERE id = :user&quot;</span><span class="p">),</span> <span class="n">user</span><span class="o">=</span><span class="s2">&quot;Te&#39;ArnaLambert&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="vm">__file__</span><span class="p">])</span>
+</code></pre></div>
+
 <h3>总结</h3>
 <ul>
 <li>单元测试框架上手快</li>
