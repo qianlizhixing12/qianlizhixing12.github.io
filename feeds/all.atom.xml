@@ -1,5 +1,347 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>千里之行 始于足下</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2021-05-31T00:00:00+08:00</updated><entry><title>ARTS第三十周</title><link href="/artsdi-san-shi-zhou.html" rel="alternate"></link><published>2021-05-31T00:00:00+08:00</published><updated>2021-05-31T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-05-31:/artsdi-san-shi-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>千里之行 始于足下</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2021-06-07T00:00:00+08:00</updated><entry><title>ARTS第三十一周</title><link href="/artsdi-san-shi-yi-zhou.html" rel="alternate"></link><published>2021-06-07T00:00:00+08:00</published><updated>2021-06-07T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-06-07:/artsdi-san-shi-yi-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 1744 你能在你最喜欢的那天吃到你最喜欢的糖果吗&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/1744.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;前缀和&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://users.ece.cmu.edu/~eno/coding/CppCodingStandard.html&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;命名&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;名字是对生活的生态进行长期深入思考的结果&lt;/li&gt;
+&lt;li&gt;只有将系统作为一个整体来理解的程序员才能创建一个“适合”系统的名称&lt;/li&gt;
+&lt;li&gt;如果名称合适，那么一切都能自然地组合在一起，关系清晰，含义可以推导出来，从人类的共同期望中推理就能正常工作&lt;/li&gt;
+&lt;li&gt;如果变量表示时间、权重或其他单元，那么在名称中包含该单元，以便开发人员更容易发现问题，例如uint32 mTimeoutMsecs。更好的方法是将一个变量变成一个类，这样就可以捕捉到错误的转换&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;类名&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;类名中每个单词首字母大写，不要使用下划线连接每个单词&lt;/li&gt;
+&lt;li&gt;超过三个单词的复合名称是一个线索，重新审视你的设计，看看你的对象是否比他们应该有更多的责任&lt;/li&gt;
+&lt;li&gt;避免将派生类的类名带入派生类名的诱惑，一个类应该是独立的，它来自于什么并不重要&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;类库名&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;使用名称空间来防止来自不同供应商和组的库之间的类名冲突&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;方法名&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;使用与类名相同的规则&lt;/li&gt;
+&lt;li&gt;每个方法和函数执行一个动作，名称应该清楚它做什么 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;leetcode 1744 你能在你最喜欢的那天吃到你最喜欢的糖果吗&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/"&gt;原题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/1744.py"&gt;解题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;前缀和&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Review&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://users.ece.cmu.edu/~eno/coding/CppCodingStandard.html&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;命名&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;名字是对生活的生态进行长期深入思考的结果&lt;/li&gt;
+&lt;li&gt;只有将系统作为一个整体来理解的程序员才能创建一个“适合”系统的名称&lt;/li&gt;
+&lt;li&gt;如果名称合适，那么一切都能自然地组合在一起，关系清晰，含义可以推导出来，从人类的共同期望中推理就能正常工作&lt;/li&gt;
+&lt;li&gt;如果变量表示时间、权重或其他单元，那么在名称中包含该单元，以便开发人员更容易发现问题，例如uint32 mTimeoutMsecs。更好的方法是将一个变量变成一个类，这样就可以捕捉到错误的转换&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;类名&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;类名中每个单词首字母大写，不要使用下划线连接每个单词&lt;/li&gt;
+&lt;li&gt;超过三个单词的复合名称是一个线索，重新审视你的设计，看看你的对象是否比他们应该有更多的责任&lt;/li&gt;
+&lt;li&gt;避免将派生类的类名带入派生类名的诱惑，一个类应该是独立的，它来自于什么并不重要&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;类库名&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;使用名称空间来防止来自不同供应商和组的库之间的类名冲突&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;方法名&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;使用与类名相同的规则&lt;/li&gt;
+&lt;li&gt;每个方法和函数执行一个动作，名称应该清楚它做什么。CheckForErrors()而不是ErrorCheck()，这也将使函数和数据对象更容易区分，类通常是名词，函数名通常是动词&lt;/li&gt;
+&lt;li&gt;后缀有时是有用的&lt;/li&gt;
+&lt;li&gt;Max最大值&lt;/li&gt;
+&lt;li&gt;Cnt计数&lt;/li&gt;
+&lt;li&gt;Key键值&lt;/li&gt;
+&lt;li&gt;前缀有时是有用的&lt;/li&gt;
+&lt;li&gt;Is问问题&lt;/li&gt;
+&lt;li&gt;Get获取&lt;/li&gt;
+&lt;li&gt;Set设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;类属性名&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;属性名应该已小写a开始，再加上其他小写修饰符(p指针point)，后面代词使用与类名相同的规则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;方法参数名&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;第一个字符应该是小写，第一个字母之后的所有单词开头都应该是大写&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;文件扩展名&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件.hh&lt;/li&gt;
+&lt;li&gt;源文件.cc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;栈生存周期变量名&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;使用小写字母&lt;/li&gt;
+&lt;li&gt;使用下划线_连接单词&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;指针变量&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;指针变量应该以前缀p开头&lt;/li&gt;
+&lt;li&gt;将*放在变量名附近，而不是指针类型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;引用变量和返回引用的函数&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;引用变量应该以前缀r开头&lt;/li&gt;
+&lt;li&gt;常量引用不应该以前缀r开头&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;全局变量&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;全局变量应该以前缀g开头&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;全局常量&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;全局常量应该是所有字母大写，以下划线_连接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;静态变量&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;静态变量应该以前缀s开头&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;类必须方法&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;类应该实现以下方法&lt;/li&gt;
+&lt;li&gt;默认构造函数&lt;/li&gt;
+&lt;li&gt;虚拟析构函数，如果类打算由其他类派生，那么将析构函数设为虚函数&lt;/li&gt;
+&lt;li&gt;拷贝构造函数&lt;/li&gt;
+&lt;li&gt;赋值运算符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;格式化&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;每行不应超过78个字符&lt;/li&gt;
+&lt;li&gt;在等式不等式比较中，总是把常数放在左边&lt;/li&gt;
+&lt;li&gt;每行应该只有一条语句，除非语句之间关系非常密切&lt;/li&gt;
+&lt;li&gt;每行定义一个变量&lt;/li&gt;
+&lt;li&gt;声明块应该对齐&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;类&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;初始化所有属性&lt;/li&gt;
+&lt;li&gt;不要在对象的构造函数中做任何实际工作。在构造函数内部，只初始化变量和只执行不会失败的操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;类文件&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;每个类的定义应该在它自己的文件中，每个文件都直接以类的名字命名&lt;/li&gt;
+&lt;li&gt;每个类都应该在一个源文件中实现&lt;/li&gt;
+&lt;li&gt;如果源文件太大，或者想避免总是编译模板，按照ClassName_section.C添加额外的文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;文档&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;注释视为描述系统的故事，期望机器人提取注释并形成一个手册页，类注释是故事的一部分，方法签名注释是故事的另一部分，方法参数是另一部分，方法实现又是另一部分。所有这些部分应该交织在一起告诉他人到底做了什么，为什么做&lt;/li&gt;
+&lt;li&gt;注释应该记录决策，当需要选择做什么的时候，写下所做的选择和原因&lt;/li&gt;
+&lt;li&gt;显式注释关键词&lt;/li&gt;
+&lt;li&gt;@author模块作者&lt;/li&gt;
+&lt;li&gt;@version模块版本&lt;/li&gt;
+&lt;li&gt;@param函数参数&lt;/li&gt;
+&lt;li&gt;@return函数返回&lt;/li&gt;
+&lt;li&gt;@deprecated函数不再被使用&lt;/li&gt;
+&lt;li&gt;@see创建一个指向文件/函数/变量的链接，以便更好地理解当前代码块的功能&lt;/li&gt;
+&lt;li&gt;@todo还有什么事要做&lt;/li&gt;
+&lt;li&gt;@bug报告错误&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Tip&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;https://www.runoob.com/w3cnote/yaml-intro.html&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;yaml.YAMLObject中定义yaml_tag，YAMLObjectMetaclass元类在类创建时将类注册到loader，即yaml_tag与类一一对应，继承自YAMLObject的类定义了对象字典信息，实现序列化和反序列化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;yaml&lt;/span&gt;
+
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;People&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;yaml&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;YAMLObject&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;yaml_tag&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;u&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;!People&amp;#39;&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sex&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;addr&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;age&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sex&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sex&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;addr&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__repr__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;(name=&lt;/span&gt;&lt;span class="si"&gt;%r&lt;/span&gt;&lt;span class="s2"&gt;, age=&lt;/span&gt;&lt;span class="si"&gt;%r&lt;/span&gt;&lt;span class="s2"&gt;, sex=&lt;/span&gt;&lt;span class="si"&gt;%r&lt;/span&gt;&lt;span class="s2"&gt;, addr=&lt;/span&gt;&lt;span class="si"&gt;%r&lt;/span&gt;&lt;span class="s2"&gt;)&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__class__&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sex&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;yaml&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;!People&lt;/span&gt;
+&lt;span class="s2"&gt;name: aaa&lt;/span&gt;
+&lt;span class="s2"&gt;age: 16&lt;/span&gt;
+&lt;span class="s2"&gt;sex: boy&lt;/span&gt;
+&lt;span class="s2"&gt;addr: beijing&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;yaml&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loader&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FullLoader&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Share(werkzeug源码解析)&lt;/h2&gt;
+&lt;h3&gt;datastructures&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;datastructures.py单元定义了基本类型&lt;/li&gt;
+&lt;li&gt;为了实现不可修改，定义了一系列Immutable类，通过覆盖默认的魔术方法(__delitem__,__setitem__等)使修改时抛异常&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Request&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;继承关系werkzeug.wrappers.request.Request--&amp;gt;werkzeug.sansio.request.Request&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;werkzeug.sansio.request.Request&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;方法基本是对wsgi中environ进行解析，使用时更方便（url，access_route，cookies，host，mimetype，user_agent，args等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;python
+  # werkzeug.wrappers.request.Request初始化__init__调用super(werkzeug.sansio.request.Request)时入参
+  def __init__(
+          self,
+          environ: "WSGIEnvironment",
+          populate_request: bool = True,
+          shallow: bool = False,
+      ) -&amp;gt; None:
+          super().__init__(
+              method=environ.get("REQUEST_METHOD", "GET"),
+              scheme=environ.get("wsgi.url_scheme", "http"),
+              server=_get_server(environ),
+              root_path=_wsgi_decoding_dance(
+                  environ.get("SCRIPT_NAME") or "", self.charset, self.encoding_errors
+              ),
+              path=_wsgi_decoding_dance(
+                  environ.get("PATH_INFO") or "", self.charset, self.encoding_errors
+              ),
+              query_string=environ.get("QUERY_STRING", "").encode("latin1"),
+              headers=EnvironHeaders(environ),
+              remote_addr=environ.get("REMOTE_ADDR"),
+          )
+          ...&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;方法大多返回不可修改对象ImmutableMultiDict或ImmutableList&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;werkzeug.wrappers.request.Request&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;根据content-type解析http/https的body(environ["wsgi.input"])&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;```python
+  from werkzeug.wrappers import Request, Response
+  from werkzeug.test import create_environ&lt;/p&gt;
+&lt;p&gt;environ = create_environ(path='/foo', base_url='http://localhost:8080/', query_string="id=22&amp;amp;name=aaa", content_type="application/json", json={'param1': '666', 'param2': 'kkk'})
+  request = Request(environ)
+  for key in list(request.&lt;strong&gt;dict&lt;/strong&gt;.keys()):
+      print(key, getattr(request, key))
+  ```&lt;/p&gt;
+&lt;h3&gt;Response&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;继承关系werkzeug.wrappers.response.Response--&amp;gt;werkzeug.sansio.response.Response&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;werkzeug.sansio.response.Response&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;和werkzeug.sansio.request.Request对应，封装http协议响应控制，status，headers(主要处理mimetype，content_type)&lt;/li&gt;
+&lt;li&gt;属性status和status_code是同步的，存储在_status, _status_code&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;werkzeug.sansio.response.Response&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;根据headers的content_type处理返回http内容body，存储在response&lt;/li&gt;
+&lt;li&gt;Response是由业务绝对内容的，所以header和body必须在__init__中自己指定，不能像Request从environ解析且不可修改，至于get_wsgi_headers，get_app_iter等environ是用来确定Location等内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Request和Response配合封装wsgi&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;werkzeug.wrappers.request.Request.application和werkzeug.wrappers.response.Response.__call__配合封装WSGI流程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 服务端&lt;/span&gt;
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;探索werkzeug.wrappers.request.Request werkzeug.wrappers.response.Response使用&lt;/span&gt;
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;wsgiref.simple_server&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;WSGIServer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;WSGIRequestHandler&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;werkzeug&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Response&lt;/span&gt;
+
+
+&lt;span class="nd"&gt;@Request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;werkzeug_app&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;    werkzeug.Request.application将wsgi入口application参数environ转为werkzeug.Request实例request&lt;/span&gt;
+&lt;span class="sd"&gt;    被装饰函数werkzeug_app处理业务请求和放回，return werkzeug.Response实例&lt;/span&gt;
+&lt;span class="sd"&gt;    werkzeug.Request.application调用werkzeug.Response实例，实例调用__call__内部调用了wsgi回调start_response回写status和headers，本身返回body&lt;/span&gt;
+&lt;span class="sd"&gt;    werkzeug.Request.application完成了wsgi原始入参(environ, start_response) -&amp;gt; body到request -&amp;gt; response的转换&lt;/span&gt;
+
+&lt;span class="sd"&gt;    进一步，基于werkzeug的框架重点在于路由管理，即werkzeug.Request作为框架入参，根据path method等路由到具体业务，返回werkzeug.Response&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;body&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;method&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;method&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;query&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query_string&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+        &lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;content_type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;application/json; charset=utf-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;make_server&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;server_class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;WSGIServer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;handler_class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;WSGIRequestHandler&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Create a new WSGI server listening on `host` and `port` for `app`&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;server_class&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;handler_class&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_app&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;make_server&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;werkzeug_app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;httpd&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;httpd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;serve_forever&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# 客户端&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;http.client&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;HTTPConnection&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;client_demo&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;HTTPConnection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;body&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;param1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;xxx&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;param2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;yyy&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;headers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Content-Type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;application/json&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Content-Length&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
+    &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;POST&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/wsgi_text?user=go&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;respnese&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getresponse&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;respnese&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;client_demo&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;封装Application类&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 官方demo，Shortly相当于Application类，dispatch_request处理路由&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Shortly&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;redis&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;redis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Redis&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;redis_host&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;redis_port&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;dispatch_request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wsgi_app&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;request&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dispatch_request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__call__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;wsgi_app&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create_app&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;redis_host&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;redis_port&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;6379&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;with_static&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Shortly&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;redis_host&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;       &lt;span class="n"&gt;redis_host&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;redis_port&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;       &lt;span class="n"&gt;redis_port&lt;/span&gt;
+    &lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;with_static&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wsgi_app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SharedDataMiddleware&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wsgi_app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;/static&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dirname&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__file__&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;static&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="ARTS"></category><category term="网络编程"></category><category term="python库"></category><category term="yaml"></category><category term="c++ style"></category><category term="werkzeug"></category></entry><entry><title>ARTS第三十周</title><link href="/artsdi-san-shi-zhou.html" rel="alternate"></link><published>2021-05-31T00:00:00+08:00</published><updated>2021-05-31T00:00:00+08:00</updated><author><name>qianlizhixing</name></author><id>tag:None,2021-05-31:/artsdi-san-shi-zhou.html</id><summary type="html">&lt;h2&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;leetcode 1707 与数组中元素的最大异或值&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://leetcode-cn.com/problems/maximum-xor-with-an-element-from-array/"&gt;原题&lt;/a&gt;&lt;/li&gt;

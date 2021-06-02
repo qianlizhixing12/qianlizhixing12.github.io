@@ -50,8 +50,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="/artsdi-san-shi-zhou.html"><h1>ARTS第三十周</h1></a>
-2021-05-31
+            <a href="/artsdi-san-shi-yi-zhou.html"><h1>ARTS第三十一周</h1></a>
+2021-06-07
 
 <a class="url fn">qianlizhixing</a>
 
@@ -60,6 +60,335 @@
         </div>
         
         <div><h2>Algorithm</h2>
+<p>leetcode 1744 你能在你最喜欢的那天吃到你最喜欢的糖果吗</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/1744.py">解题</a></li>
+<li>前缀和</li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://users.ece.cmu.edu/~eno/coding/CppCodingStandard.html</p>
+</blockquote>
+<h3>命名</h3>
+<ul>
+<li>名字是对生活的生态进行长期深入思考的结果</li>
+<li>只有将系统作为一个整体来理解的程序员才能创建一个“适合”系统的名称</li>
+<li>如果名称合适，那么一切都能自然地组合在一起，关系清晰，含义可以推导出来，从人类的共同期望中推理就能正常工作</li>
+<li>如果变量表示时间、权重或其他单元，那么在名称中包含该单元，以便开发人员更容易发现问题，例如uint32 mTimeoutMsecs。更好的方法是将一个变量变成一个类，这样就可以捕捉到错误的转换</li>
+</ul>
+<h4>类名</h4>
+<ul>
+<li>类名中每个单词首字母大写，不要使用下划线连接每个单词</li>
+<li>超过三个单词的复合名称是一个线索，重新审视你的设计，看看你的对象是否比他们应该有更多的责任</li>
+<li>避免将派生类的类名带入派生类名的诱惑，一个类应该是独立的，它来自于什么并不重要</li>
+</ul>
+<h4>类库名</h4>
+<ul>
+<li>使用名称空间来防止来自不同供应商和组的库之间的类名冲突</li>
+</ul>
+<h4>方法名</h4>
+<ul>
+<li>使用与类名相同的规则</li>
+<li>每个方法和函数执行一个动作，名称应该清楚它做什么。CheckForErrors()而不是ErrorCheck()，这也将使函数和数据对象更容易区分，类通常是名词，函数名通常是动词</li>
+<li>后缀有时是有用的</li>
+<li>Max最大值</li>
+<li>Cnt计数</li>
+<li>Key键值</li>
+<li>前缀有时是有用的</li>
+<li>Is问问题</li>
+<li>Get获取</li>
+<li>Set设置</li>
+</ul>
+<h4>类属性名</h4>
+<ul>
+<li>属性名应该已小写a开始，再加上其他小写修饰符(p指针point)，后面代词使用与类名相同的规则</li>
+</ul>
+<h4>方法参数名</h4>
+<ul>
+<li>第一个字符应该是小写，第一个字母之后的所有单词开头都应该是大写</li>
+</ul>
+<h4>文件扩展名</h4>
+<ul>
+<li>头文件.hh</li>
+<li>源文件.cc</li>
+</ul>
+<h4>栈生存周期变量名</h4>
+<ul>
+<li>使用小写字母</li>
+<li>使用下划线_连接单词</li>
+</ul>
+<h4>指针变量</h4>
+<ul>
+<li>指针变量应该以前缀p开头</li>
+<li>将*放在变量名附近，而不是指针类型</li>
+</ul>
+<h4>引用变量和返回引用的函数</h4>
+<ul>
+<li>引用变量应该以前缀r开头</li>
+<li>常量引用不应该以前缀r开头</li>
+</ul>
+<h4>全局变量</h4>
+<ul>
+<li>全局变量应该以前缀g开头</li>
+</ul>
+<h4>全局常量</h4>
+<ul>
+<li>全局常量应该是所有字母大写，以下划线_连接</li>
+</ul>
+<h4>静态变量</h4>
+<ul>
+<li>静态变量应该以前缀s开头</li>
+</ul>
+<h4>类必须方法</h4>
+<ul>
+<li>类应该实现以下方法</li>
+<li>默认构造函数</li>
+<li>虚拟析构函数，如果类打算由其他类派生，那么将析构函数设为虚函数</li>
+<li>拷贝构造函数</li>
+<li>赋值运算符</li>
+</ul>
+<h3>格式化</h3>
+<ul>
+<li>每行不应超过78个字符</li>
+<li>在等式不等式比较中，总是把常数放在左边</li>
+<li>每行应该只有一条语句，除非语句之间关系非常密切</li>
+<li>每行定义一个变量</li>
+<li>声明块应该对齐</li>
+</ul>
+<h3>类</h3>
+<ul>
+<li>初始化所有属性</li>
+<li>不要在对象的构造函数中做任何实际工作。在构造函数内部，只初始化变量和只执行不会失败的操作</li>
+</ul>
+<h4>类文件</h4>
+<ul>
+<li>每个类的定义应该在它自己的文件中，每个文件都直接以类的名字命名</li>
+<li>每个类都应该在一个源文件中实现</li>
+<li>如果源文件太大，或者想避免总是编译模板，按照ClassName_section.C添加额外的文件</li>
+</ul>
+<h3>文档</h3>
+<ul>
+<li>注释视为描述系统的故事，期望机器人提取注释并形成一个手册页，类注释是故事的一部分，方法签名注释是故事的另一部分，方法参数是另一部分，方法实现又是另一部分。所有这些部分应该交织在一起告诉他人到底做了什么，为什么做</li>
+<li>注释应该记录决策，当需要选择做什么的时候，写下所做的选择和原因</li>
+<li>显式注释关键词</li>
+<li>@author模块作者</li>
+<li>@version模块版本</li>
+<li>@param函数参数</li>
+<li>@return函数返回</li>
+<li>@deprecated函数不再被使用</li>
+<li>@see创建一个指向文件/函数/变量的链接，以便更好地理解当前代码块的功能</li>
+<li>@todo还有什么事要做</li>
+<li>@bug报告错误</li>
+</ul>
+<h2>Tip</h2>
+<blockquote>
+<p>https://www.runoob.com/w3cnote/yaml-intro.html</p>
+</blockquote>
+<ul>
+<li>yaml.YAMLObject中定义yaml_tag，YAMLObjectMetaclass元类在类创建时将类注册到loader，即yaml_tag与类一一对应，继承自YAMLObject的类定义了对象字典信息，实现序列化和反序列化</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">yaml</span>
+
+
+<span class="k">class</span> <span class="nc">People</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">YAMLObject</span><span class="p">):</span>
+    <span class="n">yaml_tag</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;!People&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sex</span> <span class="o">=</span> <span class="n">sex</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addr</span> <span class="o">=</span> <span class="n">addr</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(name=</span><span class="si">%r</span><span class="s2">, age=</span><span class="si">%r</span><span class="s2">, sex=</span><span class="si">%r</span><span class="s2">, addr=</span><span class="si">%r</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">addr</span><span class="p">)</span>
+
+
+<span class="n">obj</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">!People</span>
+<span class="s2">name: aaa</span>
+<span class="s2">age: 16</span>
+<span class="s2">sex: boy</span>
+<span class="s2">addr: beijing</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Share(werkzeug源码解析)</h2>
+<h3>datastructures</h3>
+<ul>
+<li>datastructures.py单元定义了基本类型</li>
+<li>为了实现不可修改，定义了一系列Immutable类，通过覆盖默认的魔术方法(__delitem__,__setitem__等)使修改时抛异常</li>
+</ul>
+<h3>Request</h3>
+<ul>
+<li>继承关系werkzeug.wrappers.request.Request--&gt;werkzeug.sansio.request.Request</li>
+</ul>
+<h4>werkzeug.sansio.request.Request</h4>
+<ul>
+<li>方法基本是对wsgi中environ进行解析，使用时更方便（url，access_route，cookies，host，mimetype，user_agent，args等）</li>
+</ul>
+<p><code>python
+  # werkzeug.wrappers.request.Request初始化__init__调用super(werkzeug.sansio.request.Request)时入参
+  def __init__(
+          self,
+          environ: "WSGIEnvironment",
+          populate_request: bool = True,
+          shallow: bool = False,
+      ) -&gt; None:
+          super().__init__(
+              method=environ.get("REQUEST_METHOD", "GET"),
+              scheme=environ.get("wsgi.url_scheme", "http"),
+              server=_get_server(environ),
+              root_path=_wsgi_decoding_dance(
+                  environ.get("SCRIPT_NAME") or "", self.charset, self.encoding_errors
+              ),
+              path=_wsgi_decoding_dance(
+                  environ.get("PATH_INFO") or "", self.charset, self.encoding_errors
+              ),
+              query_string=environ.get("QUERY_STRING", "").encode("latin1"),
+              headers=EnvironHeaders(environ),
+              remote_addr=environ.get("REMOTE_ADDR"),
+          )
+          ...</code></p>
+<ul>
+<li>方法大多返回不可修改对象ImmutableMultiDict或ImmutableList</li>
+</ul>
+<h4>werkzeug.wrappers.request.Request</h4>
+<ul>
+<li>根据content-type解析http/https的body(environ["wsgi.input"])</li>
+</ul>
+<p>```python
+  from werkzeug.wrappers import Request, Response
+  from werkzeug.test import create_environ</p>
+<p>environ = create_environ(path='/foo', base_url='http://localhost:8080/', query_string="id=22&amp;name=aaa", content_type="application/json", json={'param1': '666', 'param2': 'kkk'})
+  request = Request(environ)
+  for key in list(request.<strong>dict</strong>.keys()):
+      print(key, getattr(request, key))
+  ```</p>
+<h3>Response</h3>
+<ul>
+<li>继承关系werkzeug.wrappers.response.Response--&gt;werkzeug.sansio.response.Response</li>
+</ul>
+<h4>werkzeug.sansio.response.Response</h4>
+<ul>
+<li>和werkzeug.sansio.request.Request对应，封装http协议响应控制，status，headers(主要处理mimetype，content_type)</li>
+<li>属性status和status_code是同步的，存储在_status, _status_code</li>
+</ul>
+<h4>werkzeug.sansio.response.Response</h4>
+<ul>
+<li>根据headers的content_type处理返回http内容body，存储在response</li>
+<li>Response是由业务绝对内容的，所以header和body必须在__init__中自己指定，不能像Request从environ解析且不可修改，至于get_wsgi_headers，get_app_iter等environ是用来确定Location等内容</li>
+</ul>
+<h3>Request和Response配合封装wsgi</h3>
+<ul>
+<li>werkzeug.wrappers.request.Request.application和werkzeug.wrappers.response.Response.__call__配合封装WSGI流程</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 服务端</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">探索werkzeug.wrappers.request.Request werkzeug.wrappers.response.Response使用</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">wsgiref.simple_server</span> <span class="kn">import</span> <span class="n">WSGIServer</span><span class="p">,</span> <span class="n">WSGIRequestHandler</span>
+<span class="kn">from</span> <span class="nn">werkzeug</span> <span class="kn">import</span> <span class="n">Request</span><span class="p">,</span> <span class="n">Response</span>
+
+
+<span class="nd">@Request</span><span class="o">.</span><span class="n">application</span>
+<span class="k">def</span> <span class="nf">werkzeug_app</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    werkzeug.Request.application将wsgi入口application参数environ转为werkzeug.Request实例request</span>
+<span class="sd">    被装饰函数werkzeug_app处理业务请求和放回，return werkzeug.Response实例</span>
+<span class="sd">    werkzeug.Request.application调用werkzeug.Response实例，实例调用__call__内部调用了wsgi回调start_response回写status和headers，本身返回body</span>
+<span class="sd">    werkzeug.Request.application完成了wsgi原始入参(environ, start_response) -&gt; body到request -&gt; response的转换</span>
+
+<span class="sd">    进一步，基于werkzeug的框架重点在于路由管理，即werkzeug.Request作为框架入参，根据path method等路由到具体业务，返回werkzeug.Response</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">query_string</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)}</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">body</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">),</span> <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/json; charset=utf-8&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">make_server</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">server_class</span><span class="o">=</span><span class="n">WSGIServer</span><span class="p">,</span> <span class="n">handler_class</span><span class="o">=</span><span class="n">WSGIRequestHandler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a new WSGI server listening on `host` and `port` for `app`&quot;&quot;&quot;</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="n">server_class</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">),</span> <span class="n">handler_class</span><span class="p">)</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">set_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">server</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">make_server</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">8000</span><span class="p">,</span> <span class="n">werkzeug_app</span><span class="p">)</span> <span class="k">as</span> <span class="n">httpd</span><span class="p">:</span>
+        <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+
+
+<span class="c1"># 客户端</span>
+<span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">client_demo</span><span class="p">():</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">HTTPConnection</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">8000</span><span class="p">)</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;param1&#39;</span><span class="p">:</span> <span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="s1">&#39;param2&#39;</span><span class="p">:</span> <span class="s1">&#39;yyy&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span> <span class="s1">&#39;Content-Length&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">)}</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;/wsgi_text?user=go&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="n">respnese</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">respnese</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">client_demo</span><span class="p">()</span>
+</code></pre></div>
+
+<h3>封装Application类</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 官方demo，Shortly相当于Application类，dispatch_request处理路由</span>
+<span class="k">class</span> <span class="nc">Shortly</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">redis</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">Redis</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;redis_host&#39;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;redis_port&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">dispatch_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">wsgi_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">environ</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span> <span class="n">wsgi_app</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">create_app</span><span class="p">(</span><span class="n">redis_host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">redis_port</span><span class="o">=</span><span class="mi">6379</span><span class="p">,</span> <span class="n">with_static</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">Shortly</span><span class="p">({</span>
+        <span class="s1">&#39;redis_host&#39;</span><span class="p">:</span>       <span class="n">redis_host</span><span class="p">,</span>
+        <span class="s1">&#39;redis_port&#39;</span><span class="p">:</span>       <span class="n">redis_port</span>
+    <span class="p">})</span>
+    <span class="k">if</span> <span class="n">with_static</span><span class="p">:</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span> <span class="o">=</span> <span class="n">SharedDataMiddleware</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;/static&#39;</span><span class="p">:</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;static&#39;</span><span class="p">)</span>
+        <span class="p">})</span>
+    <span class="k">return</span> <span class="n">app</span>
+</code></pre></div></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-san-shi-zhou.html"><h2>ARTS第三十周</h2></a>
+        <div class= "well small"> 2021-05-31
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
 <p>leetcode 1707 与数组中元素的最大异或值</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/maximum-xor-with-an-element-from-array/">原题</a></li>
@@ -87,79 +416,9 @@
 <h2>Share(WSGI)</h2>
 <blockquote>
 <p>https://www.python.org/dev/peps/pep-0333/</p>
-<p>https://www.python.org/dev/peps/pep-3333/</p>
-</blockquote>
-<ul>
-<li>WSGI服务器<a href="https://baike.baidu.com/item/网关">网关</a>接口（Python Web Server Gateway Interface)是Python应用程序或框架和Web服务器之间的一种接口协议，类似于Java中的servlet API，让服务器和业务分离解耦</li>
-<li>WSGI接口有两个方面:服务器网关端，应用程序框架端。服务器端调用由应用程序端提供的可调用对象。提供该对象的具体方式取决于服务器或网关。假设一些服务器或网关需要应用程序的部署人员编写一个简短的脚本来创建服务器或网关的实例，并为其提供应用程序对象。其他服务器和网关可能使用配置文件或其他机制来指定应该从何处导入应用程序对象，或以其他方式获取应用程序对象</li>
-<li>除了“纯”服务器/网关和应用程序/框架之外，还可以创建“中间件”组件来实现该规范的两个方面。这些组件充当包含它们的服务器的应用程序和包含它们的应用程序的服务器，可以用来提供扩展的api、内容转换、导航和其他有用的功能</li>
-<li>实现可调用对象的服务器、网关或应用程序可以根据自己的需要选择适当的实现技术。相反，正在调用可调用对象的服务器、网关或应用程序必须不依赖于提供给它的可调用对象的类型。可调用对象只被调用，而不是被自省</li>
-</ul>
-<h3>WSGI处理</h3>
-<ul>
-<li>WSGIServer继承HTTPServer，WSGIRequestHandler继承BaseHTTPRequestHandler，继承了http库的风格，tcp层(socket)和http层分离</li>
-<li>WSGIRequestHandler仅仅使用了基类parse_request校验处理http协议版本，http头headers功能，就将流程转给ServerHandler.run。按道理ServerHandler和WSGIRequestHandler合二为一像CGIHTTPRequestHandler一样继承BaseHTTPRequestHandler处理http协议层应该是没问题的，ServerHandler也确实有大量处理http协议的代码，应该是为了处理WSGI细节和WSGI和CGI的转化</li>
-<li>对业务开发来讲，application唯一入口WSGIServer，注入application启动WSGIServer，遵守协议处理业务需求。所以application从WSGIServer一直传递到ServerHandler.run中，待application处理完业务后，将处理结果状态通过回调start_response给ServerHandler.status，ServerHandler.headers，将处理结果数据通过返回结果给ServerHandler.result，ServerHandler负责http协议层返回</li>
-<li>ServerHandler传给application的env信息和start_response回调，env都包含那些内容?WSGIServer.setup_environ添加tcp层服务器和端口信息，WSGIRequestHandler.get_environ添加http层本次请求的方法资源路径头信息等，ServerHandler.setup_environ添加WSGI协议信息</li>
-<li>environ["PATH_INFO"]，environ["QUERY_STRING"]，environ["wsgi.input"]包含了业务数据</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># 服务端</span>
-<span class="kn">from</span> <span class="nn">wsgiref.simple_server</span> <span class="kn">import</span> <span class="n">WSGIServer</span><span class="p">,</span> <span class="n">WSGIRequestHandler</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-
-<span class="k">def</span> <span class="nf">demo_app</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;REQUEST_METHOD&quot;</span><span class="p">],</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PATH_INFO&quot;</span><span class="p">],</span> <span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;QUERY_STRING&quot;</span><span class="p">]}</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;wsgi.input&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CONTENT_LENGTH&quot;</span><span class="p">]))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">body</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
-
-    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
-    <span class="n">stdout</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;request info:&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">stdout</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">stdout</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">stdout</span><span class="p">)</span>
-
-    <span class="n">start_response</span><span class="p">(</span><span class="s2">&quot;200 OK&quot;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/plain; charset=utf-8&#39;</span><span class="p">)])</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">stdout</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)]</span>
-
-
-<span class="k">def</span> <span class="nf">make_server</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">server_class</span><span class="o">=</span><span class="n">WSGIServer</span><span class="p">,</span> <span class="n">handler_class</span><span class="o">=</span><span class="n">WSGIRequestHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a new WSGI server listening on `host` and `port` for `app`&quot;&quot;&quot;</span>
-    <span class="n">server</span> <span class="o">=</span> <span class="n">server_class</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">),</span> <span class="n">handler_class</span><span class="p">)</span>
-    <span class="n">server</span><span class="o">.</span><span class="n">set_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">server</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">with</span> <span class="n">make_server</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">8000</span><span class="p">,</span> <span class="n">demo_app</span><span class="p">)</span> <span class="k">as</span> <span class="n">httpd</span><span class="p">:</span>
-        <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
-
-<span class="c1"># 客户端</span>
-<span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-
-<span class="k">def</span> <span class="nf">client_demo</span><span class="p">():</span>
-    <span class="n">client</span> <span class="o">=</span> <span class="n">HTTPConnection</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">8000</span><span class="p">)</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;param1&#39;</span><span class="p">:</span> <span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="s1">&#39;param2&#39;</span><span class="p">:</span> <span class="s1">&#39;yyy&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;trace&#39;</span><span class="p">:</span> <span class="s1">&#39;zzz&#39;</span><span class="p">,</span> <span class="s1">&#39;Content-Length&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">)}</span>
-    <span class="n">client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;/wsgi_text?user=go&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-    <span class="n">respnese</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">respnese</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">client_demo</span><span class="p">()</span>
-
-<span class="c1"># output</span>
-<span class="c1"># request info:</span>
-
-<span class="c1"># {&quot;method&quot;: &quot;POST&quot;, &quot;path&quot;: &quot;/wsgi_text&quot;, &quot;query&quot;: &quot;user=go&quot;, &quot;param1&quot;: &quot;xxx&quot;, &quot;param2&quot;: &quot;yyy&quot;}</span>
-</code></pre></div></div>
-        <hr />
-    </div>
-		
+<p>https://www.python …</p></blockquote> <a class="btn btn-info xsmall" href="/artsdi-san-shi-zhou.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -313,53 +572,14 @@
 <li>更多的时间被花在开发好软件以满足客户的期望上 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-liu-zhou.html">read more</a></div>
     </div>	
 				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="/artsdi-er-shi-wu-zhou.html"><h2>ARTS第二十五周</h2></a>
-        <div class= "well small"> 2021-04-26
-
-<a class="url fn">qianlizhixing</a>
-
-
- </div>
-        <div class="summary"><h2>Algorithm</h2>
-<p>leetcode 220 存在重复元素III</p>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/contains-duplicate-iii/">原题</a></li>
-<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/220.py">解题</a></li>
-<li>保持有序滑动窗口，二分查找</li>
-</ul>
-<h2>Review</h2>
-<blockquote>
-<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_62/</p>
-<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_64/</p>
-<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_68/</p>
-</blockquote>
-<h3>只有代码代表真相</h3>
-<ul>
-<li>查看源代码，程序的意义应该是显而易见的；要知道一个程序做什么，源代码最终是您可以确定的</li>
-<li>最准确的需求文档也不能说出全部真相，不包含程序实际的详细故事，只包含需求分析人员的高层次意图</li>
-<li>使代码尽可能简单，便于阅读和理解</li>
-<li>精心设计代码要表达的内容，尽可能直接地传达代码正在做的事</li>
-</ul>
-<h3>结对编程</h3>
-<ul>
-<li>作为一名团队成员，要对没有比你有经验的开发者有耐心</li>
-<li>直面你对被更熟练的开发人员吓倒的恐惧，要意识到每个人都是不同的 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-wu-zhou.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
     <li class="active"><a href="/tag/wang-luo-bian-cheng.html">1</a></li>
+    <li class=""><a href="/tag/wang-luo-bian-cheng2.html">2</a></li>
 
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+    <li class="next"><a href="/tag/wang-luo-bian-cheng2.html">Next &rarr;</a></li>
 
 </ul>
 </div>
