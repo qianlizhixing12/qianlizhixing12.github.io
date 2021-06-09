@@ -50,8 +50,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="/artsdi-san-shi-yi-zhou.html"><h1>ARTS第三十一周</h1></a>
-2021-06-07
+            <a href="/artsdi-san-shi-er-zhou.html"><h1>ARTS第三十二周</h1></a>
+2021-06-14
 
 <a class="url fn">qianlizhixing</a>
 
@@ -60,6 +60,321 @@
         </div>
         
         <div><h2>Algorithm</h2>
+<p>leetcode 494 目标和</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/target-sum/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/494.py">解题</a></li>
+<li>动态规划转换为背包问题</li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://www.kernel.org/doc/html/latest/process/coding-style.html</p>
+</blockquote>
+<h4>缩进</h4>
+<ul>
+<li>制表符是8个字符，缩进也是8个字符</li>
+<li>不要把多个语句放在一行里，不要用逗号来避免使用大括号</li>
+<li>除了注释、文档和Kconfig之外，空格从不用于缩进</li>
+<li>不要在行尾留下空白</li>
+</ul>
+<h4>断开长行长字符串</h4>
+<ul>
+<li>单行长度的首选限制是80列</li>
+<li>超过80列的语句应该被分成合理的块，除非超过80列会显著增加可读性</li>
+<li>一个非常常用的样式是将断开行对齐到函数开括号</li>
+<li>这些规则适用于带有长参数列表的函数头</li>
+</ul>
+<h4>括号和空格</h4>
+<ul>
+<li>首选的方式是把左括号放在行末，把右括号放在行首，独占一行，适用于所有非函数语句块(if, switch, for, while, do)</li>
+<li>函数在下一行行首开始左括号，独占一行</li>
+<li>不要在单个语句使用大括号</li>
+<li>在保留词后面加一个空格</li>
+<li>不要在圆括号周围添加空格</li>
+<li>当声明指针数据或返回指针类型的函数时，*的首选用法是紧邻数据名或函数名，而不是紧邻类型名</li>
+<li>在大多数二元和三元运算符周围(每边)使用一个空格</li>
+<li>一元运算符后不能有空格</li>
+<li>不要在行尾留下空格</li>
+</ul>
+<h4>命名</h4>
+<ul>
+<li>全局变量需要有描述性的名称，就像全局函数一样。例如一个计算活动用户数量的函数，应该调用count_active_users()，不应该调用cntusr()</li>
+<li>将函数的类型编码到名称中是愚蠢的</li>
+<li>局部变量的名称应该简短且切中要害</li>
+</ul>
+<h4>函数</h4>
+<ul>
+<li>函数应该简短亲切，只做一件事并且做得很好</li>
+<li>函数局部变量的数量不应该超过5-10个</li>
+<li>在函数原型中，包含参数名及其数据类型</li>
+</ul>
+<h4>注释</h4>
+<ul>
+<li>将注释放在函数的开头，告诉人们它做什么，以及它为什么这样做</li>
+</ul>
+<h2>Tip</h2>
+<ul>
+<li>os模块负责程序与操作系统的交互，提供了访问操作系统底层的接口</li>
+<li>sys模块负责程序与python解释器的交互，提供了一系列的函数和变量，用于操控python的运行时环境</li>
+</ul>
+<h4>运行信息</h4>
+<ul>
+<li>系统平台sys.platform</li>
+<li>解释器版本信息sys.version sys.version_info</li>
+<li>当前Unicode实现所使用的默认字符串编码名称sys.getdefaultencoding()</li>
+<li>命令行传递参数sys.argv</li>
+<li>sys.getrefcount()对象引用计数，返回的计数通常比预期的多一，因为它包括了作为getrefcount()参数的这一次临时引用</li>
+<li>sys.modules将模块名称映射到已加载的模块。可以操作该字典来强制重新加载模块，或是实现其他技巧。但是，替换的字典不一定会按预期工作，并且从字典中删除必要的项目可能会导致Python崩溃</li>
+<li>sys.path字符串组成的列表，用于指定模块的搜索路径。初始化自环境变量PYTHONPATH，再加上一条与安装有关的默认路径</li>
+<li>运行环境变量os.environ</li>
+</ul>
+<h4>进程管理</h4>
+<ul>
+<li>模拟传统的UNIX函数发信号给进程(UNIX平台上有效)os.kill(os.getpid(), signal.SIGILL)</li>
+<li>os.fork()无法在Windows系统中使用，父进程中os.fork()返回子进程pid，子进程中os.fork()返回0</li>
+<li>os.system通过fork一个子进程,然后该子进程执行命令，阻塞等待子进程结束，返回命令执行结果的返回值</li>
+<li>os.popen创建一个管道，通过fork一个子进程,然后该子进程执行命令</li>
+</ul>
+<h4>文件操作</h4>
+<ul>
+<li>
+<p>拼接路径os.path.join(dir, path)</p>
+</li>
+<li>
+<p>新建文件夹os.makedirs(os.path.dirname(file_full_path))</p>
+</li>
+<li>删除文件夹os.rmdir(os.path.dirname(file_full_path))</li>
+<li>判断文件夹存在os.path.exists(os.path.dirname(file_full_path))</li>
+<li>目录文件列表os.listdir(os.path.dirname(file_full_path))</li>
+<li>判断资源类型(是否文件)os.path.isfile(file_full_path)</li>
+<li>删除文件os.remove(file_full_path)</li>
+<li>移动(重命名)os.rename(src_file_full_path, des_file_full_path)</li>
+</ul>
+<h4>ini文件解析</h4>
+<ul>
+<li>configparser模块</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">configparser</span>
+
+
+<span class="k">def</span> <span class="nf">doini</span><span class="p">():</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;test.ini&quot;</span>
+
+    <span class="c1"># 加载ini</span>
+    <span class="n">iniFile</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+    <span class="n">iniFile</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1"># 添加或更新节点</span>
+    <span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;request&quot;</span><span class="p">,</span> <span class="s2">&quot;timeout&quot;</span><span class="p">,</span> <span class="s2">&quot;30&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">iniFile</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
+        <span class="n">iniFile</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+    <span class="n">iniFile</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="c1"># 删除节点</span>
+    <span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;request&quot;</span><span class="p">,</span> <span class="s2">&quot;retry&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span>
+    <span class="k">if</span> <span class="n">iniFile</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">iniFile</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="n">iniFile</span><span class="o">.</span><span class="n">remove_option</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">iniFile</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">section</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">iniFile</span><span class="o">.</span><span class="n">remove_section</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+
+    <span class="c1"># 回写ini</span>
+    <span class="n">iniFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">doini</span><span class="p">()</span>
+</code></pre></div>
+
+<h4>注册表操作</h4>
+<ul>
+<li>winreg模块</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">winreg</span>
+
+
+<span class="k">def</span> <span class="nf">doreg</span><span class="p">(</span><span class="n">regList</span><span class="p">):</span>
+    <span class="c1"># root</span>
+    <span class="n">root</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">winreg</span><span class="o">.</span><span class="n">HKEY_CURRENT_USER</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;ttt\www&quot;</span>
+    <span class="n">reg</span> <span class="o">=</span> <span class="n">winreg</span><span class="o">.</span><span class="n">CreateKey</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># 添加或更新</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span> <span class="s2">&quot;sss&quot;</span>
+        <span class="n">winreg</span><span class="o">.</span><span class="n">SetValueEx</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">winreg</span><span class="o">.</span><span class="n">REG_SZ</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="c1"># 删除</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;port&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">winreg</span><span class="o">.</span><span class="n">QueryInfoKey</span><span class="p">(</span><span class="n">reg</span><span class="p">)[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">winreg</span><span class="o">.</span><span class="n">EnumValue</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">):</span>
+                <span class="n">winreg</span><span class="o">.</span><span class="n">DeleteValue</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+                <span class="k">break</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">e</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">winreg</span><span class="o">.</span><span class="n">CloseKey</span><span class="p">(</span><span class="n">reg</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Share(scrapy setting)</h2>
+<blockquote>
+<p>https://docs.scrapy.org/en/latest/intro/tutorial.html</p>
+</blockquote>
+<h4>项目结构</h4>
+<p><img alt="scrapy_files" src=".\img\scrapy_files.png"></p>
+<ul>
+<li>scrapy.cfg部署配置文件</li>
+<li>settings.py项目设置文件</li>
+<li>items.py采集项定义文件</li>
+<li>pipelines.py采集管道文件</li>
+<li>middlewares.py中间件文件</li>
+<li>spiders/爬虫器目录</li>
+</ul>
+<h4>源码结构</h4>
+<ul>
+<li>随着scrapy系列文章，会逐渐补充</li>
+<li>scrapy.cmdline  命令入口</li>
+<li>scrapy.commands 命令目录</li>
+<li>scrapy.templates 创建新项目或新爬取器模板</li>
+<li>scrapy.utils工具函数</li>
+<li>scrapy.utils.project 项目设置，数据处理函数</li>
+<li>scrapy.utils.conf 部署配置处理函数</li>
+<li>scrapy.utils.versions 版本处理函数</li>
+<li>scrapy.utils.template 模板变量字符串替换处理</li>
+<li>scrapy.settings运行设置</li>
+<li>__init__ 类定义</li>
+<li>default_settings默认设置</li>
+</ul>
+<h4>命令</h4>
+<h5>全局命令</h5>
+<ul>
+<li>
+<p>startproject</p>
+</li>
+<li>
+<p>genspider</p>
+</li>
+<li>
+<p>settings</p>
+</li>
+<li>
+<p>runspider</p>
+</li>
+<li>
+<p>shell</p>
+</li>
+<li>
+<p>fetch</p>
+</li>
+<li>
+<p>view</p>
+</li>
+<li>
+<p>version</p>
+</li>
+</ul>
+<h5>Project命令</h5>
+<ul>
+<li>
+<p>crawl</p>
+</li>
+<li>
+<p>check</p>
+</li>
+<li>
+<p>list</p>
+</li>
+<li>
+<p>edit</p>
+</li>
+<li>
+<p>parse</p>
+</li>
+<li>
+<p>bench</p>
+</li>
+</ul>
+<p>命令的入口都为scrapy.cmdline.execute，根据具体命令执行scrapy.commands下具体命令</p>
+<h4>配置读取</h4>
+<ul>
+<li>
+<p>scrapy第一步先找部署配置文件，因为部署配置里面包含了运行设置项的路径配置和部署配置，如果本地运行execute时指定了settings运行配置，程序忽略部署配置文件和运行配置项的解析</p>
+</li>
+<li>
+<p>get_project_settings逻辑</p>
+</li>
+<li>
+<p>当环境变量没有SCRAPY_SETTINGS_MODULE，调用init_env从部署配置文件读取settings填充SCRAPY_SETTINGS_MODULE，init_env还会把部署配置文件的目录加入sys.path</p>
+</li>
+<li>
+<p>部署配置文件ini格式，可以在/etc/scrapy.cfg，c:\scrapy\scrapy.cfg，home/user/.config/scrapy.cfg，home/user/.scrapy.cfg和当前目录及父目录递层向上查找</p>
+</li>
+<li>
+<p>Settings类初始化加载default_settings默认配置(优先级default)，配置项SettingsAttribute的priority有5个优先级，高优先级覆盖低优先级</p>
+</li>
+</ul>
+<p>```python
+  class SettingsAttribute:</p>
+<div class="highlight"><pre><span></span><code>  ...
+
+  <span class="nv">def</span> <span class="nv">set</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">value</span>, <span class="nv">priority</span><span class="ss">)</span>:
+      <span class="s2">&quot;&quot;&quot;</span><span class="s">Sets value if priority is higher or equal than current priority.</span><span class="s2">&quot;&quot;&quot;</span>
+      <span class="k">if</span> <span class="nv">priority</span> <span class="o">&gt;=</span> <span class="nv">self</span>.<span class="nv">priority</span>:
+          <span class="k">if</span> <span class="nv">isinstance</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">value</span>, <span class="nv">BaseSettings</span><span class="ss">)</span>:
+              <span class="nv">value</span> <span class="o">=</span> <span class="nv">BaseSettings</span><span class="ss">(</span><span class="nv">value</span>, <span class="nv">priority</span><span class="o">=</span><span class="nv">priority</span><span class="ss">)</span>
+          <span class="nv">self</span>.<span class="nv">value</span> <span class="o">=</span> <span class="nv">value</span>
+          <span class="nv">self</span>.<span class="nv">priority</span> <span class="o">=</span> <span class="nv">priority</span>
+</code></pre></div>
+
+<p>```</p>
+<h4>执行命令</h4>
+<ul>
+<li>动态从scrapy.commands目录下加载所有模块，并从模块中找到继承自ScrapyCommand的类，文件名为命令名(exectue参数argv[1:]开始第一个不以-开始的值)，创建命令名到执行实例的映射</li>
+<li>使用optparse解析命令参数</li>
+<li>调用cmd.add_options将每个命令需要的参数定义到optparse</li>
+<li>调用cmd.process_options将optparse加入或更新settings(优先级为cmdline)</li>
+<li>调用cmd.run运行命令</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 显示版本命令</span>
+<span class="kn">from</span> <span class="nn">scrapy.cmdline</span> <span class="kn">import</span> <span class="n">execute</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="c1"># 获取当前脚本路径</span>
+<span class="n">dirpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="c1">#切换工作目录</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span>
+<span class="n">execute</span><span class="p">([</span><span class="s1">&#39;scrapy&#39;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="s1">&#39;-v&#39;</span><span class="p">])</span>
+
+<span class="c1"># 输出</span>
+<span class="c1"># Scrapy       : 2.5.0</span>
+<span class="c1"># lxml         : 4.6.3.0</span>
+<span class="c1"># libxml2      : 2.9.5</span>
+<span class="c1"># cssselect    : 1.1.0</span>
+<span class="c1"># parsel       : 1.6.0</span>
+<span class="c1"># w3lib        : 1.22.0</span>
+<span class="c1"># Twisted      : 21.2.0</span>
+<span class="c1"># Python       : 3.8.10 (tags/v3.8.10:3d8993a, May  3 2021, 11:48:03) [MSC v.1928 64 bit (AMD64)]</span>
+<span class="c1"># pyOpenSSL    : 20.0.1 (OpenSSL 1.1.1k  25 Mar 2021)</span>
+<span class="c1"># cryptography : 3.4.7</span>
+<span class="c1"># Platform     : Windows-10-10.0.19043-SP0</span>
+</code></pre></div></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-san-shi-yi-zhou.html"><h2>ARTS第三十一周</h2></a>
+        <div class= "well small"> 2021-06-07
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
 <p>leetcode 1744 你能在你最喜欢的那天吃到你最喜欢的糖果吗</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/">原题</a></li>
@@ -90,406 +405,9 @@
 <h4>方法名</h4>
 <ul>
 <li>使用与类名相同的规则</li>
-<li>每个方法和函数执行一个动作，名称应该清楚它做什么。CheckForErrors()而不是ErrorCheck()，这也将使函数和数据对象更容易区分，类通常是名词，函数名通常是动词</li>
-<li>后缀有时是有用的</li>
-<li>Max最大值</li>
-<li>Cnt计数</li>
-<li>Key键值</li>
-<li>前缀有时是有用的</li>
-<li>Is问问题</li>
-<li>Get获取</li>
-<li>Set设置</li>
-</ul>
-<h4>类属性名</h4>
-<ul>
-<li>属性名应该已小写a开始，再加上其他小写修饰符(p指针point)，后面代词使用与类名相同的规则</li>
-</ul>
-<h4>方法参数名</h4>
-<ul>
-<li>第一个字符应该是小写，第一个字母之后的所有单词开头都应该是大写</li>
-</ul>
-<h4>文件扩展名</h4>
-<ul>
-<li>头文件.hh</li>
-<li>源文件.cc</li>
-</ul>
-<h4>栈生存周期变量名</h4>
-<ul>
-<li>使用小写字母</li>
-<li>使用下划线_连接单词</li>
-</ul>
-<h4>指针变量</h4>
-<ul>
-<li>指针变量应该以前缀p开头</li>
-<li>将*放在变量名附近，而不是指针类型</li>
-</ul>
-<h4>引用变量和返回引用的函数</h4>
-<ul>
-<li>引用变量应该以前缀r开头</li>
-<li>常量引用不应该以前缀r开头</li>
-</ul>
-<h4>全局变量</h4>
-<ul>
-<li>全局变量应该以前缀g开头</li>
-</ul>
-<h4>全局常量</h4>
-<ul>
-<li>全局常量应该是所有字母大写，以下划线_连接</li>
-</ul>
-<h4>静态变量</h4>
-<ul>
-<li>静态变量应该以前缀s开头</li>
-</ul>
-<h4>类必须方法</h4>
-<ul>
-<li>类应该实现以下方法</li>
-<li>默认构造函数</li>
-<li>虚拟析构函数，如果类打算由其他类派生，那么将析构函数设为虚函数</li>
-<li>拷贝构造函数</li>
-<li>赋值运算符</li>
-</ul>
-<h3>格式化</h3>
-<ul>
-<li>每行不应超过78个字符</li>
-<li>在等式不等式比较中，总是把常数放在左边</li>
-<li>每行应该只有一条语句，除非语句之间关系非常密切</li>
-<li>每行定义一个变量</li>
-<li>声明块应该对齐</li>
-</ul>
-<h3>类</h3>
-<ul>
-<li>初始化所有属性</li>
-<li>不要在对象的构造函数中做任何实际工作。在构造函数内部，只初始化变量和只执行不会失败的操作</li>
-</ul>
-<h4>类文件</h4>
-<ul>
-<li>每个类的定义应该在它自己的文件中，每个文件都直接以类的名字命名</li>
-<li>每个类都应该在一个源文件中实现</li>
-<li>如果源文件太大，或者想避免总是编译模板，按照ClassName_section.C添加额外的文件</li>
-</ul>
-<h3>文档</h3>
-<ul>
-<li>注释视为描述系统的故事，期望机器人提取注释并形成一个手册页，类注释是故事的一部分，方法签名注释是故事的另一部分，方法参数是另一部分，方法实现又是另一部分。所有这些部分应该交织在一起告诉他人到底做了什么，为什么做</li>
-<li>注释应该记录决策，当需要选择做什么的时候，写下所做的选择和原因</li>
-<li>显式注释关键词</li>
-<li>@author模块作者</li>
-<li>@version模块版本</li>
-<li>@param函数参数</li>
-<li>@return函数返回</li>
-<li>@deprecated函数不再被使用</li>
-<li>@see创建一个指向文件/函数/变量的链接，以便更好地理解当前代码块的功能</li>
-<li>@todo还有什么事要做</li>
-<li>@bug报告错误</li>
-</ul>
-<h2>Tip</h2>
-<blockquote>
-<p>https://www.runoob.com/w3cnote/yaml-intro.html</p>
-</blockquote>
-<ul>
-<li>yaml.YAMLObject中定义yaml_tag，YAMLObjectMetaclass元类在类创建时将类注册到loader，即yaml_tag与类一一对应，继承自YAMLObject的类定义了对象字典信息，实现序列化和反序列化</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">yaml</span>
-
-
-<span class="k">class</span> <span class="nc">People</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">YAMLObject</span><span class="p">):</span>
-    <span class="n">yaml_tag</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;!People&#39;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sex</span> <span class="o">=</span> <span class="n">sex</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">addr</span> <span class="o">=</span> <span class="n">addr</span>
-
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(name=</span><span class="si">%r</span><span class="s2">, age=</span><span class="si">%r</span><span class="s2">, sex=</span><span class="si">%r</span><span class="s2">, addr=</span><span class="si">%r</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">addr</span><span class="p">)</span>
-
-
-<span class="n">obj</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">!People</span>
-<span class="s2">name: aaa</span>
-<span class="s2">age: 16</span>
-<span class="s2">sex: boy</span>
-<span class="s2">addr: beijing</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-</code></pre></div>
-
-<h2>Share(werkzeug源码解析)</h2>
-<h3>datastructures</h3>
-<ul>
-<li>datastructures.py单元定义了基本类型</li>
-<li>为了实现不可修改，定义了一系列Immutable类，通过覆盖默认的魔术方法(__delitem__,__setitem__等)使修改时抛异常</li>
-</ul>
-<h3>Request</h3>
-<ul>
-<li>继承关系werkzeug.wrappers.request.Request--&gt;werkzeug.sansio.request.Request</li>
-</ul>
-<h4>werkzeug.sansio.request.Request</h4>
-<ul>
-<li>方法基本是对wsgi中environ进行解析，使用时更方便（url，access_route，cookies，host，mimetype，user_agent，args等）</li>
-</ul>
-<p><code>python
-  # werkzeug.wrappers.request.Request初始化__init__调用super(werkzeug.sansio.request.Request)时入参
-  def __init__(
-          self,
-          environ: "WSGIEnvironment",
-          populate_request: bool = True,
-          shallow: bool = False,
-      ) -&gt; None:
-          super().__init__(
-              method=environ.get("REQUEST_METHOD", "GET"),
-              scheme=environ.get("wsgi.url_scheme", "http"),
-              server=_get_server(environ),
-              root_path=_wsgi_decoding_dance(
-                  environ.get("SCRIPT_NAME") or "", self.charset, self.encoding_errors
-              ),
-              path=_wsgi_decoding_dance(
-                  environ.get("PATH_INFO") or "", self.charset, self.encoding_errors
-              ),
-              query_string=environ.get("QUERY_STRING", "").encode("latin1"),
-              headers=EnvironHeaders(environ),
-              remote_addr=environ.get("REMOTE_ADDR"),
-          )
-          ...</code></p>
-<ul>
-<li>方法大多返回不可修改对象ImmutableMultiDict或ImmutableList</li>
-</ul>
-<h4>werkzeug.wrappers.request.Request</h4>
-<ul>
-<li>根据content-type解析http/https的body(environ["wsgi.input"])</li>
-</ul>
-<p>```python
-  from werkzeug.wrappers import Request, Response
-  from werkzeug.test import create_environ</p>
-<p>environ = create_environ(path='/foo', base_url='http://localhost:8080/', query_string="id=22&amp;name=aaa", content_type="application/json", json={'param1': '666', 'param2': 'kkk'})
-  request = Request(environ)
-  for key in list(request.<strong>dict</strong>.keys()):
-      print(key, getattr(request, key))
-  ```</p>
-<h3>Response</h3>
-<ul>
-<li>继承关系werkzeug.wrappers.response.Response--&gt;werkzeug.sansio.response.Response</li>
-</ul>
-<h4>werkzeug.sansio.response.Response</h4>
-<ul>
-<li>和werkzeug.sansio.request.Request对应，封装http协议响应控制，status，headers(主要处理mimetype，content_type)</li>
-<li>属性status和status_code是同步的，存储在_status, _status_code</li>
-</ul>
-<h4>werkzeug.sansio.response.Response</h4>
-<ul>
-<li>根据headers的content_type处理返回http内容body，存储在response</li>
-<li>Response是由业务绝对内容的，所以header和body必须在__init__中自己指定，不能像Request从environ解析且不可修改，至于get_wsgi_headers，get_app_iter等environ是用来确定Location等内容</li>
-</ul>
-<h3>Request和Response配合封装wsgi</h3>
-<ul>
-<li>werkzeug.wrappers.request.Request.application和werkzeug.wrappers.response.Response.__call__配合封装WSGI流程</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># 服务端</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">探索werkzeug.wrappers.request.Request werkzeug.wrappers.response.Response使用</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">wsgiref.simple_server</span> <span class="kn">import</span> <span class="n">WSGIServer</span><span class="p">,</span> <span class="n">WSGIRequestHandler</span>
-<span class="kn">from</span> <span class="nn">werkzeug</span> <span class="kn">import</span> <span class="n">Request</span><span class="p">,</span> <span class="n">Response</span>
-
-
-<span class="nd">@Request</span><span class="o">.</span><span class="n">application</span>
-<span class="k">def</span> <span class="nf">werkzeug_app</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    werkzeug.Request.application将wsgi入口application参数environ转为werkzeug.Request实例request</span>
-<span class="sd">    被装饰函数werkzeug_app处理业务请求和放回，return werkzeug.Response实例</span>
-<span class="sd">    werkzeug.Request.application调用werkzeug.Response实例，实例调用__call__内部调用了wsgi回调start_response回写status和headers，本身返回body</span>
-<span class="sd">    werkzeug.Request.application完成了wsgi原始入参(environ, start_response) -&gt; body到request -&gt; response的转换</span>
-
-<span class="sd">    进一步，基于werkzeug的框架重点在于路由管理，即werkzeug.Request作为框架入参，根据path method等路由到具体业务，返回werkzeug.Response</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">query_string</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)}</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">body</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
-
-    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">),</span> <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/json; charset=utf-8&quot;</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">make_server</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">server_class</span><span class="o">=</span><span class="n">WSGIServer</span><span class="p">,</span> <span class="n">handler_class</span><span class="o">=</span><span class="n">WSGIRequestHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a new WSGI server listening on `host` and `port` for `app`&quot;&quot;&quot;</span>
-    <span class="n">server</span> <span class="o">=</span> <span class="n">server_class</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">),</span> <span class="n">handler_class</span><span class="p">)</span>
-    <span class="n">server</span><span class="o">.</span><span class="n">set_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">server</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">with</span> <span class="n">make_server</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">8000</span><span class="p">,</span> <span class="n">werkzeug_app</span><span class="p">)</span> <span class="k">as</span> <span class="n">httpd</span><span class="p">:</span>
-        <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
-
-
-<span class="c1"># 客户端</span>
-<span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-
-<span class="k">def</span> <span class="nf">client_demo</span><span class="p">():</span>
-    <span class="n">client</span> <span class="o">=</span> <span class="n">HTTPConnection</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">8000</span><span class="p">)</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;param1&#39;</span><span class="p">:</span> <span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="s1">&#39;param2&#39;</span><span class="p">:</span> <span class="s1">&#39;yyy&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span> <span class="s1">&#39;Content-Length&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">)}</span>
-    <span class="n">client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;/wsgi_text?user=go&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-    <span class="n">respnese</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">respnese</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">client_demo</span><span class="p">()</span>
-</code></pre></div>
-
-<h3>封装Application类</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># 官方demo，Shortly相当于Application类，dispatch_request处理路由</span>
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="kn">from</span> <span class="nn">werkzeug.serving</span> <span class="kn">import</span> <span class="n">run_simple</span>
-<span class="kn">from</span> <span class="nn">werkzeug.wrappers</span> <span class="kn">import</span> <span class="n">Request</span><span class="p">,</span> <span class="n">Response</span>
-<span class="kn">from</span> <span class="nn">werkzeug.routing</span> <span class="kn">import</span> <span class="n">Map</span><span class="p">,</span> <span class="n">Rule</span>
-<span class="kn">from</span> <span class="nn">werkzeug.exceptions</span> <span class="kn">import</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">NotFound</span>
-<span class="kn">from</span> <span class="nn">werkzeug.middleware.shared_data</span> <span class="kn">import</span> <span class="n">SharedDataMiddleware</span>
-
-<span class="kn">from</span> <span class="nn">jinja2</span> <span class="kn">import</span> <span class="n">Environment</span><span class="p">,</span> <span class="n">FileSystemLoader</span>
-
-<span class="n">user_count</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span> <span class="mi">0</span> <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)}</span>
-
-
-<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;user_count&#39;</span><span class="p">:</span> <span class="n">user_count</span><span class="p">}</span>
-
-
-<span class="k">def</span> <span class="nf">user_details</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">user_count</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NotFound</span><span class="p">()</span>
-    <span class="n">user_count</span><span class="p">[</span><span class="n">user</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="s1">&#39;user_details.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="n">user_count</span><span class="p">[</span><span class="n">user</span><span class="p">]}</span>
-
-
-<span class="k">def</span> <span class="nf">error_404</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s2">&quot;404.html&quot;</span>
-
-
-<span class="k">class</span> <span class="nc">Shortly</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">template_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;templates&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">jinja_env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_path</span><span class="p">),</span> <span class="n">autoescape</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">handle_404</span> <span class="o">=</span> <span class="n">error_404</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">url_map</span> <span class="o">=</span> <span class="n">Map</span><span class="p">([</span>
-            <span class="n">Rule</span><span class="p">(</span><span class="s2">&quot;/index.html&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">index</span><span class="p">),</span>
-            <span class="n">Rule</span><span class="p">(</span><span class="s2">&quot;/&lt;user&gt;.html&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">user_details</span><span class="p">),</span>
-        <span class="p">])</span>
-
-    <span class="k">def</span> <span class="nf">dispatch_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
-        <span class="n">adapter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_map</span><span class="o">.</span><span class="n">bind_to_environ</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">environ</span><span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">endpoint</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">adapter</span><span class="o">.</span><span class="n">match</span><span class="p">()</span>
-            <span class="n">template_name</span><span class="p">,</span> <span class="n">context</span> <span class="o">=</span> <span class="n">endpoint</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">values</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_template</span><span class="p">(</span><span class="n">template_name</span><span class="p">,</span> <span class="o">**</span><span class="n">context</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">HTTPException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">template_name</span><span class="p">,</span> <span class="n">context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_404</span><span class="p">()</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_template</span><span class="p">(</span><span class="n">template_name</span><span class="p">,</span> <span class="o">**</span><span class="n">context</span><span class="p">)</span>
-            <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="mi">404</span>
-            <span class="k">return</span> <span class="n">response</span>
-
-    <span class="k">def</span> <span class="nf">wsgi_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
-        <span class="n">request</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">environ</span><span class="p">)</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">response</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">wsgi_app</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">render_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_name</span><span class="p">,</span> <span class="o">**</span><span class="n">context</span><span class="p">):</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="n">template_name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">t</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">context</span><span class="p">),</span> <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;text/html&#39;</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">create_app</span><span class="p">():</span>
-    <span class="n">app</span> <span class="o">=</span> <span class="n">Shortly</span><span class="p">()</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span> <span class="o">=</span> <span class="n">SharedDataMiddleware</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;/static&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;static&quot;</span><span class="p">)})</span>
-    <span class="k">return</span> <span class="n">app</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">run_simple</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">create_app</span><span class="p">(),</span> <span class="n">use_debugger</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_reloader</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;!templates/layout.html&gt;</span>
-<span class="cp">&lt;!doctype html&gt;</span>
-<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{% block title %}{% endblock %} | shortly<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">stylesheet</span> <span class="na">href</span><span class="o">=</span><span class="s">/static/style.css</span> <span class="na">type</span><span class="o">=</span><span class="s">text/css</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">box</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span> <span class="s">/</span><span class="p">&gt;</span>shortly<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">tagline</span><span class="p">&gt;</span>Shortly is a URL shortener written with Werkzeug
-        {% block body %}{% endblock %}
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-
-
-<span class="cp">&lt;!templates/index.html&gt;</span>
-{% extends &quot;layout.html&quot; %}
-{% block title %}All User{% endblock %}
-{% block body %}
-<span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">caption</span><span class="p">&gt;</span>All User<span class="p">&lt;/</span><span class="nt">caption</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>user<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>count<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
-        {% for user, count in user_count.items() %}
-        <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/{{user}}.html&quot;</span><span class="p">&gt;</span>{{user}}<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>{{count}}<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-        {% endfor %}
-    <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
-{% endblock %}
-
-
-<span class="cp">&lt;!templates/user_details.html&gt;</span>
-{% extends &quot;layout.html&quot; %}
-{% block title %}Details about {{ user }}{% endblock %}
-{% block body %}
-<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span> user:{{ user }} count:{{ count }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-{% endblock %}
-
-
-<span class="cp">&lt;!templates/404.html&gt;</span>
-{% extends &quot;layout.html&quot; %}
-{% block title %}Page Not Found{% endblock %}
-{% block body %}
-    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Page Not Found<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>I am sorry, but no such page was found here.
-{% endblock %}
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="err">#</span> <span class="nt">static</span><span class="o">/</span><span class="nt">style</span><span class="p">.</span><span class="nc">css</span>
-<span class="nt">body</span>        <span class="p">{</span> <span class="k">background</span><span class="p">:</span> <span class="mh">#E8EFF0</span><span class="p">;</span> <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span> <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
-<span class="nt">body</span><span class="o">,</span> <span class="nt">input</span> <span class="p">{</span> <span class="k">font-family</span><span class="p">:</span> <span class="s1">&#39;Helvetica Neue&#39;</span><span class="p">,</span> <span class="n">Arial</span><span class="p">,</span>
-              <span class="kc">sans-serif</span><span class="p">;</span> <span class="k">font-weight</span><span class="p">:</span> <span class="mi">300</span><span class="p">;</span> <span class="k">font-size</span><span class="p">:</span> <span class="mi">18</span><span class="kt">px</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">.</span><span class="nc">box</span>        <span class="p">{</span> <span class="k">width</span><span class="p">:</span> <span class="mi">500</span><span class="kt">px</span><span class="p">;</span> <span class="k">margin</span><span class="p">:</span> <span class="mi">60</span><span class="kt">px</span> <span class="kc">auto</span><span class="p">;</span> <span class="k">padding</span><span class="p">:</span> <span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
-              <span class="k">background</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span> <span class="k">box-shadow</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">1</span><span class="kt">px</span> <span class="mi">4</span><span class="kt">px</span> <span class="mh">#BED1D4</span><span class="p">;</span>
-              <span class="k">border-radius</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span><span class="p">;</span> <span class="p">}</span>
-<span class="nt">a</span>           <span class="p">{</span> <span class="k">color</span><span class="p">:</span> <span class="mh">#11557C</span><span class="p">;</span> <span class="p">}</span>
-<span class="nt">h1</span><span class="o">,</span> <span class="nt">h2</span>      <span class="p">{</span> <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span> <span class="k">color</span><span class="p">:</span> <span class="mh">#11557C</span><span class="p">;</span> <span class="p">}</span>
-<span class="nt">h1</span> <span class="nt">a</span>        <span class="p">{</span> <span class="k">text-decoration</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span> <span class="p">}</span>
-<span class="nt">h2</span>          <span class="p">{</span> <span class="k">font-weight</span><span class="p">:</span> <span class="kc">normal</span><span class="p">;</span> <span class="k">font-size</span><span class="p">:</span> <span class="mi">24</span><span class="kt">px</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">.</span><span class="nc">tagline</span>    <span class="p">{</span> <span class="k">color</span><span class="p">:</span> <span class="mh">#888</span><span class="p">;</span> <span class="k">font-style</span><span class="p">:</span> <span class="kc">italic</span><span class="p">;</span> <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">20</span><span class="kt">px</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">.</span><span class="nc">link</span> <span class="nt">div</span>   <span class="p">{</span> <span class="k">overflow</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span> <span class="k">font-size</span><span class="p">:</span> <span class="mf">0.8</span><span class="kt">em</span><span class="p">;</span> <span class="k">white-space</span><span class="p">:</span> <span class="kc">pre</span><span class="p">;</span>
-              <span class="k">padding</span><span class="p">:</span> <span class="mi">4</span><span class="kt">px</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span> <span class="k">margin</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span> <span class="mi">0</span><span class="p">;</span> <span class="k">background</span><span class="p">:</span> <span class="mh">#E5EAF1</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">.</span><span class="nc">error</span>      <span class="p">{</span> <span class="k">background</span><span class="p">:</span> <span class="mh">#E8EFF0</span><span class="p">;</span> <span class="k">padding</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="mi">8</span><span class="kt">px</span><span class="p">;</span> <span class="k">color</span><span class="p">:</span> <span class="mh">#11557C</span><span class="p">;</span>
-              <span class="k">font-size</span><span class="p">:</span> <span class="mf">0.9</span><span class="kt">em</span><span class="p">;</span> <span class="k">border-radius</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">.</span><span class="nc">urlinput</span>   <span class="p">{</span> <span class="k">width</span><span class="p">:</span> <span class="mi">300</span><span class="kt">px</span><span class="p">;</span> <span class="p">}</span>
-</code></pre></div></div>
-        <hr />
-    </div>
-		
+<li>每个方法和函数执行一个动作，名称应该清楚它做什么 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-san-shi-yi-zhou.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -640,52 +558,6 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sortKey</span> <span class="o">=</span> <span class="s2">&quot;new&quot;</span> <span class="c1">// 排序的字段，新增（new）、取消（cancel）、净关注（gain）、累积（cumulate）人数</span>
 <span class="kd">var</span> <span class="nx">sortType</span> <span class="o">=</span> <span class="mf">1</span> <span class="c1">// 升序还是逆序</span>
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[{...},</span> <span class="p">{...},</span> <span class="p">{..},</span> <span class="p">..]</span> <span class="c1">// 表格数据 …</span></code></pre></div> <a class="btn btn-info xsmall" href="/artsdi-er-shi-qi-zhou.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="/artsdi-er-shi-liu-zhou.html"><h2>ARTS第二十六周</h2></a>
-        <div class= "well small"> 2021-05-03
-
-<a class="url fn">qianlizhixing</a>
-
-
- </div>
-        <div class="summary"><h2>Algorithm</h2>
-<p>leetcode 377 组合总和Ⅳ</p>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/combination-sum-iv/">原题</a></li>
-<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/377.py">解题</a></li>
-<li>缓存中间结果，动态规划</li>
-</ul>
-<h2>Review</h2>
-<blockquote>
-<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_88/</p>
-<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_90/</p>
-<p>https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/thing_92/</p>
-</blockquote>
-<h3>Unix工具是你的朋友</h3>
-<ul>
-<li>ide以特定的语言为目标，Unix工具可以处理任何以文本形式出现的内容</li>
-<li>每年都会涌现出新的语言和符号，学习以Unix的方式工作是一项投资，而且会不断获得回报</li>
-<li>通过组合小型但通用的Unix工具就可以创建自己的命令</li>
-</ul>
-<h3>冗长的日志记录</h3>
-<ul>
-<li>过多的日志记录可能就像没有日志一样毫无用处</li>
-<li>对于许多系统，出现问题的第一个指示是将一条日志消息写入某个日志</li>
-<li>杂乱的日志表明一旦系统进入生产状态，系统将难以控制</li>
-</ul>
-<h3>程序员和测试人员协作时</h3>
-<ul>
-<li>在缺陷跟踪系统中来回发送bug所花费的时间更少</li>
-<li>更少的时间被浪费在试图找出某个东西到底是一个bug还是一个新特性上</li>
-<li>更多的时间被花在开发好软件以满足客户的期望上 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-liu-zhou.html">read more</a></div>
     </div>	
 				
 <div class="pagination">
