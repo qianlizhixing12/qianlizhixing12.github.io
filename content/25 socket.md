@@ -48,6 +48,9 @@ leetcode 220 存在重复元素III
 
 - python3去掉了\_\_cmp\_\_魔术方法，使用\_\_eq\_\_和\_\_lt\_\_替代
 - dataclass marshmallow pydantic都实现了ORM功能
+- 与dataclass功能相同的类库attrs
+
+> https://zhuanlan.zhihu.com/p/34963159
 
 ```python
 from dataclasses import dataclass
