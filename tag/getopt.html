@@ -50,8 +50,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="/artsdi-er-shi-si-zhou.html"><h1>ARTS第二十四周</h1></a>
-2021-04-19
+            <a href="/artsdi-san-shi-san-zhou.html"><h1>ARTS第三十三周</h1></a>
+2021-06-21
 
 <a class="url fn">qianlizhixing</a>
 
@@ -60,6 +60,593 @@
         </div>
         
         <div><h2>Algorithm</h2>
+<p>leetcode 279 完全平方数</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/perfect-squares/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/279.py">解题</a></li>
+<li>转换为动态规划目标和问题</li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://llvm.org/docs/CodingStandards.html</p>
+</blockquote>
+<ul>
+<li>黄金法则：如果正在扩展、增强或修复已经实现的代码，使用已经使用的样式，以便源代码是统一和易于遵循</li>
+</ul>
+<h4>注释</h4>
+<ul>
+<li>描述代码试图做什么以及为什么要做，而不是在微观层面上它是如何做的</li>
+<li>每个源文件都应该有一个描述文件基本用途的注释</li>
+<li>第一行的“*- c++ -*”字符串告诉Emacs源文件是c++文件，而不是C文件</li>
+<li>简要的说明，定义文件发布的许可。非常清楚源代码可以在什么条件下发布，并且不应该以任何方式进行修改</li>
+<li>描述文件用途的Doxygen注释(由注释标记///而不是通常的//标识)</li>
+<li>头文件的保护应该包括该头文件的所有大写路径，使用_代替路径分隔符和扩展标记</li>
+<li>类定义应该有一个注释块，解释类的用途和工作方式，每个重要的类都有一个doxygen注释块</li>
+<li>方法和全局函数也应该有注释，简要说明一下它的作用，并描述一下边界情况</li>
+<li>通常，更喜欢c++风格的注释(//用于普通注释，///用于doxygen文档注释)。但是，在一些情况下，使用c风格的(/<em> </em>/)注释是有用的</li>
+<li>注释掉大块代码是不被鼓励的，真的必须这样做，使用#if 0和#endif</li>
+</ul>
+<h4>#include</h4>
+<ul>
+<li>头文件注释之后，列出该文件所需的#include最小列表</li>
+<li>模块头文件</li>
+<li>本地/私有头文件</li>
+<li>LLVM头文件</li>
+<li>系统头文件</li>
+</ul>
+<h4>样式</h4>
+<ul>
+<li>行宽80个字符</li>
+<li>在源文件中使用空格而不是制表符</li>
+<li>不要在行尾加空格</li>
+<li>格式化多行lambda时，将其格式化为代码块</li>
+</ul>
+<h4>编译</h4>
+<ul>
+<li>
+<p>应该像对待错误一样，对待编译器警告</p>
+</li>
+<li>
+<p>有些编译器可以通过在代码上加冗余括号，抑制警告</p>
+</li>
+<li>
+<p>不使用异常或RTTI运行时类型信息</p>
+</li>
+<li>
+<p>不使用静态构造函数和全局变量</p>
+</li>
+<li>
+<p>c++中，class和struct关键字几乎可以互换使用。唯一的区别是class默认使所有成员为私有，而struct默认使所有成员为公共</p>
+</li>
+<li>
+<p>不要使用带括号的初始化列表来调用构造函数</p>
+</li>
+<li>
+<p>初始化变量时使用带括号的初始化列表，在左花括号前使用等号</p>
+</li>
+<li>
+<p>使用auto类型推断使代码更具可读性</p>
+</li>
+<li>
+<p>除非需要复制，否则使用auto &amp;表示值，auto *表示指针</p>
+</li>
+<li>
+<p>集合和映射等无序容器与指针键一起使用时，迭代顺序是未定义的</p>
+</li>
+<li>
+<p>编写只计算一个布尔值的小循环是非常常见的，转化返回布尔值的函数</p>
+</li>
+<li>
+<p>充分使用“assert”宏，检查您的所有先决条件和假设</p>
+</li>
+<li>
+<p>尽可能使用基于范围的循环</p>
+</li>
+</ul>
+<p><code>c++
+  BasicBlock *BB = ...
+  for (Instruction &amp;I : *BB)
+    ... use I ...</code></p>
+<ul>
+<li>避免每次循环计算一次终结条件</li>
+</ul>
+<p>```c++
+  BasicBlock *BB = ...
+  for (auto I = BB-&gt;begin(); I != BB-&gt;end(); ++I)
+    ... use I ...</p>
+<p>// 替换为
+  BasicBlock *BB = ...
+  for (auto I = BB-&gt;begin(), E = BB-&gt;end(); I != E; ++I)
+    ... use I ...
+  ```</p>
+<ul>
+<li>尽可能使用前递增</li>
+</ul>
+<h4>命名</h4>
+<ul>
+<li>通常名称应该是驼峰式的</li>
+<li>类型名称(包括类、结构体、枚举、类型定义等)应该是名词，并以大写字母开头</li>
+<li>变量名应该是名词(因为它们代表状态)，并以大写字母开头</li>
+<li>函数名应该是动词短语(因为它们代表动作)，并以小写字母开头</li>
+<li>Enum声明是类型，应该遵循类型的命名约定</li>
+<li>枚举(例如enum {Foo, Bar})和公共成员变量应该以大写字母开头，就像类型一样</li>
+</ul>
+<h2>Tip(魔术方法)</h2>
+<blockquote>
+<p>https://docs.python.org/zh-cn/3/reference/datamodel.html</p>
+<p>https://docs.python.org/3/reference/datamodel.html</p>
+</blockquote>
+<h4>基本定制</h4>
+<ul>
+<li>
+<p>__doc__类或函数文档字符串，没有则为None，不会被子类继承</p>
+</li>
+<li>
+<p>__name__类名或函数名</p>
+</li>
+<li>
+<p>__module__类或函数所属模块名称，没有则为None</p>
+</li>
+<li>
+<p>__defaults__ 函数具有默认值的参数的默认参数值组成的元组，如无任何参数具有默认值则为None</p>
+</li>
+<li>
+<p>__code__ 函数编译后的代码对象</p>
+</li>
+<li>
+<p>__globals__ 函数中全局变量的字典的引用(函数所属模块的全局命名空间)</p>
+</li>
+<li>
+<p>__self__ 类实例对象本身的引用</p>
+</li>
+<li>
+<p>__bases__ 基类的元组</p>
+</li>
+<li>
+<p>__class__ 实例对应的类</p>
+</li>
+<li>
+<p>__dict__ 属性命名空间的字典</p>
+</li>
+<li>
+<p>__new__ 静态方法，创建一个cls类新实例，如果在构造对象期间被发起调用并且它返回了一个实例，新实例的__init__方法将以__init__(self[, ...]) 的形式被发起调用；未返回cls实例，init不会被调用</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">C</span><span class="p">():</span>
+    <span class="o">...</span>
+
+<span class="c1">#x = C(23) 等价于</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
+    <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span>
+</code></pre></div>
+
+<ul>
+<li>
+<p>__init__ 实例初始化，实例是由__new__()和__init__()协作构造完成的(由__new__()创建，并由__init__()定制)，所以__init__()返回的值只能是None，否则会在运行时引发TypeError</p>
+</li>
+<li>
+<p>__del__ 实例将被销毁时调用(内存回收)</p>
+</li>
+<li>
+<p>__str__ 定义print()行为</p>
+</li>
+<li>
+<p>__bool__ 布尔测试</p>
+</li>
+</ul>
+<h4>属性访问定制</h4>
+<ul>
+<li>
+<p>__getattr__ 属性引用(属性未定义时)</p>
+</li>
+<li>
+<p>__getattribute__ 属性引用(无条件地被调用，不管属性是否定义)，同时定义了__getattr__，__getattr__不会被调用</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Demo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="k">def</span> <span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># return self.__dict__[attr] 死循环</span>
+            <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;NOT FIND&quot;</span>
+
+
+<span class="n">demo</span> <span class="o">=</span> <span class="n">Demo</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">demo</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">demo</span><span class="o">.</span><span class="n">addr</span><span class="p">)</span>
+</code></pre></div>
+
+<ul>
+<li>
+<p>__setattr__ 属性被尝试赋值时被调用</p>
+</li>
+<li>
+<p>__delattr__ 属性被尝试删除时被调用</p>
+</li>
+</ul>
+<h4>属性描述器定制</h4>
+<ul>
+<li>__get__,__set__,__delete__属性描述器</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Test</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filed</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">filed</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Demo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Test</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+    <span class="n">age</span> <span class="o">=</span> <span class="n">Test</span><span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">)</span>
+
+
+<span class="n">demo</span> <span class="o">=</span> <span class="n">Demo</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
+<span class="n">demo</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">demo</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>其他控制</h4>
+<ul>
+<li>__slots__显式地声明属性，并禁止创建__dict__和__weakref__(除非是在__slots__中显式地声明)，相比使用 <em><strong>dict</strong></em> 此方式可以显著地节省空间，属性查找速度也可得到显著的提升</li>
+<li>当继承自一个未定义__slots__的类时，实例的__dict__和__weakref__属性将总是可访问</li>
+<li>没有__dict__变量，实例就不能给未在__slots__定义中列出的新变量赋值</li>
+</ul>
+<h4>模拟可调用对象</h4>
+<ul>
+<li>__call__ 实例当作函数调用时调用</li>
+</ul>
+<h4>模拟容器类型</h4>
+<ul>
+<li>
+<p>__len__ len()调用</p>
+</li>
+<li>
+<p>__getitem__(self, key) 实现self[key]取值</p>
+</li>
+<li>
+<p>__setitem__(self, key, value) 实现self[key]赋值</p>
+</li>
+<li>
+<p>__iter__(self) 支持迭代协议，返回迭代器</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span>
+
+
+<span class="k">class</span> <span class="nc">Demo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;Not Found&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+
+<span class="n">demo</span> <span class="o">=</span> <span class="n">Demo</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
+<span class="n">demo</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">demo</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">demo</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">issubclass</span><span class="p">(</span><span class="n">Demo</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">))</span>
+</code></pre></div>
+
+<ul>
+<li>__next__ 迭代器</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterator</span>
+
+
+<span class="k">class</span> <span class="nc">MyRange</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Iterable: 有迭代能力的对象，一个类，实现了__iter__，那么就认为它有迭代能力，通常此函数必须返回一个实现了__next__的对象，如果自己实现了，你可以返回self，当然这个返回值不是必须的</span>
+<span class="sd">    Iterator: 迭代器(当然也是Iterable)，同时实现了__iter__和__next__的对象，缺少任何一个都不算是Iterator</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+
+    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">ret</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">MyRange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="c1"># print(next(b))</span>
+</code></pre></div>
+
+<h4>with上下文</h4>
+<ul>
+<li>__enter__</li>
+<li>__exit__(self, exc_type, exc_value, exc_traceback) __exit__方法中异常，被顺利捕捉并进行了处理。如果方法__exit__没有返回 True，异常仍然会被抛出。如果确定异常已经被处理了，请__exit__的最后加上return True</li>
+</ul>
+<h2>Share(getopt)</h2>
+<h3>getopt</h3>
+<ul>
+<li><code>int getopt(int ___argc, char *const *___argv, const char *__shortopts)</code>处理短格式命令选项</li>
+<li>argc，argv取自main函数argc，argv</li>
+<li>shortopts短格式命令选项定义，如<code>ht:v::</code>（:表示t后带参数，::表示v后可带可不带参数），-h -t 30 -v</li>
+<li>返回命令项，如'h'，'t'，'v'带参数选项用optarg获取选项，未定义返回'?'并输出提示信息</li>
+<li>在while循环中解析完参数返回-1(EOF)</li>
+</ul>
+<h3>getopt_long</h3>
+<ul>
+<li><code>int getopt_long(int ___argc, char * const * ___argv, const char * __shortopts, const option * __longopts, int * __longind)</code>兼容处理短格式长格式命令选项</li>
+<li>argc，argv，shortopts同getopt </li>
+<li>longopts为<code>struct option</code>数组，长格式命令选项定义<code>struct option{const char *name;   int has_arg;  int *flag;  int val;};</code>，如<code>{"head", no_argument, &amp;method, METHOD_HEAD}</code>，name选项名称，has_arg选项后是否有参数，flag后面val存储位置(为NULL时getopt_long返回val，不为空val填充*flag同时getopt_long返回0)</li>
+<li>返回命令项val，如'h'，'t'，'v'带参数选项用optarg获取选项，未定义返回'?'并输出提示信息</li>
+<li>在while循环中解析完参数返回-1(EOF)</li>
+</ul>
+<h3>demo(重构封装webbench)</h3>
+<blockquote>
+<p>http://home.tiscali.cz/~cz210552/webbench.html</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1">// option.h</span>
+<span class="cp">#ifndef WEBBENCH_OPTION_H_</span>
+<span class="cp">#define WEBBENCH_OPTION_H_</span>
+
+<span class="cp">#define METHOD_GET 0</span>
+<span class="cp">#define METHOD_HEAD 1</span>
+<span class="cp">#define METHOD_OPTIONS 2</span>
+<span class="cp">#define METHOD_TRACE 3</span>
+
+<span class="cp">#define HTTP_09 0</span>
+<span class="cp">#define HTTP_10 1</span>
+<span class="cp">#define HTTP_11 2</span>
+
+<span class="k">class</span> <span class="nc">WebbenchOption</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">WebbenchOption</span><span class="p">();</span>
+  <span class="o">~</span><span class="n">WebbenchOption</span><span class="p">();</span>
+  <span class="k">static</span> <span class="kt">void</span> <span class="nf">usage</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+  <span class="kt">void</span> <span class="nf">print_option</span><span class="p">();</span>
+  <span class="kt">void</span> <span class="nf">param_short_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]);</span>
+  <span class="kt">void</span> <span class="nf">param_long_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]);</span>
+  <span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="n">shortopts</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">param_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">opt</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="n">force</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">force_reload</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">benchtime</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">proxyhost</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">proxyport</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">clients</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">http10</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">method</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="cp">#endif</span>
+
+
+<span class="c1">// option.cc</span>
+<span class="cp">#include</span> <span class="cpf">&quot;option.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;getopt.h&gt;</span><span class="cp"></span>
+
+<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">shortopts</span> <span class="o">=</span> <span class="s">&quot;frt:p:c:?h&quot;</span><span class="p">;</span>
+
+<span class="n">WebbenchOption</span><span class="o">::</span><span class="n">WebbenchOption</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">force</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">force_reload</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">benchtime</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+  <span class="n">proxyhost</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="n">proxyport</span> <span class="o">=</span> <span class="mi">80</span><span class="p">;</span>
+  <span class="n">clients</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">http10</span> <span class="o">=</span> <span class="n">HTTP_09</span><span class="p">;</span>
+  <span class="n">method</span> <span class="o">=</span> <span class="n">METHOD_GET</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">WebbenchOption</span><span class="o">::~</span><span class="n">WebbenchOption</span><span class="p">()</span> <span class="p">{}</span>
+
+<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">usage</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 原来的9，1，2代表http09，http10，http11短格式和长格式差异大</span>
+  <span class="c1">// 去除短格式，强制使用长格式</span>
+  <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span>
+          <span class="s">&quot;webbench [option]... URL</span><span class="se">\n</span><span class="s">&quot;</span>
+          <span class="s">&quot;  -f|--force               Don&#39;t wait for reply from server.</span><span class="se">\n</span><span class="s">&quot;</span>
+          <span class="s">&quot;  -r|--reload              Send reload request - Pragma: no-cache.</span><span class="se">\n</span><span class="s">&quot;</span>
+          <span class="s">&quot;  -t|--time &lt;sec&gt;          Run benchmark for &lt;sec&gt; seconds. Default &quot;</span>
+          <span class="s">&quot;30.</span><span class="se">\n</span><span class="s">&quot;</span>
+          <span class="s">&quot;  -p|--proxy &lt;server:port&gt; Use proxy server for request.</span><span class="se">\n</span><span class="s">&quot;</span>
+          <span class="s">&quot;  -c|--clients &lt;n&gt;         Run &lt;n&gt; HTTP clients at once. Default &quot;</span>
+          <span class="s">&quot;one.</span><span class="se">\n</span><span class="s">&quot;</span>
+          <span class="s">&quot;  --http09                 Use HTTP/0.9 style requests.</span><span class="se">\n</span><span class="s">&quot;</span>
+          <span class="s">&quot;  --http10                 Use HTTP/1.0 protocol.</span><span class="se">\n</span><span class="s">&quot;</span>
+          <span class="s">&quot;  --http11                 Use HTTP/1.1 protocol.</span><span class="se">\n</span><span class="s">&quot;</span>
+          <span class="s">&quot;  --get                    Use GET request method.</span><span class="se">\n</span><span class="s">&quot;</span>
+          <span class="s">&quot;  --head                   Use HEAD request method.</span><span class="se">\n</span><span class="s">&quot;</span>
+          <span class="s">&quot;  --options                Use OPTIONS request method.</span><span class="se">\n</span><span class="s">&quot;</span>
+          <span class="s">&quot;  --trace                  Use TRACE request method.</span><span class="se">\n</span><span class="s">&quot;</span>
+          <span class="s">&quot;  -h|--help                This information.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">print_option</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;webbench option:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--force</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">force</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--reload</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">force_reload</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--time</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">benchtime</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--proxy</span><span class="se">\t</span><span class="s">%s:%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">proxyhost</span><span class="p">,</span> <span class="n">proxyport</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--clients</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">clients</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--http10</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">http10</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--method</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">method</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">param_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">opt</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">tmp</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+  <span class="k">switch</span> <span class="p">(</span><span class="n">opt</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="sc">&#39;?&#39;</span><span class="o">:</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="sc">&#39;f&#39;</span><span class="o">:</span>
+    <span class="n">force</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="sc">&#39;r&#39;</span><span class="o">:</span>
+    <span class="n">force_reload</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="sc">&#39;t&#39;</span><span class="o">:</span>
+    <span class="n">benchtime</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">optarg</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="sc">&#39;p&#39;</span><span class="o">:</span>
+    <span class="c1">// server:port</span>
+    <span class="n">proxyhost</span> <span class="o">=</span> <span class="n">optarg</span><span class="p">;</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">strrchr</span><span class="p">(</span><span class="n">optarg</span><span class="p">,</span> <span class="sc">&#39;:&#39;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">==</span> <span class="n">optarg</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Error in option --proxy %s: Missing hostname.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+              <span class="n">optarg</span><span class="p">);</span>
+      <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// optarg + strlen(optarg) - 1指针操作</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">==</span> <span class="n">optarg</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">optarg</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Error in option --proxy %s Port number is missing.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+              <span class="n">optarg</span><span class="p">);</span>
+      <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// *tmp = &#39;\0&#39;作用在于将proxyhost &quot;test.com:8888&quot; 改为&quot;test.com\08888&quot;</span>
+    <span class="c1">// 意思稍隐晦，可以改为更明显些</span>
+    <span class="o">*</span><span class="n">tmp</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+    <span class="n">proxyport</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">tmp</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="sc">&#39;c&#39;</span><span class="o">:</span>
+    <span class="n">clients</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">optarg</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="sc">&#39;h&#39;</span><span class="o">:</span>
+    <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">usage</span><span class="p">();</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="k">default</span><span class="o">:</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">param_short_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">usage</span><span class="p">();</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">int</span> <span class="n">opt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">((</span><span class="n">opt</span> <span class="o">=</span> <span class="n">getopt</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">shortopts</span><span class="p">))</span> <span class="o">!=</span> <span class="n">EOF</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">param_option</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">param_long_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">usage</span><span class="p">();</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">int</span> <span class="n">opt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">const</span> <span class="k">struct</span> <span class="nc">option</span> <span class="n">longopts</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="p">{</span><span class="s">&quot;help&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;h&#39;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;force&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;f&#39;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;reload&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;r&#39;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;time&quot;</span><span class="p">,</span> <span class="n">required_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;t&#39;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;proxy&quot;</span><span class="p">,</span> <span class="n">required_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;p&#39;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;clients&quot;</span><span class="p">,</span> <span class="n">required_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;http09&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">http10</span><span class="p">,</span> <span class="n">HTTP_09</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;http10&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">http10</span><span class="p">,</span> <span class="n">HTTP_10</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;http11&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">http10</span><span class="p">,</span> <span class="n">HTTP_11</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;get&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="n">METHOD_GET</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;head&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="n">METHOD_HEAD</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;options&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="n">METHOD_OPTIONS</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;trace&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="n">METHOD_TRACE</span><span class="p">},</span>
+      <span class="p">{</span><span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">}};</span>
+  <span class="k">while</span> <span class="p">((</span><span class="n">opt</span> <span class="o">=</span> <span class="n">getopt_long</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">&quot;?h:m:t:p:c:&quot;</span><span class="p">,</span> <span class="n">longopts</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">))</span> <span class="o">!=</span>
+         <span class="n">EOF</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">param_option</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="c1">// webbench.cc</span>
+<span class="cm">/*</span>
+<span class="cm"> * Simple forking WWW Server benchmark</span>
+<span class="cm"> */</span>
+<span class="cp">#include</span> <span class="cpf">&quot;option.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Return codes:</span>
+<span class="cm"> *    0 - sucess</span>
+<span class="cm"> *    1 - benchmark failed (server is not on-line)</span>
+<span class="cm"> *    2 - bad param</span>
+<span class="cm"> *    3 - internal error, fork failed</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="c1">// WebbenchOption options;</span>
+  <span class="c1">// options.param_short_option(argc, argv);</span>
+  <span class="c1">// options.print_option();</span>
+
+  <span class="n">WebbenchOption</span> <span class="n">options1</span><span class="p">;</span>
+  <span class="n">options1</span><span class="p">.</span><span class="n">param_long_option</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+  <span class="n">options1</span><span class="p">.</span><span class="n">print_option</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="c1">// 运行 ./webbench -p &quot;test.com:8888&quot; -t 60 --options -v --ver</span>
+</code></pre></div></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-er-shi-si-zhou.html"><h2>ARTS第二十四周</h2></a>
+        <div class= "well small"> 2021-04-19
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
 <p>leetcode 179 最大数</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/largest-number/">原题</a></li>
@@ -80,170 +667,9 @@
 <h3>测试员是你的朋友</h3>
 <ul>
 <li>因为测试人员报告琐碎的问题，开发看起来很糟糕</li>
-<li>因为测试人员的QC，客户没有让开发修复那些“小东西”所困扰而感到兴奋时，开发看起来很棒</li>
-</ul>
-<h3>部署二进制文件</h3>
-<ul>
-<li>构建或部署重写了部分代码，为每个目标环境生成定制的二进制文件，这是糟糕的</li>
-<li>为生产环境从头开始重建，意味着无法证明生产环境中的版本是经过测试的版本</li>
-<li>规则很简单:构建一个单独的二进制文件，在发行渠道的所有阶段识别并提升它。在每个目标环境中保留特定环境的细节。例如，将目标环境配置保存在组件容器、已知文件或路径中</li>
-<li>设计上将应用程序的核心功能和特定于平台的功能分开</li>
-<li>保持环境信息的版本化，环境信息应该与代码分开进行版本管理，因为它们将以不同的速率和不同的原因进行更改。一些团队使用分布式版本控制系统(如bazaar和git)来实现这一点，可以更容易地将生产环境中的更改(不可避免地会发生)推回存储库</li>
-</ul>
-<h2>Tip</h2>
-<blockquote>
-<p>https://www.w3school.com.cn/jsref/dom_obj_all.asp</p>
-</blockquote>
-<ul>
-<li>
-<p>刚好需要在某博客平台发布个文章，有图片，markdown格式</p>
-</li>
-<li>
-<p>Typora打草稿，图片稍大，生成img标签，在浏览器(chrome)中缩小25%，该博客平台未生效</p>
-</li>
-</ul>
-<p><code>html
-  &lt;img src=".\img\aaa.png" style="zoom: 25%;" /&gt;</code></p>
-<ul>
-<li>使用width属性，浏览器和该博客平台都生效</li>
-</ul>
-<p><code>html
-  &lt;img src=".\img\aaa.png" id="3" width="25%" /&gt;
-  &lt;--或者!--&gt;
-  &lt;img src=".\img\aaa.png" id="4" style="width: 25%;" /&gt;</code></p>
-<ul>
-<li>使用transform属性，浏览器和该博客平台都生效</li>
-</ul>
-<p><code>html
-  &lt;--success!--&gt;
-  &lt;img src=".\img\aaa.png" id="2" style="transform: scale(0.4, 0.4);" /&gt;
-  &lt;--fail!--&gt;
-  &lt;img src=".\img\aaa.png" id="1" transform="scale(0.4, 0.4);" /&gt;</code></p>
-<ul>
-<li>transform为什么不能width使用，只能放在style中，继续测试</li>
-</ul>
-<p><code>javascript
-  document.getElementById('1').style
-  //输出 CSSStyleDeclaration {alignContent: "", alignItems: "", alignSelf: "", alignmentBaseline: "", all: "", …}
-  document.getElementById('1').attributes
-  //输出 NamedNodeMap {0: src, 1: id, 2: transform, src: src, id: id, transform: transform, length: 3}</code></p>
-<ul>
-<li>总结，element.attributes，element.getAttribute()，element.getAttributeNode()都是HtmlDom节点的属性相关操作，element.attributes.style也是一个属性，属性属于节点；element.style样式，不是所有属性都能影响样式，哈哈自己这样推理</li>
-</ul>
-<h2>Share(命令行解析)</h2>
-<h3>sys.argv变量</h3>
-<ul>
-<li>sys.argv类型List[str]，就是普通的列表，sys.argv[0]运行的脚本</li>
-<li>因为每个参数都是str，不能直接解析参数(例如--time=0)</li>
-<li>每个参数用空白字符分割，参数包含空白符的用单引号或双引号分开</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># 测试脚本</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
-
-<span class="c1">#命令 python test.py --timeout=0  on=true  -p 80  &#39;wait false&#39; &quot;save out.xml&quot;</span>
-<span class="c1">#输出 [&#39;test.py&#39;, &#39;--timeout=0&#39;, &#39;on=true&#39;, &#39;-p&#39;, &#39;80&#39;, &#39;wait false&#39;, &#39;save out.xml&#39;]</span>
-</code></pre></div>
-
-<h3>argparse模块</h3>
-<ul>
-<li>基于optparse(不推荐使用)</li>
-<li>帮助信息，附加信息更全面，推荐使用</li>
-<li>使用ArgumentParser类解析参数，支持-p 80或-p=80格式，即用=号或空白符分割参数名和参数值</li>
-<li>构造ArgumentParser对象后调用add_argument定义命令行参数，--完整参数名，-简写参数名，default默认值</li>
-<li>调用parse_args返回Namespace类对象，用属性访问(.)获取参数</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># 测试脚本</span>
-<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span>
-<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">cpu_count</span>
-
-
-<span class="k">def</span> <span class="nf">parse_option</span><span class="p">():</span>
-    <span class="c1"># 构造ArgumentParser</span>
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;argparse test&#39;</span><span class="p">,</span>
-                            <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;info&#39;</span><span class="p">,</span>
-                            <span class="n">description</span><span class="o">=</span><span class="s1">&#39;get option from cmdline&#39;</span><span class="p">,</span>
-                            <span class="n">prefix_chars</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
-    <span class="c1"># print(parser.prog, parser.usage, parser.description)</span>
-    <span class="c1"># 定义命令行参数</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-n&#39;</span><span class="p">,</span>
-                        <span class="s1">&#39;--num&#39;</span><span class="p">,</span>
-                        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-                        <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">,</span>
-                        <span class="n">default</span><span class="o">=</span><span class="n">cpu_count</span><span class="p">())</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="s1">&#39;--fun&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;ping&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-m&#39;</span><span class="p">,</span> <span class="s1">&#39;--mode&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;proc&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--port&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-w&#39;</span><span class="p">,</span> <span class="s1">&#39;--save&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">options</span> <span class="o">=</span> <span class="n">parse_option</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">options</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
-
-<span class="c1">#命令 python test_argparse.py -n 300 -f tcp --mode thread -p 80</span>
-<span class="c1">#输出 Namespace(fun=&#39;tcp&#39;, mode=&#39;thread&#39;, number=300, port=&#39;80&#39;, save=None)</span>
-<span class="c1">#    300 tcp thread 80 None</span>
-
-<span class="c1">#命令 python test_argparse.py -n 300 -f tcp --mode thread -p=80</span>
-<span class="c1">#输出 Namespace(fun=&#39;tcp&#39;, mode=&#39;thread&#39;, number=300, port=&#39;80&#39;, save=None)</span>
-<span class="c1">#    300 tcp thread 80 None</span>
-
-<span class="c1">#命令 python test_argparse.py -n 300 -f tcp --mode thread -p 80 -timeout 120</span>
-<span class="c1">#输出 usage: info</span>
-<span class="c1">#    argparse test: error: unrecognized arguments: -timeout 120</span>
-</code></pre></div>
-
-<h3>getopt模块</h3>
-<ul>
-<li>使用形式接近c语言getopt函数</li>
-<li>使用getopt.getopt(args=args, shortopts, longopts=[])初始化</li>
-<li>args要解析的参数数组，通常为sys.argv[1:]</li>
-<li>shortopts短参数(-t)，有冒号(:)选项必须有值(-t 100或-t100都可，-t=100解析为=100)，没有冒号选项不能有值</li>
-<li>longopts长参数(--timeout)，有等号(=)选项必须有值(--t 100或--t100及--t=100都解析100)，没有等号选项不能有值</li>
-<li>返回一个两元素元组，第一个元素(option, value)格式的列表，第二元素是没匹配的内容列表</li>
-<li>遇到未匹配的立即返回，shortopts必须在longopts前，没有匹配的args</li>
-<li>返回值没有属性访问(.)或字典访问([])方法，后期处理没有argparse方便</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">getopt</span>
-
-
-<span class="k">def</span> <span class="nf">parse_option</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-    <span class="c1"># 解析命令行</span>
-    <span class="n">option</span><span class="p">,</span> <span class="n">argv</span> <span class="o">=</span> <span class="n">getopt</span><span class="o">.</span><span class="n">getopt</span><span class="p">(</span>
-        <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
-        <span class="n">shortopts</span><span class="o">=</span><span class="s1">&#39;n:t:f&#39;</span><span class="p">,</span>
-        <span class="n">longopts</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="s1">&#39;timeout&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">,</span> <span class="s1">&#39;mode&#39;</span><span class="p">,</span> <span class="s1">&#39;port=&#39;</span><span class="p">,</span> <span class="s1">&#39;save&#39;</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">option</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">parse_option</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-
-<span class="c1">#命令 python .\test_getopt.py -n 10 -t 120 -f 200 --save 500</span>
-<span class="c1">#输出 [(&#39;-n&#39;, &#39;10&#39;), (&#39;-t&#39;, &#39;120&#39;), (&#39;-f&#39;, &#39;&#39;)]</span>
-<span class="c1">#    [&#39;200&#39;, &#39;--save&#39;, &#39;500&#39;]</span>
-
-<span class="c1">#命令 python .\test_getopt.py -n 10 -t 120 -f --save --port 300</span>
-<span class="c1">#输出 [(&#39;-n&#39;, &#39;10&#39;), (&#39;-t&#39;, &#39;120&#39;), (&#39;-f&#39;, &#39;&#39;), (&#39;--save&#39;, &#39;&#39;), (&#39;--port&#39;, &#39;300&#39;)]</span>
-<span class="c1">#    []</span>
-</code></pre></div>
-
-<h3>其他模块</h3>
-<ul>
-<li>click</li>
-<li>fire</li>
-<li>个人认为这两个库设计上，不是单纯为了解析命令行参数目的</li>
-</ul></div>
-        <hr />
-    </div>
-		
+<li>因为测试人员的QC，客户没有让开发修复那些“小东西”所困扰而感到兴奋时，开发看起来很棒 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-si-zhou.html">read more</a></div>
+    </div>	
+				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
