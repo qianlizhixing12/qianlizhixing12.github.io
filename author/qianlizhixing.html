@@ -50,8 +50,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="/artsdi-san-shi-san-zhou.html"><h1>ARTS第三十三周</h1></a>
-2021-06-21
+            <a href="/artsdi-san-shi-si-zhou.html"><h1>ARTS第三十四周</h1></a>
+2021-06-28
 
 <a class="url fn">qianlizhixing</a>
 
@@ -60,6 +60,601 @@
         </div>
         
         <div><h2>Algorithm</h2>
+<p>leetcode 剑指Offer20 表示数值的字符串</p>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/">原题</a></li>
+<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/Offer20.py">解题</a></li>
+<li>状态模式，状态较多容易写错</li>
+</ul>
+<h2>Review</h2>
+<blockquote>
+<p>https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/#</p>
+<p>https://google.github.io/styleguide/cppguide.html#Header_Files</p>
+</blockquote>
+<h3>头文件</h3>
+<ul>
+<li>
+<p>插入文本的文件应以.inc结尾</p>
+</li>
+<li>
+<p>头文件要能够自给自足，即头文件本身的依赖要全部包含，调用者不用考虑引用的头文件本身的依赖</p>
+</li>
+</ul>
+<p>```c++
+  // 反例
+  // b.h依赖a.h，调用者c.cpp使用b.h</p>
+<p>// file: b.h b不是自给自足的
+  #include ...
+  ...</p>
+<p>// file: c.cpp
+  #include "a.h"
+  #include "b.h"
+  ```</p>
+<ul>
+<li>
+<p>头文件都应该使用#define来防止头文件被多重包含，命名格式<code>&lt;PROJECT&gt;_&lt;PATH&gt;_&lt;FILE&gt;_H_</code></p>
+</li>
+<li>
+<p>尽可能地避免使用前置声明，使用 <code>#include</code> 包含需要的头文件即可</p>
+</li>
+<li>
+<p>只有当函数只有10行甚至更少时才将其定义为内联函数</p>
+</li>
+<li>
+<p>标准的头文件包含顺序可增强可读性, 避免隐藏依赖: 相关头文件, C库, C++库, 其他库的.h, 本项目内的.h</p>
+</li>
+<li>
+<p><code>dir/foo.cc</code> 或 <code>dir/foo_test.cc</code> 的主要作用是实现或测试 <code>dir2/foo2.h</code> 的功能, <code>foo.cc</code> 中包含头文件的次序</p>
+<ul>
+<li><code>dir2/foo2.h</code> (<code>dir/foo.cc</code> 和 <code>dir2/foo2.h</code> 通常位于同一目录下 (如 <code>base/basictypes_unittest.cc</code> 和 <code>base/basictypes.h</code>), 但也可以放在不同目录下)</li>
+<li>C 系统文件</li>
+<li>C++ 系统文件</li>
+<li>其他库的 <code>.h</code> 文件</li>
+<li>本项目内 <code>.h</code> 文件</li>
+</ul>
+</li>
+<li>这种优先顺序排序保证当 <code>dir2/foo2.h</code> 遗漏某些必要的库时， <code>dir/foo.cc</code> 或 <code>dir/foo_test.cc</code> 的构建会立刻中止</li>
+</ul>
+<h3>作用域</h3>
+<ul>
+<li>不要在命名空间 <code>std</code> 内声明任何东西, 包括标准库的类前置声明. 在 <code>std</code> 命名空间声明实体是未定义的行为, 会导致如不可移植. 声明标准库下的实体, 需要包含对应的头文件</li>
+<li>不应该使用using指示引入整个命名空间的标识符号，例如using namespace std</li>
+<li>禁止使用内联命名空间（inline namespace）</li>
+<li>在 <code>.cc</code> 文件中定义一个不需要被外部引用的变量时，可以将它们放在匿名命名空间或声明为 <code>static</code> 。但是不要在 <code>.h</code> 文件中这么做</li>
+<li>使用静态成员函数或命名空间内的非成员函数, 尽量不要用裸的全局函数. 将一系列函数直接置于命名空间中，不要用类的静态方法模拟出命名空间的效果，类的静态方法应当和类的实例或静态数据紧密相关</li>
+<li>将函数变量尽可能置于最小作用域内, 离第一次使用越近越好,并在变量声明时进行初始化</li>
+<li>属于 <code>if</code>, <code>while</code> 和 <code>for</code> 语句的变量应当在这些语句中正常地声明，这些变量的作用域就被限制在这些语句中</li>
+<li>禁止定义静态储存周期非POD变量，禁止使用含有副作用的函数初始化POD全局变量，因为多编译单元中的静态变量执行时的构造和析构顺序是未明确的，这将导致代码的不可移植</li>
+</ul>
+<h3>类</h3>
+<ul>
+<li>在基类构造函数内调用了自身的虚函数, 调用是不会重定向到子类的虚函数实现</li>
+<li>不要在无法报出错误时进行可能失败的初始化</li>
+<li>不要定义隐式类型转换，对于转换运算符和单参数构造函数, 请使用 <code>explicit</code> 关键字</li>
+<li>如果类型需要, 就让它们支持拷贝 / 移动. 否则, 就把隐式产生的拷贝和移动函数禁用</li>
+<li>仅当只有数据成员时使用 <code>struct</code>, 其它一概使用 <code>class</code></li>
+<li>使用组合常常比使用继承更合理. 如果使用继承的话, 定义为 <code>public</code> 继承</li>
+<li>只有当所有父类除第一个外都是纯接口类时, 才允许使用多重继承. 为确保它们是纯接口, 这些类必须以 <code>Interface</code> 为后缀</li>
+<li>接口是指满足特定条件的类, 这些类以 <code>Interface</code> 为后缀 (不强制)</li>
+<li>只有在意义明显, 不会出现奇怪的行为并且与对应的内建运算符的行为一致时才定义重载运算符</li>
+<li>将所有数据成员声明为 <code>private</code>, 除非是 <code>static const</code> 类型成员</li>
+<li>将相似的声明放在一起, 将 <code>public</code> 部分放在最前，具体顺序: 类型 (包括 <code>typedef</code>, <code>using</code> 和嵌套的结构体与类), 常量, 工厂函数, 构造函数, 赋值运算符, 析构函数, 其它函数, 数据成员</li>
+</ul>
+<h3>函数</h3>
+<ul>
+<li>输入参数在先, 后跟输出参数.</li>
+<li>编写简短, 凝练的函数</li>
+<li>所有按引用传递的参数必须加上 <code>const</code></li>
+<li>输入参数是值参或 <code>const</code> 引用, 输出参数为指针. 输入参数可以是 <code>const</code> 指针, 但决不能是非 <code>const</code> 的引用参数, 除非特殊要求, 比如 <code>swap()</code></li>
+<li>如果打算重载一个函数, 可以试试改在函数名里加上参数信息. 例如, 用 <code>AppendString()</code> 和 <code>AppendInt()</code> 等, 而不是一口气重载多个 <code>Append()</code>. 如果重载函数的目的是为了支持不同数量的同一类型参数, 则优先考虑使用 <code>std::vector</code> 以便使用者可以用列表初始化指定参数</li>
+<li>虚函数不允许使用缺省参数, 因为在虚函数中缺省参数不一定能正常工作. 如果在每个调用点缺省参数的值都有可能不同, 在这种情况下缺省函数也不允许使用. (例如, 不要写像 <code>void f(int n = counter++);</code> 这样的代码.)</li>
+<li>只有在常规写法 (返回类型前置) 不便于书写或不便于阅读时使用返回类型后置语法</li>
+</ul>
+<h3>Google奇技</h3>
+<ul>
+<li>动态分配出的对象最好有单一且固定的所有主, 并通过智能指针传递所有权，不要使用 <code>std::auto_ptr</code>, 使用 <code>std::unique_ptr</code> 代替它</li>
+<li>使用 <code>cpplint.py</code> 检查风格错误</li>
+</ul>
+<h3>其他特性</h3>
+<ul>
+<li>所有按引用传递的参数必须加上 <code>const</code></li>
+<li>只在定义移动构造函数与移动赋值操作时使用右值引用, 不要使用 <code>std::forward</code> 功能函数，可能会使用 <code>std::move</code> 来表示将值从一个对象移动而不是复制到另一个对象</li>
+<li>不允许使用变长数组和 <code>alloca()</code>，改用更安全的分配器（allocator），就像 <code>std::vector</code> 或 <code>std::unique_ptr&lt;T[]&gt;</code></li>
+<li>允许合理的使用友元类及友元函数</li>
+<li>禁止使用 RTTI</li>
+<li>不要使用 C 风格类型转换. 而应该使用 C++ 风格</li>
+<li>用 <code>static_cast</code> 替代 C 风格的值转换, 或某个类指针需要明确的向上转换为父类指针时</li>
+<li>用 <code>const_cast</code> 去掉 <code>const</code> 限定符</li>
+<li>用 <code>reinterpret_cast</code> 指针类型和整型或其它指针之间进行不安全的相互转换. 仅在你对所做一切了然于心时使用</li>
+<li>只在记录日志时使用流</li>
+<li>对于迭代器和其他模板对象使用前缀形式 (<code>++i</code>) 的自增, 自减运算符</li>
+<li>在C++11里，用 constexpr 来定义真正的常量，或实现常量初始化</li>
+<li>使用宏时要非常谨慎, 尽量以内联函数, 枚举和常量代替之</li>
+<li>整数用 <code>0</code>, 实数用 <code>0.0</code>, 指针用 <code>nullptr</code> 或 <code>NULL</code>, 字符 (串) 用 <code>'\0'</code></li>
+<li>尽可能用 <code>sizeof(varname)</code> 代替 <code>sizeof(type)</code></li>
+<li>用 <code>auto</code> 绕过烦琐的类型名，只要可读性好就继续用，别用在局部变量之外的地方</li>
+<li>可以用列表初始化</li>
+<li>适当使用 lambda 表达式。别用默认 lambda 捕获，所有捕获都要显式写出来</li>
+<li>不要使用复杂的模板编程</li>
+<li>只使用Boost中被认可的库</li>
+</ul>
+<h3>命名约定</h3>
+<ul>
+<li>函数命名, 变量命名, 文件命名要有描述性，少用缩写；一些特定的广为人知的缩写是允许的</li>
+<li>文件名要全部小写, 可以包含下划线 (<code>_</code>) 或连字符 (<code>-</code>), 依照项目的约定. 如果没有约定, 那么 “<code>_</code>” 更好</li>
+<li>C++文件要以 <code>.cc</code> 结尾, 头文件以 <code>.h</code> 结尾. 专门插入文本的文件则以 <code>.inc</code> 结尾</li>
+<li>类型(类, 结构体, 类型定义<code>typedef</code>, 枚举, 类型模板参数)名称的每个单词首字母均大写, 不包含下划线</li>
+<li>变量 (包括函数参数) 和数据成员名一律小写, 单词之间用下划线连接. 类的成员变量以下划线结尾, 但结构体的就不用</li>
+<li>声明为 <code>constexpr</code> 或 <code>const</code> 的变量, 或在程序运行期间其值始终保持不变的, 命名时以 “k” 开头, 大小写混合</li>
+<li>常规函数使用大小写混合, 取值和设值函数则要求与变量名匹配，函数名的每个单词首字母大写, 没有下划线. 对于首字母缩写的单词, 更倾向于将它们视作一个单词进行首字母大写</li>
+<li>枚举的命名应当和 <a href="https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/naming/#constant-names">常量</a> 或 <a href="https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/naming/#macro-names">宏</a> 一致: <code>kEnumName</code> 或是 <code>ENUM_NAME</code></li>
+<li>通常不应该使用宏，如果不得不用, 其命名像枚举命名一样全部大写, 使用下划线</li>
+</ul>
+<h3>注释</h3>
+<ul>
+<li><code>//</code> 或 <code>/* */</code> 都可以; 但 <code>//</code> <em>更</em> 常用. 要在如何注释及注释风格上确保统一</li>
+<li>在每一个文件开头加入版权公告</li>
+<li>每个类的定义都要附带一份注释, 描述类的功能和用法, 除非它的功能相当明显</li>
+<li>函数声明处的注释描述函数功能; 定义处的注释描述函数实现</li>
+<li>通常变量名本身足以很好说明变量用途. 某些情况下, 也需要额外的注释说明</li>
+<li>对于代码中巧妙的, 晦涩的, 有趣的, 重要的地方加以注释</li>
+<li>如果函数参数的意义不明显, 考虑进行弥补</li>
+<li>不要描述显而易见的现象</li>
+<li>注意标点, 拼写和语法; 写的好的注释比差的要易读的多</li>
+<li>那些临时的, 短期的解决方案, 或已经够好但仍不完美的代码使用 <code>TODO</code> 注释</li>
+<li>通过弃用注释（<code>DEPRECATED</code> comments）以标记某接口点已弃用.</li>
+</ul>
+<h3>格式</h3>
+<ul>
+<li>每一行代码字符数不超过80</li>
+<li>尽量不使用非 ASCII 字符, 使用时必须使用 UTF-8 编码</li>
+<li>只使用空格, 每次缩进 2 个空格，不要在代码中使用制表符，应该设置编辑器将制表符转为空格</li>
+<li>返回类型和函数名在同一行, 参数也尽量放在同一行, 如果放不下就对形参分行, 分行方式与函数调用一致</li>
+<li>倾向于不在圆括号内使用空格，关键字 <code>if</code> 和 <code>else</code> 另起一行</li>
+<li>句点或箭头前后不要有空格，指针/地址操作符 (<code>*, &amp;</code>) 之后不能有空格</li>
+<li>在声明指针变量或参数时, 星号与类型或变量名紧挨都可以</li>
+<li>如果一个布尔表达式超过标准行宽, 断行方式要统一</li>
+<li>不要在 <code>return</code> 表达式里加上非必须的圆括号</li>
+<li>变量及数组初始化，用 <code>=</code>, <code>()</code> 和 <code>{}</code> 均可</li>
+<li>预处理指令不要缩进, 从行首开始</li>
+<li>访问控制块的声明依次序是 <code>public:</code>, <code>protected:</code>, <code>private:</code>, 每个都缩进 1 个空格</li>
+<li>构造函数初始化列表放在同一行或按四格缩进并排多行</li>
+<li>水平留白的使用根据在代码中的位置决定. 永远不要在行尾添加没意义的留白</li>
+<li>垂直留白越少越好</li>
+</ul>
+<h2>Tip</h2>
+<blockquote>
+<p>https://coolshell.cn/articles/12199.html</p>
+</blockquote>
+<ul>
+<li>Copy-On-Write技术在于节省内存，用一个引用计数实现内存共享，在最新的STL中已经不支持</li>
+</ul>
+<h2>Share(http proxy)</h2>
+<h3>http proxy代理请求实现方式</h3>
+<blockquote>
+<p>https://datatracker.ietf.org/doc/html/rfc7230</p>
+<p>https://datatracker.ietf.org/doc/html/rfc7231</p>
+<p>https://datatracker.ietf.org/doc/html/draft-luotonen-web-proxy-tunneling-01</p>
+</blockquote>
+<ul>
+<li>普通代理，代理服务器充当中间人，客户端--》代理--》服务端</li>
+<li>隧道代理，基于http的connect方法(2014HTTP/1.1修订版)</li>
+</ul>
+<h3>普通代理</h3>
+<ul>
+<li>非代理http请求</li>
+<li>向host建立tcp连接</li>
+<li>start-line:method SP request-target(相对url资源路径) SP HTTP-version CRLF</li>
+<li>host_header:host:hostname</li>
+<li>例如目标请求url:http://test.com/books.html，request-target为books.html，host header为test.com</li>
+<li>普通代理</li>
+<li>start-line:method SP request-target(绝对url资源路径) SP HTTP-version CRLF</li>
+<li>host_header:不发送host</li>
+<li>代理服务器根据绝对url资源路径，转化为相对url资源路径和host，代理完成中间人角色</li>
+</ul>
+<h3>demo(c++重构封装webbench)</h3>
+<blockquote>
+<p>http://home.tiscali.cz/~cz210552/webbench.html</p>
+</blockquote>
+<ul>
+<li>普通代理处理demo</li>
+<li>注意重构的param_http_path，param_http_host方法</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// option.h</span>
+<span class="cp">#ifndef WEBBENCH_OPTION_H_</span>
+<span class="cp">#define WEBBENCH_OPTION_H_</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">WebbenchOption</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">WebbenchOption</span><span class="p">();</span>
+  <span class="o">~</span><span class="n">WebbenchOption</span><span class="p">();</span>
+  <span class="k">static</span> <span class="kt">void</span> <span class="nf">usage</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+  <span class="kt">void</span> <span class="nf">print_option</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">param_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]);</span>
+  <span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="nf">param_http_method</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="nf">param_http_version</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">string</span> <span class="nf">param_http_path</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">string</span> <span class="nf">param_http_host</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">string</span> <span class="nf">build_http_headers</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+  <span class="k">static</span> <span class="k">const</span> <span class="n">string</span> <span class="n">shortopts</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">fix_option</span><span class="p">();</span>
+  <span class="kt">bool</span> <span class="n">force</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="n">force_reload</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">benchtime</span><span class="p">;</span>
+  <span class="n">string</span> <span class="n">proxyhost</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">proxyport</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">clients</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">http10</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">method</span><span class="p">;</span>
+  <span class="n">string</span> <span class="n">url</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="cp">#endif</span>
+
+<span class="c1">// options.cc</span>
+<span class="cp">#include</span> <span class="cpf">&quot;option.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;getopt.h&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">ios_base</span><span class="p">;</span>
+<span class="c1">// using std::npos;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="p">;</span>
+
+<span class="cp">#define METHOD_GET 0</span>
+<span class="cp">#define METHOD_HEAD 1</span>
+<span class="cp">#define METHOD_OPTIONS 2</span>
+<span class="cp">#define METHOD_TRACE 3</span>
+
+<span class="cp">#define HTTP_09 0</span>
+<span class="cp">#define HTTP_10 1</span>
+<span class="cp">#define HTTP_11 2</span>
+
+<span class="k">static</span> <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span> <span class="n">method_map</span> <span class="o">=</span> <span class="p">{{</span><span class="n">METHOD_GET</span><span class="p">,</span> <span class="s">&quot;GET&quot;</span><span class="p">},</span>
+                                                <span class="p">{</span><span class="n">METHOD_HEAD</span><span class="p">,</span> <span class="s">&quot;HEAD&quot;</span><span class="p">},</span>
+                                                <span class="p">{</span><span class="n">METHOD_OPTIONS</span><span class="p">,</span> <span class="s">&quot;OPTIONS&quot;</span><span class="p">},</span>
+                                                <span class="p">{</span><span class="n">METHOD_TRACE</span><span class="p">,</span> <span class="s">&quot;TRACE&quot;</span><span class="p">}};</span>
+
+<span class="k">static</span> <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span> <span class="n">http_version_map</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">{</span><span class="n">HTTP_09</span><span class="p">,</span> <span class="s">&quot;HTTP/0.9&quot;</span><span class="p">},</span> <span class="p">{</span><span class="n">HTTP_10</span><span class="p">,</span> <span class="s">&quot;HTTP/1.0&quot;</span><span class="p">},</span> <span class="p">{</span><span class="n">HTTP_11</span><span class="p">,</span> <span class="s">&quot;HTTP/1.1&quot;</span><span class="p">}};</span>
+
+<span class="k">const</span> <span class="n">string</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">shortopts</span> <span class="o">=</span> <span class="s">&quot;frt:p:c:h&quot;</span><span class="p">;</span>
+
+<span class="n">WebbenchOption</span><span class="o">::</span><span class="n">WebbenchOption</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">force</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">force_reload</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">benchtime</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+  <span class="n">proxyhost</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">proxyport</span> <span class="o">=</span> <span class="mi">80</span><span class="p">;</span>
+  <span class="n">clients</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">http10</span> <span class="o">=</span> <span class="n">HTTP_09</span><span class="p">;</span>
+  <span class="n">method</span> <span class="o">=</span> <span class="n">METHOD_GET</span><span class="p">;</span>
+  <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">WebbenchOption</span><span class="o">::~</span><span class="n">WebbenchOption</span><span class="p">()</span> <span class="p">{}</span>
+
+<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">usage</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 原来的9，1，2代表http09，http10，http11短格式和长格式差异大，强制使用长格式</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;webbench [option]... URL&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  -f|--force               Don&#39;t wait for reply from server.&quot;</span>
+       <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  -r|--reload              Send reload request - Pragma: no-cache.&quot;</span>
+       <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  -t|--time &lt;sec&gt;          Run benchmark for &lt;sec&gt; seconds. Default &quot;</span>
+          <span class="s">&quot;30.&quot;</span>
+       <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  -p|--proxy &lt;server:port&gt; Use proxy server for request.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  -c|--clients &lt;n&gt;         Run &lt;n&gt; HTTP clients at once. Default &quot;</span>
+          <span class="s">&quot;one.&quot;</span>
+       <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  --http09                 Use HTTP/0.9 style requests.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  --http10                 Use HTTP/1.0 protocol.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  --http11                 Use HTTP/1.1 protocol.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  --get                    Use GET request method.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  --head                   Use HEAD request method.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  --options                Use OPTIONS request method.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  --trace                  Use TRACE request method.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  -h|--help                This information.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">print_option</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">cout</span><span class="p">.</span><span class="n">setf</span><span class="p">(</span><span class="n">ios_base</span><span class="o">::</span><span class="n">boolalpha</span><span class="p">);</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;webbench option:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="c1">// proxy</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">--proxy      &quot;</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">proxyhost</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">proxyhost</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">proxyport</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;no&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="c1">// force</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">--force      early socket close &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">force</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="c1">// reload</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">--reload     forcing reload &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">force_reload</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="c1">// http version</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">--http       using &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">param_http_version</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="c1">// method</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">--method     &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">param_http_method</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="c1">// timeout</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">--time       &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">benchtime</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="c1">// clients</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">--clients    &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">clients</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="c1">// url</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">--url        &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">url</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">param_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">usage</span><span class="p">();</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 长命令选项</span>
+  <span class="kt">int</span> <span class="n">opt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">string</span> <span class="n">tmp</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+  <span class="k">const</span> <span class="k">struct</span> <span class="nc">option</span> <span class="n">longopts</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="p">{</span><span class="s">&quot;help&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;h&#39;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;force&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;f&#39;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;reload&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;r&#39;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;time&quot;</span><span class="p">,</span> <span class="n">required_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;t&#39;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;proxy&quot;</span><span class="p">,</span> <span class="n">required_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;p&#39;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;clients&quot;</span><span class="p">,</span> <span class="n">required_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;http09&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">http10</span><span class="p">,</span> <span class="n">HTTP_09</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;http10&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">http10</span><span class="p">,</span> <span class="n">HTTP_10</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;http11&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">http10</span><span class="p">,</span> <span class="n">HTTP_11</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;get&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="n">METHOD_GET</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;head&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="n">METHOD_HEAD</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;options&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="n">METHOD_OPTIONS</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&quot;trace&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="n">METHOD_TRACE</span><span class="p">},</span>
+      <span class="p">{</span><span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">}};</span>
+  <span class="k">while</span> <span class="p">((</span><span class="n">opt</span> <span class="o">=</span> <span class="n">getopt_long</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">shortopts</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span>
+                            <span class="n">longopts</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">))</span> <span class="o">!=</span> <span class="n">EOF</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">opt</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;?&#39;</span><span class="o">:</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;f&#39;</span><span class="o">:</span>
+      <span class="n">force</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;r&#39;</span><span class="o">:</span>
+      <span class="n">force_reload</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;t&#39;</span><span class="o">:</span>
+      <span class="n">benchtime</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">optarg</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;p&#39;</span><span class="o">:</span>
+      <span class="c1">// server:port</span>
+      <span class="n">tmp</span> <span class="o">=</span> <span class="n">optarg</span><span class="p">;</span>
+      <span class="c1">// tmp = strrchr(optarg, &#39;:&#39;);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="n">i</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">.</span><span class="n">rfind</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Error in option --proxy &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">tmp</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: Not valid proxy.&quot;</span>
+             <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Error in option --proxy &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">tmp</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: Missing hostname.&quot;</span>
+             <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">tmp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Error in option --proxy &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">tmp</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Port number is missing.&quot;</span>
+             <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="n">proxyhost</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+      <span class="n">proxyport</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">tmp</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="n">c_str</span><span class="p">());</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;c&#39;</span><span class="o">:</span>
+      <span class="n">clients</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">optarg</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;h&#39;</span><span class="o">:</span>
+      <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">usage</span><span class="p">();</span>
+      <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">default</span><span class="o">:</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// url</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">optind</span> <span class="o">==</span> <span class="n">argc</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;webbench: Missing URL!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">usage</span><span class="p">();</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">url</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="n">optind</span><span class="p">];</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="n">url</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;://&quot;</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">url</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: is not a valid URL.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="n">url</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;://&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Invalid URL syntax - hostname don&#39;t ends with &#39;/&#39;.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1500</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;URL is too long.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">proxyhost</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 只有http协议可以直连，其他协议要代理支持</span>
+    <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">!=</span> <span class="n">url</span><span class="p">.</span><span class="n">find_first_of</span><span class="p">(</span><span class="s">&quot;http://&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Only HTTP protocol is directly supported, set --proxy for &quot;</span>
+              <span class="s">&quot;others.&quot;</span>
+           <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+      <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// option</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;----------cmdline option----------&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">print_option</span><span class="p">();</span>
+
+  <span class="n">fix_option</span><span class="p">();</span>
+
+  <span class="c1">// fix option</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;--------fix cmdline option--------&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">print_option</span><span class="p">();</span>
+
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;----------------ok----------------&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">fix_option</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">clients</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">clients</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">benchtime</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">benchtime</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// http/0.9不支持缓冲控制</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">force_reload</span> <span class="o">&amp;&amp;</span> <span class="n">proxyhost</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="o">&amp;&amp;</span> <span class="n">http10</span> <span class="o">&lt;</span> <span class="n">HTTP_10</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">http10</span> <span class="o">=</span> <span class="n">HTTP_10</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// http/0.9只支持get请求</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">method</span> <span class="o">==</span> <span class="n">METHOD_HEAD</span> <span class="o">&amp;&amp;</span> <span class="n">http10</span> <span class="o">&lt;</span> <span class="n">HTTP_10</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">http10</span> <span class="o">=</span> <span class="n">HTTP_10</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">method</span> <span class="o">==</span> <span class="n">METHOD_OPTIONS</span> <span class="o">&amp;&amp;</span> <span class="n">http10</span> <span class="o">&lt;</span> <span class="n">HTTP_11</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">http10</span> <span class="o">=</span> <span class="n">HTTP_11</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">method</span> <span class="o">==</span> <span class="n">METHOD_TRACE</span> <span class="o">&amp;&amp;</span> <span class="n">http10</span> <span class="o">&lt;</span> <span class="n">HTTP_11</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">http10</span> <span class="o">=</span> <span class="n">HTTP_11</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">proxyhost</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">http10</span> <span class="o">=</span> <span class="n">HTTP_11</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">WebbenchOption</span><span class="o">::</span><span class="n">param_http_method</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">method_map</span><span class="p">[</span><span class="n">method</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">WebbenchOption</span><span class="o">::</span><span class="n">param_http_version</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">http_version_map</span><span class="p">[</span><span class="n">http10</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">string</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">param_http_path</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">proxyhost</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">url</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;://&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="p">));</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">url</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">string</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">param_http_host</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="cm">/* protocol/host delimiter */</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">proxyhost</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 是否包含端口号</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">url</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;://&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">url</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">url</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">url</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">url</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// http_headers与options强耦合</span>
+<span class="k">const</span> <span class="n">string</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">build_http_headers</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">string</span> <span class="n">request</span><span class="p">;</span>
+
+  <span class="c1">// http start-line</span>
+  <span class="n">request</span> <span class="o">+=</span> <span class="n">param_http_method</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">param_http_path</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span>
+             <span class="n">param_http_version</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">;</span>
+  <span class="c1">// http headers</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">http10</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">request</span> <span class="o">+=</span> <span class="s">&quot;User-Agent: WebBench</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">proxyhost</span> <span class="o">==</span> <span class="s">&quot;&quot;</span> <span class="o">&amp;&amp;</span> <span class="n">http10</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">request</span> <span class="o">+=</span> <span class="s">&quot;Host: &quot;</span> <span class="o">+</span> <span class="n">param_http_host</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">force_reload</span> <span class="o">&amp;&amp;</span> <span class="n">proxyhost</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">request</span> <span class="o">+=</span> <span class="s">&quot;Pragma: no-cache</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">http10</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">request</span> <span class="o">+=</span> <span class="s">&quot;Connection: close</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="cm">/* add empty line at end */</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">http10</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">request</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">request</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// webbench.cc</span>
+<span class="cm">/*</span>
+<span class="cm"> * Simple forking WWW Server benchmark</span>
+<span class="cm"> */</span>
+<span class="cp">#include</span> <span class="cpf">&quot;option.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Return codes:</span>
+<span class="cm"> *    0 - sucess</span>
+<span class="cm"> *    1 - benchmark failed (server is not on-line)</span>
+<span class="cm"> *    2 - bad param</span>
+<span class="cm"> *    3 - internal error, fork failed</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+
+  <span class="n">WebbenchOption</span> <span class="n">options</span><span class="p">;</span>
+  <span class="n">options</span><span class="p">.</span><span class="n">param_option</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">options</span><span class="p">.</span><span class="n">build_http_headers</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="c1">// 运行 ./webbench --http11 -p &quot;test.com:8888&quot; -t 60 --trace &quot;https://httpbin.org/get&quot;</span>
+<span class="c1">// TRACE https://httpbin.org/get HTTP/1.1\r\nUser-Agent: WebBench\r\nConnection: close\r\n\r\n</span>
+<span class="c1">// 运行 ./webbench --http11 -t 60 --trace &quot;https://httpbin.org/get&quot;</span>
+<span class="c1">// TRACE /get HTTP/1.1\r\nUser-Agent: WebBench\r\nHost: httpbin.org\r\nConnection: close\r\n\r\n&quot;</span>
+</code></pre></div></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/artsdi-san-shi-san-zhou.html"><h2>ARTS第三十三周</h2></a>
+        <div class= "well small"> 2021-06-21
+
+<a class="url fn">qianlizhixing</a>
+
+
+ </div>
+        <div class="summary"><h2>Algorithm</h2>
 <p>leetcode 279 完全平方数</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/perfect-squares/">原题</a></li>
@@ -83,555 +678,9 @@
 <li>头文件的保护应该包括该头文件的所有大写路径，使用_代替路径分隔符和扩展标记</li>
 <li>类定义应该有一个注释块，解释类的用途和工作方式，每个重要的类都有一个doxygen注释块</li>
 <li>方法和全局函数也应该有注释，简要说明一下它的作用，并描述一下边界情况</li>
-<li>通常，更喜欢c++风格的注释(//用于普通注释，///用于doxygen文档注释)。但是，在一些情况下，使用c风格的(/<em> </em>/)注释是有用的</li>
-<li>注释掉大块代码是不被鼓励的，真的必须这样做，使用#if 0和#endif</li>
-</ul>
-<h4>#include</h4>
-<ul>
-<li>头文件注释之后，列出该文件所需的#include最小列表</li>
-<li>模块头文件</li>
-<li>本地/私有头文件</li>
-<li>LLVM头文件</li>
-<li>系统头文件</li>
-</ul>
-<h4>样式</h4>
-<ul>
-<li>行宽80个字符</li>
-<li>在源文件中使用空格而不是制表符</li>
-<li>不要在行尾加空格</li>
-<li>格式化多行lambda时，将其格式化为代码块</li>
-</ul>
-<h4>编译</h4>
-<ul>
-<li>
-<p>应该像对待错误一样，对待编译器警告</p>
-</li>
-<li>
-<p>有些编译器可以通过在代码上加冗余括号，抑制警告</p>
-</li>
-<li>
-<p>不使用异常或RTTI运行时类型信息</p>
-</li>
-<li>
-<p>不使用静态构造函数和全局变量</p>
-</li>
-<li>
-<p>c++中，class和struct关键字几乎可以互换使用。唯一的区别是class默认使所有成员为私有，而struct默认使所有成员为公共</p>
-</li>
-<li>
-<p>不要使用带括号的初始化列表来调用构造函数</p>
-</li>
-<li>
-<p>初始化变量时使用带括号的初始化列表，在左花括号前使用等号</p>
-</li>
-<li>
-<p>使用auto类型推断使代码更具可读性</p>
-</li>
-<li>
-<p>除非需要复制，否则使用auto &amp;表示值，auto *表示指针</p>
-</li>
-<li>
-<p>集合和映射等无序容器与指针键一起使用时，迭代顺序是未定义的</p>
-</li>
-<li>
-<p>编写只计算一个布尔值的小循环是非常常见的，转化返回布尔值的函数</p>
-</li>
-<li>
-<p>充分使用“assert”宏，检查您的所有先决条件和假设</p>
-</li>
-<li>
-<p>尽可能使用基于范围的循环</p>
-</li>
-</ul>
-<p><code>c++
-  BasicBlock *BB = ...
-  for (Instruction &amp;I : *BB)
-    ... use I ...</code></p>
-<ul>
-<li>避免每次循环计算一次终结条件</li>
-</ul>
-<p>```c++
-  BasicBlock *BB = ...
-  for (auto I = BB-&gt;begin(); I != BB-&gt;end(); ++I)
-    ... use I ...</p>
-<p>// 替换为
-  BasicBlock *BB = ...
-  for (auto I = BB-&gt;begin(), E = BB-&gt;end(); I != E; ++I)
-    ... use I ...
-  ```</p>
-<ul>
-<li>尽可能使用前递增</li>
-</ul>
-<h4>命名</h4>
-<ul>
-<li>通常名称应该是驼峰式的</li>
-<li>类型名称(包括类、结构体、枚举、类型定义等)应该是名词，并以大写字母开头</li>
-<li>变量名应该是名词(因为它们代表状态)，并以大写字母开头</li>
-<li>函数名应该是动词短语(因为它们代表动作)，并以小写字母开头</li>
-<li>Enum声明是类型，应该遵循类型的命名约定</li>
-<li>枚举(例如enum {Foo, Bar})和公共成员变量应该以大写字母开头，就像类型一样</li>
-</ul>
-<h2>Tip(魔术方法)</h2>
-<blockquote>
-<p>https://docs.python.org/zh-cn/3/reference/datamodel.html</p>
-<p>https://docs.python.org/3/reference/datamodel.html</p>
-</blockquote>
-<h4>基本定制</h4>
-<ul>
-<li>
-<p>__doc__类或函数文档字符串，没有则为None，不会被子类继承</p>
-</li>
-<li>
-<p>__name__类名或函数名</p>
-</li>
-<li>
-<p>__module__类或函数所属模块名称，没有则为None</p>
-</li>
-<li>
-<p>__defaults__ 函数具有默认值的参数的默认参数值组成的元组，如无任何参数具有默认值则为None</p>
-</li>
-<li>
-<p>__code__ 函数编译后的代码对象</p>
-</li>
-<li>
-<p>__globals__ 函数中全局变量的字典的引用(函数所属模块的全局命名空间)</p>
-</li>
-<li>
-<p>__self__ 类实例对象本身的引用</p>
-</li>
-<li>
-<p>__bases__ 基类的元组</p>
-</li>
-<li>
-<p>__class__ 实例对应的类</p>
-</li>
-<li>
-<p>__dict__ 属性命名空间的字典</p>
-</li>
-<li>
-<p>__new__ 静态方法，创建一个cls类新实例，如果在构造对象期间被发起调用并且它返回了一个实例，新实例的__init__方法将以__init__(self[, ...]) 的形式被发起调用；未返回cls实例，init不会被调用</p>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">C</span><span class="p">():</span>
-    <span class="o">...</span>
-
-<span class="c1">#x = C(23) 等价于</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
-    <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span>
-</code></pre></div>
-
-<ul>
-<li>
-<p>__init__ 实例初始化，实例是由__new__()和__init__()协作构造完成的(由__new__()创建，并由__init__()定制)，所以__init__()返回的值只能是None，否则会在运行时引发TypeError</p>
-</li>
-<li>
-<p>__del__ 实例将被销毁时调用(内存回收)</p>
-</li>
-<li>
-<p>__str__ 定义print()行为</p>
-</li>
-<li>
-<p>__bool__ 布尔测试</p>
-</li>
-</ul>
-<h4>属性访问定制</h4>
-<ul>
-<li>
-<p>__getattr__ 属性引用(属性未定义时)</p>
-</li>
-<li>
-<p>__getattribute__ 属性引用(无条件地被调用，不管属性是否定义)，同时定义了__getattr__，__getattr__不会被调用</p>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Demo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
-
-    <span class="k">def</span> <span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># return self.__dict__[attr] 死循环</span>
-            <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;NOT FIND&quot;</span>
-
-
-<span class="n">demo</span> <span class="o">=</span> <span class="n">Demo</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">demo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">demo</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">demo</span><span class="o">.</span><span class="n">addr</span><span class="p">)</span>
-</code></pre></div>
-
-<ul>
-<li>
-<p>__setattr__ 属性被尝试赋值时被调用</p>
-</li>
-<li>
-<p>__delattr__ 属性被尝试删除时被调用</p>
-</li>
-</ul>
-<h4>属性描述器定制</h4>
-<ul>
-<li>__get__,__set__,__delete__属性描述器</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Test</span><span class="p">:</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filed</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">filed</span>
-
-    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="nb">setattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
-
-<span class="k">class</span> <span class="nc">Demo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_age</span> <span class="o">=</span> <span class="n">age</span>
-
-    <span class="n">name</span> <span class="o">=</span> <span class="n">Test</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
-    <span class="n">age</span> <span class="o">=</span> <span class="n">Test</span><span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">)</span>
-
-
-<span class="n">demo</span> <span class="o">=</span> <span class="n">Demo</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
-<span class="n">demo</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">16</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">demo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">demo</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
-</code></pre></div>
-
-<h4>其他控制</h4>
-<ul>
-<li>__slots__显式地声明属性，并禁止创建__dict__和__weakref__(除非是在__slots__中显式地声明)，相比使用 <em><strong>dict</strong></em> 此方式可以显著地节省空间，属性查找速度也可得到显著的提升</li>
-<li>当继承自一个未定义__slots__的类时，实例的__dict__和__weakref__属性将总是可访问</li>
-<li>没有__dict__变量，实例就不能给未在__slots__定义中列出的新变量赋值</li>
-</ul>
-<h4>模拟可调用对象</h4>
-<ul>
-<li>__call__ 实例当作函数调用时调用</li>
-</ul>
-<h4>模拟容器类型</h4>
-<ul>
-<li>
-<p>__len__ len()调用</p>
-</li>
-<li>
-<p>__getitem__(self, key) 实现self[key]取值</p>
-</li>
-<li>
-<p>__setitem__(self, key, value) 实现self[key]赋值</p>
-</li>
-<li>
-<p>__iter__(self) 支持迭代协议，返回迭代器</p>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span>
-
-
-<span class="k">class</span> <span class="nc">Demo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
-
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">value</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;Not Found&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
-
-
-<span class="n">demo</span> <span class="o">=</span> <span class="n">Demo</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
-<span class="n">demo</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">16</span>
-<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">demo</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">demo</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">issubclass</span><span class="p">(</span><span class="n">Demo</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">))</span>
-</code></pre></div>
-
-<ul>
-<li>__next__ 迭代器</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterator</span>
-
-
-<span class="k">class</span> <span class="nc">MyRange</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Iterable: 有迭代能力的对象，一个类，实现了__iter__，那么就认为它有迭代能力，通常此函数必须返回一个实现了__next__的对象，如果自己实现了，你可以返回self，当然这个返回值不是必须的</span>
-<span class="sd">    Iterator: 迭代器(当然也是Iterable)，同时实现了__iter__和__next__的对象，缺少任何一个都不算是Iterator</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
-
-    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
-            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">return</span> <span class="n">ret</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">StopIteration</span>
-
-
-<span class="n">b</span> <span class="o">=</span> <span class="n">MyRange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
-<span class="c1"># print(next(b))</span>
-</code></pre></div>
-
-<h4>with上下文</h4>
-<ul>
-<li>__enter__</li>
-<li>__exit__(self, exc_type, exc_value, exc_traceback) __exit__方法中异常，被顺利捕捉并进行了处理。如果方法__exit__没有返回 True，异常仍然会被抛出。如果确定异常已经被处理了，请__exit__的最后加上return True</li>
-</ul>
-<h2>Share(getopt)</h2>
-<h3>getopt</h3>
-<ul>
-<li><code>int getopt(int ___argc, char *const *___argv, const char *__shortopts)</code>处理短格式命令选项</li>
-<li>argc，argv取自main函数argc，argv</li>
-<li>shortopts短格式命令选项定义，如<code>ht:v::</code>（:表示t后带参数，::表示v后可带可不带参数），-h -t 30 -v</li>
-<li>返回命令项，如'h'，'t'，'v'带参数选项用optarg获取选项，未定义返回'?'并输出提示信息</li>
-<li>在while循环中解析完参数返回-1(EOF)</li>
-</ul>
-<h3>getopt_long</h3>
-<ul>
-<li><code>int getopt_long(int ___argc, char * const * ___argv, const char * __shortopts, const option * __longopts, int * __longind)</code>兼容处理短格式长格式命令选项</li>
-<li>argc，argv，shortopts同getopt </li>
-<li>longopts为<code>struct option</code>数组，长格式命令选项定义<code>struct option{const char *name;   int has_arg;  int *flag;  int val;};</code>，如<code>{"head", no_argument, &amp;method, METHOD_HEAD}</code>，name选项名称，has_arg选项后是否有参数，flag后面val存储位置(为NULL时getopt_long返回val，不为空val填充*flag同时getopt_long返回0)</li>
-<li>返回命令项val，如'h'，'t'，'v'带参数选项用optarg获取选项，未定义返回'?'并输出提示信息</li>
-<li>在while循环中解析完参数返回-1(EOF)</li>
-</ul>
-<h3>demo(重构封装webbench)</h3>
-<blockquote>
-<p>http://home.tiscali.cz/~cz210552/webbench.html</p>
-</blockquote>
-<div class="highlight"><pre><span></span><code><span class="c1">// option.h</span>
-<span class="cp">#ifndef WEBBENCH_OPTION_H_</span>
-<span class="cp">#define WEBBENCH_OPTION_H_</span>
-
-<span class="cp">#define METHOD_GET 0</span>
-<span class="cp">#define METHOD_HEAD 1</span>
-<span class="cp">#define METHOD_OPTIONS 2</span>
-<span class="cp">#define METHOD_TRACE 3</span>
-
-<span class="cp">#define HTTP_09 0</span>
-<span class="cp">#define HTTP_10 1</span>
-<span class="cp">#define HTTP_11 2</span>
-
-<span class="k">class</span> <span class="nc">WebbenchOption</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-  <span class="n">WebbenchOption</span><span class="p">();</span>
-  <span class="o">~</span><span class="n">WebbenchOption</span><span class="p">();</span>
-  <span class="k">static</span> <span class="kt">void</span> <span class="nf">usage</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
-  <span class="kt">void</span> <span class="nf">print_option</span><span class="p">();</span>
-  <span class="kt">void</span> <span class="nf">param_short_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]);</span>
-  <span class="kt">void</span> <span class="nf">param_long_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]);</span>
-  <span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="n">shortopts</span><span class="p">;</span>
-
-<span class="k">private</span><span class="o">:</span>
-  <span class="kt">void</span> <span class="n">param_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">opt</span><span class="p">);</span>
-  <span class="kt">int</span> <span class="n">force</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">force_reload</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">benchtime</span><span class="p">;</span>
-  <span class="kt">char</span> <span class="o">*</span><span class="n">proxyhost</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">proxyport</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">clients</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">http10</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">method</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="cp">#endif</span>
-
-
-<span class="c1">// option.cc</span>
-<span class="cp">#include</span> <span class="cpf">&quot;option.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;getopt.h&gt;</span><span class="cp"></span>
-
-<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">shortopts</span> <span class="o">=</span> <span class="s">&quot;frt:p:c:?h&quot;</span><span class="p">;</span>
-
-<span class="n">WebbenchOption</span><span class="o">::</span><span class="n">WebbenchOption</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">force</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="n">force_reload</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="n">benchtime</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
-  <span class="n">proxyhost</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-  <span class="n">proxyport</span> <span class="o">=</span> <span class="mi">80</span><span class="p">;</span>
-  <span class="n">clients</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="n">http10</span> <span class="o">=</span> <span class="n">HTTP_09</span><span class="p">;</span>
-  <span class="n">method</span> <span class="o">=</span> <span class="n">METHOD_GET</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">WebbenchOption</span><span class="o">::~</span><span class="n">WebbenchOption</span><span class="p">()</span> <span class="p">{}</span>
-
-<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">usage</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// 原来的9，1，2代表http09，http10，http11短格式和长格式差异大</span>
-  <span class="c1">// 去除短格式，强制使用长格式</span>
-  <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span>
-          <span class="s">&quot;webbench [option]... URL</span><span class="se">\n</span><span class="s">&quot;</span>
-          <span class="s">&quot;  -f|--force               Don&#39;t wait for reply from server.</span><span class="se">\n</span><span class="s">&quot;</span>
-          <span class="s">&quot;  -r|--reload              Send reload request - Pragma: no-cache.</span><span class="se">\n</span><span class="s">&quot;</span>
-          <span class="s">&quot;  -t|--time &lt;sec&gt;          Run benchmark for &lt;sec&gt; seconds. Default &quot;</span>
-          <span class="s">&quot;30.</span><span class="se">\n</span><span class="s">&quot;</span>
-          <span class="s">&quot;  -p|--proxy &lt;server:port&gt; Use proxy server for request.</span><span class="se">\n</span><span class="s">&quot;</span>
-          <span class="s">&quot;  -c|--clients &lt;n&gt;         Run &lt;n&gt; HTTP clients at once. Default &quot;</span>
-          <span class="s">&quot;one.</span><span class="se">\n</span><span class="s">&quot;</span>
-          <span class="s">&quot;  --http09                 Use HTTP/0.9 style requests.</span><span class="se">\n</span><span class="s">&quot;</span>
-          <span class="s">&quot;  --http10                 Use HTTP/1.0 protocol.</span><span class="se">\n</span><span class="s">&quot;</span>
-          <span class="s">&quot;  --http11                 Use HTTP/1.1 protocol.</span><span class="se">\n</span><span class="s">&quot;</span>
-          <span class="s">&quot;  --get                    Use GET request method.</span><span class="se">\n</span><span class="s">&quot;</span>
-          <span class="s">&quot;  --head                   Use HEAD request method.</span><span class="se">\n</span><span class="s">&quot;</span>
-          <span class="s">&quot;  --options                Use OPTIONS request method.</span><span class="se">\n</span><span class="s">&quot;</span>
-          <span class="s">&quot;  --trace                  Use TRACE request method.</span><span class="se">\n</span><span class="s">&quot;</span>
-          <span class="s">&quot;  -h|--help                This information.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">print_option</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;webbench option:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--force</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">force</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--reload</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">force_reload</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--time</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">benchtime</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--proxy</span><span class="se">\t</span><span class="s">%s:%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">proxyhost</span><span class="p">,</span> <span class="n">proxyport</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--clients</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">clients</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--http10</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">http10</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">--method</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">method</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">param_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">opt</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kt">char</span> <span class="o">*</span><span class="n">tmp</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-
-  <span class="k">switch</span> <span class="p">(</span><span class="n">opt</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
-    <span class="k">break</span><span class="p">;</span>
-  <span class="k">case</span> <span class="sc">&#39;?&#39;</span><span class="o">:</span>
-    <span class="k">break</span><span class="p">;</span>
-  <span class="k">case</span> <span class="sc">&#39;f&#39;</span><span class="o">:</span>
-    <span class="n">force</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">break</span><span class="p">;</span>
-  <span class="k">case</span> <span class="sc">&#39;r&#39;</span><span class="o">:</span>
-    <span class="n">force_reload</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">break</span><span class="p">;</span>
-  <span class="k">case</span> <span class="sc">&#39;t&#39;</span><span class="o">:</span>
-    <span class="n">benchtime</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">optarg</span><span class="p">);</span>
-    <span class="k">break</span><span class="p">;</span>
-  <span class="k">case</span> <span class="sc">&#39;p&#39;</span><span class="o">:</span>
-    <span class="c1">// server:port</span>
-    <span class="n">proxyhost</span> <span class="o">=</span> <span class="n">optarg</span><span class="p">;</span>
-    <span class="n">tmp</span> <span class="o">=</span> <span class="n">strrchr</span><span class="p">(</span><span class="n">optarg</span><span class="p">,</span> <span class="sc">&#39;:&#39;</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">break</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">==</span> <span class="n">optarg</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Error in option --proxy %s: Missing hostname.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
-              <span class="n">optarg</span><span class="p">);</span>
-      <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="c1">// optarg + strlen(optarg) - 1指针操作</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">==</span> <span class="n">optarg</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">optarg</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Error in option --proxy %s Port number is missing.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
-              <span class="n">optarg</span><span class="p">);</span>
-      <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="c1">// *tmp = &#39;\0&#39;作用在于将proxyhost &quot;test.com:8888&quot; 改为&quot;test.com\08888&quot;</span>
-    <span class="c1">// 意思稍隐晦，可以改为更明显些</span>
-    <span class="o">*</span><span class="n">tmp</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
-    <span class="n">proxyport</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">tmp</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="k">break</span><span class="p">;</span>
-  <span class="k">case</span> <span class="sc">&#39;c&#39;</span><span class="o">:</span>
-    <span class="n">clients</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">optarg</span><span class="p">);</span>
-    <span class="k">break</span><span class="p">;</span>
-  <span class="k">case</span> <span class="sc">&#39;h&#39;</span><span class="o">:</span>
-    <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">usage</span><span class="p">();</span>
-    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-    <span class="k">break</span><span class="p">;</span>
-  <span class="k">default</span><span class="o">:</span>
-    <span class="k">break</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">param_short_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">usage</span><span class="p">();</span>
-    <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-  <span class="p">}</span>
-
-  <span class="kt">int</span> <span class="n">opt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="k">while</span> <span class="p">((</span><span class="n">opt</span> <span class="o">=</span> <span class="n">getopt</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">shortopts</span><span class="p">))</span> <span class="o">!=</span> <span class="n">EOF</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">param_option</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">param_long_option</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">WebbenchOption</span><span class="o">::</span><span class="n">usage</span><span class="p">();</span>
-    <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-  <span class="p">}</span>
-
-  <span class="kt">int</span> <span class="n">opt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="k">const</span> <span class="k">struct</span> <span class="nc">option</span> <span class="n">longopts</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="p">{</span><span class="s">&quot;help&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;h&#39;</span><span class="p">},</span>
-      <span class="p">{</span><span class="s">&quot;force&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;f&#39;</span><span class="p">},</span>
-      <span class="p">{</span><span class="s">&quot;reload&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;r&#39;</span><span class="p">},</span>
-      <span class="p">{</span><span class="s">&quot;time&quot;</span><span class="p">,</span> <span class="n">required_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;t&#39;</span><span class="p">},</span>
-      <span class="p">{</span><span class="s">&quot;proxy&quot;</span><span class="p">,</span> <span class="n">required_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;p&#39;</span><span class="p">},</span>
-      <span class="p">{</span><span class="s">&quot;clients&quot;</span><span class="p">,</span> <span class="n">required_argument</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">},</span>
-      <span class="p">{</span><span class="s">&quot;http09&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">http10</span><span class="p">,</span> <span class="n">HTTP_09</span><span class="p">},</span>
-      <span class="p">{</span><span class="s">&quot;http10&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">http10</span><span class="p">,</span> <span class="n">HTTP_10</span><span class="p">},</span>
-      <span class="p">{</span><span class="s">&quot;http11&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">http10</span><span class="p">,</span> <span class="n">HTTP_11</span><span class="p">},</span>
-      <span class="p">{</span><span class="s">&quot;get&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="n">METHOD_GET</span><span class="p">},</span>
-      <span class="p">{</span><span class="s">&quot;head&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="n">METHOD_HEAD</span><span class="p">},</span>
-      <span class="p">{</span><span class="s">&quot;options&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="n">METHOD_OPTIONS</span><span class="p">},</span>
-      <span class="p">{</span><span class="s">&quot;trace&quot;</span><span class="p">,</span> <span class="n">no_argument</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="n">METHOD_TRACE</span><span class="p">},</span>
-      <span class="p">{</span><span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">}};</span>
-  <span class="k">while</span> <span class="p">((</span><span class="n">opt</span> <span class="o">=</span> <span class="n">getopt_long</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">&quot;?h:m:t:p:c:&quot;</span><span class="p">,</span> <span class="n">longopts</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">))</span> <span class="o">!=</span>
-         <span class="n">EOF</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">param_option</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-
-<span class="c1">// webbench.cc</span>
-<span class="cm">/*</span>
-<span class="cm"> * Simple forking WWW Server benchmark</span>
-<span class="cm"> */</span>
-<span class="cp">#include</span> <span class="cpf">&quot;option.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-
-<span class="cm">/*</span>
-<span class="cm"> * Return codes:</span>
-<span class="cm"> *    0 - sucess</span>
-<span class="cm"> *    1 - benchmark failed (server is not on-line)</span>
-<span class="cm"> *    2 - bad param</span>
-<span class="cm"> *    3 - internal error, fork failed</span>
-<span class="cm"> */</span>
-<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-  <span class="c1">// WebbenchOption options;</span>
-  <span class="c1">// options.param_short_option(argc, argv);</span>
-  <span class="c1">// options.print_option();</span>
-
-  <span class="n">WebbenchOption</span> <span class="n">options1</span><span class="p">;</span>
-  <span class="n">options1</span><span class="p">.</span><span class="n">param_long_option</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
-  <span class="n">options1</span><span class="p">.</span><span class="n">print_option</span><span class="p">();</span>
-
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-
-
-<span class="c1">// 运行 ./webbench -p &quot;test.com:8888&quot; -t 60 --options -v --ver</span>
-</code></pre></div></div>
-        <hr />
-    </div>
-		
+<li>通常，更喜欢c++风格的注释(//用于普通注释，///用于doxygen文档注释)。但是 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-san-shi-san-zhou.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -810,39 +859,6 @@
 <h4>Content-Security-Policy</h4>
 <ul>
 <li>Content-Security-Policy通过定义经过批准的内容源 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-jiu-zhou.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="/artsdi-er-shi-ba-zhou.html"><h2>ARTS第二十八周</h2></a>
-        <div class= "well small"> 2021-05-17
-
-<a class="url fn">qianlizhixing</a>
-
-
- </div>
-        <div class="summary"><h2>Algorithm</h2>
-<p>leetcode 1734 解码异或后的排列</p>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/decode-xored-permutation/">原题</a></li>
-<li><a href="https://github.com/qianlizhixing12/coding-training/blob/main/leetcode/1734.py">解题</a></li>
-<li>位运算</li>
-</ul>
-<h2>Review(websocket)</h2>
-<blockquote>
-<p>http://www.websocket.org/quantum.html</p>
-</blockquote>
-<h3>轮询、长轮询、流方式</h3>
-<ul>
-<li>通常，当浏览器访问一个网页时，一个HTTP请求被发送到承载该网页的web服务器,web服务器确认这个请求并发回响应。如果想获得最新的实时信息，可以不断手动刷新页面，但这显然不是一个很好的解决方案。</li>
-<li>目前提供实时web应用程序的尝试主要围绕轮询和其他服务器端推技术，最值得注意的是Comet，它延迟了向客户机传递消息的HTTP响应的完成。基于comet的推送通常用JavaScript实现，并使用长轮询或流媒体等连接策略。</li>
-<li>通过轮询，浏览器定期发送HTTP请求并立即接收响应，这种技术是浏览器提供实时信息的第一次尝试。如果知道确切的消息传递间隔，这是一个很好的解决方案。然而，实时数据往往不是那么可预测的，使得不必要的请求不可避免，因此，许多连接在低消息率的情况下被不必要地打开和关闭。</li>
-<li>使用长轮询，浏览器向服务器发送请求，服务器将请求保持打开一段时间。如果在这段时间内收到通知，将向客户端发送包含消息的响应。如果在设置的时间内没有收到通知，服务器将发送一个响应来终止打开的请求。但是，重要的是要理解，当消息量很大时 …</li></ul> <a class="btn btn-info xsmall" href="/artsdi-er-shi-ba-zhou.html">read more</a></div>
     </div>	
 				
 <div class="pagination">
